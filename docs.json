@@ -9,34 +9,24 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "versions": [
       {
-        "tab": "Guides",
-        "groups": [
+        "version": "1.4.0-latest",
+        "tabs": [
           {
-            "group": "Get Started",
-            "pages": [
-              "introduction",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
+            "tab": "API Reference",
+            "openapi": "api-reference/openapi_latest.yaml"
           }
         ]
       },
       {
-        "tab": "API Reference",
-        "openapi": "api-reference/openapi.yaml"
+        "version": "1.4.0-LTS",
+        "tabs": [
+          {
+            "tab": "API Reference",
+            "openapi": "api-reference/openapi_lts.yaml"
+          }
+        ]
       }
     ],
     "global": {
