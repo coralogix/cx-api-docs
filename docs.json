@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Coralogix Developer Docs",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -16,6 +16,14 @@
           {
             "tab": "API Reference",
             "openapi": "api-reference/openapi_latest.yaml"
+          },
+          {
+            "tab": "Use Cases",
+            "pages": [
+              "api-reference/create_an_alert_with_an_outgoing_webhook",
+              "api-reference/copy_a_dashboard",
+              "api-reference/setup_kubernetes_complete_observability_integration"
+            ]
           }
         ]
       },
@@ -25,33 +33,22 @@
           {
             "tab": "API Reference",
             "openapi": "api-reference/openapi_lts.yaml"
+          },
+          {
+            "tab": "Use Cases",
+            "pages": [
+              "api-reference/create_an_alert_with_an_outgoing_webhook",
+              "api-reference/copy_a_dashboard",
+              "api-reference/setup_kubernetes_complete_observability_integration"
+            ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/coralogix.svg",
+    "dark": "/logo/coralogix.svg"
   },
   "navbar": {
     "links": [
@@ -59,18 +56,13 @@
         "label": "Support",
         "href": "mailto:hi@mintlify.com"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://twitter.com/Coralogix",
+      "github": "https://github.com/coralogix",
+      "linkedin": "https://linkedin.com/company/coralogix"
     }
   }
 }
