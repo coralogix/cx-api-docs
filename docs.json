@@ -11,28 +11,11 @@
   "navigation": {
     "versions": [
       {
-        "version": "1.4.0-latest",
+        "version": "1.5.2-latest",
         "tabs": [
           {
             "tab": "API Reference",
             "openapi": "api-reference/openapi_latest.yaml"
-          },
-          {
-            "tab": "Use Cases",
-            "pages": [
-              "api-reference/create_an_alert_with_an_outgoing_webhook",
-              "api-reference/copy_a_dashboard",
-              "api-reference/setup_kubernetes_complete_observability_integration"
-            ]
-          }
-        ]
-      },
-      {
-        "version": "1.4.0-LTS",
-        "tabs": [
-          {
-            "tab": "API Reference",
-            "openapi": "api-reference/openapi_lts.yaml"
           },
           {
             "tab": "Use Cases",
