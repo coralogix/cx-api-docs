@@ -36,9 +36,9 @@ tags:
     externalDocs:
       description: Learn more about alerts in our documentation
       url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
-  - name: Folders for views
+  - name: Folders for views service
     description: Create and manage view folders.
-  - name: Views
+  - name: Views service
     description: Create and manage views.
   - name: Scopes Service
     description: A service to manage scopes
@@ -14411,7 +14411,7 @@ paths:
       description: ''
   /v1/view_folders:
     get:
-      summary: List view folders
+      summary: List view Folders service
       description: List view's folders
       operationId: ViewsFoldersService_ListViewFolders
       responses:
@@ -14434,7 +14434,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
       tags:
-        - Folders for views
+        - Folders for views service
       x-codeSamples:
         - lang: Node
           source: >-
@@ -14469,7 +14469,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/v1/view_folders \
               --header 'Authorization: Bearer <API_KEY>'
     post:
-      summary: Create View Folder
+      summary: Create View Folder service
       description: Create view folder
       operationId: ViewsFoldersService_CreateViewFolder
       responses:
@@ -14498,7 +14498,7 @@ paths:
         description: Create view folder.
         required: true
       tags:
-        - Folders for views
+        - Folders for views service
       x-codeSamples:
         - lang: Node
           source: |-
@@ -14546,7 +14546,7 @@ paths:
               --data '{"name":"My Folder"}'
   /v1/view_folders/{folder.id}:
     put:
-      summary: Replace View Folder
+      summary: Replace View Folder service
       description: Replaces an existing view folder
       operationId: ViewsFoldersService_ReplaceViewFolder
       responses:
@@ -14592,7 +14592,7 @@ paths:
         description: View folder
         required: true
       tags:
-        - Folders for views
+        - Folders for views service
       x-codeSamples:
         - lang: Node
           source: >-
@@ -14645,7 +14645,7 @@ paths:
               --data '{"name":"My Folder"}'
   /v1/view_folders/{id}:
     get:
-      summary: Get View Folder
+      summary: Get View Folder service
       description: Create view folder
       operationId: ViewsFoldersService_GetViewFolder
       responses:
@@ -14675,7 +14675,7 @@ paths:
             type: string
             format: uuid
       tags:
-        - Folders for views
+        - Folders for views service
       x-codeSamples:
         - lang: Node
           source: >-
@@ -14716,7 +14716,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bid%7D \
               --header 'Authorization: Bearer <API_KEY>'
     delete:
-      summary: Delete View Folder
+      summary: Delete View Folder service
       description: Deletes a view folder by ID
       operationId: ViewsFoldersService_DeleteViewFolder
       responses:
@@ -14741,7 +14741,7 @@ paths:
             type: string
             format: uuid
       tags:
-        - Folders for views
+        - Folders for views service
       x-codeSamples:
         - lang: Node
           source: >-
@@ -14783,7 +14783,7 @@ paths:
               --header 'Authorization: Bearer <API_KEY>'
   /v1/views:
     get:
-      summary: List views
+      summary: List views service
       description: Lists all company public views
       operationId: ViewsService_ListViews
       responses:
@@ -14829,7 +14829,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
       tags:
-        - Views
+        - Views service
       x-codeSamples:
         - lang: Node
           source: >-
@@ -14864,7 +14864,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/v1/views \
               --header 'Authorization: Bearer <API_KEY>'
     post:
-      summary: Create a view
+      summary: Create a view service
       description: Creates a new view
       operationId: ViewsService_CreateView
       responses:
@@ -14915,7 +14915,7 @@ paths:
         description: View folder.
         required: true
       tags:
-        - Views
+        - Views service
       x-codeSamples:
         - lang: Node
           source: |-
@@ -14986,7 +14986,7 @@ paths:
               --data '{"name":"Logs view","searchQuery":{"query":"string"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600},"customSelection":{"fromTime":"2024-01-25T11:31:43.152Z","toTime":"2024-01-25T11:35:43.152Z"}},"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f"}'
   /v1/views/{id}:
     get:
-      summary: Get view
+      summary: Get view service
       description: Gets a view by ID
       operationId: ViewsService_GetView
       responses:
@@ -15039,7 +15039,7 @@ paths:
             type: integer
             format: int32
       tags:
-        - Views
+        - Views service
       x-codeSamples:
         - lang: Node
           source: >-
@@ -15075,7 +15075,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/v1/views/%7Bid%7D \
               --header 'Authorization: Bearer <API_KEY>'
     delete:
-      summary: Delete view
+      summary: Delete view service
       description: Deletes a view by ID
       operationId: ViewsService_DeleteView
       responses:
@@ -15100,7 +15100,7 @@ paths:
             type: integer
             format: int32
       tags:
-        - Views
+        - Views service
       x-codeSamples:
         - lang: Node
           source: >-
@@ -15137,7 +15137,7 @@ paths:
               --header 'Authorization: Bearer <API_KEY>'
   /v1/views/{view.id}:
     put:
-      summary: Replace a view
+      summary: Replace a view service
       description: Replaces an existing view
       operationId: ViewsService_ReplaceView
       responses:
@@ -15224,7 +15224,7 @@ paths:
         description: View
         required: true
       tags:
-        - Views
+        - Views service
       x-codeSamples:
         - lang: Node
           source: >-
