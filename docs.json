@@ -11,18 +11,465 @@
   "navigation": {
     "versions": [
       {
-        "version": "1.5.1-latest",
-        "tabs": [
+        "version": "1.5.2-latest",
+        "groups": [
           {
-            "tab": "API Reference",
-            "openapi": "api-reference/openapi_latest.yaml"
+            "group": "Home",
+            "pages": [
+              "introduction"
+            ]
           },
           {
-            "tab": "Use Cases",
+            "group": "Use Cases",
             "pages": [
-              "api-reference/create_an_alert_with_an_outgoing_webhook",
+              "api-reference/introduction",
               "api-reference/copy_a_dashboard",
+              "api-reference/create_an_alert_with_an_outgoing_webhook",
               "api-reference/setup_kubernetes_complete_observability_integration"
+            ]
+          },
+          {
+            "group": "Actions Service",
+            "pages": [
+              "api-reference/actions-service/atomic-batch-execute-actions",
+              "api-reference/actions-service/create-action",
+              "api-reference/actions-service/delete-action",
+              "api-reference/actions-service/get-action",
+              "api-reference/actions-service/list-actions",
+              "api-reference/actions-service/order-actions",
+              "api-reference/actions-service/replace-action"
+            ]
+          },
+          {
+            "group": "Alert Definitions Service",
+            "pages": [
+              "api-reference/alert-definitions-service/overview",
+              "api-reference/alert-definitions-service/create-an-alert",
+              "api-reference/alert-definitions-service/delete-v3alert-defs",
+              "api-reference/alert-definitions-service/disable-or-enable-an-alert",
+              "api-reference/alert-definitions-service/download-alerts",
+              "api-reference/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions",
+              "api-reference/alert-definitions-service/get-alert-definition-by-alert-version-id",
+              "api-reference/alert-definitions-service/get-alert-definition-by-id",
+              "api-reference/alert-definitions-service/replace-an-alert-definition"
+            ]
+          },
+          {
+            "group": "Alert Events Service",
+            "pages": [
+              "api-reference/alert-events-service/overview",
+              "api-reference/alert-events-service/get-alert-event-by-id",
+              "api-reference/alert-events-service/get-alert-events-statistics"
+            ]
+          },
+          {
+            "group": "API Keys Service",
+            "pages": [
+              "api-reference/api-keys-service/create-api-key",
+              "api-reference/api-keys-service/delete-api-key",
+              "api-reference/api-keys-service/get-\"send-data\"-api-keys",
+              "api-reference/api-keys-service/get-api-key",
+              "api-reference/api-keys-service/update-api-key"
+            ]
+          },
+          {
+            "group": "Connectors Service",
+            "pages": [
+              "api-reference/connectorsservice/overview",
+              "api-reference/connectorsservice/delete-v1notification-centerconnectors",
+              "api-reference/connectorsservice/get-v1notification-centerconnectors",
+              "api-reference/connectorsservice/get-v1notification-centerconnectors-1",
+              "api-reference/connectorsservice/get-v1notification-centerconnectors:batchget",
+              "api-reference/connectorsservice/get-v1notification-centerconnectors:batchgetsummaries",
+              "api-reference/connectorsservice/get-v1notification-centerconnectors:gettypesummaries",
+              "api-reference/connectorsservice/get-v1notification-centerconnectors:listsummaries",
+              "api-reference/connectorsservice/post-v1notification-centerconnectors",
+              "api-reference/connectorsservice/put-v1notification-centerconnector"
+            ]
+          },
+          {
+            "group": "Contextual Data Integration Service",
+            "pages": [
+              "api-reference/contextual-data-integration-service/overview",
+              "api-reference/contextual-data-integration-service/delete-contextual-data-integration",
+              "api-reference/contextual-data-integration-service/get-all-contextual-data-integrations-accessible",
+              "api-reference/contextual-data-integration-service/get-contextual-data-integration-definition",
+              "api-reference/contextual-data-integration-service/get-contextual-data-integration-details",
+              "api-reference/contextual-data-integration-service/save-contextual-data-integration",
+              "api-reference/contextual-data-integration-service/test-contextual-data-integration",
+              "api-reference/contextual-data-integration-service/update-contextual-data-integration"
+            ]
+          },
+          {
+            "group": "Custom Enrichments Service",
+            "pages": [
+              "api-reference/custom-enrichments-service/overview",
+              "api-reference/custom-enrichments-service/create-custom-enrichments",
+              "api-reference/custom-enrichments-service/delete-custom-enrichments",
+              "api-reference/custom-enrichments-service/get-custom-enrichment",
+              "api-reference/custom-enrichments-service/get-custom-enrichments",
+              "api-reference/custom-enrichments-service/search-custom-enrichment-data",
+              "api-reference/custom-enrichments-service/update-custom-enrichment"
+            ]
+          },
+          {
+            "group": "Dashboard Folders Service",
+            "pages": [
+              "api-reference/dashboard-folders-service/overview",
+              "api-reference/dashboard-folders-service/create-a-dashboard-folder",
+              "api-reference/dashboard-folders-service/delete-a-dashboard-folder",
+              "api-reference/dashboard-folders-service/get-a-dashboard-folder",
+              "api-reference/dashboard-folders-service/list-dashboard-folders",
+              "api-reference/dashboard-folders-service/replace-a-dashboard-folder"
+            ]
+          },
+          {
+            "group": "Dashboard Service",
+            "pages": [
+              "api-reference/dashboard-service/overview",
+              "api-reference/dashboard-service/add-dashboard-to-favorites",
+              "api-reference/dashboard-service/assign-a-dashboard-to-a-folder",
+              "api-reference/dashboard-service/create-a-new-dashboard",
+              "api-reference/dashboard-service/delete-a-dashboard",
+              "api-reference/dashboard-service/get-a-dashboard",
+              "api-reference/dashboard-service/get-dashboard-catalog",
+              "api-reference/dashboard-service/remove-dashboard-from-favorites",
+              "api-reference/dashboard-service/replace-a-dashboard",
+              "api-reference/dashboard-service/replace-the-default-dashboard"
+            ]
+          },
+          {
+            "group": "Data Usage Service",
+            "pages": [
+              "api-reference/data-usage-service/overview",
+              "api-reference/data-usage-service/get-daily-usage-evaluation-tokens",
+              "api-reference/data-usage-service/get-daily-usage-processed-gbs",
+              "api-reference/data-usage-service/get-daily-usage-units",
+              "api-reference/data-usage-service/get-data-usage",
+              "api-reference/data-usage-service/get-data-usage-metrics-export-status",
+              "api-reference/data-usage-service/get-logs-count",
+              "api-reference/data-usage-service/get-spans-count",
+              "api-reference/data-usage-service/update-data-usage-metrics-export-status"
+            ]
+          },
+          {
+            "group": "Enrichments Service",
+            "pages": [
+              "api-reference/enrichments-service/overview",
+              "api-reference/enrichments-service/add-enrichments",
+              "api-reference/enrichments-service/atomic-overwrite-enrichments",
+              "api-reference/enrichments-service/delete-enrichments",
+              "api-reference/enrichments-service/get-company-enrichment-settings",
+              "api-reference/enrichments-service/get-enrichment-limit",
+              "api-reference/enrichments-service/get-enrichments"
+            ]
+          },
+          {
+            "group": "Entities Service",
+            "pages": [
+              "api-reference/entitiesservice/overview",
+              "api-reference/entitiesservice/get-v1notification-centerentity-types",
+              "api-reference/entitiesservice/get-v1notification-centerentity-types-entity-subtypes"
+            ]
+          },
+          {
+            "group": "Events Service",
+            "pages": [
+              "api-reference/events-service/batch-get-event",
+              "api-reference/events-service/get-event",
+              "api-reference/events-service/get-events-statistics",
+              "api-reference/events-service/list-events",
+              "api-reference/events-service/list-events-count"
+            ]
+          },
+          {
+            "group": "Events2Metrics Service",
+            "pages": [
+              "api-reference/events2metrics-service/overview",
+              "api-reference/events2metrics-service/atomic-batch-execute-e2m",
+              "api-reference/events2metrics-service/create-a-new-e2m",
+              "api-reference/events2metrics-service/delete-an-e2m",
+              "api-reference/events2metrics-service/get-an-e2m",
+              "api-reference/events2metrics-service/get-e2m-limits",
+              "api-reference/events2metrics-service/list-e2m-labels-cardinality",
+              "api-reference/events2metrics-service/list-e2ms",
+              "api-reference/events2metrics-service/replace-an-e2m"
+            ]
+          },
+          {
+            "group": "Extension Deployment Service",
+            "pages": [
+              "api-reference/extension-deployment-service/overview",
+              "api-reference/extension-deployment-service/deploy-extension",
+              "api-reference/extension-deployment-service/get-deployed-extensions",
+              "api-reference/extension-deployment-service/revert-deployment-of-extension",
+              "api-reference/extension-deployment-service/update-extension"
+            ]
+          },
+          {
+            "group": "Extension Service",
+            "pages": [
+              "api-reference/extension-service/overview",
+              "api-reference/extension-service/get-all-extensions",
+              "api-reference/extension-service/get-extension-by-id"
+            ]
+          },
+          {
+            "group": "Extension Testing Service",
+            "pages": [
+              "api-reference/extension-testing-service/overview",
+              "api-reference/extension-testing-service/cleanup-testing-extension",
+              "api-reference/extension-testing-service/initialize-testing-revision",
+              "api-reference/extension-testing-service/test-extension-revision"
+            ]
+          },
+          {
+            "group": "Folders for Views",
+            "pages": [
+              "api-reference/folders-for-views-service/overview",
+              "api-reference/folders-for-views-service/create-view-folder-service",
+              "api-reference/folders-for-views-service/delete-view-folder-service",
+              "api-reference/folders-for-views-service/get-view-folder-service",
+              "api-reference/folders-for-views-service/list-view-folders-service",
+              "api-reference/folders-for-views-service/replace-view-folder-service"
+            ]
+          },
+          {
+            "group": "Global Routers Service",
+            "pages": [
+              "api-reference/globalroutersservice/overview",
+              "api-reference/globalroutersservice/delete-v1notification-centerrouters",
+              "api-reference/globalroutersservice/get-v1notification-centerrouters",
+              "api-reference/globalroutersservice/get-v1notification-centerrouters-1",
+              "api-reference/globalroutersservice/get-v1notification-centerrouters:batchgetsummaries",
+              "api-reference/globalroutersservice/post-v1notification-centerrouters",
+              "api-reference/globalroutersservice/put-v1notification-centerrouters"
+            ]
+          },
+          {
+            "group": "Incidents Service",
+            "pages": [
+              "api-reference/incidents-service/overview",
+              "api-reference/incidents-service/acknowledge-incidents",
+              "api-reference/incidents-service/assign-incidents-to-a-user",
+              "api-reference/incidents-service/close-incidents",
+              "api-reference/incidents-service/get-available-filter-values",
+              "api-reference/incidents-service/get-available-incident-event-filter-values",
+              "api-reference/incidents-service/get-incident-aggregations",
+              "api-reference/incidents-service/get-incident-by-id",
+              "api-reference/incidents-service/get-incident-events",
+              "api-reference/incidents-service/get-multiple-incidents-by-ids",
+              "api-reference/incidents-service/get-total-count-of-incident-events",
+              "api-reference/incidents-service/list-incident-events-with-filters",
+              "api-reference/incidents-service/list-incidents-with-filters",
+              "api-reference/incidents-service/remove-incident-user-assignments",
+              "api-reference/incidents-service/resolve-incidents"
+            ]
+          },
+          {
+            "group": "Integration Service",
+            "pages": [
+              "api-reference/integration-service/overview",
+              "api-reference/integration-service/delete-integration",
+              "api-reference/integration-service/get-all-integrations",
+              "api-reference/integration-service/get-deployed-integration",
+              "api-reference/integration-service/get-integration-definition",
+              "api-reference/integration-service/get-integration-details",
+              "api-reference/integration-service/get-integration-template",
+              "api-reference/integration-service/get-managed-integration-status",
+              "api-reference/integration-service/get-rum-integration-versions-data",
+              "api-reference/integration-service/list-managed-integration-keys",
+              "api-reference/integration-service/save-integration-registration-metadata",
+              "api-reference/integration-service/test-integration",
+              "api-reference/integration-service/trigger-sync-of-rum-integration-data",
+              "api-reference/integration-service/update-integration"
+            ]
+          },
+          {
+            "group": "Metrics Configurator Public Service",
+            "pages": [
+              "api-reference/metricsconfiguratorpublicservice/get-v1metrics-archive",
+              "api-reference/metricsconfiguratorpublicservice/post-v1metrics-archive",
+              "api-reference/metricsconfiguratorpublicservice/post-v1metrics-archive:disable",
+              "api-reference/metricsconfiguratorpublicservice/post-v1metrics-archive:enable",
+              "api-reference/metricsconfiguratorpublicservice/post-v1metrics-archive:validate",
+              "api-reference/metricsconfiguratorpublicservice/put-v1metrics-archive"
+            ]
+          },
+          {
+            "group": "Metrics Tco Service",
+            "pages": [
+              "api-reference/metricstcoservice/get-metrics-tco",
+              "api-reference/metricstcoservice/post-metrics-tcoadd",
+              "api-reference/metricstcoservice/post-metrics-tcodelete"
+            ]
+          },
+          {
+            "group": "Outgoing Webhooks Service",
+            "pages": [
+              "api-reference/outgoing-webhooks-service/overview",
+              "api-reference/outgoing-webhooks-service/create-an-outgoing-webhook",
+              "api-reference/outgoing-webhooks-service/delete-an-outgoing-webhook",
+              "api-reference/outgoing-webhooks-service/get-outgoing-webhook",
+              "api-reference/outgoing-webhooks-service/get-outgoing-webhook-type-details",
+              "api-reference/outgoing-webhooks-service/get-outgoing-webhook-types",
+              "api-reference/outgoing-webhooks-service/list-all-outgoing-webhooks",
+              "api-reference/outgoing-webhooks-service/list-ibm-event-notification-instances",
+              "api-reference/outgoing-webhooks-service/list-outbound-webhooks-summary",
+              "api-reference/outgoing-webhooks-service/list-outgoing-webhooks",
+              "api-reference/outgoing-webhooks-service/test-an-existing-outgoing-webhook",
+              "api-reference/outgoing-webhooks-service/test-an-outgoing-webhook",
+              "api-reference/outgoing-webhooks-service/update-an-outgoing-webhook"
+            ]
+          },
+          {
+            "group": "Policies Service",
+            "pages": [
+              "api-reference/policies-service/overview",
+              "api-reference/policies-service/atomic-batch-create-policy",
+              "api-reference/policies-service/atomic-overwrite-log-policies",
+              "api-reference/policies-service/atomic-overwrite-span-policies",
+              "api-reference/policies-service/bulk-test-log-policies",
+              "api-reference/policies-service/delete-policy",
+              "api-reference/policies-service/get-company-policies",
+              "api-reference/policies-service/get-policy-by-id",
+              "api-reference/policies-service/get-policy-by-id-1",
+              "api-reference/policies-service/reorder-policies",
+              "api-reference/policies-service/toggle-policies",
+              "api-reference/policies-service/update-policy"
+            ]
+          },
+          {
+            "group": "Presets Service",
+            "pages": [
+              "api-reference/presetsservice/overview",
+              "api-reference/presetsservice/delete-v1notification-centerpresetscustom",
+              "api-reference/presetsservice/get-v1notification-centerpresets",
+              "api-reference/presetsservice/get-v1notification-centerpresets:batchget",
+              "api-reference/presetsservice/get-v1notification-centerpresets:defaultsummaryget",
+              "api-reference/presetsservice/get-v1notification-centerpresets:summarieslist",
+              "api-reference/presetsservice/get-v1notification-centerpresets:systemdefaultsummaryget",
+              "api-reference/presetsservice/post-v1notification-centerpresets-:defaultset",
+              "api-reference/presetsservice/post-v1notification-centerpresetscustom",
+              "api-reference/presetsservice/post-v1notification-centerpresetscustom-:defaultset",
+              "api-reference/presetsservice/put-v1notification-centerpresetscustom"
+            ]
+          },
+          {
+            "group": "Recording Rules Service",
+            "pages": [
+              "api-reference/recording-rules-service/create-recording-rules",
+              "api-reference/recording-rules-service/delete-recording-rules",
+              "api-reference/recording-rules-service/get-recording-rules",
+              "api-reference/recording-rules-service/list-recording-rules",
+              "api-reference/recording-rules-service/update-recording-rules"
+            ]
+          },
+          {
+            "group": "Retentions Service",
+            "pages": [
+              "api-reference/retentions-service/overview",
+              "api-reference/retentions-service/activate-retentions",
+              "api-reference/retentions-service/get-retentions",
+              "api-reference/retentions-service/get-retentions-enabled",
+              "api-reference/retentions-service/update-retentions"
+            ]
+          },
+          {
+            "group": "Rule Groups Service",
+            "pages": [
+              "api-reference/rule-groups-service/overview",
+              "api-reference/rule-groups-service/bulk-delete-rule-group",
+              "api-reference/rule-groups-service/create-rule-group",
+              "api-reference/rule-groups-service/delete-rule-group",
+              "api-reference/rule-groups-service/get-company-usage-limits",
+              "api-reference/rule-groups-service/get-rule-group",
+              "api-reference/rule-groups-service/get-rule-group-model-mapping",
+              "api-reference/rule-groups-service/list-rule-groups",
+              "api-reference/rule-groups-service/update-rule-group"
+            ]
+          },
+          {
+            "group": "SAML Configuration Service",
+            "pages": [
+              "api-reference/saml-configuration-service/activatedeactivate-saml",
+              "api-reference/saml-configuration-service/get-saml-configuration",
+              "api-reference/saml-configuration-service/get-sp-parameters",
+              "api-reference/saml-configuration-service/set-idp-parameters"
+            ]
+          },
+          {
+            "group": "Scopes Service",
+            "pages": [
+              "api-reference/scopes-service/overview",
+              "api-reference/scopes-service/create-scope",
+              "api-reference/scopes-service/delete-scope",
+              "api-reference/scopes-service/get-team-scopes",
+              "api-reference/scopes-service/get-team-scopes-by-ids",
+              "api-reference/scopes-service/update-scope"
+            ]
+          },
+          {
+            "group": "Slos Service",
+            "pages": [
+              "api-reference/slos-service/overview",
+              "api-reference/slos-service/batch-execute-slo",
+              "api-reference/slos-service/batch-get-slo",
+              "api-reference/slos-service/create-slo",
+              "api-reference/slos-service/delete-slo",
+              "api-reference/slos-service/get-slo",
+              "api-reference/slos-service/list-slos",
+              "api-reference/slos-service/replace-slo"
+            ]
+          },
+          {
+            "group": "Target Service",
+            "pages": [
+              "api-reference/target-service/get-target",
+              "api-reference/target-service/set-target",
+              "api-reference/target-service/validate-target"
+            ]
+          },
+          {
+            "group": "Team Permissions Management Service",
+            "pages": [
+              "api-reference/team-permissions-management-service/overview",
+              "api-reference/team-permissions-management-service/add-users-to-team-group",
+              "api-reference/team-permissions-management-service/add-users-to-team-groups",
+              "api-reference/team-permissions-management-service/create-team-group",
+              "api-reference/team-permissions-management-service/delete-team-group",
+              "api-reference/team-permissions-management-service/get-group-users",
+              "api-reference/team-permissions-management-service/get-team-group",
+              "api-reference/team-permissions-management-service/get-team-group-by-name",
+              "api-reference/team-permissions-management-service/get-team-group-scope",
+              "api-reference/team-permissions-management-service/get-team-groups",
+              "api-reference/team-permissions-management-service/remove-users-from-team-group",
+              "api-reference/team-permissions-management-service/remove-users-from-team-groups",
+              "api-reference/team-permissions-management-service/set-team-group-scope",
+              "api-reference/team-permissions-management-service/update-team-group"
+            ]
+          },
+          {
+            "group": "Testing Service",
+            "pages": [
+              "api-reference/testingservice/overview",
+              "api-reference/testingservice/post-v1notification-centernotificationstesting:testconnectorconfiguration",
+              "api-reference/testingservice/post-v1notification-centernotificationstesting:testdestination",
+              "api-reference/testingservice/post-v1notification-centernotificationstesting:testexistingconnector",
+              "api-reference/testingservice/post-v1notification-centernotificationstesting:testexistingpreset",
+              "api-reference/testingservice/post-v1notification-centernotificationstesting:testpresetconfiguration",
+              "api-reference/testingservice/post-v1notification-centernotificationstesting:testroutingconditionvalid",
+              "api-reference/testingservice/post-v1notification-centernotificationstesting:testtemplaterender"
+            ]
+          },
+          {
+            "group": "Views",
+            "pages": [
+              "api-reference/views-service/create-a-view-service",
+              "api-reference/views-service/delete-view-service",
+              "api-reference/views-service/get-view-service",
+              "api-reference/views-service/list-views-service",
+              "api-reference/views-service/replace-a-view-service"
             ]
           }
         ]

@@ -1,0 +1,437 @@
+# Alert definitions service overview
+
+View and manage your alerts using alert definitions - data structures that contain the configuration required to create an alert.
+
+Learn more about alerts in our [documentation](https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/).
+
+## Authentication and permissions
+
+To use the Alert definitions service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). It's recommended to use permission presets, as they are automatically updated with all relevant permissions. Alternatively, you can manually add the following individual permissions.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+| Alerts | `alerts:ReadConfig` | Grants access to read alerts |
+|  | `alerts:UpdateConfig` | Required to create, update, or delete alerts |
+
+## Available methods
+
+| Method                        |
+|-------------------------------|
+| [Get alert definition by ID](https://docs.coralogix.com/api-reference/alert-definitions-service/get-alert-definition-by-id) |
+| [Get alert definition by alert version ID](https://docs.coralogix.com/api-reference/alert-definitions-service/get-alert-definition-by-alert-version-id) |
+| [Create an alert](https://docs.coralogix.com/api-reference/alert-definitions-service/create-an-alert) |
+| [Replace an alert definition](https://docs.coralogix.com/api-reference/alert-definitions-service/replace-an-alert-definition) |
+| [Get a list of all accessible alert definitions](https://docs.coralogix.com/api-reference/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions) |
+| [Download alerts](https://docs.coralogix.com/api-reference/alert-definitions-service/download-alerts) |
+| [Delete alert definition](https://docs.coralogix.com/api-reference/alert-definitions-service/delete-v3alert-defs) |
+| [Disable or enable an alert](https://docs.coralogix.com/api-reference/alert-definitions-service/disable-or-enable-an-alert) |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>FilterMatcher</summary>
+
+  | Value |
+|-------|
+| `FILTER_MATCHER_UNSPECIFIED` |
+| `FILTER_MATCHER_EQUALS` |
+| `FILTER_MATCHER_NOT_EQUALS` |
+</details>
+<details>
+  <summary>FilterValuesOperator</summary>
+
+  | Value |
+|-------|
+| `FILTER_VALUES_OPERATOR_UNSPECIFIED` |
+| `FILTER_VALUES_OPERATOR_OR` |
+| `FILTER_VALUES_OPERATOR_AND` |
+</details>
+<details>
+  <summary>AlertDefType</summary>
+
+  | Value |
+|-------|
+| `ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED` |
+| `ALERT_DEF_TYPE_LOGS_THRESHOLD` |
+| `ALERT_DEF_TYPE_LOGS_ANOMALY` |
+| `ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD` |
+| `ALERT_DEF_TYPE_LOGS_NEW_VALUE` |
+| `ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT` |
+| `ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_THRESHOLD` |
+| `ALERT_DEF_TYPE_METRIC_THRESHOLD` |
+| `ALERT_DEF_TYPE_METRIC_ANOMALY` |
+| `ALERT_DEF_TYPE_TRACING_IMMEDIATE` |
+| `ALERT_DEF_TYPE_TRACING_THRESHOLD` |
+| `ALERT_DEF_TYPE_FLOW` |
+| `ALERT_DEF_TYPE_SLO_THRESHOLD` |
+</details>
+<details>
+  <summary>DayOfWeek</summary>
+
+  | Value |
+|-------|
+| `DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED` |
+| `DAY_OF_WEEK_TUESDAY` |
+| `DAY_OF_WEEK_WEDNESDAY` |
+| `DAY_OF_WEEK_THURSDAY` |
+| `DAY_OF_WEEK_FRIDAY` |
+| `DAY_OF_WEEK_SATURDAY` |
+| `DAY_OF_WEEK_SUNDAY` |
+</details>
+<details>
+  <summary>NotifyOn</summary>
+
+  | Value |
+|-------|
+| `NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED` |
+| `NOTIFY_ON_TRIGGERED_AND_RESOLVED` |
+</details>
+<details>
+  <summary>DurationUnit</summary>
+
+  | Value |
+|-------|
+| `DURATION_UNIT_UNSPECIFIED` |
+| `DURATION_UNIT_HOURS` |
+</details>
+<details>
+  <summary>BooleanOperator</summary>
+
+  | Value |
+|-------|
+| `BOOLEAN_OPERATOR_AND_UNSPECIFIED` |
+| `BOOLEAN_OPERATOR_OR` |
+</details>
+<details>
+  <summary>OrderByDirection</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED` |
+| `ORDER_BY_DIRECTION_DESC` |
+</details>
+<details>
+  <summary>OrderByFields</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_FIELDS_UNSPECIFIED` |
+| `ORDER_BY_FIELDS_NAME` |
+| `ORDER_BY_FIELDS_ID` |
+| `ORDER_BY_FIELDS_SEVERITY` |
+| `ORDER_BY_FIELDS_CREATED_TIME` |
+| `ORDER_BY_FIELDS_UPDATED_TIME` |
+| `ORDER_BY_FIELDS_LAST_TRIGGERED` |
+</details>
+<details>
+  <summary>AlertDefPriority</summary>
+
+  | Value |
+|-------|
+| `ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED` |
+| `ALERT_DEF_PRIORITY_P4` |
+| `ALERT_DEF_PRIORITY_P3` |
+| `ALERT_DEF_PRIORITY_P2` |
+| `ALERT_DEF_PRIORITY_P1` |
+</details>
+<details>
+  <summary>AutoRetireTimeframe</summary>
+
+  | Value |
+|-------|
+| `AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED` |
+| `AUTO_RETIRE_TIMEFRAME_MINUTES_5` |
+| `AUTO_RETIRE_TIMEFRAME_MINUTES_10` |
+| `AUTO_RETIRE_TIMEFRAME_HOUR_1` |
+| `AUTO_RETIRE_TIMEFRAME_HOURS_2` |
+| `AUTO_RETIRE_TIMEFRAME_HOURS_6` |
+| `AUTO_RETIRE_TIMEFRAME_HOURS_12` |
+| `AUTO_RETIRE_TIMEFRAME_HOURS_24` |
+</details>
+<details>
+  <summary>TracingFilterOperationType</summary>
+
+  | Value |
+|-------|
+| `TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED` |
+| `TRACING_FILTER_OPERATION_TYPE_INCLUDES` |
+| `TRACING_FILTER_OPERATION_TYPE_ENDS_WITH` |
+| `TRACING_FILTER_OPERATION_TYPE_STARTS_WITH` |
+| `TRACING_FILTER_OPERATION_TYPE_IS_NOT` |
+</details>
+<details>
+  <summary>TracingTimeWindowValue</summary>
+
+  | Value |
+|-------|
+| `TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED` |
+| `TRACING_TIME_WINDOW_VALUE_MINUTES_10` |
+| `TRACING_TIME_WINDOW_VALUE_MINUTES_15` |
+| `TRACING_TIME_WINDOW_VALUE_MINUTES_20` |
+| `TRACING_TIME_WINDOW_VALUE_MINUTES_30` |
+| `TRACING_TIME_WINDOW_VALUE_HOUR_1` |
+| `TRACING_TIME_WINDOW_VALUE_HOURS_2` |
+| `TRACING_TIME_WINDOW_VALUE_HOURS_4` |
+| `TRACING_TIME_WINDOW_VALUE_HOURS_6` |
+| `TRACING_TIME_WINDOW_VALUE_HOURS_12` |
+| `TRACING_TIME_WINDOW_VALUE_HOURS_24` |
+| `TRACING_TIME_WINDOW_VALUE_HOURS_36` |
+</details>
+<details>
+  <summary>TracingThresholdConditionType</summary>
+
+  | Value |
+|-------|
+| `TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
+</details>
+<details>
+  <summary>LogsAnomalyConditionType</summary>
+
+  | Value |
+|-------|
+| `LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED` |
+</details>
+<details>
+  <summary>LogsUniqueValueTimeWindowValue</summary>
+
+  | Value |
+|-------|
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_5` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_10` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_15` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_20` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_30` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_1` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_2` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_4` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_6` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24` |
+| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_36` |
+</details>
+<details>
+  <summary>LogsRatioGroupByFor</summary>
+
+  | Value |
+|-------|
+| `LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED` |
+| `LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY` |
+| `LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY` |
+</details>
+<details>
+  <summary>LogsRatioTimeWindowValue</summary>
+
+  | Value |
+|-------|
+| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_10` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_15` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_30` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_HOUR_1` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_2` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_4` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_6` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_12` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24` |
+| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36` |
+</details>
+<details>
+  <summary>LogsRatioConditionType</summary>
+
+  | Value |
+|-------|
+| `LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
+| `LOGS_RATIO_CONDITION_TYPE_LESS_THAN` |
+</details>
+<details>
+  <summary>LogsTimeRelativeConditionType</summary>
+
+  | Value |
+|-------|
+| `LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
+| `LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN` |
+</details>
+<details>
+  <summary>LogsTimeRelativeComparedTo</summary>
+
+  | Value |
+|-------|
+| `LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED` |
+| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_YESTERDAY` |
+| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_LAST_WEEK` |
+| `LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY` |
+| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK` |
+| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH` |
+</details>
+<details>
+  <summary>LogsTimeWindowValue</summary>
+
+  | Value |
+|-------|
+| `LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED` |
+| `LOGS_TIME_WINDOW_VALUE_MINUTES_10` |
+| `LOGS_TIME_WINDOW_VALUE_MINUTES_20` |
+| `LOGS_TIME_WINDOW_VALUE_MINUTES_15` |
+| `LOGS_TIME_WINDOW_VALUE_MINUTES_30` |
+| `LOGS_TIME_WINDOW_VALUE_HOUR_1` |
+| `LOGS_TIME_WINDOW_VALUE_HOURS_2` |
+| `LOGS_TIME_WINDOW_VALUE_HOURS_4` |
+| `LOGS_TIME_WINDOW_VALUE_HOURS_6` |
+| `LOGS_TIME_WINDOW_VALUE_HOURS_12` |
+| `LOGS_TIME_WINDOW_VALUE_HOURS_24` |
+| `LOGS_TIME_WINDOW_VALUE_HOURS_36` |
+</details>
+<details>
+  <summary>LogFilterOperationType</summary>
+
+  | Value |
+|-------|
+| `LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED` |
+| `LOG_FILTER_OPERATION_TYPE_INCLUDES` |
+| `LOG_FILTER_OPERATION_TYPE_ENDS_WITH` |
+| `LOG_FILTER_OPERATION_TYPE_STARTS_WITH` |
+</details>
+<details>
+  <summary>LogSeverity</summary>
+
+  | Value |
+|-------|
+| `LOG_SEVERITY_VERBOSE_UNSPECIFIED` |
+| `LOG_SEVERITY_DEBUG` |
+| `LOG_SEVERITY_INFO` |
+| `LOG_SEVERITY_WARNING` |
+| `LOG_SEVERITY_ERROR` |
+| `LOG_SEVERITY_CRITICAL` |
+</details>
+<details>
+  <summary>LogsThresholdConditionType</summary>
+
+  | Value |
+|-------|
+| `LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
+| `LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN` |
+</details>
+<details>
+  <summary>LogsNewValueTimeWindowValue</summary>
+
+  | Value |
+|-------|
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED` |
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_24` |
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_48` |
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_72` |
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_WEEK_1` |
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTH_1` |
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_2` |
+| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3` |
+</details>
+<details>
+  <summary>ActivityAnalysisStatus</summary>
+
+  | Value |
+|-------|
+| `ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED` |
+| `ACTIVITY_ANALYSIS_STATUS_MUTE` |
+</details>
+<details>
+  <summary>MetricAnomalyConditionType</summary>
+
+  | Value |
+|-------|
+| `METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED` |
+| `METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL` |
+</details>
+<details>
+  <summary>MetricTimeWindowValue</summary>
+
+  | Value |
+|-------|
+| `METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED` |
+| `METRIC_TIME_WINDOW_VALUE_MINUTES_5` |
+| `METRIC_TIME_WINDOW_VALUE_MINUTES_10` |
+| `METRIC_TIME_WINDOW_VALUE_MINUTES_15` |
+| `METRIC_TIME_WINDOW_VALUE_MINUTES_20` |
+| `METRIC_TIME_WINDOW_VALUE_MINUTES_30` |
+| `METRIC_TIME_WINDOW_VALUE_HOUR_1` |
+| `METRIC_TIME_WINDOW_VALUE_HOURS_2` |
+| `METRIC_TIME_WINDOW_VALUE_HOURS_4` |
+| `METRIC_TIME_WINDOW_VALUE_HOURS_6` |
+| `METRIC_TIME_WINDOW_VALUE_HOURS_12` |
+| `METRIC_TIME_WINDOW_VALUE_HOURS_24` |
+| `METRIC_TIME_WINDOW_VALUE_HOURS_36` |
+</details>
+<details>
+  <summary>MetricThresholdConditionType</summary>
+
+  | Value |
+|-------|
+| `METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
+| `METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN` |
+| `METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS` |
+| `METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS` |
+</details>
+<details>
+  <summary>NextOp</summary>
+
+  | Value |
+|-------|
+| `NEXT_OP_AND_OR_UNSPECIFIED` |
+| `NEXT_OP_OR` |
+</details>
+<details>
+  <summary>AlertsOp</summary>
+
+  | Value |
+|-------|
+| `ALERTS_OP_AND_OR_UNSPECIFIED` |
+| `ALERTS_OP_OR` |
+</details>
+<details>
+  <summary>TimeframeType</summary>
+
+  | Value |
+|-------|
+| `TIMEFRAME_TYPE_UNSPECIFIED` |
+| `TIMEFRAME_TYPE_UP_TO` |
+</details>
+<details>
+  <summary>AlertStatus</summary>
+
+  | Value |
+|-------|
+| `ALERT_STATUS_RESOLVED_OR_UNSPECIFIED` |
+| `ALERT_STATUS_TRIGGERED` |
+</details>
+<details>
+  <summary>OrderByAlertEventFields</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED` |
+| `ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP` |
+</details>
+<details>
+  <summary>OrderByAlertEventDirection</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED` |
+| `ORDER_BY_ALERT_EVENT_DIRECTION_ASC` |
+| `ORDER_BY_ALERT_EVENT_DIRECTION_DESC` |
+</details>
+<details>
+  <summary>SpecialRatioValues</summary>
+
+  | Value |
+|-------|
+| `SPECIAL_RATIO_VALUES_INFINITY_OR_UNSPECIFIED` |
+</details>
