@@ -1,6 +1,6 @@
 ---
-title: Introduction
-description: "Welcome to the home of your new documentation"
+title: Getting started
+description: "Unlock the full power of Coralogix with our HTTP API suite"
 ---
 
 <img
@@ -14,58 +14,53 @@ description: "Welcome to the home of your new documentation"
   alt="Hero Dark"
 />
 
-## Setting up
+Coralogix offers a robust set of APIs designed to help you send observability data, manage and enrich it, build dashboards, configure alerts, and run advanced queries—all at scale. Whether you're automating workflows or integrating with third-party tools, our APIs give you precise control over every aspect of your observability pipeline.
 
-The first step to world-class documentation is setting up your editing environments.
+Explore the API categories below to get started.
 
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+## API Overview
 
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
-
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/content/components/accordions"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+| Repository | Description | Services |
+| --- | --- | --- |
+| **Alerts** | Coralogix Alerts deliver intelligent monitoring and proactive notification across your entire observability stack, helping teams detect and respond to issues before they impact users. The Alerts API provides comprehensive alert definition management with support for multiple trigger types including threshold, anomaly, ratio, and unique count alerts. It enables sophisticated alert lifecycle management with configurable notification channels and alert status tracking (enable/disable, events history). | • [Alert definitions service](https://docs.coralogix.com/api-reference/alert-definitions-service/overview) 
+• [Alert events service](https://docs.coralogix.com/api-reference/alert-events-service/overview) |
+| **Incidents** | Coralogix Incidents provide comprehensive incident management capabilities to streamline alert response and resolution workflows. The Incidents API enables tracking, assignment, and management of incidents with automated workflows and team collaboration features. It supports incident aggregation, metadata updates, and integration with external incident management systems for seamless operational response. (For example, the API allows acknowledging, assigning, and resolving incidents programmatically.) | • [Incidents service](https://docs.coralogix.com/api-reference/incidents-service/overview) |
+| **Extensions** | Coralogix Extensions provide a comprehensive ecosystem of pre-built monitoring resources to accelerate observability implementation and reduce time-to-value. The Extensions API enables deployment and management of out-of-the-box resources including alerts, parsing rules, dashboards, and saved views. For example, deploying a Coralogix extension can automatically add parsing rules, define dozens of alerts, and install ready-made dashboards in a few clicks. It supports integration management, webhook configurations, and contextual data integration for customized workflows and third-party system integration. | • [Contextual data integration service](https://docs.coralogix.com/api-reference/contextual-data-integration-service/overview)
+• [Extension deployment service](https://docs.coralogix.com/api-reference/extension-deployment-service/overview)
+• [Extension service](https://docs.coralogix.com/api-reference/extension-service/overview)
+• [Extension testing service](https://docs.coralogix.com/api-reference/extension-testing-service/overview)
+• External token service
+• Integration extensions deployment service
+• [Integration service](https://docs.coralogix.com/api-reference/integration-service/overview)
+• [Outgoing webhooks service](https://docs.coralogix.com/api-reference/outgoing-webhooks-service/overview)
+• Push-based contextual data integration service
+• Webhook integration service |
+| **Dashboards** | Coralogix Dashboards deliver powerful visualization and analysis capabilities for all your observability data, enabling teams to create comprehensive monitoring views. The Dashboards API provides complete dashboard management including creation, customization, and organization with support for multiple data sources. It enables folder management, team settings, and integration with logs, metrics, traces, and DataPrime queries for comprehensive data visualization (e.g. querying both hot and archived data). | • Archive logs data source service
+• Archive spans data source service
+• [Dashboard folders service](https://docs.coralogix.com/api-reference/dashboard-folders-service/overview)
+• [Dashboard service](https://docs.coralogix.com/api-reference/dashboard-service/overview)
+• DataPrime query service
+• DataPrime spans data source service
+• Metrics frequent search data source service
+• Spans frequent search data source service
+• Team settings service |
+| **Actions** | Coralogix Actions provide powerful automation capabilities that trigger workflows based on data conditions, enabling teams to respond automatically to operational events. The Actions API enables programmatic creation and management of automation triggers with full CRUD operations. It supports advanced features like action ordering and atomic batch execution for reliable automation workflows. | • [Actions](https://docs.coralogix.com/api-reference/actions-service/overview) |
+| **APM** | Coralogix APM delivers comprehensive application performance monitoring with Service Level Objective (SLO) tracking to ensure your applications meet business requirements. The APM API provides programmatic SLO management with configurable error budgets and alerting thresholds. It supports multiple SLI metric types and detailed SLO status tracking for application performance optimization. | • [SLO service](https://docs.coralogix.com/api-reference/slos-service/overview) |
+| **Archive** | Coralogix Archive provides intelligent data lifecycle management to optimize storage costs while maintaining compliance and data accessibility. The Archive API enables configuration and activation of data retention policies across all observability data types. It provides granular control over data lifecycle management (defining and enabling archive retention for logs, metrics, and traces). | • [Retentions service](https://docs.coralogix.com/api-reference/retentions-service/overview) |
+| **Data Usage** | Coralogix Data Usage provides detailed insights into your observability data consumption patterns to optimize costs and resource allocation. The Data Usage API delivers granular reporting on data consumption per policy, application, and subsystem with historical analysis capabilities. It supports current month and retroactive analysis (30/90 days) to enable data optimization and cost management across all observability pillars. | • Daily Usage service
+• [Data Usage service](https://docs.coralogix.com/api-reference/data-usage-service/overview) |
+| **Enrichment** | Coralogix Enrichment enhances your observability data with contextual information from multiple sources to provide deeper insights and operational context. The Enrichment API enables automatic data enhancement using AWS resource metadata, custom data sources, and predefined enrichment rules. For example, AWS Resource Enrichment can tag logs with EC2 instance metadata for greater insight. It supports both real-time and batch enrichment operations for comprehensive data enhancement across logs, metrics, and traces. | • AWS Enrichment
+• [Custom Enrichment service](https://docs.coralogix.com/api-reference/custom-enrichments-service/overview)
+• [Enrichment service](https://docs.coralogix.com/api-reference/enrichments-service/overview) |
+| **Logs2Metrics** | Coralogix Logs2Metrics transforms log events into actionable metrics to enable enhanced monitoring and analysis of operational data. The Logs2Metrics API provides flexible conversion of log patterns or events into time-series metrics for dashboard visualization and alerting. It supports multiple aggregation types and configurable conversion rules (Events2Metrics), including batch and atomic operations for reliable metric creation. | • [Events2Metric service](https://docs.coralogix.com/api-reference/events2metrics-service/overview) |
+| **Notification Center** | Coralogix Notification Center provides centralized notification management across all services to ensure reliable alert delivery and team communication. The Notification Center API enables configuration of notification connectors, creation of notification presets, and definition of global routing rules for flexible delivery. It supports multiple third-party connector types and schema-based templates for rich messages, with full auditing of notifications. | • [Connectors service](https://docs.coralogix.com/api-reference/connectorsservice/overview)
+• [Entities service](https://docs.coralogix.com/api-reference/entitiesservice/overview)
+• [Global Routers service](https://docs.coralogix.com/api-reference/globalroutersservice/overview)
+• [Presets service](https://docs.coralogix.com/api-reference/presetsservice/overview)
+• [Testing service](https://docs.coralogix.com/api-reference/testingservice/overview) |
+| **Permissions** | Coralogix Permissions provide granular role-based access control to secure your observability data and ensure proper resource access across teams. The Permissions API enables comprehensive user/role permission management and access policy definition across all services and data sources. It supports team-based group permissions, fine-grained resource-level access control, and thorough permission auditing to meet security and compliance requirements. | • [Team Permissions Management service](https://docs.coralogix.com/api-reference/team-permissions-management-service/overview) |
+| **Quota** | Coralogix Quota provides resource allocation and usage enforcement to optimize your observability platform utilization and control costs. The Quota API enables configuration and monitoring of usage policies (quotas) for data ingestion, API usage, and other service consumption. It supports policy templates, atomic batch updates, and toggling of policies for flexible quota management, along with usage tracking to implement cost management strategies. | • [Policies service](https://docs.coralogix.com/api-reference/policies-service/overview) |
+| **Scopes** | Coralogix Scopes provide data isolation and access control through logical data partitioning to support multi-tenant and enterprise environments. The Scopes API enables creation and management of data scopes to organize and secure observability data by team, project, or environment. It supports scope-based filtering, access control, and data governance for secure data isolation and compliance requirements (with full CRUD for scope definitions). | • [Scopes service](https://docs.coralogix.com/api-reference/scopes-service/overview) |
+| **Views** | Coralogix Views allow you to save and organize filtered data queries for fast access and shared analysis. The Views API enables creation and management of saved views and view folders across teams and environments. It supports full CRUD operations and folder-level organization for efficient query reuse and collaboration. | • [Views service](https://docs.coralogix.com/api-reference/views-service/list-views-service/overview)
+• [Views folder service](https://docs.coralogix.com/api-reference/folders-for-views-service/overview) |
+| **Rule Groups** | Coralogix Rule Groups allow you to organize and manage log parsing rules in structured, ordered collections. The Rule Groups API provides full CRUD support for defining, updating, and reordering rule groups to control how logs are transformed on ingestion. | • [Rule Groups service](https://docs.coralogix.com/api-reference/rule-groups-service/overview) |
