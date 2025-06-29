@@ -97,7 +97,7 @@ def get_mdx_files(service_path: Path) -> List[str]:
     return mdx_files
 
 
-def build_navigation_structure(api_reference_path: Path) -> Dict[str, Any]:
+def build_navigation_structure(api_reference_path_latest: Path, api_reference_path_lts: Path) -> Dict[str, Any]:
     """
     Build the complete navigation structure for docs.json.
     
@@ -121,7 +121,27 @@ def build_navigation_structure(api_reference_path: Path) -> Dict[str, Any]:
         "navigation": {
             "versions": [
                 {
-                    "version": "1.5.2-latest",
+                    "version": "1.5.2-latest", # This could be whatever, as the github action from the facade will override it anyways on release
+                    "groups": [
+                        {
+                            "group": "Home",
+                            "pages": [
+                                "introduction"
+                            ]
+                        },
+                        {
+                            "group": "Use Cases",
+                            "pages": [
+                                "api-reference/introduction",
+                                "api-reference/copy_a_dashboard",
+                                "api-reference/create_an_alert_with_an_outgoing_webhook",
+                                "api-reference/setup_kubernetes_complete_observability_integration",
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "version": "1.5.2-lts", # This could be whatever, as the github action from the facade will override it anyways on release
                     "groups": [
                         {
                             "group": "Home",
@@ -164,6 +184,12 @@ def build_navigation_structure(api_reference_path: Path) -> Dict[str, Any]:
     }
     
     # Get all directories in api-reference
+    add_groups_to_navigation_structure(api_reference_path_latest, docs_structure, False)
+    add_groups_to_navigation_structure(api_reference_path_lts, docs_structure, True)
+    
+    return docs_structure
+
+def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lts):
     service_dirs = []
     for item in api_reference_path.iterdir():
         if item.is_dir() and not item.name.startswith('.'):
@@ -181,16 +207,15 @@ def build_navigation_structure(api_reference_path: Path) -> Dict[str, Any]:
             group_name = get_group_name(service_name)
             
             # Create page paths
-            pages = [f"api-reference/{service_name}/{file_name}" for file_name in mdx_files]
+            subfolder = "lts" if is_lts else "latest"
+            pages = [f"api-reference/{subfolder}/{service_name}/{file_name}" for file_name in mdx_files]
             
             group = {
                 "group": group_name,
                 "pages": pages
             }
             
-            docs_structure["navigation"]["versions"][0]["groups"].append(group)
-    
-    return docs_structure
+            docs_structure["navigation"]["versions"][is_lts]["groups"].append(group)
 
 
 def main():
@@ -199,13 +224,14 @@ def main():
     """
     # Get the current working directory
     current_dir = Path.cwd()
-    api_reference_path = current_dir / "api-reference"
+    api_reference_path_latest = current_dir / "api-reference" / "latest"
+    api_reference_path_lts = current_dir / "api-reference" / "lts"
     
     
-    print(f"Scanning {api_reference_path} for service directories...")
+    print(f"Scanning {api_reference_path_latest} for service directories...")
     
     # Build the navigation structure
-    docs_structure = build_navigation_structure(api_reference_path)
+    docs_structure = build_navigation_structure(api_reference_path_latest, api_reference_path_lts)
     
     # Write to docs.json
     output_file = current_dir / "docs.json"
