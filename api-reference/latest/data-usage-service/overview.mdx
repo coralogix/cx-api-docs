@@ -1,0 +1,186 @@
+# Data Usage Service overview
+
+A service to manage data usage metrics.
+
+
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>Pillar</summary>
+
+  | Value |
+|-------|
+| `PILLAR_UNSPECIFIED` |
+| `PILLAR_METRICS` |
+| `PILLAR_LOGS` |
+| `PILLAR_SPANS` |
+| `PILLAR_BINARY` |
+| `PILLAR_PROFILES` |
+</details>
+<details>
+  <summary>TcoTier</summary>
+
+  | Value |
+|-------|
+| `TCO_TIER_UNSPECIFIED` |
+| `TCO_TIER_LOW` |
+| `TCO_TIER_MEDIUM` |
+| `TCO_TIER_HIGH` |
+| `TCO_TIER_BLOCKED` |
+</details>
+<details>
+  <summary>Priority</summary>
+
+  | Value |
+|-------|
+| `PRIORITY_UNSPECIFIED` |
+| `PRIORITY_LOW` |
+| `PRIORITY_MEDIUM` |
+| `PRIORITY_HIGH` |
+| `PRIORITY_BLOCKED` |
+</details>
+<details>
+  <summary>Severity</summary>
+
+  | Value |
+|-------|
+| `SEVERITY_UNSPECIFIED` |
+| `SEVERITY_DEBUG` |
+| `SEVERITY_VERBOSE` |
+| `SEVERITY_INFO` |
+| `SEVERITY_WARNING` |
+| `SEVERITY_ERROR` |
+| `SEVERITY_CRITICAL` |
+</details>
+<details>
+  <summary>Range</summary>
+
+  | Value |
+|-------|
+| `RANGE_UNSPECIFIED` |
+| `RANGE_CURRENT_MONTH` |
+| `RANGE_LAST_30_DAYS` |
+| `RANGE_LAST_90_DAYS` |
+| `RANGE_LAST_WEEK` |
+</details>
+<details>
+  <summary>Resolution</summary>
+
+  | Value |
+|-------|
+| `RESOLUTION_UNSPECIFIED` |
+| `RESOLUTION_ONE_MINUTE` |
+| `RESOLUTION_FIVE_MINUTES` |
+| `RESOLUTION_FIFTEEN_MINUTES` |
+| `RESOLUTION_ONE_HOUR` |
+| `RESOLUTION_SIX_HOURS` |
+| `RESOLUTION_ONE_DAY` |
+| `RESOLUTION_ONE_WEEK` |
+</details>
+<details>
+  <summary>GbUnitsRatios</summary>
+
+  | Value |
+|-------|
+| `GB_UNITS_RATIOS_UNSPECIFIED` |
+</details>
+<details>
+  <summary>AggregateBy</summary>
+
+  | Value |
+|-------|
+| `AGGREGATE_BY_UNSPECIFIED` |
+| `AGGREGATE_BY_APPLICATION` |
+| `AGGREGATE_BY_SUBSYSTEM` |
+| `AGGREGATE_BY_PILLAR` |
+| `AGGREGATE_BY_PRIORITY` |
+</details>
+<details>
+  <summary>Range</summary>
+
+  | Value |
+|-------|
+| `RANGE_UNSPECIFIED` |
+| `RANGE_CURRENT_MONTH` |
+| `RANGE_LAST_30_DAYS` |
+| `RANGE_LAST_90_DAYS` |
+| `RANGE_LAST_WEEK` |
+</details>
+<details>
+  <summary>Pillar</summary>
+
+  | Value |
+|-------|
+| `PILLAR_UNSPECIFIED` |
+| `PILLAR_METRICS` |
+| `PILLAR_LOGS` |
+| `PILLAR_SPANS` |
+| `PILLAR_BINARY` |
+| `PILLAR_PROFILES` |
+</details>
+<details>
+  <summary>TcoTier</summary>
+
+  | Value |
+|-------|
+| `TCO_TIER_UNSPECIFIED` |
+| `TCO_TIER_LOW` |
+| `TCO_TIER_MEDIUM` |
+| `TCO_TIER_HIGH` |
+| `TCO_TIER_BLOCKED` |
+</details>
+<details>
+  <summary>Priority</summary>
+
+  | Value |
+|-------|
+| `PRIORITY_UNSPECIFIED` |
+| `PRIORITY_LOW` |
+| `PRIORITY_MEDIUM` |
+| `PRIORITY_HIGH` |
+| `PRIORITY_BLOCKED` |
+</details>
+<details>
+  <summary>Severity</summary>
+
+  | Value |
+|-------|
+| `SEVERITY_UNSPECIFIED` |
+| `SEVERITY_DEBUG` |
+| `SEVERITY_VERBOSE` |
+| `SEVERITY_INFO` |
+| `SEVERITY_WARNING` |
+| `SEVERITY_ERROR` |
+| `SEVERITY_CRITICAL` |
+</details>
+<details>
+  <summary>Range</summary>
+
+  | Value |
+|-------|
+| `RANGE_UNSPECIFIED` |
+| `RANGE_CURRENT_MONTH` |
+| `RANGE_LAST_30_DAYS` |
+| `RANGE_LAST_90_DAYS` |
+| `RANGE_LAST_WEEK` |
+</details>
+<details>
+  <summary>Priority</summary>
+
+  | Value |
+|-------|
+| `PRIORITY_UNSPECIFIED` |
+| `PRIORITY_LOW` |
+| `PRIORITY_MEDIUM` |
+| `PRIORITY_HIGH` |
+| `PRIORITY_BLOCKED` |
+</details>
