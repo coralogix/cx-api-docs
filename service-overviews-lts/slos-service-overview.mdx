@@ -1,0 +1,127 @@
+# SLO service overview
+
+Manage your SLOs.
+
+
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>K8sFilter</summary>
+
+  | Value |
+|-------|
+| `K8S_FILTER_UNSPECIFIED` |
+| `K8S_FILTER_NAMESPACE` |
+| `K8S_FILTER_NODE` |
+| `K8S_FILTER_APP` |
+| `K8S_FILTER_POD` |
+| `K8S_FILTER_CLUSTER` |
+</details>
+<details>
+  <summary>K8sObject</summary>
+
+  | Value |
+|-------|
+| `K8S_OBJECT_UNSPECIFIED` |
+| `K8S_OBJECT_POD` |
+| `K8S_OBJECT_NODE` |
+| `K8S_OBJECT_APP` |
+</details>
+<details>
+  <summary>Feature</summary>
+
+  | Value |
+|-------|
+| `FEATURE_UNSPECIFIED` |
+| `FEATURE_K8S_DASHBOARD` |
+</details>
+<details>
+  <summary>OrderByDirection</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_DIRECTION_UNSPECIFIED` |
+| `ORDER_BY_DIRECTION_ASC` |
+| `ORDER_BY_DIRECTION_DESC` |
+</details>
+<details>
+  <summary>CompareType</summary>
+
+  | Value |
+|-------|
+| `COMPARE_TYPE_UNSPECIFIED` |
+| `COMPARE_TYPE_IS` |
+| `COMPARE_TYPE_START_WITH` |
+| `COMPARE_TYPE_ENDS_WITH` |
+| `COMPARE_TYPE_INCLUDES` |
+</details>
+<details>
+  <summary>SloStatus</summary>
+
+  | Value |
+|-------|
+| `SLO_STATUS_UNSPECIFIED` |
+| `SLO_STATUS_OK` |
+| `SLO_STATUS_BREACHED` |
+</details>
+<details>
+  <summary>SliMetricType</summary>
+
+  | Value |
+|-------|
+| `SLI_METRIC_TYPE_UNSPECIFIED` |
+| `SLI_METRIC_TYPE_ERROR` |
+| `SLI_METRIC_TYPE_LATENCY` |
+| `SLI_METRIC_TYPE_CUSTOM` |
+</details>
+<details>
+  <summary>ThresholdSymbol</summary>
+
+  | Value |
+|-------|
+| `THRESHOLD_SYMBOL_UNSPECIFIED` |
+| `THRESHOLD_SYMBOL_GREATER` |
+| `THRESHOLD_SYMBOL_GREATER_OR_EQUAL` |
+| `THRESHOLD_SYMBOL_LESS` |
+| `THRESHOLD_SYMBOL_LESS_OR_EQUAL` |
+| `THRESHOLD_SYMBOL_EQUAL` |
+| `THRESHOLD_SYMBOL_NOT_EQUAL` |
+</details>
+<details>
+  <summary>SloPeriod</summary>
+
+  | Value |
+|-------|
+| `SLO_PERIOD_UNSPECIFIED` |
+| `SLO_PERIOD_7_DAYS` |
+| `SLO_PERIOD_14_DAYS` |
+| `SLO_PERIOD_30_DAYS` |
+</details>
+<details>
+  <summary>Unit</summary>
+
+  | Value |
+|-------|
+| `UNIT_UNSPECIFIED` |
+| `UNIT_BYTES` |
+| `UNIT_MESSAGES` |
+| `UNIT_MESSAGES_PER_SECOND` |
+| `UNIT_BYTES_PER_SECOND` |
+| `UNIT_SECONDS` |
+| `UNIT_MILLISECONDS` |
+| `UNIT_X_PER_SECOND` |
+| `UNIT_PERCENT` |
+| `UNIT_MICROSECONDS` |
+| `UNIT_MESSAGES_PER_MINUTE` |
+| `UNIT_X_PER_MINUTE` |
+| `UNIT_MEGABYTES` |
+</details>

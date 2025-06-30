@@ -1,0 +1,430 @@
+# Dashboard folders service overview
+
+Manage your dashboard folders.
+
+## Authentication and permissions
+
+To use the Dashboard folders service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). It's recommended to use permission presets, as they are automatically updated with all relevant permissions. Alternatively, you can manually add the following individual permissions.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+| Dashboards | `team-dashboards:Read` | Grants access to read team-dashboards |
+|  | `team-dashboards:Update` | Required to create, update, or delete team-dashboards |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>SpanRelationType</summary>
+
+  | Value |
+|-------|
+| `SPAN_RELATION_TYPE_NONE_UNSPECIFIED` |
+| `SPAN_RELATION_TYPE_OTHER` |
+| `SPAN_RELATION_TYPE_PARENT` |
+| `SPAN_RELATION_TYPE_ROOT` |
+</details>
+<details>
+  <summary>DataModeType</summary>
+
+  | Value |
+|-------|
+| `DATA_MODE_TYPE_HIGH_UNSPECIFIED` |
+| `DATA_MODE_TYPE_ARCHIVE` |
+</details>
+<details>
+  <summary>ActionDataSourceType</summary>
+
+  | Value |
+|-------|
+| `ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED` |
+| `ACTION_DATA_SOURCE_TYPE_LOGS` |
+| `ACTION_DATA_SOURCE_TYPE_SPANS` |
+| `ACTION_DATA_SOURCE_TYPE_METRICS` |
+| `ACTION_DATA_SOURCE_TYPE_DATAPRIME` |
+</details>
+<details>
+  <summary>LogSeverityLevel</summary>
+
+  | Value |
+|-------|
+| `LOG_SEVERITY_LEVEL_UNSPECIFIED` |
+| `LOG_SEVERITY_LEVEL_DEBUG` |
+| `LOG_SEVERITY_LEVEL_VERBOSE` |
+| `LOG_SEVERITY_LEVEL_INFO` |
+| `LOG_SEVERITY_LEVEL_WARNING` |
+| `LOG_SEVERITY_LEVEL_ERROR` |
+| `LOG_SEVERITY_LEVEL_CRITICAL` |
+</details>
+<details>
+  <summary>PromQLQueryType</summary>
+
+  | Value |
+|-------|
+| `PROM_QL_QUERY_TYPE_UNSPECIFIED` |
+| `PROM_QL_QUERY_TYPE_RANGE` |
+| `PROM_QL_QUERY_TYPE_INSTANT` |
+</details>
+<details>
+  <summary>OrderDirection</summary>
+
+  | Value |
+|-------|
+| `ORDER_DIRECTION_UNSPECIFIED` |
+| `ORDER_DIRECTION_ASC` |
+| `ORDER_DIRECTION_DESC` |
+</details>
+<details>
+  <summary>MetricField</summary>
+
+  | Value |
+|-------|
+| `METRIC_FIELD_UNSPECIFIED` |
+| `METRIC_FIELD_DURATION` |
+</details>
+<details>
+  <summary>MetricAggregationType</summary>
+
+  | Value |
+|-------|
+| `METRIC_AGGREGATION_TYPE_UNSPECIFIED` |
+| `METRIC_AGGREGATION_TYPE_MIN` |
+| `METRIC_AGGREGATION_TYPE_MAX` |
+| `METRIC_AGGREGATION_TYPE_AVERAGE` |
+| `METRIC_AGGREGATION_TYPE_SUM` |
+| `METRIC_AGGREGATION_TYPE_PERCENTILE_99` |
+| `METRIC_AGGREGATION_TYPE_PERCENTILE_95` |
+| `METRIC_AGGREGATION_TYPE_PERCENTILE_50` |
+</details>
+<details>
+  <summary>DimensionField</summary>
+
+  | Value |
+|-------|
+| `DIMENSION_FIELD_UNSPECIFIED` |
+| `DIMENSION_FIELD_TRACE_ID` |
+</details>
+<details>
+  <summary>DimensionAggregationType</summary>
+
+  | Value |
+|-------|
+| `DIMENSION_AGGREGATION_TYPE_UNSPECIFIED` |
+| `DIMENSION_AGGREGATION_TYPE_UNIQUE_COUNT` |
+| `DIMENSION_AGGREGATION_TYPE_ERROR_COUNT` |
+</details>
+<details>
+  <summary>DatasetScope</summary>
+
+  | Value |
+|-------|
+| `DATASET_SCOPE_UNSPECIFIED` |
+| `DATASET_SCOPE_USER_DATA` |
+| `DATASET_SCOPE_LABEL` |
+| `DATASET_SCOPE_METADATA` |
+</details>
+<details>
+  <summary>MetadataField</summary>
+
+  | Value |
+|-------|
+| `METADATA_FIELD_UNSPECIFIED` |
+| `METADATA_FIELD_APPLICATION_NAME` |
+| `METADATA_FIELD_SUBSYSTEM_NAME` |
+| `METADATA_FIELD_SERVICE_NAME` |
+| `METADATA_FIELD_OPERATION_NAME` |
+</details>
+<details>
+  <summary>SectionPredefinedColor</summary>
+
+  | Value |
+|-------|
+| `SECTION_PREDEFINED_COLOR_UNSPECIFIED` |
+| `SECTION_PREDEFINED_COLOR_CYAN` |
+| `SECTION_PREDEFINED_COLOR_GREEN` |
+| `SECTION_PREDEFINED_COLOR_BLUE` |
+| `SECTION_PREDEFINED_COLOR_PURPLE` |
+| `SECTION_PREDEFINED_COLOR_MAGENTA` |
+| `SECTION_PREDEFINED_COLOR_PINK` |
+| `SECTION_PREDEFINED_COLOR_ORANGE` |
+</details>
+<details>
+  <summary>VariableDisplayType</summary>
+
+  | Value |
+|-------|
+| `VARIABLE_DISPLAY_TYPE_UNSPECIFIED` |
+| `VARIABLE_DISPLAY_TYPE_LABEL_VALUE` |
+| `VARIABLE_DISPLAY_TYPE_VALUE` |
+| `VARIABLE_DISPLAY_TYPE_NOTHING` |
+</details>
+<details>
+  <summary>RefreshStrategy</summary>
+
+  | Value |
+|-------|
+| `REFRESH_STRATEGY_UNSPECIFIED` |
+| `REFRESH_STRATEGY_ON_DASHBOARD_LOAD` |
+| `REFRESH_STRATEGY_ON_TIME_FRAME_CHANGE` |
+</details>
+<details>
+  <summary>SelectionType</summary>
+
+  | Value |
+|-------|
+| `SELECTION_TYPE_UNSPECIFIED` |
+| `SELECTION_TYPE_MULTI_ALL` |
+| `SELECTION_TYPE_MULTI` |
+| `SELECTION_TYPE_SINGLE` |
+</details>
+<details>
+  <summary>TooltipType</summary>
+
+  | Value |
+|-------|
+| `TOOLTIP_TYPE_UNSPECIFIED` |
+| `TOOLTIP_TYPE_ALL` |
+| `TOOLTIP_TYPE_SINGLE` |
+</details>
+<details>
+  <summary>StackedLine</summary>
+
+  | Value |
+|-------|
+| `STACKED_LINE_UNSPECIFIED` |
+| `STACKED_LINE_ABSOLUTE` |
+| `STACKED_LINE_RELATIVE` |
+</details>
+<details>
+  <summary>Aggregation</summary>
+
+  | Value |
+|-------|
+| `AGGREGATION_UNSPECIFIED` |
+| `AGGREGATION_LAST` |
+| `AGGREGATION_MIN` |
+| `AGGREGATION_MAX` |
+| `AGGREGATION_AVG` |
+| `AGGREGATION_SUM` |
+</details>
+<details>
+  <summary>Unit</summary>
+
+  | Value |
+|-------|
+| `UNIT_UNSPECIFIED` |
+| `UNIT_NUMBER` |
+| `UNIT_PERCENT` |
+| `UNIT_MICROSECONDS` |
+| `UNIT_MILLISECONDS` |
+| `UNIT_SECONDS` |
+| `UNIT_BYTES` |
+| `UNIT_KBYTES` |
+| `UNIT_MBYTES` |
+| `UNIT_GBYTES` |
+| `UNIT_BYTES_IEC` |
+| `UNIT_KIBYTES` |
+| `UNIT_MIBYTES` |
+| `UNIT_GIBYTES` |
+| `UNIT_EUR_CENTS` |
+| `UNIT_EUR` |
+| `UNIT_USD_CENTS` |
+| `UNIT_USD` |
+| `UNIT_CUSTOM` |
+| `UNIT_PERCENT_ZERO_ONE` |
+| `UNIT_PERCENT_ZERO_HUNDRED` |
+| `UNIT_NANOSECONDS` |
+</details>
+<details>
+  <summary>ThresholdBy</summary>
+
+  | Value |
+|-------|
+| `THRESHOLD_BY_UNSPECIFIED` |
+| `THRESHOLD_BY_VALUE` |
+| `THRESHOLD_BY_BACKGROUND` |
+</details>
+<details>
+  <summary>RowStyle</summary>
+
+  | Value |
+|-------|
+| `ROW_STYLE_UNSPECIFIED` |
+| `ROW_STYLE_ONE_LINE` |
+| `ROW_STYLE_TWO_LINE` |
+| `ROW_STYLE_CONDENSED` |
+| `ROW_STYLE_JSON` |
+| `ROW_STYLE_LIST` |
+</details>
+<details>
+  <summary>BarValueDisplay</summary>
+
+  | Value |
+|-------|
+| `BAR_VALUE_DISPLAY_UNSPECIFIED` |
+| `BAR_VALUE_DISPLAY_TOP` |
+| `BAR_VALUE_DISPLAY_INSIDE` |
+| `BAR_VALUE_DISPLAY_BOTH` |
+</details>
+<details>
+  <summary>LabelSource</summary>
+
+  | Value |
+|-------|
+| `LABEL_SOURCE_UNSPECIFIED` |
+| `LABEL_SOURCE_INNER` |
+| `LABEL_SOURCE_STACK` |
+</details>
+<details>
+  <summary>MetricsQueryEditorMode</summary>
+
+  | Value |
+|-------|
+| `METRICS_QUERY_EDITOR_MODE_UNSPECIFIED` |
+| `METRICS_QUERY_EDITOR_MODE_TEXT` |
+| `METRICS_QUERY_EDITOR_MODE_BUILDER` |
+</details>
+<details>
+  <summary>Aggregation</summary>
+
+  | Value |
+|-------|
+| `AGGREGATION_UNSPECIFIED` |
+| `AGGREGATION_LAST` |
+| `AGGREGATION_MIN` |
+| `AGGREGATION_MAX` |
+| `AGGREGATION_AVG` |
+| `AGGREGATION_SUM` |
+</details>
+<details>
+  <summary>SortByType</summary>
+
+  | Value |
+|-------|
+| `SORT_BY_TYPE_UNSPECIFIED` |
+| `SORT_BY_TYPE_VALUE` |
+| `SORT_BY_TYPE_NAME` |
+</details>
+<details>
+  <summary>DataModeType</summary>
+
+  | Value |
+|-------|
+| `DATA_MODE_TYPE_HIGH_UNSPECIFIED` |
+| `DATA_MODE_TYPE_ARCHIVE` |
+</details>
+<details>
+  <summary>ScaleType</summary>
+
+  | Value |
+|-------|
+| `SCALE_TYPE_UNSPECIFIED` |
+| `SCALE_TYPE_LINEAR` |
+| `SCALE_TYPE_LOGARITHMIC` |
+</details>
+<details>
+  <summary>LegendColumn</summary>
+
+  | Value |
+|-------|
+| `LEGEND_COLUMN_UNSPECIFIED` |
+| `LEGEND_COLUMN_MIN` |
+| `LEGEND_COLUMN_MAX` |
+| `LEGEND_COLUMN_SUM` |
+| `LEGEND_COLUMN_AVG` |
+| `LEGEND_COLUMN_LAST` |
+| `LEGEND_COLUMN_NAME` |
+</details>
+<details>
+  <summary>LegendPlacement</summary>
+
+  | Value |
+|-------|
+| `LEGEND_PLACEMENT_UNSPECIFIED` |
+| `LEGEND_PLACEMENT_AUTO` |
+| `LEGEND_PLACEMENT_BOTTOM` |
+| `LEGEND_PLACEMENT_SIDE` |
+| `LEGEND_PLACEMENT_HIDDEN` |
+</details>
+<details>
+  <summary>LegendBy</summary>
+
+  | Value |
+|-------|
+| `LEGEND_BY_UNSPECIFIED` |
+| `LEGEND_BY_THRESHOLDS` |
+| `LEGEND_BY_GROUPS` |
+</details>
+<details>
+  <summary>Unit</summary>
+
+  | Value |
+|-------|
+| `UNIT_UNSPECIFIED` |
+| `UNIT_MICROSECONDS` |
+| `UNIT_MILLISECONDS` |
+| `UNIT_SECONDS` |
+| `UNIT_BYTES` |
+| `UNIT_KBYTES` |
+| `UNIT_MBYTES` |
+| `UNIT_GBYTES` |
+| `UNIT_BYTES_IEC` |
+| `UNIT_KIBYTES` |
+| `UNIT_MIBYTES` |
+| `UNIT_GIBYTES` |
+| `UNIT_EUR_CENTS` |
+| `UNIT_EUR` |
+| `UNIT_USD_CENTS` |
+| `UNIT_USD` |
+| `UNIT_NANOSECONDS` |
+| `UNIT_CUSTOM` |
+| `UNIT_PERCENT_ZERO_ONE` |
+| `UNIT_PERCENT_ZERO_HUNDRED` |
+| `UNIT_PERCENT` |
+</details>
+<details>
+  <summary>ThresholdType</summary>
+
+  | Value |
+|-------|
+| `THRESHOLD_TYPE_UNSPECIFIED` |
+| `THRESHOLD_TYPE_RELATIVE` |
+| `THRESHOLD_TYPE_ABSOLUTE` |
+</details>
+<details>
+  <summary>ThresholdBy</summary>
+
+  | Value |
+|-------|
+| `THRESHOLD_BY_UNSPECIFIED` |
+| `THRESHOLD_BY_VALUE` |
+| `THRESHOLD_BY_BACKGROUND` |
+</details>
+<details>
+  <summary>TokenOriginType</summary>
+
+  | Value |
+|-------|
+| `TOKEN_ORIGIN_TYPE_UNSPECIFIED` |
+| `TOKEN_ORIGIN_TYPE_USER` |
+| `TOKEN_ORIGIN_TYPE_API` |
+</details>
+<details>
+  <summary>AggregationType</summary>
+
+  | Value |
+|-------|
+| `AGGREGATION_TYPE_UNSPECIFIED` |
+| `AGGREGATION_TYPE_LAST` |
+| `AGGREGATION_TYPE_MIN` |
+| `AGGREGATION_TYPE_MAX` |
+| `AGGREGATION_TYPE_AVG` |
+| `AGGREGATION_TYPE_SUM` |
+</details>

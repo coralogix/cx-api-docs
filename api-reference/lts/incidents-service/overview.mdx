@@ -1,0 +1,179 @@
+# Incidents service overview
+
+Handle all operations related to incident management within Coralogix. Identify, manage, and resolve incidents efficiently through automated workflows and team collaboration.
+
+Find out more about incident management in our [documentation](https://coralogix.com/docs/user-guides/alerting/incidents/).
+
+## Authentication and permissions
+
+To use the Incidents service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). It's recommended to use permission presets, as they are automatically updated with all relevant permissions. Alternatively, you can manually add the following individual permissions.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+| Incidents | `incidents:acknowledge` | Access to incidents operations |
+|  | `incidents:assign` | Access to incidents operations |
+|  | `incidents:close` | Access to incidents operations |
+|  | `incidents:read` | Grants access to read incidents |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>IncidentSeverity</summary>
+
+  | Value |
+|-------|
+| `INCIDENT_SEVERITY_UNSPECIFIED` |
+| `INCIDENT_SEVERITY_INFO` |
+| `INCIDENT_SEVERITY_WARNING` |
+| `INCIDENT_SEVERITY_ERROR` |
+| `INCIDENT_SEVERITY_CRITICAL` |
+| `INCIDENT_SEVERITY_LOW` |
+</details>
+<details>
+  <summary>IncidentEventOrderByFieldType</summary>
+
+  | Value |
+|-------|
+| `INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED` |
+</details>
+<details>
+  <summary>FilterOperator</summary>
+
+  | Value |
+|-------|
+| `FILTER_OPERATOR_OR_OR_UNSPECIFIED` |
+| `FILTER_OPERATOR_AND` |
+</details>
+<details>
+  <summary>IncidentStatus</summary>
+
+  | Value |
+|-------|
+| `INCIDENT_STATUS_UNSPECIFIED` |
+| `INCIDENT_STATUS_TRIGGERED` |
+| `INCIDENT_STATUS_ACKNOWLEDGED` |
+| `INCIDENT_STATUS_RESOLVED` |
+</details>
+<details>
+  <summary>IncidentState</summary>
+
+  | Value |
+|-------|
+| `INCIDENT_STATE_UNSPECIFIED` |
+| `INCIDENT_STATE_TRIGGERED` |
+| `INCIDENT_STATE_RESOLVED` |
+</details>
+<details>
+  <summary>OrderByFields</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_FIELDS_UNSPECIFIED` |
+| `ORDER_BY_FIELDS_ID` |
+| `ORDER_BY_FIELDS_SEVERITY` |
+| `ORDER_BY_FIELDS_NAME` |
+| `ORDER_BY_FIELDS_CREATED_TIME` |
+| `ORDER_BY_FIELDS_CLOSED_TIME` |
+</details>
+<details>
+  <summary>OrderByDirection</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_DIRECTION_UNSPECIFIED` |
+| `ORDER_BY_DIRECTION_ASC` |
+| `ORDER_BY_DIRECTION_DESC` |
+</details>
+<details>
+  <summary>IncidentFields</summary>
+
+  | Value |
+|-------|
+| `INCIDENTS_FIELDS_UNSPECIFIED` |
+| `INCIDENTS_FIELDS_ID` |
+| `INCIDENTS_FIELDS_SEVERITY` |
+| `INCIDENTS_FIELDS_NAME` |
+| `INCIDENTS_FIELDS_CREATED_TIME` |
+| `INCIDENTS_FIELDS_CLOSED_TIME` |
+| `INCIDENTS_FIELDS_STATE` |
+| `INCIDENTS_FIELDS_STATUS` |
+| `INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME` |
+| `INCIDENTS_FIELDS_APPLICATION_NAME` |
+| `INCIDENTS_FIELDS_SUBSYSTEM_NAME` |
+| `INCIDENTS_FIELDS_DURATION` |
+</details>
+<details>
+  <summary>AlertIncidentActionType</summary>
+
+  | Value |
+|-------|
+| `ALERT_INCIDENT_ACTION_TYPE_UNSPECIFIED` |
+| `ALERT_INCIDENT_ACTION_TYPE_CLOSE` |
+| `ALERT_INCIDENT_ACTION_TYPE_ACKNOWLEDGE` |
+| `ALERT_INCIDENT_ACTION_TYPE_ASSIGN` |
+</details>
+<details>
+  <summary>IncidentActionType</summary>
+
+  | Value |
+|-------|
+| `INCIDENT_ACTION_TYPE_UNSPECIFIED` |
+| `INCIDENT_ACTION_TYPE_CLOSE` |
+| `INCIDENT_ACTION_TYPE_ACKNOWLEDGE` |
+| `INCIDENT_ACTION_TYPE_ASSIGN` |
+| `INCIDENT_ACTION_TYPE_UPSERT_STATE` |
+</details>
+<details>
+  <summary>UpsertIncidentStateType</summary>
+
+  | Value |
+|-------|
+| `UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED` |
+| `UPSERT_INCIDENT_STATE_TYPE_TRIGGERED` |
+| `UPSERT_INCIDENT_STATE_TYPE_RESOLVED` |
+</details>
+<details>
+  <summary>IncidentEventType</summary>
+
+  | Value |
+|-------|
+| `INCIDENT_EVENT_TYPE_UNSPECIFIED` |
+| `INCIDENT_EVENT_TYPE_UPSERT_STATE` |
+| `INCIDENT_EVENT_TYPE_OPEN` |
+| `INCIDENT_EVENT_TYPE_CLOSE` |
+| `INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR` |
+| `INCIDENT_EVENT_TYPE_ASSIGN` |
+| `INCIDENT_EVENT_TYPE_UNASSIGN` |
+| `INCIDENT_EVENT_TYPE_ACKNOWLEDGE` |
+</details>
+<details>
+  <summary>OriginatorType</summary>
+
+  | Value |
+|-------|
+| `ORIGINATOR_TYPE_UNSPECIFIED` |
+| `ORIGINATOR_TYPE_OPERATIONAL` |
+| `ORIGINATOR_TYPE_ADMINISTRATIVE` |
+</details>
+<details>
+  <summary>IncidentEventAlertType</summary>
+
+  | Value |
+|-------|
+| `INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED` |
+| `INCIDENT_EVENT_ALERT_TYPE_METRIC` |
+| `INCIDENT_EVENT_ALERT_TYPE_NEW_VALUE` |
+| `INCIDENT_EVENT_ALERT_TYPE_RATIO` |
+| `INCIDENT_EVENT_ALERT_TYPE_TIME_RELATIVE` |
+| `INCIDENT_EVENT_ALERT_TYPE_UNIQUE_COUNT` |
+| `INCIDENT_EVENT_ALERT_TYPE_TRACING` |
+| `INCIDENT_EVENT_ALERT_TYPE_FLOW` |
+</details>

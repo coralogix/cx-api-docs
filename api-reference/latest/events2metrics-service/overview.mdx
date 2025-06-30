@@ -1,0 +1,52 @@
+# Events2Metrics service overview
+
+Coralogix Events2Metrics transforms log and span events into time-series metrics, allowing teams to build metrics pipelines directly from event data. The API provides complete lifecycle management of E2M definitions, including creation, replacement, retrieval, listing, and deletion. It also supports atomic batch operations to ensure reliable and ordered updates across multiple E2M rules.
+
+
+## Constants
+
+<details>
+  <summary>Severity</summary>
+
+  | Value |
+|-------|
+| `SEVERITY_UNSPECIFIED` |
+| `SEVERITY_DEBUG` |
+| `SEVERITY_VERBOSE` |
+| `SEVERITY_INFO` |
+| `SEVERITY_WARNING` |
+| `SEVERITY_ERROR` |
+| `SEVERITY_CRITICAL` |
+</details>
+<details>
+  <summary>E2MType</summary>
+
+  | Value |
+|-------|
+| `E2M_TYPE_UNSPECIFIED` |
+| `E2M_TYPE_LOGS2METRICS` |
+| `E2M_TYPE_SPANS2METRICS` |
+</details>
+<details>
+  <summary>AggType</summary>
+
+  | Value |
+|-------|
+| `AGG_TYPE_UNSPECIFIED` |
+| `AGG_TYPE_MIN` |
+| `AGG_TYPE_MAX` |
+| `AGG_TYPE_COUNT` |
+| `AGG_TYPE_AVG` |
+| `AGG_TYPE_SUM` |
+| `AGG_TYPE_HISTOGRAM` |
+| `AGG_TYPE_SAMPLES` |
+</details>
+<details>
+  <summary>SampleType</summary>
+
+  | Value |
+|-------|
+| `SAMPLE_TYPE_UNSPECIFIED` |
+| `SAMPLE_TYPE_MIN` |
+| `SAMPLE_TYPE_MAX` |
+</details>

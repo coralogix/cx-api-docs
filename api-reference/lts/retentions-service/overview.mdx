@@ -1,0 +1,236 @@
+# Retentions service overview
+
+
+
+
+
+
+
+## Constants
+
+<details>
+  <summary>DatasetClass</summary>
+
+  | Value |
+|-------|
+| `DATASET_CLASS_UNSPECIFIED` |
+| `DATASET_CLASS_ENV_LEVEL_DATASET` |
+| `DATASET_CLASS_TEAM_LEVEL_DATASET` |
+</details>
+<details>
+  <summary>PartitioningScheme</summary>
+
+  | Value |
+|-------|
+| `PARTITIONING_SCHEME_UNSPECIFIED` |
+| `PARTITIONING_SCHEME_DT_HR` |
+</details>
+<details>
+  <summary>DataPillar</summary>
+
+  | Value |
+|-------|
+| `DATA_PILLAR_UNSPECIFIED` |
+| `DATA_PILLAR_LOG` |
+| `DATA_PILLAR_SPAN` |
+</details>
+<details>
+  <summary>PredicateType</summary>
+
+  | Value |
+|-------|
+| `PREDICATE_TYPE_UNSPECIFIED` |
+| `PREDICATE_TYPE_REGEX` |
+| `PREDICATE_TYPE_DPXL` |
+| `PREDICATE_TYPE_EXACT` |
+</details>
+<details>
+  <summary>Pillar</summary>
+
+  | Value |
+|-------|
+| `PILLAR_UNSPECIFIED` |
+| `PILLAR_LOGS` |
+| `PILLAR_SPANS` |
+| `PILLAR_METRICS` |
+| `PILLAR_BINARY` |
+</details>
+<details>
+  <summary>DataType</summary>
+
+  | Value |
+|-------|
+| `DATA_TYPE_UNSPECIFIED` |
+| `DATA_TYPE_NUM` |
+| `DATA_TYPE_STRING` |
+| `DATA_TYPE_BOOL` |
+| `DATA_TYPE_UNTRACKED_ARRAY` |
+| `DATA_TYPE_OBJECT` |
+| `DATA_TYPE_NUM_ARRAY` |
+| `DATA_TYPE_STRING_ARRAY` |
+| `DATA_TYPE_BOOL_ARRAY` |
+| `DATA_TYPE_ARRAY_ARRAY` |
+| `DATA_TYPE_OBJECT_ARRAY` |
+| `DATA_TYPE_NULL` |
+| `DATA_TYPE_NULL_ARRAY` |
+| `DATA_TYPE_EMPTY_ARRAY` |
+</details>
+<details>
+  <summary>FieldReservation</summary>
+
+  | Value |
+|-------|
+| `FIELD_RESERVATION_NOT_RESERVED_UNSPECIFIED` |
+| `FIELD_RESERVATION_RESERVED` |
+</details>
+<details>
+  <summary>WriteToDatasetMode</summary>
+
+  | Value |
+|-------|
+| `WRITE_TO_DATASET_MODE_UNSPECIFIED` |
+| `WRITE_TO_DATASET_MODE_OVERWRITE` |
+| `WRITE_TO_DATASET_MODE_APPEND` |
+</details>
+<details>
+  <summary>Namespace</summary>
+
+  | Value |
+|-------|
+| `NAMESPACE_UNSPECIFIED` |
+| `NAMESPACE_METADATA` |
+| `NAMESPACE_LABELS` |
+| `NAMESPACE_USER_DATA` |
+</details>
+<details>
+  <summary>SchemaType</summary>
+
+  | Value |
+|-------|
+| `SCHEMA_TYPE_UNSPECIFIED` |
+| `SCHEMA_TYPE_STRING` |
+| `SCHEMA_TYPE_TIMESTAMP_NANOS` |
+| `SCHEMA_TYPE_TIMESTAMP_MICROS` |
+</details>
+<details>
+  <summary>ProviderType</summary>
+
+  | Value |
+|-------|
+| `PROVIDER_TYPE_UNSPECIFIED` |
+| `PROVIDER_TYPE_S3` |
+| `PROVIDER_TYPE_IBM_COS` |
+</details>
+<details>
+  <summary>PartitioningScheme</summary>
+
+  | Value |
+|-------|
+| `PARTITIONING_SCHEME_UNSPECIFIED` |
+| `PARTITIONING_SCHEME_DT_HR` |
+</details>
+<details>
+  <summary>ArchivingFormatId</summary>
+
+  | Value |
+|-------|
+| `ARCHIVING_FORMAT_ID_UNSPECIFIED` |
+| `ARCHIVING_FORMAT_ID_WIDE_PARQUET_V1` |
+</details>
+<details>
+  <summary>OrderBy</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_UNSPECIFIED` |
+| `ORDER_BY_UPDATED_AT` |
+| `ORDER_BY_CREATED_AT` |
+| `ORDER_BY_COMPANY_ID` |
+</details>
+<details>
+  <summary>OrderDirection</summary>
+
+  | Value |
+|-------|
+| `ORDER_DIRECTION_UNSPECIFIED` |
+| `ORDER_DIRECTION_ASC` |
+| `ORDER_DIRECTION_DESC` |
+</details>
+<details>
+  <summary>IbmBucketType</summary>
+
+  | Value |
+|-------|
+| `IBM_BUCKET_TYPE_UNSPECIFIED` |
+| `IBM_BUCKET_TYPE_EXTERNAL` |
+| `IBM_BUCKET_TYPE_INTERNAL` |
+</details>
+<details>
+  <summary>CompressionType</summary>
+
+  | Value |
+|-------|
+| `COMPRESSION_TYPE_UNSPECIFIED` |
+| `COMPRESSION_TYPE_GZIP` |
+</details>
+<details>
+  <summary>CompressionType</summary>
+
+  | Value |
+|-------|
+| `COMPRESSION_TYPE_UNSPECIFIED` |
+| `COMPRESSION_TYPE_GZIP` |
+</details>
+<details>
+  <summary>CompressionType</summary>
+
+  | Value |
+|-------|
+| `COMPRESSION_TYPE_UNSPECIFIED` |
+| `COMPRESSION_TYPE_GZIP` |
+</details>
+<details>
+  <summary>CompressionType</summary>
+
+  | Value |
+|-------|
+| `COMPRESSION_TYPE_UNSPECIFIED` |
+| `COMPRESSION_TYPE_GZIP` |
+| `COMPRESSION_TYPE_ZSTANDARD` |
+</details>
+<details>
+  <summary>FieldType</summary>
+
+  | Value |
+|-------|
+| `FIELD_TYPE_UNSPECIFIED` |
+| `FIELD_TYPE_STRING` |
+| `FIELD_TYPE_STRING_ARRAY` |
+| `FIELD_TYPE_TIMESTAMP_NANOS` |
+| `FIELD_TYPE_TIMESTAMP_MICROS` |
+</details>
+<details>
+  <summary>Version</summary>
+
+  | Value |
+|-------|
+| `VERSION_UNSPECIFIED` |
+| `VERSION_V1` |
+| `VERSION_V3` |
+</details>
+<details>
+  <summary>Version</summary>
+
+  | Value |
+|-------|
+| `VERSION_UNSPECIFIED` |
+| `VERSION_V1` |
+</details>
+<details>
+  <summary>Version</summary>
+
+  | Value |
+|-------|
+| `VERSION_UNSPECIFIED` |
+| `VERSION_V1` |
+</details>

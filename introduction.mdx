@@ -1,71 +1,30 @@
 ---
-title: Introduction
-description: "Welcome to the home of your new documentation"
+title: Getting started
+description: "Unlock the full power of Coralogix with our HTTP API suite"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.png"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.png"
-  alt="Hero Dark"
-/>
+Coralogix offers a robust set of APIs designed to help you send observability data, manage and enrich it, build dashboards, configure alerts, and run advanced queries—all at scale. Whether you're automating workflows or integrating with third-party tools, our APIs give you precise control over every aspect of your observability pipeline.
 
-## Setting up
+Explore the API categories below to get started.
 
-The first step to world-class documentation is setting up your editing environments.
+## API Overview
 
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
-
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
-
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/content/components/accordions"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+| Repository | Description | Services |
+| --- | --- | --- |
+| **Alerts** | Coralogix Alerts deliver intelligent monitoring and proactive notification across your entire observability stack, helping teams detect and respond to issues before they impact users. | [Alert definitions](https://docs.coralogix.com/api-reference/alert-definitions-service/overview)<br /> [Alert events](https://docs.coralogix.com/api-reference/alert-events-service/overview) |
+| **Incidents** | Coralogix Incidents provide comprehensive incident management capabilities to streamline alert response and resolution workflows. |  [Incidents](https://docs.coralogix.com/api-reference/incidents-service/overview) |
+| **Extensions** | Coralogix Extensions provide a comprehensive ecosystem of pre-built monitoring resources to accelerate observability implementation and reduce time-to-value. |  [Contextual data integration](https://docs.coralogix.com/api-reference/contextual-data-integration-service/overview)<br /> [Extension deployment](https://docs.coralogix.com/api-reference/extension-deployment-service/overview)<br /> [Extensions](https://docs.coralogix.com/api-reference/extension-service/overview)<br /> [Extension testing](https://docs.coralogix.com/api-reference/extension-testing-service/overview)<br /> [Integration](https://docs.coralogix.com/api-reference/integration-service/overview)<br /> [Outgoing webhooks](https://docs.coralogix.com/api-reference/outgoing-webhooks-service/overview) |
+| **Dashboards** | Coralogix Dashboards deliver powerful visualization and analysis capabilities for all your observability data. |  [Dashboard folders](https://docs.coralogix.com/api-reference/dashboard-folders-service/overview)<br /> [Dashboard](https://docs.coralogix.com/api-reference/dashboard-service/overview) |
+| **Actions** | Coralogix Actions provide powerful automation capabilities that trigger workflows based on data conditions. |  [Actions](https://docs.coralogix.com/api-reference/actions-service/overview) |
+| **APM** | Coralogix APM delivers comprehensive application performance monitoring with Service Level Objective (SLO) tracking. |  [SLO](https://docs.coralogix.com/api-reference/slos-service/overview) |
+| **Archive** | Coralogix Archive provides intelligent data lifecycle management to optimize storage costs while maintaining compliance. |  [Retentions](https://docs.coralogix.com/api-reference/retentions-service/overview)<br /> [Target](https://docs.coralogix.com/api-reference/target-service/overview) |
+| **Data Usage** | Coralogix Data Usage provides detailed insights into your observability data consumption patterns. |  [Data Usage](https://docs.coralogix.com/api-reference/data-usage-service/overview) |
+| **Enrichment** | Coralogix Enrichment enhances your observability data with contextual information from multiple sources. |  [Custom Enrichments](https://docs.coralogix.com/api-reference/custom-enrichments-service/overview)<br /> [Enrichment service](https://docs.coralogix.com/api-reference/enrichments-service/overview) |
+| **Logs2Metrics** | Coralogix Logs2Metrics transforms log events into actionable metrics for enhanced monitoring. |  [Events2Metrics](https://docs.coralogix.com/api-reference/events2metrics-service/overview) |
+| **Permissions** | Coralogix Permissions provide granular role-based access control to secure your observability data. |  [API Keys](https://docs.coralogix.com/api-reference/api-keys-service/overview)<br /> [Team Permissions Management](https://docs.coralogix.com/api-reference/team-permissions-management-service/overview)<br /> [SAML Configuration](https://docs.coralogix.com/api-reference/saml-configuration-service/overview) |
+| **Quota** | Coralogix Quota provides resource allocation and usage enforcement to optimize platform utilization. |  [Policies](https://docs.coralogix.com/api-reference/policies-service/overview) |
+| **Scopes** | Coralogix Scopes provide data isolation and access control through logical data partitioning. |  [Scopes](https://docs.coralogix.com/api-reference/scopes-service/overview) |
+| **Views** | Coralogix Views allow you to save and organize filtered data queries for fast access and shared analysis. |  [Views](https://docs.coralogix.com/api-reference/views-service/list-views-service/overview)<br /> [View folders](https://docs.coralogix.com/api-reference/folders-for-views-service/overview) |
+| **Rule Groups** | Coralogix Rule Groups allow you to organize and manage log parsing rules in structured, ordered collections. |  [Rule Groups](https://docs.coralogix.com/api-reference/rule-groups-service/overview) |
+| **Recording Rules** | Coralogix Recording Rules let you define PromQL-based expressions that are periodically evaluated and stored as new time series for downstream analysis. Recording rules help optimize performance by precomputing frequently used queries and metrics. The API supports full CRUD operations for rule groups and rule group sets, including versioned updates and interval-based scheduling. |  [Recording Rules](https://docs.coralogix.com/api-reference/recording-rules-service/overview) |
+| **Events** | Coralogix Events exposes historical data about triggered incidents. It enables teams to query, paginate, and analyze alert event occurrences. | [Events](https://docs.coralogix.com/api-reference/events-service/overview) |

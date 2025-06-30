@@ -1,0 +1,207 @@
+# Extension service overview
+
+A service that enables querying for extension information.
+
+Learn more about extensions in our [documentation](https://coralogix.com/docs/integrations/extensions/).
+
+## Authentication and permissions
+
+To use the Extension service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). It's recommended to use permission presets, as they are automatically updated with all relevant permissions. Alternatively, you can manually add the following individual permissions.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+| Extensions | `extensions:ReadConfig` | Grants access to read extensions |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>TargetDomain</summary>
+
+  | Value |
+|-------|
+| `ACTION` |
+| `ALERT` |
+| `ENRICHMENT` |
+| `GRAFANA_DASHBOARD` |
+| `KIBANA_DASHBOARD` |
+| `PARSING_RULE` |
+| `SAVED_VIEW` |
+| `CX_CUSTOM_DASHBOARD` |
+| `METRICS_RULE_GROUP` |
+| `EVENTS_TO_METRICS` |
+| `ALERT_V3` |
+</details>
+<details>
+  <summary>BinaryType</summary>
+
+  | Value |
+|-------|
+| `PREVIEW_IMAGE` |
+| `KIBANA_DASHBOARD_DEFINITION` |
+| `GRAFANA_DASHBOARD_DEFINITION` |
+| `ENRICHMENT_CSV` |
+| `CX_CUSTOM_DASHBOARD_DEFINITION` |
+</details>
+<details>
+  <summary>PermissionResource</summary>
+
+  | Value |
+|-------|
+| `UNKNOWN` |
+| `ACTION` |
+| `ALERT` |
+| `CUSTOM_ENRICHMENT` |
+| `GEO_ENRICHMENT` |
+| `SECURITY_ENRICHMENT` |
+| `RESOURCE_CLOUD_METADATA_ENRICHMENT` |
+| `GRAFANA_DASHBOARD` |
+| `KIBANA_DASHBOARD` |
+| `PARSING_RULE` |
+| `SAVED_VIEW` |
+| `CX_CUSTOM_DASHBOARD` |
+| `METRICS_RULE_GROUP` |
+| `SPAN_EVENTS_TO_METRICS` |
+| `LOGS_EVENTS_TO_METRICS` |
+</details>
+<details>
+  <summary>BinaryType</summary>
+
+  | Value |
+|-------|
+| `KIBANA_INDEX_PATTERN` |
+</details>
+<details>
+  <summary>PushBasedPlatform</summary>
+
+  | Value |
+|-------|
+| `UNDEFINED` |
+| `PLATFORM_BITBUCKET` |
+| `PLATFORM_GITHUB` |
+| `PLATFORM_GITLAB` |
+| `PLATFORM_AWS_SNS` |
+| `PLATFORM_OPSGENIE` |
+| `PLATFORM_PAGERDUTY` |
+| `PLATFORM_PROMETHEUS` |
+| `PLATFORM_SLACK` |
+| `PLATFORM_INTERCOM` |
+</details>
+<details>
+  <summary>ConnectionStatus</summary>
+
+  | Value |
+|-------|
+| `PENDING` |
+| `ACTIVE` |
+| `FAILING` |
+| `STATUS_UNKNOWN` |
+</details>
+<details>
+  <summary>Variant</summary>
+
+  | Value |
+|-------|
+| `DEFAULT` |
+| `GCP` |
+| `OAUTH` |
+| `CUSTOM` |
+</details>
+<details>
+  <summary>InputType</summary>
+
+  | Value |
+|-------|
+| `API_KEY` |
+| `TEXT` |
+| `LIST_TEXT` |
+| `MULTIPLE_SELECTION` |
+| `BOOLEAN` |
+| `SELECT` |
+| `JSON` |
+| `NUMBER` |
+| `SENSITIVE_DATA` |
+| `JSON_OBJECT_ARRAY` |
+</details>
+<details>
+  <summary>ConditionType</summary>
+
+  | Value |
+|-------|
+| `UNKNOWN` |
+| `OR` |
+| `AND` |
+</details>
+<details>
+  <summary>Language</summary>
+
+  | Value |
+|-------|
+| `UNKNOWN` |
+| `BASH` |
+| `JAVASCRIPT` |
+</details>
+<details>
+  <summary>WebhookType</summary>
+
+  | Value |
+|-------|
+| `UNKNOWN` |
+| `GENERIC` |
+| `SLACK` |
+| `PAGERDUTY` |
+| `SEND_LOG` |
+| `EMAIL_GROUP` |
+| `MICROSOFT_TEAMS` |
+| `JIRA` |
+| `OPSGENIE` |
+| `DEMISTO` |
+| `AWS_EVENT_BRIDGE` |
+| `IBM_EVENT_NOTIFICATIONS` |
+| `MS_TEAMS_WORKFLOW` |
+</details>
+<details>
+  <summary>MethodType</summary>
+
+  | Value |
+|-------|
+| `UNKNOWN` |
+| `GET` |
+| `POST` |
+| `PUT` |
+</details>
+<details>
+  <summary>DigestType</summary>
+
+  | Value |
+|-------|
+| `UNKNOWN` |
+| `ERROR_AND_CRITICAL_LOGS` |
+| `FLOW_ANOMALIES` |
+| `SPIKE_ANOMALIES` |
+| `DATA_USAGE` |
+</details>
+<details>
+  <summary>AttachmentType</summary>
+
+  | Value |
+|-------|
+| `EMPTY` |
+| `METRIC_SNAPSHOT` |
+| `LOGS` |
+</details>
+<details>
+  <summary>EndpointType</summary>
+
+  | Value |
+|-------|
+| `ENDPOINT_TYPE_DEFAULT_OR_PUBLIC` |
+| `ENDPOINT_TYPE_PRIVATE` |
+</details>
