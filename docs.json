@@ -14,6 +14,20 @@
         "version": "1.5.2-latest",
         "groups": [
           {
+            "group": "Introduction",
+            "pages": [
+              "introduction"
+            ]
+          },
+          {
+            "group": "Use Cases",
+            "pages": [
+              "copy_a_dashboard",
+              "create_an_alert_with_an_outgoing_webhook",
+              "setup_kubernetes_complete_observability_integration"
+            ]
+          },
+          {
             "group": "Actions Service",
             "pages": [
               "api-reference/latest/actions-service/overview",
@@ -57,21 +71,6 @@
               "api-reference/latest/api-keys-service/get-\"send-data\"-api-keys",
               "api-reference/latest/api-keys-service/get-api-key",
               "api-reference/latest/api-keys-service/update-api-key"
-            ]
-          },
-          {
-            "group": "Connectors Service",
-            "pages": [
-              "api-reference/latest/connectorsservice/overview",
-              "api-reference/latest/connectorsservice/delete-v1notification-centerconnectors",
-              "api-reference/latest/connectorsservice/get-v1notification-centerconnectors",
-              "api-reference/latest/connectorsservice/get-v1notification-centerconnectors-1",
-              "api-reference/latest/connectorsservice/get-v1notification-centerconnectors:batchget",
-              "api-reference/latest/connectorsservice/get-v1notification-centerconnectors:batchgetsummaries",
-              "api-reference/latest/connectorsservice/get-v1notification-centerconnectors:gettypesummaries",
-              "api-reference/latest/connectorsservice/get-v1notification-centerconnectors:listsummaries",
-              "api-reference/latest/connectorsservice/post-v1notification-centerconnectors",
-              "api-reference/latest/connectorsservice/put-v1notification-centerconnector"
             ]
           },
           {
@@ -152,14 +151,6 @@
             ]
           },
           {
-            "group": "Entities Service",
-            "pages": [
-              "api-reference/latest/entitiesservice/overview",
-              "api-reference/latest/entitiesservice/get-v1notification-centerentity-types",
-              "api-reference/latest/entitiesservice/get-v1notification-centerentity-types-entity-subtypes"
-            ]
-          },
-          {
             "group": "Events Service",
             "pages": [
               "api-reference/latest/events-service/overview",
@@ -223,18 +214,6 @@
             ]
           },
           {
-            "group": "Global Routers Service",
-            "pages": [
-              "api-reference/latest/globalroutersservice/overview",
-              "api-reference/latest/globalroutersservice/delete-v1notification-centerrouters",
-              "api-reference/latest/globalroutersservice/get-v1notification-centerrouters",
-              "api-reference/latest/globalroutersservice/get-v1notification-centerrouters-1",
-              "api-reference/latest/globalroutersservice/get-v1notification-centerrouters:batchgetsummaries",
-              "api-reference/latest/globalroutersservice/post-v1notification-centerrouters",
-              "api-reference/latest/globalroutersservice/put-v1notification-centerrouters"
-            ]
-          },
-          {
             "group": "Incidents Service",
             "pages": [
               "api-reference/latest/incidents-service/overview",
@@ -274,25 +253,6 @@
             ]
           },
           {
-            "group": "Metrics Configurator Public Service",
-            "pages": [
-              "api-reference/latest/metricsconfiguratorpublicservice/get-v1metrics-archive",
-              "api-reference/latest/metricsconfiguratorpublicservice/post-v1metrics-archive",
-              "api-reference/latest/metricsconfiguratorpublicservice/post-v1metrics-archive:disable",
-              "api-reference/latest/metricsconfiguratorpublicservice/post-v1metrics-archive:enable",
-              "api-reference/latest/metricsconfiguratorpublicservice/post-v1metrics-archive:validate",
-              "api-reference/latest/metricsconfiguratorpublicservice/put-v1metrics-archive"
-            ]
-          },
-          {
-            "group": "Metrics Tco Service",
-            "pages": [
-              "api-reference/latest/metricstcoservice/get-metrics-tco",
-              "api-reference/latest/metricstcoservice/post-metrics-tcoadd",
-              "api-reference/latest/metricstcoservice/post-metrics-tcodelete"
-            ]
-          },
-          {
             "group": "Outgoing Webhooks Service",
             "pages": [
               "api-reference/latest/outgoing-webhooks-service/overview",
@@ -325,22 +285,6 @@
               "api-reference/latest/policies-service/reorder-policies",
               "api-reference/latest/policies-service/toggle-policies",
               "api-reference/latest/policies-service/update-policy"
-            ]
-          },
-          {
-            "group": "Presets Service",
-            "pages": [
-              "api-reference/latest/presetsservice/overview",
-              "api-reference/latest/presetsservice/delete-v1notification-centerpresetscustom",
-              "api-reference/latest/presetsservice/get-v1notification-centerpresets",
-              "api-reference/latest/presetsservice/get-v1notification-centerpresets:batchget",
-              "api-reference/latest/presetsservice/get-v1notification-centerpresets:defaultsummaryget",
-              "api-reference/latest/presetsservice/get-v1notification-centerpresets:summarieslist",
-              "api-reference/latest/presetsservice/get-v1notification-centerpresets:systemdefaultsummaryget",
-              "api-reference/latest/presetsservice/post-v1notification-centerpresets-:defaultset",
-              "api-reference/latest/presetsservice/post-v1notification-centerpresetscustom",
-              "api-reference/latest/presetsservice/post-v1notification-centerpresetscustom-:defaultset",
-              "api-reference/latest/presetsservice/put-v1notification-centerpresetscustom"
             ]
           },
           {
@@ -441,19 +385,6 @@
             ]
           },
           {
-            "group": "Testing Service",
-            "pages": [
-              "api-reference/latest/testingservice/overview",
-              "api-reference/latest/testingservice/post-v1notification-centernotificationstesting:testconnectorconfiguration",
-              "api-reference/latest/testingservice/post-v1notification-centernotificationstesting:testdestination",
-              "api-reference/latest/testingservice/post-v1notification-centernotificationstesting:testexistingconnector",
-              "api-reference/latest/testingservice/post-v1notification-centernotificationstesting:testexistingpreset",
-              "api-reference/latest/testingservice/post-v1notification-centernotificationstesting:testpresetconfiguration",
-              "api-reference/latest/testingservice/post-v1notification-centernotificationstesting:testroutingconditionvalid",
-              "api-reference/latest/testingservice/post-v1notification-centernotificationstesting:testtemplaterender"
-            ]
-          },
-          {
             "group": "Views",
             "pages": [
               "api-reference/latest/views-service/overview",
@@ -469,6 +400,20 @@
       {
         "version": "1.5.2-lts",
         "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "introduction"
+            ]
+          },
+          {
+            "group": "Use Cases",
+            "pages": [
+              "copy_a_dashboard",
+              "create_an_alert_with_an_outgoing_webhook",
+              "setup_kubernetes_complete_observability_integration"
+            ]
+          },
           {
             "group": "Actions Service",
             "pages": [
@@ -513,21 +458,6 @@
               "api-reference/lts/api-keys-service/get-\"send-data\"-api-keys",
               "api-reference/lts/api-keys-service/get-api-key",
               "api-reference/lts/api-keys-service/update-api-key"
-            ]
-          },
-          {
-            "group": "Connectors Service",
-            "pages": [
-              "api-reference/lts/connectorsservice/overview",
-              "api-reference/lts/connectorsservice/delete-v1notification-centerconnectors",
-              "api-reference/lts/connectorsservice/get-v1notification-centerconnectors",
-              "api-reference/lts/connectorsservice/get-v1notification-centerconnectors-1",
-              "api-reference/lts/connectorsservice/get-v1notification-centerconnectors:batchget",
-              "api-reference/lts/connectorsservice/get-v1notification-centerconnectors:batchgetsummaries",
-              "api-reference/lts/connectorsservice/get-v1notification-centerconnectors:gettypesummaries",
-              "api-reference/lts/connectorsservice/get-v1notification-centerconnectors:listsummaries",
-              "api-reference/lts/connectorsservice/post-v1notification-centerconnectors",
-              "api-reference/lts/connectorsservice/put-v1notification-centerconnector"
             ]
           },
           {
@@ -608,14 +538,6 @@
             ]
           },
           {
-            "group": "Entities Service",
-            "pages": [
-              "api-reference/lts/entitiesservice/overview",
-              "api-reference/lts/entitiesservice/get-v1notification-centerentity-types",
-              "api-reference/lts/entitiesservice/get-v1notification-centerentity-types-entity-subtypes"
-            ]
-          },
-          {
             "group": "Events Service",
             "pages": [
               "api-reference/lts/events-service/overview",
@@ -679,18 +601,6 @@
             ]
           },
           {
-            "group": "Global Routers Service",
-            "pages": [
-              "api-reference/lts/globalroutersservice/overview",
-              "api-reference/lts/globalroutersservice/delete-v1notification-centerrouters",
-              "api-reference/lts/globalroutersservice/get-v1notification-centerrouters",
-              "api-reference/lts/globalroutersservice/get-v1notification-centerrouters-1",
-              "api-reference/lts/globalroutersservice/get-v1notification-centerrouters:batchgetsummaries",
-              "api-reference/lts/globalroutersservice/post-v1notification-centerrouters",
-              "api-reference/lts/globalroutersservice/put-v1notification-centerrouters"
-            ]
-          },
-          {
             "group": "Incidents Service",
             "pages": [
               "api-reference/lts/incidents-service/overview",
@@ -730,25 +640,6 @@
             ]
           },
           {
-            "group": "Metrics Configurator Public Service",
-            "pages": [
-              "api-reference/lts/metricsconfiguratorpublicservice/get-v1metrics-archive",
-              "api-reference/lts/metricsconfiguratorpublicservice/post-v1metrics-archive",
-              "api-reference/lts/metricsconfiguratorpublicservice/post-v1metrics-archive:disable",
-              "api-reference/lts/metricsconfiguratorpublicservice/post-v1metrics-archive:enable",
-              "api-reference/lts/metricsconfiguratorpublicservice/post-v1metrics-archive:validate",
-              "api-reference/lts/metricsconfiguratorpublicservice/put-v1metrics-archive"
-            ]
-          },
-          {
-            "group": "Metrics Tco Service",
-            "pages": [
-              "api-reference/lts/metricstcoservice/get-metrics-tco",
-              "api-reference/lts/metricstcoservice/post-metrics-tcoadd",
-              "api-reference/lts/metricstcoservice/post-metrics-tcodelete"
-            ]
-          },
-          {
             "group": "Outgoing Webhooks Service",
             "pages": [
               "api-reference/lts/outgoing-webhooks-service/overview",
@@ -781,22 +672,6 @@
               "api-reference/lts/policies-service/reorder-policies",
               "api-reference/lts/policies-service/toggle-policies",
               "api-reference/lts/policies-service/update-policy"
-            ]
-          },
-          {
-            "group": "Presets Service",
-            "pages": [
-              "api-reference/lts/presetsservice/overview",
-              "api-reference/lts/presetsservice/delete-v1notification-centerpresetscustom",
-              "api-reference/lts/presetsservice/get-v1notification-centerpresets",
-              "api-reference/lts/presetsservice/get-v1notification-centerpresets:batchget",
-              "api-reference/lts/presetsservice/get-v1notification-centerpresets:defaultsummaryget",
-              "api-reference/lts/presetsservice/get-v1notification-centerpresets:summarieslist",
-              "api-reference/lts/presetsservice/get-v1notification-centerpresets:systemdefaultsummaryget",
-              "api-reference/lts/presetsservice/post-v1notification-centerpresets-:defaultset",
-              "api-reference/lts/presetsservice/post-v1notification-centerpresetscustom",
-              "api-reference/lts/presetsservice/post-v1notification-centerpresetscustom-:defaultset",
-              "api-reference/lts/presetsservice/put-v1notification-centerpresetscustom"
             ]
           },
           {
@@ -894,19 +769,6 @@
               "api-reference/lts/team-permissions-management-service/remove-users-from-team-groups",
               "api-reference/lts/team-permissions-management-service/set-team-group-scope",
               "api-reference/lts/team-permissions-management-service/update-team-group"
-            ]
-          },
-          {
-            "group": "Testing Service",
-            "pages": [
-              "api-reference/lts/testingservice/overview",
-              "api-reference/lts/testingservice/post-v1notification-centernotificationstesting:testconnectorconfiguration",
-              "api-reference/lts/testingservice/post-v1notification-centernotificationstesting:testdestination",
-              "api-reference/lts/testingservice/post-v1notification-centernotificationstesting:testexistingconnector",
-              "api-reference/lts/testingservice/post-v1notification-centernotificationstesting:testexistingpreset",
-              "api-reference/lts/testingservice/post-v1notification-centernotificationstesting:testpresetconfiguration",
-              "api-reference/lts/testingservice/post-v1notification-centernotificationstesting:testroutingconditionvalid",
-              "api-reference/lts/testingservice/post-v1notification-centernotificationstesting:testtemplaterender"
             ]
           },
           {

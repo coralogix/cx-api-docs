@@ -1,0 +1,134 @@
+# Use case: Copy a Dashboard
+
+This use case demonstrates how to duplicate an existing dashboard by retrieving its configuration and posting it as a new dashboard.
+
+## Steps
+
+**1. (Optional) List available dashboards**
+
+If you don't already have the `dashboard_id` of the source dashboard, use this endpoint to list existing dashboards.
+
+**GET** `/dashboards/catalog`
+
+### Sample response
+
+```json
+{
+  "items": [
+    {
+      "id": "qw5k07W8SYBxp6h1m1EN9",
+      "name": "K8s dashboard",
+      "description": "A23 updated desc",
+      "isDefault": false,
+      "isPinned": true,
+      "createTime": "2024-10-22T09:28:31.538Z",
+      "updateTime": "2025-02-11T11:02:32.534Z",
+      "folder": {
+        "id": "ebee6dd5-078b-44ca-f901-ba9722b17d6e",
+        "name": "Infra"
+      },
+      "isLocked": true
+    }
+  ]
+}
+
+```
+
+!!! Note
+    Note the ID of the dashboard you want to copy.
+
+
+**2. Retrieve the dashboard by ID**
+
+**GET** `/dashboards/{dashboard_id}`
+
+Use the ID from the previous step to fetch the full dashboard definition.
+
+### Example
+
+**GET** `/dashboards/qw5k07W8SYBxp6h1m1EN9`
+
+**3. Copy the dashboard**
+
+Take the response from the previous step and remove the following fields:
+
+- `id`
+- `createTime`- `updateTime`
+
+Update any fields if needed, then send the remaining data as the body to create a new dashboard.
+
+**POST** `/dashboards`
+
+### Sample request body
+
+```json
+{
+  "name": "K8s dashboard (Copy)",
+  "description": "Copied from K8s dashboard",
+  "variables": [
+    {
+      "name": "env",
+      "definition": {
+        "multiSelect": {
+          "source": {
+            "query": {
+              "query": {
+                "logsQuery": {
+                  "type": {
+                    "fieldValue": {
+                      "observationField": {
+                        "keypath": ["environment"],
+                        "scope": "DATASET_SCOPE_USER_DATA"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "relativeTimeFrame": "3600s",
+  "folderId": {
+    "value": "ebee6dd5-078b-44ca-f901-ba9722b17d6e"
+  },
+  "annotations": [
+    {
+      "name": "sample",
+      "enabled": true,
+      "source": {
+        "logs": {
+          "luceneQuery": {
+            "value": "coralogix.metadata.subsystemName=\"resource\""
+          },
+          "strategy": {
+            "instant": {
+              "timestampField": {
+                "keypath": ["timestamp"],
+                "scope": "DATASET_SCOPE_METADATA"
+              }
+            }
+          },
+          "labelFields": [
+            {
+              "keypath": ["severity"],
+              "scope": "DATASET_SCOPE_METADATA"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+
+```
+
+### Summary
+
+| Action | Endpoint | Notes |
+| --- | --- | --- |
+| List dashboards | `GET /dashboards/catalog` | Optional: use to select the source dashboard |
+| Get dashboard by ID | `GET /dashboards/{dashboard_id}` | Fetch full config of dashboard |
+| Create new dashboard | `POST /dashboards` | Submit updated body to create a copy |

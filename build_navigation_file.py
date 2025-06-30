@@ -39,19 +39,19 @@ def get_group_name(service_dir: str) -> str:
         'enrichments-service': 'Enrichments Service',
         'events2metrics-service': 'Events2Metrics Service',
         'rule-groups-service': 'Rule Groups Service',
-        'entitiesservice': 'Entities Service',
+        # 'entitiesservice': 'Entities Service',
         'integration-service': 'Integration Service',
-        'testingservice': 'Testing Service',
-        'globalroutersservice': 'Global Routers Service',
+        # 'testingservice': 'Testing Service',
+        # 'globalroutersservice': 'Global Routers Service',
         'extension-testing-service': 'Extension Testing Service',
         'extension-service': 'Extension Service',
         'extension-deployment-service': 'Extension Deployment Service',
         'dashboard-service': 'Dashboard Service',
         'dashboard-folders-service': 'Dashboard Folders Service',
-        'connectorsservice': 'Connectors Service',
-        'presetsservice': 'Presets Service',
-        'metricsconfiguratorpublicservice': 'Metrics Configurator Public Service',
-        'metricstcoservice': 'Metrics Tco Service',
+        # 'connectorsservice': 'Connectors Service',
+        # 'presetsservice': 'Presets Service',
+        # 'metricsconfiguratorpublicservice': 'Metrics Configurator Public Service',
+        # 'metricstcoservice': 'Metrics Tco Service',
         'alert-definitions-service': 'Alert Definitions Service',
         'alert-events-service': 'Alert Events Service',
         'folders-for-views-service': 'Folders for Views',
@@ -61,7 +61,7 @@ def get_group_name(service_dir: str) -> str:
         'contextual-data-integration-service': 'Contextual Data Integration Service'
     }
     
-    return service_names[service_dir]
+    return service_names.get(service_dir)
     
     
 
@@ -109,80 +109,6 @@ def build_navigation_structure(api_reference_path_latest: Path, api_reference_pa
     """
     # Base structure
     docs_structure = json.load(open("docs.json"))
-    # docs_structure = {
-    #     "$schema": "https://mintlify.com/docs.json",
-    #     "theme": "mint",
-    #     "name": "Coralogix Developer Docs",
-    #     "colors": {
-    #         "primary": "#16A34A",
-    #         "light": "#07C983",
-    #         "dark": "#15803D"
-    #     },
-    #     "favicon": "/favicon.svg",
-    #     "navigation": {
-    #         "versions": [
-    #             {
-    #                 "version": "1.5.2-latest", # This could be whatever, as the github action from the facade will override it anyways on release
-    #                 "groups": [
-    #                     {
-    #                         "group": "Home",
-    #                         "pages": [
-    #                             "introduction"
-    #                         ]
-    #                     },
-    #                     {
-    #                         "group": "Use Cases",
-    #                         "pages": [
-    #                             "api-reference/introduction",
-    #                             "api-reference/copy_a_dashboard",
-    #                             "api-reference/create_an_alert_with_an_outgoing_webhook",
-    #                             "api-reference/setup_kubernetes_complete_observability_integration",
-    #                         ]
-    #                     }
-    #                 ]
-    #             },
-    #             {
-    #                 "version": "1.5.2-lts", # This could be whatever, as the github action from the facade will override it anyways on release
-    #                 "groups": [
-    #                     {
-    #                         "group": "Home",
-    #                         "pages": [
-    #                             "introduction"
-    #                         ]
-    #                     },
-    #                     {
-    #                         "group": "Use Cases",
-    #                         "pages": [
-    #                             "api-reference/introduction",
-    #                             "api-reference/copy_a_dashboard",
-    #                             "api-reference/create_an_alert_with_an_outgoing_webhook",
-    #                             "api-reference/setup_kubernetes_complete_observability_integration",
-    #                         ]
-    #                     }
-    #                 ]
-    #             }
-    #         ]
-    #     },
-    #     "logo": {
-    #         "light": "/logo/coralogix.svg",
-    #         "dark": "/logo/coralogix.svg"
-    #     },
-    #     "navbar": {
-    #         "links": [
-    #             {
-    #                 "label": "Support",
-    #                 "href": "mailto:hi@mintlify.com"
-    #             }
-    #         ]
-    #     },
-    #     "footer": {
-    #         "socials": {
-    #             "x": "https://twitter.com/Coralogix",
-    #             "github": "https://github.com/coralogix",
-    #             "linkedin": "https://linkedin.com/company/coralogix"
-    #         }
-    #     }
-    # }
     # Get all directories in api-reference
     add_groups_to_navigation_structure(api_reference_path_latest, docs_structure, False)
     add_groups_to_navigation_structure(api_reference_path_lts, docs_structure, True)
@@ -206,17 +132,33 @@ def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lt
         
         if mdx_files:  # Only add groups that have .mdx files
             group_name = get_group_name(service_name)
+            if group_name is None:
+                continue
             
             # Create page paths
             subfolder = "lts" if is_lts else "latest"
             pages = [f"api-reference/{subfolder}/{service_name}/{file_name}" for file_name in mdx_files]
+
             
             group = {
                 "group": group_name,
                 "pages": pages
             }
             groups.append(group)
-        docs_structure["navigation"]["versions"][is_lts]["groups"] = groups
+
+    introduction_and_use_cases_groups = [
+        {
+            "group": "Introduction",
+            "pages": [f"introduction"]
+        },
+        {
+            "group": "Use Cases",
+            "pages": [f"copy_a_dashboard", "create_an_alert_with_an_outgoing_webhook", "setup_kubernetes_complete_observability_integration"]
+        }
+    ]
+    docs_structure["navigation"]["versions"][is_lts]["groups"] = introduction_and_use_cases_groups + groups
+
+
 
 
 def main():
