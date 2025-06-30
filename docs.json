@@ -14,23 +14,9 @@
         "version": "1.5.2-latest",
         "groups": [
           {
-            "group": "Home",
-            "pages": [
-              "introduction"
-            ]
-          },
-          {
-            "group": "Use Cases",
-            "pages": [
-              "api-reference/introduction",
-              "api-reference/copy_a_dashboard",
-              "api-reference/create_an_alert_with_an_outgoing_webhook",
-              "api-reference/setup_kubernetes_complete_observability_integration"
-            ]
-          },
-          {
             "group": "Actions Service",
             "pages": [
+              "api-reference/latest/actions-service/overview",
               "api-reference/latest/actions-service/atomic-batch-execute-actions",
               "api-reference/latest/actions-service/create-action",
               "api-reference/latest/actions-service/delete-action",
@@ -65,6 +51,7 @@
           {
             "group": "API Keys Service",
             "pages": [
+              "api-reference/latest/api-keys-service/overview",
               "api-reference/latest/api-keys-service/create-api-key",
               "api-reference/latest/api-keys-service/delete-api-key",
               "api-reference/latest/api-keys-service/get-\"send-data\"-api-keys",
@@ -358,6 +345,7 @@
           {
             "group": "Recording Rules Service",
             "pages": [
+              "api-reference/latest/recording-rules-service/overview",
               "api-reference/latest/recording-rules-service/create-recording-rules",
               "api-reference/latest/recording-rules-service/delete-recording-rules",
               "api-reference/latest/recording-rules-service/get-recording-rules",
@@ -392,6 +380,7 @@
           {
             "group": "SAML Configuration Service",
             "pages": [
+              "api-reference/latest/saml-configuration-service/overview",
               "api-reference/latest/saml-configuration-service/activatedeactivate-saml",
               "api-reference/latest/saml-configuration-service/get-saml-configuration",
               "api-reference/latest/saml-configuration-service/get-sp-parameters",
@@ -478,23 +467,9 @@
         "version": "1.5.2-lts",
         "groups": [
           {
-            "group": "Home",
-            "pages": [
-              "introduction"
-            ]
-          },
-          {
-            "group": "Use Cases",
-            "pages": [
-              "api-reference/introduction",
-              "api-reference/copy_a_dashboard",
-              "api-reference/create_an_alert_with_an_outgoing_webhook",
-              "api-reference/setup_kubernetes_complete_observability_integration"
-            ]
-          },
-          {
             "group": "Actions Service",
             "pages": [
+              "api-reference/lts/actions-service/overview",
               "api-reference/lts/actions-service/atomic-batch-execute-actions",
               "api-reference/lts/actions-service/create-action",
               "api-reference/lts/actions-service/delete-action",
@@ -529,6 +504,7 @@
           {
             "group": "API Keys Service",
             "pages": [
+              "api-reference/lts/api-keys-service/overview",
               "api-reference/lts/api-keys-service/create-api-key",
               "api-reference/lts/api-keys-service/delete-api-key",
               "api-reference/lts/api-keys-service/get-\"send-data\"-api-keys",
@@ -822,6 +798,7 @@
           {
             "group": "Recording Rules Service",
             "pages": [
+              "api-reference/lts/recording-rules-service/overview",
               "api-reference/lts/recording-rules-service/create-recording-rules",
               "api-reference/lts/recording-rules-service/delete-recording-rules",
               "api-reference/lts/recording-rules-service/get-recording-rules",
@@ -856,6 +833,7 @@
           {
             "group": "SAML Configuration Service",
             "pages": [
+              "api-reference/lts/saml-configuration-service/overview",
               "api-reference/lts/saml-configuration-service/activatedeactivate-saml",
               "api-reference/lts/saml-configuration-service/get-saml-configuration",
               "api-reference/lts/saml-configuration-service/get-sp-parameters",

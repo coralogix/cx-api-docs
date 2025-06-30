@@ -108,81 +108,81 @@ def build_navigation_structure(api_reference_path_latest: Path, api_reference_pa
         Complete docs.json structure
     """
     # Base structure
-    docs_structure = {
-        "$schema": "https://mintlify.com/docs.json",
-        "theme": "mint",
-        "name": "Coralogix Developer Docs",
-        "colors": {
-            "primary": "#16A34A",
-            "light": "#07C983",
-            "dark": "#15803D"
-        },
-        "favicon": "/favicon.svg",
-        "navigation": {
-            "versions": [
-                {
-                    "version": "1.5.2-latest", # This could be whatever, as the github action from the facade will override it anyways on release
-                    "groups": [
-                        {
-                            "group": "Home",
-                            "pages": [
-                                "introduction"
-                            ]
-                        },
-                        {
-                            "group": "Use Cases",
-                            "pages": [
-                                "api-reference/introduction",
-                                "api-reference/copy_a_dashboard",
-                                "api-reference/create_an_alert_with_an_outgoing_webhook",
-                                "api-reference/setup_kubernetes_complete_observability_integration",
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "version": "1.5.2-lts", # This could be whatever, as the github action from the facade will override it anyways on release
-                    "groups": [
-                        {
-                            "group": "Home",
-                            "pages": [
-                                "introduction"
-                            ]
-                        },
-                        {
-                            "group": "Use Cases",
-                            "pages": [
-                                "api-reference/introduction",
-                                "api-reference/copy_a_dashboard",
-                                "api-reference/create_an_alert_with_an_outgoing_webhook",
-                                "api-reference/setup_kubernetes_complete_observability_integration",
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        "logo": {
-            "light": "/logo/coralogix.svg",
-            "dark": "/logo/coralogix.svg"
-        },
-        "navbar": {
-            "links": [
-                {
-                    "label": "Support",
-                    "href": "mailto:hi@mintlify.com"
-                }
-            ]
-        },
-        "footer": {
-            "socials": {
-                "x": "https://twitter.com/Coralogix",
-                "github": "https://github.com/coralogix",
-                "linkedin": "https://linkedin.com/company/coralogix"
-            }
-        }
-    }
-    
+    docs_structure = json.load(open("docs.json"))
+    # docs_structure = {
+    #     "$schema": "https://mintlify.com/docs.json",
+    #     "theme": "mint",
+    #     "name": "Coralogix Developer Docs",
+    #     "colors": {
+    #         "primary": "#16A34A",
+    #         "light": "#07C983",
+    #         "dark": "#15803D"
+    #     },
+    #     "favicon": "/favicon.svg",
+    #     "navigation": {
+    #         "versions": [
+    #             {
+    #                 "version": "1.5.2-latest", # This could be whatever, as the github action from the facade will override it anyways on release
+    #                 "groups": [
+    #                     {
+    #                         "group": "Home",
+    #                         "pages": [
+    #                             "introduction"
+    #                         ]
+    #                     },
+    #                     {
+    #                         "group": "Use Cases",
+    #                         "pages": [
+    #                             "api-reference/introduction",
+    #                             "api-reference/copy_a_dashboard",
+    #                             "api-reference/create_an_alert_with_an_outgoing_webhook",
+    #                             "api-reference/setup_kubernetes_complete_observability_integration",
+    #                         ]
+    #                     }
+    #                 ]
+    #             },
+    #             {
+    #                 "version": "1.5.2-lts", # This could be whatever, as the github action from the facade will override it anyways on release
+    #                 "groups": [
+    #                     {
+    #                         "group": "Home",
+    #                         "pages": [
+    #                             "introduction"
+    #                         ]
+    #                     },
+    #                     {
+    #                         "group": "Use Cases",
+    #                         "pages": [
+    #                             "api-reference/introduction",
+    #                             "api-reference/copy_a_dashboard",
+    #                             "api-reference/create_an_alert_with_an_outgoing_webhook",
+    #                             "api-reference/setup_kubernetes_complete_observability_integration",
+    #                         ]
+    #                     }
+    #                 ]
+    #             }
+    #         ]
+    #     },
+    #     "logo": {
+    #         "light": "/logo/coralogix.svg",
+    #         "dark": "/logo/coralogix.svg"
+    #     },
+    #     "navbar": {
+    #         "links": [
+    #             {
+    #                 "label": "Support",
+    #                 "href": "mailto:hi@mintlify.com"
+    #             }
+    #         ]
+    #     },
+    #     "footer": {
+    #         "socials": {
+    #             "x": "https://twitter.com/Coralogix",
+    #             "github": "https://github.com/coralogix",
+    #             "linkedin": "https://linkedin.com/company/coralogix"
+    #         }
+    #     }
+    # }
     # Get all directories in api-reference
     add_groups_to_navigation_structure(api_reference_path_latest, docs_structure, False)
     add_groups_to_navigation_structure(api_reference_path_lts, docs_structure, True)
@@ -199,6 +199,7 @@ def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lt
     service_dirs.sort(key=lambda x: x.name.lower())
     
     # Build groups for each service
+    groups = []
     for service_dir in service_dirs:
         service_name = service_dir.name
         mdx_files = get_mdx_files(service_dir)
@@ -214,8 +215,8 @@ def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lt
                 "group": group_name,
                 "pages": pages
             }
-            
-            docs_structure["navigation"]["versions"][is_lts]["groups"].append(group)
+            groups.append(group)
+        docs_structure["navigation"]["versions"][is_lts]["groups"] = groups
 
 
 def main():
