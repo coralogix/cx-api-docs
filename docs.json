@@ -162,6 +162,7 @@
           {
             "group": "Events Service",
             "pages": [
+              "api-reference/latest/events-service/overview",
               "api-reference/latest/events-service/batch-get-event",
               "api-reference/latest/events-service/get-event",
               "api-reference/latest/events-service/get-events-statistics",
@@ -414,6 +415,7 @@
           {
             "group": "Target Service",
             "pages": [
+              "api-reference/latest/target-service/overview",
               "api-reference/latest/target-service/get-target",
               "api-reference/latest/target-service/set-target",
               "api-reference/latest/target-service/validate-target"
@@ -454,6 +456,7 @@
           {
             "group": "Views",
             "pages": [
+              "api-reference/latest/views-service/overview",
               "api-reference/latest/views-service/create-a-view-service",
               "api-reference/latest/views-service/delete-view-service",
               "api-reference/latest/views-service/get-view-service",
@@ -615,6 +618,7 @@
           {
             "group": "Events Service",
             "pages": [
+              "api-reference/lts/events-service/overview",
               "api-reference/lts/events-service/batch-get-event",
               "api-reference/lts/events-service/get-event",
               "api-reference/lts/events-service/get-events-statistics",
@@ -867,6 +871,7 @@
           {
             "group": "Target Service",
             "pages": [
+              "api-reference/lts/target-service/overview",
               "api-reference/lts/target-service/get-target",
               "api-reference/lts/target-service/set-target",
               "api-reference/lts/target-service/validate-target"
@@ -907,6 +912,7 @@
           {
             "group": "Views",
             "pages": [
+              "api-reference/lts/views-service/overview",
               "api-reference/lts/views-service/create-a-view-service",
               "api-reference/lts/views-service/delete-view-service",
               "api-reference/lts/views-service/get-view-service",
