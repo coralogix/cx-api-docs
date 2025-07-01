@@ -145,11 +145,12 @@ def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lt
                 "pages": pages
             }
             groups.append(group)
+    introduction_page = f"introduction-{'lts' if is_lts else 'latest'}"
 
     introduction_and_use_cases_groups = [
         {
             "group": "Introduction",
-            "pages": [f"introduction"]
+            "pages": [introduction_page]
         },
         {
             "group": "Use Cases",
