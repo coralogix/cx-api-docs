@@ -2,7 +2,8 @@
 
 A service to manage data usage metrics.
 
-
+NB: The `Get logs count`, `Get spans count` and `Get data usage` endpoints return data as a stream of new-line delimited JSON objects.
+When you call these endpoints, you must include the `Accept: text/event-stream` header.
 
 ## Common error response codes
 
