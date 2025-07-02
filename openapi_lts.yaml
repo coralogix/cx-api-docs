@@ -21904,7 +21904,7 @@ paths:
             let options = {
               method: 'POST',
               headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-              body: '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"},"ibmCos":{"bucketCrn":"bucket_crn","endpoint":"http://some.endpoint.com:8081","serviceCrn":"service_crn","bucketType":"IBM_BUCKET_TYPE_UNSPECIFIED"}}'
+              body: '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"}}'
             };
 
             fetch(url, options)
@@ -21924,12 +21924,6 @@ paths:
                 "s3": {
                     "bucket": "bucket",
                     "region": "us-west-2"
-                },
-                "ibmCos": {
-                    "bucketCrn": "bucket_crn",
-                    "endpoint": "http://some.endpoint.com:8081",
-                    "serviceCrn": "service_crn",
-                    "bucketType": "IBM_BUCKET_TYPE_UNSPECIFIED"
                 }
             }
 
@@ -21950,7 +21944,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/v2/target \
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
-              --data '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"},"ibmCos":{"bucketCrn":"bucket_crn","endpoint":"http://some.endpoint.com:8081","serviceCrn":"service_crn","bucketType":"IBM_BUCKET_TYPE_UNSPECIFIED"}}'
+              --data '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"}}'
       description: No description available
   /v2/target:validate:
     post:
@@ -22006,7 +22000,7 @@ paths:
             let options = {
               method: 'POST',
               headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-              body: '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"},"ibmCos":{"bucketCrn":"bucket_crn","endpoint":"http://some.endpoint.com:8081","serviceCrn":"service_crn","bucketType":"IBM_BUCKET_TYPE_UNSPECIFIED"}}'
+              body: '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"}}'
             };
 
 
@@ -22027,12 +22021,6 @@ paths:
                 "s3": {
                     "bucket": "bucket",
                     "region": "us-west-2"
-                },
-                "ibmCos": {
-                    "bucketCrn": "bucket_crn",
-                    "endpoint": "http://some.endpoint.com:8081",
-                    "serviceCrn": "service_crn",
-                    "bucketType": "IBM_BUCKET_TYPE_UNSPECIFIED"
                 }
             }
 
@@ -22053,7 +22041,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/v2/target:validate \
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
-              --data '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"},"ibmCos":{"bucketCrn":"bucket_crn","endpoint":"http://some.endpoint.com:8081","serviceCrn":"service_crn","bucketType":"IBM_BUCKET_TYPE_UNSPECIFIED"}}'
+              --data '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"}}'
       description: No description available
   /v3/alert-defs:
     get:
@@ -36662,29 +36650,6 @@ components:
         retention:
           type: integer
           format: int32
-    v2IBMCosTargetSpec:
-      type: object
-      properties:
-        bucketCrn:
-          type: string
-          example: bucket_crn
-        endpoint:
-          type: string
-          example: http://some.endpoint.com:8081
-        serviceCrn:
-          type: string
-          example: service_crn
-        bucketType:
-          $ref: '#/components/schemas/v2IbmBucketType'
-      description: This data structure represents an IBM COS target.
-      title: IBM COS Target Spec
-      externalDocs:
-        description: Find out more about archives
-        url: >-
-          https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      required:
-        - bucketCrn
-        - endpoint
     v2IDPParameters:
       type: object
       properties:
@@ -36720,13 +36685,6 @@ components:
         - metadata
         - teamEntityId
         - groupNames
-    v2IbmBucketType:
-      type: string
-      enum:
-        - IBM_BUCKET_TYPE_UNSPECIFIED
-        - IBM_BUCKET_TYPE_EXTERNAL
-        - IBM_BUCKET_TYPE_INTERNAL
-      default: IBM_BUCKET_TYPE_UNSPECIFIED
     v2LabelsPermutationsCardinalityDay:
       type: object
       properties:
@@ -37007,8 +36965,6 @@ components:
           example: true
         s3:
           $ref: '#/components/schemas/v2S3TargetSpec'
-        ibmCos:
-          $ref: '#/components/schemas/v2IBMCosTargetSpec'
       description: This data structure is used to set a storage target for logs.
       title: Set Target Response
       externalDocs:
@@ -37017,7 +36973,7 @@ components:
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       required:
         - isActive
-        - target_spec
+        - s3
     v2SetTargetResponse:
       type: object
       properties:
@@ -37073,8 +37029,6 @@ components:
       properties:
         s3:
           $ref: '#/components/schemas/v2S3TargetSpec'
-        ibmCos:
-          $ref: '#/components/schemas/v2IBMCosTargetSpec'
         archiveSpec:
           $ref: '#/components/schemas/v2ArchiveSpec'
       description: This data structure represents a target to archive logs.
@@ -37084,7 +37038,8 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       required:
-        - target_specarchive_spec
+        - s3
+        - archiveSpec
     v2Token:
       type: object
       properties:
@@ -37126,8 +37081,6 @@ components:
           type: boolean
         s3:
           $ref: '#/components/schemas/v2S3TargetSpec'
-        ibmCos:
-          $ref: '#/components/schemas/v2IBMCosTargetSpec'
       description: This data structure is used to validate a storage target for logs.
       title: Set Target Response
       externalDocs:
@@ -37136,7 +37089,7 @@ components:
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       required:
         - isActive
-        - target_spec
+        - s3
     v2ValidateTargetResponse:
       type: object
       properties:
