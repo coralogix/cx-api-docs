@@ -1,4 +1,9 @@
 {
+  "api": {
+    "playground": {
+      "display": "none"
+    }
+  },
   "navigation": {
     "versions": [
       {
