@@ -1,13 +1,8 @@
 {
-  "api": {
-    "playground": {
-      "display": "none"
-    }
-  },
   "navigation": {
     "versions": [
       {
-        "version": "v1.6.0-latest",
+        "version": "v1.7.0-latest",
         "groups": [
           {
             "group": "Introduction",
@@ -114,6 +109,7 @@
               "api-reference/latest/dashboard-service/create-a-new-dashboard",
               "api-reference/latest/dashboard-service/delete-a-dashboard",
               "api-reference/latest/dashboard-service/get-a-dashboard",
+              "api-reference/latest/dashboard-service/get-a-dashboard-by-url-slug",
               "api-reference/latest/dashboard-service/get-dashboard-catalog",
               "api-reference/latest/dashboard-service/remove-dashboard-from-favorites",
               "api-reference/latest/dashboard-service/replace-a-dashboard",
@@ -394,7 +390,7 @@
         ]
       },
       {
-        "version": "1.6.0-lts",
+        "version": "v1.6.0-lts",
         "groups": [
           {
             "group": "Introduction",
@@ -501,6 +497,7 @@
               "api-reference/lts/dashboard-service/create-a-new-dashboard",
               "api-reference/lts/dashboard-service/delete-a-dashboard",
               "api-reference/lts/dashboard-service/get-a-dashboard",
+              "api-reference/lts/dashboard-service/get-a-dashboard-by-url-slug",
               "api-reference/lts/dashboard-service/get-dashboard-catalog",
               "api-reference/lts/dashboard-service/remove-dashboard-from-favorites",
               "api-reference/lts/dashboard-service/replace-a-dashboard",
@@ -782,18 +779,6 @@
       }
     ]
   },
-  "colors": {
-    "dark": "#15803D",
-    "light": "#07C983",
-    "primary": "#16A34A"
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/coralogix",
-      "linkedin": "https://linkedin.com/company/coralogix",
-      "x": "https://twitter.com/Coralogix"
-    }
-  },
   "navbar": {
     "links": [
       {
@@ -802,12 +787,29 @@
       }
     ]
   },
-  "name": "Coralogix Developer Docs",
-  "theme": "mint",
   "$schema": "https://mintlify.com/docs.json",
+  "footer": {
+    "socials": {
+      "github": "https://github.com/coralogix",
+      "linkedin": "https://linkedin.com/company/coralogix",
+      "x": "https://twitter.com/Coralogix"
+    }
+  },
+  "theme": "mint",
   "favicon": "/favicon.svg",
+  "colors": {
+    "dark": "#15803D",
+    "light": "#07C983",
+    "primary": "#16A34A"
+  },
+  "name": "Coralogix Developer Docs",
   "logo": {
     "dark": "/logo/coralogix.svg",
     "light": "/logo/coralogix.svg"
+  },
+  "api": {
+    "playground": {
+      "display": "none"
+    }
   }
 }
