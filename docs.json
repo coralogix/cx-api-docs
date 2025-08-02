@@ -1,13 +1,8 @@
 {
-  "api": {
-    "playground": {
-      "display": "none"
-    }
-  },
   "navigation": {
     "versions": [
       {
-        "version": "v1.6.0-latest",
+        "version": "v1.7.0-latest",
         "groups": [
           {
             "group": "Introduction",
@@ -114,6 +109,7 @@
               "api-reference/latest/dashboard-service/create-a-new-dashboard",
               "api-reference/latest/dashboard-service/delete-a-dashboard",
               "api-reference/latest/dashboard-service/get-a-dashboard",
+              "api-reference/latest/dashboard-service/get-a-dashboard-by-url-slug",
               "api-reference/latest/dashboard-service/get-dashboard-catalog",
               "api-reference/latest/dashboard-service/remove-dashboard-from-favorites",
               "api-reference/latest/dashboard-service/replace-a-dashboard",
@@ -501,6 +497,7 @@
               "api-reference/lts/dashboard-service/create-a-new-dashboard",
               "api-reference/lts/dashboard-service/delete-a-dashboard",
               "api-reference/lts/dashboard-service/get-a-dashboard",
+              "api-reference/lts/dashboard-service/get-a-dashboard-by-url-slug",
               "api-reference/lts/dashboard-service/get-dashboard-catalog",
               "api-reference/lts/dashboard-service/remove-dashboard-from-favorites",
               "api-reference/lts/dashboard-service/replace-a-dashboard",
@@ -782,11 +779,6 @@
       }
     ]
   },
-  "colors": {
-    "dark": "#15803D",
-    "light": "#07C983",
-    "primary": "#16A34A"
-  },
   "footer": {
     "socials": {
       "github": "https://github.com/coralogix",
@@ -802,12 +794,22 @@
       }
     ]
   },
-  "name": "Coralogix Developer Docs",
-  "theme": "mint",
-  "$schema": "https://mintlify.com/docs.json",
-  "favicon": "/favicon.svg",
   "logo": {
     "dark": "/logo/coralogix.svg",
     "light": "/logo/coralogix.svg"
+  },
+  "name": "Coralogix Developer Docs",
+  "favicon": "/favicon.svg",
+  "colors": {
+    "dark": "#15803D",
+    "light": "#07C983",
+    "primary": "#16A34A"
+  },
+  "theme": "mint",
+  "$schema": "https://mintlify.com/docs.json",
+  "api": {
+    "playground": {
+      "display": "none"
+    }
   }
 }
