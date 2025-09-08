@@ -13,7 +13,6 @@ To use the Alert definitions service API you need to [create a personal or team 
 | Alerts | `alerts:ReadConfig` | Grants access to read alerts |
 |  | `alerts:UpdateConfig` | Required to create, update, or delete alerts |
 
-
 ## Common error response codes
 
 | Status Code | Description                           |
@@ -22,203 +21,97 @@ To use the Alert definitions service API you need to [create a personal or team 
 | `401 Unauthorized` | Response code 401 |
 | `500 Internal Server Error` | Response code 500 |
 
-
 ## Protocol documentation
-
-
-## com/coralogixapis/alerts/v3/alert_def.proto
-
 
 
 ### AlertDef
 Represents An Existing or Created Alert Definition
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_def_properties | [AlertDefProperties](#com-coralogixapis-alerts-v3-AlertDefProperties) |  |  |
-| id | [google.protobuf.StringValue](#google-protobuf-StringValue) |  | This is the Alert Definition&#39;s Persistent ID (does not change on replace) , AKA UniqueIdentifier |
-| alert_version_id | [google.protobuf.StringValue](#google-protobuf-StringValue) |  | the old alertId |
-| created_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| updated_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-
-
-
-
-
-
+| alert_def_properties | AlertDefProperties |  |  |
+| id | google.protobuf.StringValue |  | This is the Alert Definition's Persistent ID (does not change on replace) , AKA UniqueIDentifier |
+| alert_version_id | google.protobuf.StringValue |  | the old alertID |
+| created_time | google.protobuf.Timestamp |  |  |
+| updated_time | google.protobuf.Timestamp |  |  |
 
 ### AlertDefProperties
 Represents The non generated alert definition properties (the ones that are set by the user)
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| description | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| enabled | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-| priority | [AlertDefPriority](#com-coralogixapis-alerts-v3-AlertDefPriority) |  |  |
-| active_on | [ActivitySchedule](#com-coralogixapis-alerts-v3-ActivitySchedule) |  |  |
-| type | [AlertDefType](#com-coralogixapis-alerts-v3-AlertDefType) |  |  |
-| logs_immediate | [LogsImmediateType](#com-coralogixapis-alerts-v3-LogsImmediateType) |  |  |
-| tracing_immediate | [TracingImmediateType](#com-coralogixapis-alerts-v3-TracingImmediateType) |  |  |
-| logs_threshold | [LogsThresholdType](#com-coralogixapis-alerts-v3-LogsThresholdType) |  |  |
-| logs_ratio_threshold | [LogsRatioThresholdType](#com-coralogixapis-alerts-v3-LogsRatioThresholdType) |  |  |
-| logs_time_relative_threshold | [LogsTimeRelativeThresholdType](#com-coralogixapis-alerts-v3-LogsTimeRelativeThresholdType) |  |  |
-| metric_threshold | [MetricThresholdType](#com-coralogixapis-alerts-v3-MetricThresholdType) |  |  |
-| tracing_threshold | [TracingThresholdType](#com-coralogixapis-alerts-v3-TracingThresholdType) |  |  |
-| flow | [FlowType](#com-coralogixapis-alerts-v3-FlowType) |  |  |
-| logs_anomaly | [LogsAnomalyType](#com-coralogixapis-alerts-v3-LogsAnomalyType) |  |  |
-| metric_anomaly | [MetricAnomalyType](#com-coralogixapis-alerts-v3-MetricAnomalyType) |  |  |
-| logs_new_value | [LogsNewValueType](#com-coralogixapis-alerts-v3-LogsNewValueType) |  |  |
-| logs_unique_count | [LogsUniqueCountType](#com-coralogixapis-alerts-v3-LogsUniqueCountType) |  |  |
-| group_by_keys | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-| incidents_settings | [AlertDefIncidentSettings](#com-coralogixapis-alerts-v3-AlertDefIncidentSettings) |  |  |
-| notification_group | [AlertDefNotificationGroup](#com-coralogixapis-alerts-v3-AlertDefNotificationGroup) |  |  |
-| entity_labels | [AlertDefProperties.EntityLabelsEntry](#com-coralogixapis-alerts-v3-AlertDefProperties-EntityLabelsEntry) | repeated |  |
-| phantom_mode | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-| deleted | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-
-
-
-
-
-
+| name | google.protobuf.StringValue |  |  |
+| description | google.protobuf.StringValue |  |  |
+| enabled | google.protobuf.BoolValue |  |  |
+| priority | AlertDefPriority |  |  |
+| active_on | ActivitySchedule |  |  |
+| type | AlertDefType |  |  |
+| logs_immediate | LogsImmediateType |  |  |
+| tracing_immediate | TracingImmediateType |  |  |
+| logs_threshold | LogsThresholdType |  |  |
+| logs_ratio_threshold | LogsRatioThresholdType |  |  |
+| logs_time_relative_threshold | LogsTimeRelativeThresholdType |  |  |
+| metric_threshold | MetricThresholdType |  |  |
+| tracing_threshold | TracingThresholdType |  |  |
+| flow | FlowType |  |  |
+| logs_anomaly | LogsAnomalyType |  |  |
+| metric_anomaly | MetricAnomalyType |  |  |
+| logs_new_value | LogsNewValueType |  |  |
+| logs_unique_count | LogsUniqueCountType |  |  |
+| group_by_keys | google.protobuf.StringValue | repeated |  |
+| incidents_settings | AlertDefIncidentSettings |  |  |
+| notification_group | AlertDefNotificationGroup |  |  |
+| entity_labels | AlertDefProperties.EntityLabelsEntry | repeated |  |
+| phantom_mode | google.protobuf.BoolValue |  |  |
+| deleted | google.protobuf.BoolValue |  |  |
 
 ### AlertDefProperties.EntityLabelsEntry
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_notification_group.proto
-
-
-
+| key | string |  |  |
+| value | string |  |  |
 
 ### AlertDefIncidentSettings
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| minutes | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-| notify_on | [NotifyOn](#com-coralogixapis-alerts-v3-NotifyOn) |  |  |
-
-
-
-
-
-
+| minutes | google.protobuf.UInt32Value |  |  |
+| notify_on | NotifyOn |  |  |
 
 ### AlertDefNotificationGroup
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| group_by_keys | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-| webhooks | [AlertDefWebhooksSettings](#com-coralogixapis-alerts-v3-AlertDefWebhooksSettings) | repeated |  |
-
-
-
-
-
-
+| group_by_keys | google.protobuf.StringValue | repeated |  |
+| webhooks | AlertDefWebhooksSettings | repeated |  |
 
 ### AlertDefWebhooksSettings
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| minutes | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-| notify_on | [NotifyOn](#com-coralogixapis-alerts-v3-NotifyOn) | optional |  |
-| integration | [IntegrationType](#com-coralogixapis-alerts-v3-IntegrationType) |  |  |
-
-
-
-
-
-
+| minutes | google.protobuf.UInt32Value |  |  |
+| notify_on | NotifyOn | optional |  |
+| integration | IntegrationType |  |  |
 
 ### IntegrationType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| integration_id | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-| recipients | [Recipients](#com-coralogixapis-alerts-v3-Recipients) |  |  |
-
-
-
-
-
-
+| integration_id | google.protobuf.UInt32Value |  |  |
+| recipients | Recipients |  |  |
 
 ### Recipients
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| emails | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
-
-
+| emails | google.protobuf.StringValue | repeated |  |
 
 ### NotifyOn
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED | 0 |  |
 | NOTIFY_ON_TRIGGERED_AND_RESOLVED | 1 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_priority.proto
-
-
-
-
-
-
 ### AlertDefPriority
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED | 0 |  |
@@ -227,57 +120,22 @@ Represents The non generated alert definition properties (the ones that are set 
 | ALERT_DEF_PRIORITY_P2 | 3 |  |
 | ALERT_DEF_PRIORITY_P1 | 4 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_scheduling.proto
-
-
-
-
 ### ActivitySchedule
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| day_of_week | [DayOfWeek](#com-coralogixapis-alerts-v3-DayOfWeek) | repeated |  |
-| start_time | [TimeOfDay](#com-coralogixapis-alerts-v3-TimeOfDay) |  |  |
-| end_time | [TimeOfDay](#com-coralogixapis-alerts-v3-TimeOfDay) |  |  |
-
-
-
-
-
-
+| day_of_week | DayOfWeek | repeated |  |
+| start_time | TimeOfDay |  |  |
+| end_time | TimeOfDay |  |  |
 
 ### TimeOfDay
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hours | [int32](#int32) |  | Hours of day in 24 hour format. Should be from 0 to 23. |
-| minutes | [int32](#int32) |  | Minutes of hour of day. Must be from 0 to 59. |
-
-
-
-
-
-
-
-
+| hours | int32 |  | Hours of day in 24 hour format. Should be from 0 to 23. |
+| minutes | int32 |  | Minutes of hour of day. Must be from 0 to 59. |
 
 ### DayOfWeek
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED | 0 |  |
@@ -288,26 +146,7 @@ Represents The non generated alert definition properties (the ones that are set 
 | DAY_OF_WEEK_SATURDAY | 5 |  |
 | DAY_OF_WEEK_SUNDAY | 6 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type.proto
-
-
-
-
-
-
 ### AlertDefType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED | 0 |  |
@@ -323,273 +162,107 @@ Represents The non generated alert definition properties (the ones that are set 
 | ALERT_DEF_TYPE_TRACING_THRESHOLD | 16 |  |
 | ALERT_DEF_TYPE_FLOW | 17 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto
-
-
-
-
 ### ActivityAnalysis
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| rules | [string](#string) | repeated |  |
-| status | [ActivityAnalysisStatus](#com-coralogixapis-alerts-v3-ActivityAnalysisStatus) |  |  |
-
-
-
-
-
-
-
-
+| rules | string | repeated |  |
+| status | ActivityAnalysisStatus |  |  |
 
 ### ActivityAnalysisStatus
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED | 0 |  |
 | ACTIVITY_ANALYSIS_STATUS_MUTE | 1 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto
-
-
-
-
 ### FlowStages
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| flow_stages_groups | [FlowStagesGroups](#com-coralogixapis-alerts-v3-FlowStagesGroups) |  |  |
-| timeframe_ms | [google.protobuf.Int64Value](#google-protobuf-Int64Value) |  |  |
-| timeframe_type | [TimeframeType](#com-coralogixapis-alerts-v3-TimeframeType) |  |  |
-
-
-
-
-
-
+| flow_stages_groups | FlowStagesGroups |  |  |
+| timeframe_ms | google.protobuf.Int64Value |  |  |
+| timeframe_type | TimeframeType |  |  |
 
 ### FlowStagesGroup
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_defs | [FlowStagesGroupsAlertDefs](#com-coralogixapis-alerts-v3-FlowStagesGroupsAlertDefs) | repeated |  |
-| next_op | [NextOp](#com-coralogixapis-alerts-v3-NextOp) |  |  |
-| alerts_op | [AlertsOp](#com-coralogixapis-alerts-v3-AlertsOp) |  |  |
-
-
-
-
-
-
+| alert_defs | FlowStagesGroupsAlertDefs | repeated |  |
+| next_op | NextOp |  |  |
+| alerts_op | AlertsOp |  |  |
 
 ### FlowStagesGroups
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| groups | [FlowStagesGroup](#com-coralogixapis-alerts-v3-FlowStagesGroup) | repeated |  |
-
-
-
-
-
-
+| groups | FlowStagesGroup | repeated |  |
 
 ### FlowStagesGroupsAlertDefs
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| not | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-
-
-
-
-
-
+| id | google.protobuf.StringValue |  |  |
+| not | google.protobuf.BoolValue |  |  |
 
 ### FlowType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| stages | [FlowStages](#com-coralogixapis-alerts-v3-FlowStages) | repeated |  |
-| enforce_suppression | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-
-
-
-
-
-
-
-
+| stages | FlowStages | repeated |  |
+| enforce_suppression | google.protobuf.BoolValue |  |  |
 
 ### AlertsOp
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ALERTS_OP_AND_OR_UNSPECIFIED | 0 |  |
 | ALERTS_OP_OR | 1 |  |
 
-
-
-
 ### NextOp
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | NEXT_OP_AND_OR_UNSPECIFIED | 0 |  |
 | NEXT_OP_OR | 1 |  |
 
-
-
-
 ### TimeframeType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | TIMEFRAME_TYPE_UNSPECIFIED | 0 |  |
 | TIMEFRAME_TYPE_UP_TO | 1 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto
-
-
-
-
-
-
 ### LogsAnomalyConditionType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED | 0 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto
-
-
-
-
 ### LabelFilterType
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| value | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| operation | [LogFilterOperationType](#com-coralogixapis-alerts-v3-LogFilterOperationType) |  |  |
-
-
-
-
-
-
+| value | google.protobuf.StringValue |  |  |
+| operation | LogFilterOperationType |  |  |
 
 ### LabelFilters
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| application_name | [LabelFilterType](#com-coralogixapis-alerts-v3-LabelFilterType) | repeated |  |
-| subsystem_name | [LabelFilterType](#com-coralogixapis-alerts-v3-LabelFilterType) | repeated |  |
-| severities | [LogSeverity](#com-coralogixapis-alerts-v3-LogSeverity) | repeated |  |
-
-
-
-
-
-
+| application_name | LabelFilterType | repeated |  |
+| subsystem_name | LabelFilterType | repeated |  |
+| severities | LogSeverity | repeated |  |
 
 ### LogsFilter
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| simple_filter | [LogsSimpleFilter](#com-coralogixapis-alerts-v3-LogsSimpleFilter) |  |  |
-
-
-
-
-
-
+| simple_filter | LogsSimpleFilter |  |  |
 
 ### LogsSimpleFilter
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| lucene_query | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| label_filters | [LabelFilters](#com-coralogixapis-alerts-v3-LabelFilters) |  |  |
-
-
-
-
-
-
-
-
+| lucene_query | google.protobuf.StringValue |  |  |
+| label_filters | LabelFilters |  |  |
 
 ### LogFilterOperationType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED | 0 |  |
@@ -597,12 +270,7 @@ Represents The non generated alert definition properties (the ones that are set 
 | LOG_FILTER_OPERATION_TYPE_ENDS_WITH | 2 |  |
 | LOG_FILTER_OPERATION_TYPE_STARTS_WITH | 3 |  |
 
-
-
-
 ### LogSeverity
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOG_SEVERITY_VERBOSE_UNSPECIFIED | 0 |  |
@@ -612,40 +280,13 @@ Represents The non generated alert definition properties (the ones that are set 
 | LOG_SEVERITY_ERROR | 4 |  |
 | LOG_SEVERITY_CRITICAL | 5 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto
-
-
-
-
 ### LogsTimeWindow
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_time_window_specific_value | [LogsTimeWindowValue](#com-coralogixapis-alerts-v3-LogsTimeWindowValue) |  |  |
-
-
-
-
-
-
-
-
+| logs_time_window_specific_value | LogsTimeWindowValue |  |  |
 
 ### LogsTimeWindowValue
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED | 0 |  |
@@ -661,441 +302,164 @@ Represents The non generated alert definition properties (the ones that are set 
 | LOGS_TIME_WINDOW_VALUE_HOURS_24 | 10 |  |
 | LOGS_TIME_WINDOW_VALUE_HOURS_36 | 11 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto
-
-
-
-
 ### LogsAnomalyCondition
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| minimum_threshold | [google.protobuf.DoubleValue](#google-protobuf-DoubleValue) |  |  |
-| time_window | [LogsTimeWindow](#com-coralogixapis-alerts-v3-LogsTimeWindow) |  |  |
-| condition_type | [LogsAnomalyConditionType](#com-coralogixapis-alerts-v3-LogsAnomalyConditionType) |  |  |
-
-
-
-
-
-
+| minimum_threshold | google.protobuf.DoubleValue |  |  |
+| time_window | LogsTimeWindow |  |  |
+| condition_type | LogsAnomalyConditionType |  |  |
 
 ### LogsAnomalyRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [LogsAnomalyCondition](#com-coralogixapis-alerts-v3-LogsAnomalyCondition) |  |  |
-
-
-
-
-
-
+| condition | LogsAnomalyCondition |  |  |
 
 ### LogsAnomalyType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_filter | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| rules | [LogsAnomalyRule](#com-coralogixapis-alerts-v3-LogsAnomalyRule) | repeated |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto
-
-
-
+| logs_filter | LogsFilter |  |  |
+| rules | LogsAnomalyRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
 
 ### LogsImmediateType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_filter | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto
-
-
-
+| logs_filter | LogsFilter |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
 
 ### LogsNewValueCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| keypath_to_track | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| time_window | [LogsNewValueTimeWindow](#com-coralogixapis-alerts-v3-LogsNewValueTimeWindow) |  |  |
-
-
-
-
-
-
+| keypath_to_track | google.protobuf.StringValue |  |  |
+| time_window | LogsNewValueTimeWindow |  |  |
 
 ### LogsNewValueRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [LogsNewValueCondition](#com-coralogixapis-alerts-v3-LogsNewValueCondition) |  |  |
-
-
-
-
-
-
+| condition | LogsNewValueCondition |  |  |
 
 ### LogsNewValueType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_filter | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| rules | [LogsNewValueRule](#com-coralogixapis-alerts-v3-LogsNewValueRule) | repeated |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto
-
-
-
+| logs_filter | LogsFilter |  |  |
+| rules | LogsNewValueRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
 
 ### LogsRatioCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| threshold | [google.protobuf.DoubleValue](#google-protobuf-DoubleValue) |  |  |
-| time_window | [LogsRatioTimeWindow](#com-coralogixapis-alerts-v3-LogsRatioTimeWindow) |  |  |
-| condition_type | [LogsRatioConditionType](#com-coralogixapis-alerts-v3-LogsRatioConditionType) |  |  |
-
-
-
-
-
-
+| threshold | google.protobuf.DoubleValue |  |  |
+| time_window | LogsRatioTimeWindow |  |  |
+| condition_type | LogsRatioConditionType |  |  |
 
 ### LogsRatioRules
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [LogsRatioCondition](#com-coralogixapis-alerts-v3-LogsRatioCondition) |  |  |
-| override | [AlertDefOverride](#com-coralogixapis-alerts-v3-AlertDefOverride) |  |  |
-
-
-
-
-
-
+| condition | LogsRatioCondition |  |  |
+| override | AlertDefOverride |  |  |
 
 ### LogsRatioThresholdType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| numerator | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| numerator_alias | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| denominator | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| denominator_alias | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| rules | [LogsRatioRules](#com-coralogixapis-alerts-v3-LogsRatioRules) | repeated |  |
-| ignore_infinity | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-| group_by_for | [LogsRatioGroupByFor](#com-coralogixapis-alerts-v3-LogsRatioGroupByFor) |  |  |
-| undetected_values_management | [UndetectedValuesManagement](#com-coralogixapis-alerts-v3-UndetectedValuesManagement) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto
-
-
-
+| numerator | LogsFilter |  |  |
+| numerator_alias | google.protobuf.StringValue |  |  |
+| denominator | LogsFilter |  |  |
+| denominator_alias | google.protobuf.StringValue |  |  |
+| rules | LogsRatioRules | repeated |  |
+| ignore_infinity | google.protobuf.BoolValue |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+| group_by_for | LogsRatioGroupByFor |  |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
 
 ### LogsThresholdCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| threshold | [google.protobuf.DoubleValue](#google-protobuf-DoubleValue) |  |  |
-| time_window | [LogsTimeWindow](#com-coralogixapis-alerts-v3-LogsTimeWindow) |  |  |
-| condition_type | [LogsThresholdConditionType](#com-coralogixapis-alerts-v3-LogsThresholdConditionType) |  |  |
-
-
-
-
-
-
+| threshold | google.protobuf.DoubleValue |  |  |
+| time_window | LogsTimeWindow |  |  |
+| condition_type | LogsThresholdConditionType |  |  |
 
 ### LogsThresholdRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [LogsThresholdCondition](#com-coralogixapis-alerts-v3-LogsThresholdCondition) |  |  |
-| override | [AlertDefOverride](#com-coralogixapis-alerts-v3-AlertDefOverride) |  |  |
-
-
-
-
-
-
+| condition | LogsThresholdCondition |  |  |
+| override | AlertDefOverride |  |  |
 
 ### LogsThresholdType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_filter | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| undetected_values_management | [UndetectedValuesManagement](#com-coralogixapis-alerts-v3-UndetectedValuesManagement) |  |  |
-| rules | [LogsThresholdRule](#com-coralogixapis-alerts-v3-LogsThresholdRule) | repeated |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_time_relative_threshold_type_definition.proto
-
-
-
+| logs_filter | LogsFilter |  |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
+| rules | LogsThresholdRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
 
 ### LogsTimeRelativeCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| threshold | [google.protobuf.DoubleValue](#google-protobuf-DoubleValue) |  |  |
-| compared_to | [LogsTimeRelativeComparedTo](#com-coralogixapis-alerts-v3-LogsTimeRelativeComparedTo) |  |  |
-| condition_type | [LogsTimeRelativeConditionType](#com-coralogixapis-alerts-v3-LogsTimeRelativeConditionType) |  |  |
-
-
-
-
-
-
+| threshold | google.protobuf.DoubleValue |  |  |
+| compared_to | LogsTimeRelativeComparedTo |  |  |
+| condition_type | LogsTimeRelativeConditionType |  |  |
 
 ### LogsTimeRelativeRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [LogsTimeRelativeCondition](#com-coralogixapis-alerts-v3-LogsTimeRelativeCondition) |  |  |
-| override | [AlertDefOverride](#com-coralogixapis-alerts-v3-AlertDefOverride) |  |  |
-
-
-
-
-
-
+| condition | LogsTimeRelativeCondition |  |  |
+| override | AlertDefOverride |  |  |
 
 ### LogsTimeRelativeThresholdType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_filter | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| rules | [LogsTimeRelativeRule](#com-coralogixapis-alerts-v3-LogsTimeRelativeRule) | repeated |  |
-| ignore_infinity | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-| undetected_values_management | [UndetectedValuesManagement](#com-coralogixapis-alerts-v3-UndetectedValuesManagement) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto
-
-
-
+| logs_filter | LogsFilter |  |  |
+| rules | LogsTimeRelativeRule | repeated |  |
+| ignore_infinity | google.protobuf.BoolValue |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
 
 ### LogsUniqueCountCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| max_unique_count | [google.protobuf.Int64Value](#google-protobuf-Int64Value) |  |  |
-| time_window | [LogsUniqueValueTimeWindow](#com-coralogixapis-alerts-v3-LogsUniqueValueTimeWindow) |  |  |
-
-
-
-
-
-
+| max_unique_count | google.protobuf.Int64Value |  |  |
+| time_window | LogsUniqueValueTimeWindow |  |  |
 
 ### LogsUniqueCountRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [LogsUniqueCountCondition](#com-coralogixapis-alerts-v3-LogsUniqueCountCondition) |  |  |
-
-
-
-
-
-
+| condition | LogsUniqueCountCondition |  |  |
 
 ### LogsUniqueCountType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_filter | [LogsFilter](#com-coralogixapis-alerts-v3-LogsFilter) |  |  |
-| rules | [LogsUniqueCountRule](#com-coralogixapis-alerts-v3-LogsUniqueCountRule) | repeated |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-| max_unique_count_per_group_by_key | [google.protobuf.Int64Value](#google-protobuf-Int64Value) |  |  |
-| unique_count_keypath | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/new_value/logs_new_value_timewindow.proto
-
-
-
+| logs_filter | LogsFilter |  |  |
+| rules | LogsUniqueCountRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+| max_unique_count_per_group_by_key | google.protobuf.Int64Value |  |  |
+| unique_count_keypath | google.protobuf.StringValue |  |  |
 
 ### LogsNewValueTimeWindow
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_new_value_time_window_specific_value | [LogsNewValueTimeWindowValue](#com-coralogixapis-alerts-v3-LogsNewValueTimeWindowValue) |  |  |
-
-
-
-
-
-
-
-
+| logs_new_value_time_window_specific_value | LogsNewValueTimeWindowValue |  |  |
 
 ### LogsNewValueTimeWindowValue
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED | 0 |  |
@@ -1107,91 +471,26 @@ Represents The non generated alert definition properties (the ones that are set 
 | LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_2 | 6 |  |
 | LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3 | 7 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_condition_type.proto
-
-
-
-
-
-
 ### LogsRatioConditionType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
 | LOGS_RATIO_CONDITION_TYPE_LESS_THAN | 1 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_group_by_for.proto
-
-
-
-
-
-
 ### LogsRatioGroupByFor
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED | 0 |  |
 | LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY | 1 |  |
 | LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY | 2 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_timewindow.proto
-
-
-
-
 ### LogsRatioTimeWindow
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_ratio_time_window_specific_value | [LogsRatioTimeWindowValue](#com-coralogixapis-alerts-v3-LogsRatioTimeWindowValue) |  |  |
-
-
-
-
-
-
-
-
+| logs_ratio_time_window_specific_value | LogsRatioTimeWindowValue |  |  |
 
 ### LogsRatioTimeWindowValue
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED | 0 |  |
@@ -1206,51 +505,13 @@ Represents The non generated alert definition properties (the ones that are set 
 | LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24 | 9 |  |
 | LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36 | 10 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto
-
-
-
-
-
-
 ### LogsThresholdConditionType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
 | LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN | 1 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative/logs_time_relative_compared_to.proto
-
-
-
-
-
-
 ### LogsTimeRelativeComparedTo
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED | 0 |  |
@@ -1260,65 +521,19 @@ Represents The non generated alert definition properties (the ones that are set 
 | LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK | 4 |  |
 | LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH | 5 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative/logs_time_relative_condition_type.proto
-
-
-
-
-
-
 ### LogsTimeRelativeConditionType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
 | LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN | 1 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/logs/unique_count/logs_unique_value_timewindow.proto
-
-
-
-
 ### LogsUniqueValueTimeWindow
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| logs_unique_value_time_window_specific_value | [LogsUniqueValueTimeWindowValue](#com-coralogixapis-alerts-v3-LogsUniqueValueTimeWindowValue) |  |  |
-
-
-
-
-
-
-
-
+| logs_unique_value_time_window_specific_value | LogsUniqueValueTimeWindowValue |  |  |
 
 ### LogsUniqueValueTimeWindowValue
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED | 0 |  |
@@ -1332,65 +547,19 @@ Represents The non generated alert definition properties (the ones that are set 
 | LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12 | 8 |  |
 | LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24 | 9 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/metric/anomaly/metric_anomaly_condition_type.proto
-
-
-
-
-
-
 ### MetricAnomalyConditionType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED | 0 |  |
 | METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL | 1 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto
-
-
-
-
 ### MetricTimeWindow
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| metric_time_window_specific_value | [MetricTimeWindowValue](#com-coralogixapis-alerts-v3-MetricTimeWindowValue) |  |  |
-
-
-
-
-
-
-
-
+| metric_time_window_specific_value | MetricTimeWindowValue |  |  |
 
 ### MetricTimeWindowValue
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED | 0 |  |
@@ -1405,178 +574,61 @@ Represents The non generated alert definition properties (the ones that are set 
 | METRIC_TIME_WINDOW_VALUE_HOURS_12 | 9 |  |
 | METRIC_TIME_WINDOW_VALUE_HOURS_24 | 10 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto
-
-
-
-
 ### MetricFilter
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| promql | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto
-
-
-
+| promql | google.protobuf.StringValue |  |  |
 
 ### MetricAnomalyCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| threshold | [google.protobuf.DoubleValue](#google-protobuf-DoubleValue) |  |  |
-| for_over_pct | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-| of_the_last | [MetricTimeWindow](#com-coralogixapis-alerts-v3-MetricTimeWindow) |  |  |
-| min_non_null_values_pct | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-| condition_type | [MetricAnomalyConditionType](#com-coralogixapis-alerts-v3-MetricAnomalyConditionType) |  |  |
-
-
-
-
-
-
+| threshold | google.protobuf.DoubleValue |  |  |
+| for_over_pct | google.protobuf.UInt32Value |  |  |
+| of_the_last | MetricTimeWindow |  |  |
+| min_non_null_values_pct | google.protobuf.UInt32Value |  |  |
+| condition_type | MetricAnomalyConditionType |  |  |
 
 ### MetricAnomalyRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [MetricAnomalyCondition](#com-coralogixapis-alerts-v3-MetricAnomalyCondition) |  |  |
-
-
-
-
-
-
+| condition | MetricAnomalyCondition |  |  |
 
 ### MetricAnomalyType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| metric_filter | [MetricFilter](#com-coralogixapis-alerts-v3-MetricFilter) |  |  |
-| rules | [MetricAnomalyRule](#com-coralogixapis-alerts-v3-MetricAnomalyRule) | repeated |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto
-
-
-
+| metric_filter | MetricFilter |  |  |
+| rules | MetricAnomalyRule | repeated |  |
 
 ### MetricThresholdCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| threshold | [google.protobuf.DoubleValue](#google-protobuf-DoubleValue) |  |  |
-| for_over_pct | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-| of_the_last | [MetricTimeWindow](#com-coralogixapis-alerts-v3-MetricTimeWindow) |  |  |
-| condition_type | [MetricThresholdConditionType](#com-coralogixapis-alerts-v3-MetricThresholdConditionType) |  |  |
-
-
-
-
-
-
+| threshold | google.protobuf.DoubleValue |  |  |
+| for_over_pct | google.protobuf.UInt32Value |  |  |
+| of_the_last | MetricTimeWindow |  |  |
+| condition_type | MetricThresholdConditionType |  |  |
 
 ### MetricThresholdRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [MetricThresholdCondition](#com-coralogixapis-alerts-v3-MetricThresholdCondition) |  |  |
-| override | [AlertDefOverride](#com-coralogixapis-alerts-v3-AlertDefOverride) |  |  |
-
-
-
-
-
-
+| condition | MetricThresholdCondition |  |  |
+| override | AlertDefOverride |  |  |
 
 ### MetricThresholdType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| metric_filter | [MetricFilter](#com-coralogixapis-alerts-v3-MetricFilter) |  |  |
-| rules | [MetricThresholdRule](#com-coralogixapis-alerts-v3-MetricThresholdRule) | repeated |  |
-| missing_values | [MetricMissingValues](#com-coralogixapis-alerts-v3-MetricMissingValues) |  |  |
-| undetected_values_management | [UndetectedValuesManagement](#com-coralogixapis-alerts-v3-UndetectedValuesManagement) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto
-
-
-
-
-
+| metric_filter | MetricFilter |  |  |
+| rules | MetricThresholdRule | repeated |  |
+| missing_values | MetricMissingValues |  |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
 
 ### MetricThresholdConditionType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
@@ -1584,160 +636,57 @@ Represents The non generated alert definition properties (the ones that are set 
 | METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS | 2 |  |
 | METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS | 3 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_missing_values.proto
-
-
-
-
 ### MetricMissingValues
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| replace_with_zero | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-| min_non_null_values_pct | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto
-
-
-
+| replace_with_zero | google.protobuf.BoolValue |  |  |
+| min_non_null_values_pct | google.protobuf.UInt32Value |  |  |
 
 ### AlertDefOverride
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| priority | [AlertDefPriority](#com-coralogixapis-alerts-v3-AlertDefPriority) |  |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto
-
-
-
+| priority | AlertDefPriority |  |  |
 
 ### TracingFilter
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| simple_filter | [TracingSimpleFilter](#com-coralogixapis-alerts-v3-TracingSimpleFilter) |  |  |
-
-
-
-
-
-
+| simple_filter | TracingSimpleFilter |  |  |
 
 ### TracingFilterType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| values | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-| operation | [TracingFilterOperationType](#com-coralogixapis-alerts-v3-TracingFilterOperationType) |  |  |
-
-
-
-
-
-
+| values | google.protobuf.StringValue | repeated |  |
+| operation | TracingFilterOperationType |  |  |
 
 ### TracingLabelFilters
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| application_name | [TracingFilterType](#com-coralogixapis-alerts-v3-TracingFilterType) | repeated |  |
-| subsystem_name | [TracingFilterType](#com-coralogixapis-alerts-v3-TracingFilterType) | repeated |  |
-| service_name | [TracingFilterType](#com-coralogixapis-alerts-v3-TracingFilterType) | repeated |  |
-| operation_name | [TracingFilterType](#com-coralogixapis-alerts-v3-TracingFilterType) | repeated |  |
-| span_fields | [TracingSpanFieldsFilterType](#com-coralogixapis-alerts-v3-TracingSpanFieldsFilterType) | repeated |  |
-
-
-
-
-
-
+| application_name | TracingFilterType | repeated |  |
+| subsystem_name | TracingFilterType | repeated |  |
+| service_name | TracingFilterType | repeated |  |
+| operation_name | TracingFilterType | repeated |  |
+| span_fields | TracingSpanFieldsFilterType | repeated |  |
 
 ### TracingSimpleFilter
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tracing_label_filters | [TracingLabelFilters](#com-coralogixapis-alerts-v3-TracingLabelFilters) |  |  |
-| latency_threshold_ms | [google.protobuf.UInt32Value](#google-protobuf-UInt32Value) |  |  |
-
-
-
-
-
-
+| tracing_label_filters | TracingLabelFilters |  |  |
+| latency_threshold_ms | google.protobuf.UInt32Value |  |  |
 
 ### TracingSpanFieldsFilterType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| filter_type | [TracingFilterType](#com-coralogixapis-alerts-v3-TracingFilterType) |  |  |
-
-
-
-
-
-
-
-
+| key | google.protobuf.StringValue |  |  |
+| filter_type | TracingFilterType |  |  |
 
 ### TracingFilterOperationType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED | 0 |  |
@@ -1746,64 +695,18 @@ Represents The non generated alert definition properties (the ones that are set 
 | TRACING_FILTER_OPERATION_TYPE_STARTS_WITH | 3 |  |
 | TRACING_FILTER_OPERATION_TYPE_IS_NOT | 4 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_condition_type.proto
-
-
-
-
-
-
 ### TracingThresholdConditionType
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_timewindow.proto
-
-
-
-
 ### TracingTimeWindow
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tracing_time_window_value | [TracingTimeWindowValue](#com-coralogixapis-alerts-v3-TracingTimeWindowValue) |  |  |
-
-
-
-
-
-
-
-
+| tracing_time_window_value | TracingTimeWindowValue |  |  |
 
 ### TracingTimeWindowValue
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED | 0 |  |
@@ -1818,130 +721,43 @@ Represents The non generated alert definition properties (the ones that are set 
 | TRACING_TIME_WINDOW_VALUE_HOURS_24 | 9 |  |
 | TRACING_TIME_WINDOW_VALUE_HOURS_36 | 10 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto
-
-
-
-
 ### TracingImmediateType
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tracing_filter | [TracingFilter](#com-coralogixapis-alerts-v3-TracingFilter) |  |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto
-
-
-
+| tracing_filter | TracingFilter |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
 
 ### TracingThresholdCondition
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| span_amount | [google.protobuf.DoubleValue](#google-protobuf-DoubleValue) |  |  |
-| time_window | [TracingTimeWindow](#com-coralogixapis-alerts-v3-TracingTimeWindow) |  |  |
-| condition_type | [TracingThresholdConditionType](#com-coralogixapis-alerts-v3-TracingThresholdConditionType) |  |  |
-
-
-
-
-
-
+| span_amount | google.protobuf.DoubleValue |  |  |
+| time_window | TracingTimeWindow |  |  |
+| condition_type | TracingThresholdConditionType |  |  |
 
 ### TracingThresholdRule
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| condition | [TracingThresholdCondition](#com-coralogixapis-alerts-v3-TracingThresholdCondition) |  |  |
-
-
-
-
-
-
+| condition | TracingThresholdCondition |  |  |
 
 ### TracingThresholdType
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tracing_filter | [TracingFilter](#com-coralogixapis-alerts-v3-TracingFilter) |  |  |
-| rules | [TracingThresholdRule](#com-coralogixapis-alerts-v3-TracingThresholdRule) | repeated |  |
-| notification_payload_filter | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto
-
-
-
+| tracing_filter | TracingFilter |  |  |
+| rules | TracingThresholdRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
 
 ### UndetectedValuesManagement
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| trigger_undetected_values | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-| auto_retire_timeframe | [AutoRetireTimeframe](#com-coralogixapis-alerts-v3-AutoRetireTimeframe) | optional |  |
-
-
-
-
-
-
-
-
+| trigger_undetected_values | google.protobuf.BoolValue |  |  |
+| auto_retire_timeframe | AutoRetireTimeframe | optional |  |
 
 ### AutoRetireTimeframe
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED | 0 |  |
@@ -1953,314 +769,143 @@ Represents The non generated alert definition properties (the ones that are set 
 | AUTO_RETIRE_TIMEFRAME_HOURS_12 | 6 |  |
 | AUTO_RETIRE_TIMEFRAME_HOURS_24 | 7 |  |
 
-
-
-
-
-
-
-
-
-
-
-## com/coralogixapis/alerts/v3/alert_defs_service.proto
-
-
-
-
 ### AuditLogDescription
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| description | [string](#string) | optional |  |
-
-
-
-
-
-
+| description | string | optional |  |
 
 ### BatchGetAlertDefRequest
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ids | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
+| ids | google.protobuf.StringValue | repeated |  |
 
 ### BatchGetAlertDefResponse
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_defs | [BatchGetAlertDefResponse.AlertDefsEntry](#com-coralogixapis-alerts-v3-BatchGetAlertDefResponse-AlertDefsEntry) | repeated |  |
-| not_found_ids | [google.protobuf.StringValue](#google-protobuf-StringValue) | repeated |  |
-
-
-
-
-
-
+| alert_defs | BatchGetAlertDefResponse.AlertDefsEntry | repeated |  |
+| not_found_ids | google.protobuf.StringValue | repeated |  |
 
 ### BatchGetAlertDefResponse.AlertDefsEntry
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [AlertDef](#com-coralogixapis-alerts-v3-AlertDef) |  |  |
-
-
-
-
-
-
+| key | string |  |  |
+| value | AlertDef |  |  |
 
 ### CreateAlertDefRequest
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_def_properties | [AlertDefProperties](#com-coralogixapis-alerts-v3-AlertDefProperties) |  |  |
-
-
-
-
-
-
+| alert_def_properties | AlertDefProperties |  |  |
 
 ### CreateAlertDefResponse
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_def | [AlertDef](#com-coralogixapis-alerts-v3-AlertDef) |  |  |
-
-
-
-
-
-
+| alert_def | AlertDef |  |  |
 
 ### DeleteAlertDefRequest
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-
-
-
-
-
-
+| id | google.protobuf.StringValue |  |  |
 
 ### DeleteAlertDefResponse
-
-
-
-
-
-
-
-
 ### DownloadAlertsRequest
-
-
-
-
-
-
-
-
 ### DownloadAlertsResponse
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| content | [bytes](#bytes) |  |  |
-
-
-
-
-
-
+| content | bytes |  |  |
 
 ### GetAlertDefRequest
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [google.protobuf.StringValue](#google-protobuf-StringValue) |  | The Alert&#39;s non changing ID |
-
-
-
-
-
-
+| id | google.protobuf.StringValue |  | The Alert's non changing ID |
 
 ### GetAlertDefResponse
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_def | [AlertDef](#com-coralogixapis-alerts-v3-AlertDef) |  |  |
-
-
-
-
-
-
+| alert_def | AlertDef |  |  |
 
 ### ListAlertDefsRequest
-
-
-
-
-
-
-
-
 ### ListAlertDefsResponse
-
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_defs | [AlertDef](#com-coralogixapis-alerts-v3-AlertDef) | repeated |  |
-
-
-
-
-
-
+| alert_defs | AlertDef | repeated |  |
 
 ### OrderBy
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| field_name | [OrderByFields](#com-coralogixapis-alerts-v3-OrderByFields) |  |  |
-| direction | [OrderByDirection](#com-coralogixapis-alerts-v3-OrderByDirection) |  |  |
-
-
-
-
-
-
+| field_name | OrderByFields |  |  |
+| direction | OrderByDirection |  |  |
 
 ### ReplaceAlertDefRequest
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_def_properties | [AlertDefProperties](#com-coralogixapis-alerts-v3-AlertDefProperties) |  |  |
-| id | [google.protobuf.StringValue](#google-protobuf-StringValue) |  | The AlertDef&#39;s Id to be replaced |
-
-
-
-
-
-
+| alert_def_properties | AlertDefProperties |  |  |
+| id | google.protobuf.StringValue |  | The AlertDef's ID to be replaced |
 
 ### ReplaceAlertDefResponse
 
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alert_def | [AlertDef](#com-coralogixapis-alerts-v3-AlertDef) |  |  |
-
-
-
-
-
-
+| alert_def | AlertDef |  |  |
 
 ### SetActiveRequest
 message AlertExecutionRequest {
-oneof request {
-CreateAlertDefRequest create = 1;
-ReplaceAlertDefRequest replace = 2;
-DeleteAlertDefRequest delete = 3;
+  oneof request {
+    CreateAlertDefRequest create = 1;
+    ReplaceAlertDefRequest replace = 2;
+    DeleteAlertDefRequest delete = 3;
+  }
 }
-}
+
 message AlertExecutionResponse {
-oneof response {
-CreateAlertDefResponse create = 1;
-ReplaceAlertDefResponse replace = 2;
-DeleteAlertDefResponse delete = 3;
+  oneof response {
+    CreateAlertDefResponse create = 1;
+    ReplaceAlertDefResponse replace = 2;
+    DeleteAlertDefResponse delete = 3;
+  }
 }
-}
+
 message GetLimitsRequest {}
 
 message GetLimitsResponse {
-google.protobuf.StringValue company_id = 1;
-google.protobuf.Int32Value limit = 2;
-google.protobuf.Int32Value used = 3;
+  google.protobuf.StringValue company_id = 1;
+  google.protobuf.Int32Value limit = 2;
+  google.protobuf.Int32Value used = 3;
 }
+
 message ValidateAlertRequest {
-Alert alert = 1;
+  Alert alert = 1;
 }
+
 message ValidateAlertResponse {
-google.protobuf.BoolValue valid = 1;
+  google.protobuf.BoolValue valid = 1;
 }
-
-
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [google.protobuf.StringValue](#google-protobuf-StringValue) |  |  |
-| active | [google.protobuf.BoolValue](#google-protobuf-BoolValue) |  |  |
-
-
-
-
-
-
+| id | google.protobuf.StringValue |  |  |
+| active | google.protobuf.BoolValue |  |  |
 
 ### SetActiveResponse
 
-
-
-
-
-
-
-
-
-
 ### OrderByDirection
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED | 0 |  |
 | ORDER_BY_DIRECTION_DESC | 1 |  |
 
-
-
-
 ### OrderByFields
-
-
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | `ORDER_BY_FIELDS_UNSPECIFIED`    | `0`    |  |
@@ -2271,13 +916,7 @@ google.protobuf.BoolValue valid = 1;
 | `ORDER_BY_FIELDS_UPDATED_TIME`   | `5`    |  |
 | `ORDER_BY_FIELDS_LAST_TRIGGERED` | `6`    |  |
 
-
-
-
-
-
 ### File-level Extensions
 | Extension | Type | Base | Number | Description |
 | --------- | ---- | ---- | ------ | ----------- |
 | audit_log_description | AuditLogDescription | .google.protobuf.MethodOptions | 5000 |  |
-
