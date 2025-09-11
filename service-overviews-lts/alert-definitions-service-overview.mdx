@@ -860,6 +860,7 @@ Represents The non generated alert definition properties (the ones that are set 
 | alert_def | AlertDef |  |  |
 
 ### SetActiveRequest
+```
 message AlertExecutionRequest {
   oneof request {
     CreateAlertDefRequest create = 1;
@@ -891,6 +892,8 @@ message ValidateAlertRequest {
 message ValidateAlertResponse {
   google.protobuf.BoolValue valid = 1;
 }
+```
+
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | google.protobuf.StringValue |  |  |
