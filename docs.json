@@ -2,7 +2,7 @@
   "navigation": {
     "versions": [
       {
-        "version": "v1.7.0-latest",
+        "version": "v1.9.0-latest",
         "groups": [
           {
             "group": "Introduction",
@@ -36,12 +36,13 @@
             "pages": [
               "api-reference/latest/alert-definitions-service/overview",
               "api-reference/latest/alert-definitions-service/create-an-alert",
-              "api-reference/latest/alert-definitions-service/delete-v3alert-defs",
+              "api-reference/latest/alert-definitions-service/deletealertdef",
               "api-reference/latest/alert-definitions-service/disable-or-enable-an-alert",
               "api-reference/latest/alert-definitions-service/download-alerts",
               "api-reference/latest/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions",
               "api-reference/latest/alert-definitions-service/get-alert-definition-by-alert-version-id",
               "api-reference/latest/alert-definitions-service/get-alert-definition-by-id",
+              "api-reference/latest/alert-definitions-service/get-counts-for-filter-options",
               "api-reference/latest/alert-definitions-service/replace-an-alert-definition"
             ]
           },
@@ -140,17 +141,6 @@
               "api-reference/latest/enrichments-service/get-company-enrichment-settings",
               "api-reference/latest/enrichments-service/get-enrichment-limit",
               "api-reference/latest/enrichments-service/get-enrichments"
-            ]
-          },
-          {
-            "group": "Events Service",
-            "pages": [
-              "api-reference/latest/events-service/overview",
-              "api-reference/latest/events-service/batch-get-event",
-              "api-reference/latest/events-service/get-event",
-              "api-reference/latest/events-service/get-events-statistics",
-              "api-reference/latest/events-service/list-events",
-              "api-reference/latest/events-service/list-events-count"
             ]
           },
           {
@@ -263,34 +253,6 @@
             ]
           },
           {
-            "group": "Policies Service",
-            "pages": [
-              "api-reference/latest/policies-service/overview",
-              "api-reference/latest/policies-service/atomic-batch-create-policy",
-              "api-reference/latest/policies-service/atomic-overwrite-log-policies",
-              "api-reference/latest/policies-service/atomic-overwrite-span-policies",
-              "api-reference/latest/policies-service/bulk-test-log-policies",
-              "api-reference/latest/policies-service/delete-policy",
-              "api-reference/latest/policies-service/get-company-policies",
-              "api-reference/latest/policies-service/get-policy-by-id",
-              "api-reference/latest/policies-service/get-policy-by-id-1",
-              "api-reference/latest/policies-service/reorder-policies",
-              "api-reference/latest/policies-service/toggle-policies",
-              "api-reference/latest/policies-service/update-policy"
-            ]
-          },
-          {
-            "group": "Recording Rules Service",
-            "pages": [
-              "api-reference/latest/recording-rules-service/overview",
-              "api-reference/latest/recording-rules-service/create-recording-rules",
-              "api-reference/latest/recording-rules-service/delete-recording-rules",
-              "api-reference/latest/recording-rules-service/get-recording-rules",
-              "api-reference/latest/recording-rules-service/list-recording-rules",
-              "api-reference/latest/recording-rules-service/update-recording-rules"
-            ]
-          },
-          {
             "group": "Retentions Service",
             "pages": [
               "api-reference/latest/retentions-service/overview",
@@ -298,20 +260,6 @@
               "api-reference/latest/retentions-service/get-retentions",
               "api-reference/latest/retentions-service/get-retentions-enabled",
               "api-reference/latest/retentions-service/update-retentions"
-            ]
-          },
-          {
-            "group": "Rule Groups Service",
-            "pages": [
-              "api-reference/latest/rule-groups-service/overview",
-              "api-reference/latest/rule-groups-service/bulk-delete-rule-group",
-              "api-reference/latest/rule-groups-service/create-rule-group",
-              "api-reference/latest/rule-groups-service/delete-rule-group",
-              "api-reference/latest/rule-groups-service/get-company-usage-limits",
-              "api-reference/latest/rule-groups-service/get-rule-group",
-              "api-reference/latest/rule-groups-service/get-rule-group-model-mapping",
-              "api-reference/latest/rule-groups-service/list-rule-groups",
-              "api-reference/latest/rule-groups-service/update-rule-group"
             ]
           },
           {
@@ -344,8 +292,10 @@
               "api-reference/latest/slos-service/create-slo",
               "api-reference/latest/slos-service/delete-slo",
               "api-reference/latest/slos-service/get-slo",
+              "api-reference/latest/slos-service/get-slo-zero-state",
               "api-reference/latest/slos-service/list-slos",
-              "api-reference/latest/slos-service/replace-slo"
+              "api-reference/latest/slos-service/replace-slo",
+              "api-reference/latest/slos-service/replace-slo-pre-validate-alerts"
             ]
           },
           {

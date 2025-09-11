@@ -13,7 +13,6 @@ To use the Alert definitions service API you need to [create a personal or team 
 | Alerts | `alerts:ReadConfig` | Grants access to read alerts |
 |  | `alerts:UpdateConfig` | Required to create, update, or delete alerts |
 
-
 ## Common error response codes
 
 | Status Code | Description                           |
@@ -22,404 +21,904 @@ To use the Alert definitions service API you need to [create a personal or team 
 | `401 Unauthorized` | Response code 401 |
 | `500 Internal Server Error` | Response code 500 |
 
-## Constants
+## Protocol documentation
 
-<details>
-  <summary>FilterMatcher</summary>
+### AlertDef
+Represents An Existing or Created Alert Definition
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_def_properties | AlertDefProperties |  |  |
+| id | google.protobuf.StringValue |  | This is the Alert Definition's Persistent ID (does not change on replace) , AKA UniqueIDentifier |
+| alert_version_id | google.protobuf.StringValue |  | the old alertID |
+| created_time | google.protobuf.Timestamp |  |  |
+| updated_time | google.protobuf.Timestamp |  |  |
 
-  | Value |
-|-------|
-| `FILTER_MATCHER_UNSPECIFIED` |
-| `FILTER_MATCHER_EQUALS` |
-| `FILTER_MATCHER_NOT_EQUALS` |
-</details>
-<details>
-  <summary>FilterValuesOperator</summary>
+### AlertDefProperties
+Represents The non generated alert definition properties (the ones that are set by the user)
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | google.protobuf.StringValue |  |  |
+| description | google.protobuf.StringValue |  |  |
+| enabled | google.protobuf.BoolValue |  |  |
+| priority | AlertDefPriority |  |  |
+| active_on | ActivitySchedule |  |  |
+| type | AlertDefType |  |  |
+| logs_immediate | LogsImmediateType |  |  |
+| tracing_immediate | TracingImmediateType |  |  |
+| logs_threshold | LogsThresholdType |  |  |
+| logs_ratio_threshold | LogsRatioThresholdType |  |  |
+| logs_time_relative_threshold | LogsTimeRelativeThresholdType |  |  |
+| metric_threshold | MetricThresholdType |  |  |
+| tracing_threshold | TracingThresholdType |  |  |
+| flow | FlowType |  |  |
+| logs_anomaly | LogsAnomalyType |  |  |
+| metric_anomaly | MetricAnomalyType |  |  |
+| logs_new_value | LogsNewValueType |  |  |
+| logs_unique_count | LogsUniqueCountType |  |  |
+| group_by_keys | google.protobuf.StringValue | repeated |  |
+| incidents_settings | AlertDefIncidentSettings |  |  |
+| notification_group | AlertDefNotificationGroup |  |  |
+| entity_labels | AlertDefProperties.EntityLabelsEntry | repeated |  |
+| phantom_mode | google.protobuf.BoolValue |  |  |
+| deleted | google.protobuf.BoolValue |  |  |
 
-  | Value |
-|-------|
-| `FILTER_VALUES_OPERATOR_UNSPECIFIED` |
-| `FILTER_VALUES_OPERATOR_OR` |
-| `FILTER_VALUES_OPERATOR_AND` |
-</details>
-<details>
-  <summary>AlertDefType</summary>
+### AlertDefProperties.EntityLabelsEntry
 
-  | Value |
-|-------|
-| `ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED` |
-| `ALERT_DEF_TYPE_LOGS_THRESHOLD` |
-| `ALERT_DEF_TYPE_LOGS_ANOMALY` |
-| `ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD` |
-| `ALERT_DEF_TYPE_LOGS_NEW_VALUE` |
-| `ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT` |
-| `ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_THRESHOLD` |
-| `ALERT_DEF_TYPE_METRIC_THRESHOLD` |
-| `ALERT_DEF_TYPE_METRIC_ANOMALY` |
-| `ALERT_DEF_TYPE_TRACING_IMMEDIATE` |
-| `ALERT_DEF_TYPE_TRACING_THRESHOLD` |
-| `ALERT_DEF_TYPE_FLOW` |
-| `ALERT_DEF_TYPE_SLO_THRESHOLD` |
-</details>
-<details>
-  <summary>DayOfWeek</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | string |  |  |
+| value | string |  |  |
 
-  | Value |
-|-------|
-| `DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED` |
-| `DAY_OF_WEEK_TUESDAY` |
-| `DAY_OF_WEEK_WEDNESDAY` |
-| `DAY_OF_WEEK_THURSDAY` |
-| `DAY_OF_WEEK_FRIDAY` |
-| `DAY_OF_WEEK_SATURDAY` |
-| `DAY_OF_WEEK_SUNDAY` |
-</details>
-<details>
-  <summary>NotifyOn</summary>
+### AlertDefIncidentSettings
 
-  | Value |
-|-------|
-| `NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED` |
-| `NOTIFY_ON_TRIGGERED_AND_RESOLVED` |
-</details>
-<details>
-  <summary>DurationUnit</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| minutes | google.protobuf.UInt32Value |  |  |
+| notify_on | NotifyOn |  |  |
 
-  | Value |
-|-------|
-| `DURATION_UNIT_UNSPECIFIED` |
-| `DURATION_UNIT_HOURS` |
-</details>
-<details>
-  <summary>BooleanOperator</summary>
+### AlertDefNotificationGroup
 
-  | Value |
-|-------|
-| `BOOLEAN_OPERATOR_AND_UNSPECIFIED` |
-| `BOOLEAN_OPERATOR_OR` |
-</details>
-<details>
-  <summary>OrderByDirection</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| group_by_keys | google.protobuf.StringValue | repeated |  |
+| webhooks | AlertDefWebhooksSettings | repeated |  |
 
-  | Value |
-|-------|
-| `ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED` |
-| `ORDER_BY_DIRECTION_DESC` |
-</details>
-<details>
-  <summary>OrderByFields</summary>
+### AlertDefWebhooksSettings
 
-  | Value |
-|-------|
-| `ORDER_BY_FIELDS_UNSPECIFIED` |
-| `ORDER_BY_FIELDS_NAME` |
-| `ORDER_BY_FIELDS_ID` |
-| `ORDER_BY_FIELDS_SEVERITY` |
-| `ORDER_BY_FIELDS_CREATED_TIME` |
-| `ORDER_BY_FIELDS_UPDATED_TIME` |
-| `ORDER_BY_FIELDS_LAST_TRIGGERED` |
-</details>
-<details>
-  <summary>AlertDefPriority</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| minutes | google.protobuf.UInt32Value |  |  |
+| notify_on | NotifyOn | optional |  |
+| integration | IntegrationType |  |  |
 
-  | Value |
-|-------|
-| `ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED` |
-| `ALERT_DEF_PRIORITY_P4` |
-| `ALERT_DEF_PRIORITY_P3` |
-| `ALERT_DEF_PRIORITY_P2` |
-| `ALERT_DEF_PRIORITY_P1` |
-</details>
-<details>
-  <summary>AutoRetireTimeframe</summary>
+### IntegrationType
 
-  | Value |
-|-------|
-| `AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED` |
-| `AUTO_RETIRE_TIMEFRAME_MINUTES_5` |
-| `AUTO_RETIRE_TIMEFRAME_MINUTES_10` |
-| `AUTO_RETIRE_TIMEFRAME_HOUR_1` |
-| `AUTO_RETIRE_TIMEFRAME_HOURS_2` |
-| `AUTO_RETIRE_TIMEFRAME_HOURS_6` |
-| `AUTO_RETIRE_TIMEFRAME_HOURS_12` |
-| `AUTO_RETIRE_TIMEFRAME_HOURS_24` |
-</details>
-<details>
-  <summary>TracingFilterOperationType</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| integration_id | google.protobuf.UInt32Value |  |  |
+| recipients | Recipients |  |  |
 
-  | Value |
-|-------|
-| `TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED` |
-| `TRACING_FILTER_OPERATION_TYPE_INCLUDES` |
-| `TRACING_FILTER_OPERATION_TYPE_ENDS_WITH` |
-| `TRACING_FILTER_OPERATION_TYPE_STARTS_WITH` |
-| `TRACING_FILTER_OPERATION_TYPE_IS_NOT` |
-</details>
-<details>
-  <summary>TracingTimeWindowValue</summary>
+### Recipients
 
-  | Value |
-|-------|
-| `TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED` |
-| `TRACING_TIME_WINDOW_VALUE_MINUTES_10` |
-| `TRACING_TIME_WINDOW_VALUE_MINUTES_15` |
-| `TRACING_TIME_WINDOW_VALUE_MINUTES_20` |
-| `TRACING_TIME_WINDOW_VALUE_MINUTES_30` |
-| `TRACING_TIME_WINDOW_VALUE_HOUR_1` |
-| `TRACING_TIME_WINDOW_VALUE_HOURS_2` |
-| `TRACING_TIME_WINDOW_VALUE_HOURS_4` |
-| `TRACING_TIME_WINDOW_VALUE_HOURS_6` |
-| `TRACING_TIME_WINDOW_VALUE_HOURS_12` |
-| `TRACING_TIME_WINDOW_VALUE_HOURS_24` |
-| `TRACING_TIME_WINDOW_VALUE_HOURS_36` |
-</details>
-<details>
-  <summary>TracingThresholdConditionType</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| emails | google.protobuf.StringValue | repeated |  |
 
-  | Value |
-|-------|
-| `TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
-</details>
-<details>
-  <summary>LogsAnomalyConditionType</summary>
+### NotifyOn
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED | 0 |  |
+| NOTIFY_ON_TRIGGERED_AND_RESOLVED | 1 |  |
 
-  | Value |
-|-------|
-| `LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED` |
-</details>
-<details>
-  <summary>LogsUniqueValueTimeWindowValue</summary>
+### AlertDefPriority
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED | 0 |  |
+| ALERT_DEF_PRIORITY_P4 | 1 |  |
+| ALERT_DEF_PRIORITY_P3 | 2 |  |
+| ALERT_DEF_PRIORITY_P2 | 3 |  |
+| ALERT_DEF_PRIORITY_P1 | 4 |  |
 
-  | Value |
-|-------|
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_5` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_10` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_15` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_20` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_30` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_1` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_2` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_4` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_6` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24` |
-| `LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_36` |
-</details>
-<details>
-  <summary>LogsRatioGroupByFor</summary>
+### ActivitySchedule
 
-  | Value |
-|-------|
-| `LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED` |
-| `LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY` |
-| `LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY` |
-</details>
-<details>
-  <summary>LogsRatioTimeWindowValue</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| day_of_week | DayOfWeek | repeated |  |
+| start_time | TimeOfDay |  |  |
+| end_time | TimeOfDay |  |  |
 
-  | Value |
-|-------|
-| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_10` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_15` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_30` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_HOUR_1` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_2` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_4` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_6` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_12` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24` |
-| `LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36` |
-</details>
-<details>
-  <summary>LogsRatioConditionType</summary>
+### TimeOfDay
 
-  | Value |
-|-------|
-| `LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
-| `LOGS_RATIO_CONDITION_TYPE_LESS_THAN` |
-</details>
-<details>
-  <summary>LogsTimeRelativeConditionType</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hours | int32 |  | Hours of day in 24 hour format. Should be from 0 to 23. |
+| minutes | int32 |  | Minutes of hour of day. Must be from 0 to 59. |
 
-  | Value |
-|-------|
-| `LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
-| `LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN` |
-</details>
-<details>
-  <summary>LogsTimeRelativeComparedTo</summary>
+### DayOfWeek
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED | 0 |  |
+| DAY_OF_WEEK_TUESDAY | 1 |  |
+| DAY_OF_WEEK_WEDNESDAY | 2 |  |
+| DAY_OF_WEEK_THURSDAY | 3 |  |
+| DAY_OF_WEEK_FRIDAY | 4 |  |
+| DAY_OF_WEEK_SATURDAY | 5 |  |
+| DAY_OF_WEEK_SUNDAY | 6 |  |
 
-  | Value |
-|-------|
-| `LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED` |
-| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_YESTERDAY` |
-| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_LAST_WEEK` |
-| `LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY` |
-| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK` |
-| `LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH` |
-</details>
-<details>
-  <summary>LogsTimeWindowValue</summary>
+### AlertDefType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED | 0 |  |
+| ALERT_DEF_TYPE_LOGS_THRESHOLD | 1 |  |
+| ALERT_DEF_TYPE_LOGS_ANOMALY | 3 |  |
+| ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD | 4 |  |
+| ALERT_DEF_TYPE_LOGS_NEW_VALUE | 6 |  |
+| ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT | 7 |  |
+| ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_THRESHOLD | 8 |  |
+| ALERT_DEF_TYPE_METRIC_THRESHOLD | 10 |  |
+| ALERT_DEF_TYPE_METRIC_ANOMALY | 14 |  |
+| ALERT_DEF_TYPE_TRACING_IMMEDIATE | 15 |  |
+| ALERT_DEF_TYPE_TRACING_THRESHOLD | 16 |  |
+| ALERT_DEF_TYPE_FLOW | 17 |  |
 
-  | Value |
-|-------|
-| `LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED` |
-| `LOGS_TIME_WINDOW_VALUE_MINUTES_10` |
-| `LOGS_TIME_WINDOW_VALUE_MINUTES_20` |
-| `LOGS_TIME_WINDOW_VALUE_MINUTES_15` |
-| `LOGS_TIME_WINDOW_VALUE_MINUTES_30` |
-| `LOGS_TIME_WINDOW_VALUE_HOUR_1` |
-| `LOGS_TIME_WINDOW_VALUE_HOURS_2` |
-| `LOGS_TIME_WINDOW_VALUE_HOURS_4` |
-| `LOGS_TIME_WINDOW_VALUE_HOURS_6` |
-| `LOGS_TIME_WINDOW_VALUE_HOURS_12` |
-| `LOGS_TIME_WINDOW_VALUE_HOURS_24` |
-| `LOGS_TIME_WINDOW_VALUE_HOURS_36` |
-</details>
-<details>
-  <summary>LogFilterOperationType</summary>
+### ActivityAnalysis
 
-  | Value |
-|-------|
-| `LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED` |
-| `LOG_FILTER_OPERATION_TYPE_INCLUDES` |
-| `LOG_FILTER_OPERATION_TYPE_ENDS_WITH` |
-| `LOG_FILTER_OPERATION_TYPE_STARTS_WITH` |
-</details>
-<details>
-  <summary>LogSeverity</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| rules | string | repeated |  |
+| status | ActivityAnalysisStatus |  |  |
 
-  | Value |
-|-------|
-| `LOG_SEVERITY_VERBOSE_UNSPECIFIED` |
-| `LOG_SEVERITY_DEBUG` |
-| `LOG_SEVERITY_INFO` |
-| `LOG_SEVERITY_WARNING` |
-| `LOG_SEVERITY_ERROR` |
-| `LOG_SEVERITY_CRITICAL` |
-</details>
-<details>
-  <summary>LogsThresholdConditionType</summary>
+### ActivityAnalysisStatus
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED | 0 |  |
+| ACTIVITY_ANALYSIS_STATUS_MUTE | 1 |  |
 
-  | Value |
-|-------|
-| `LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
-| `LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN` |
-</details>
-<details>
-  <summary>LogsNewValueTimeWindowValue</summary>
+### FlowStages
 
-  | Value |
-|-------|
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED` |
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_24` |
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_48` |
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_72` |
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_WEEK_1` |
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTH_1` |
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_2` |
-| `LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3` |
-</details>
-<details>
-  <summary>ActivityAnalysisStatus</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| flow_stages_groups | FlowStagesGroups |  |  |
+| timeframe_ms | google.protobuf.Int64Value |  |  |
+| timeframe_type | TimeframeType |  |  |
 
-  | Value |
-|-------|
-| `ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED` |
-| `ACTIVITY_ANALYSIS_STATUS_MUTE` |
-</details>
-<details>
-  <summary>MetricAnomalyConditionType</summary>
+### FlowStagesGroup
 
-  | Value |
-|-------|
-| `METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED` |
-| `METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL` |
-</details>
-<details>
-  <summary>MetricTimeWindowValue</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_defs | FlowStagesGroupsAlertDefs | repeated |  |
+| next_op | NextOp |  |  |
+| alerts_op | AlertsOp |  |  |
 
-  | Value |
-|-------|
-| `METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED` |
-| `METRIC_TIME_WINDOW_VALUE_MINUTES_5` |
-| `METRIC_TIME_WINDOW_VALUE_MINUTES_10` |
-| `METRIC_TIME_WINDOW_VALUE_MINUTES_15` |
-| `METRIC_TIME_WINDOW_VALUE_MINUTES_20` |
-| `METRIC_TIME_WINDOW_VALUE_MINUTES_30` |
-| `METRIC_TIME_WINDOW_VALUE_HOUR_1` |
-| `METRIC_TIME_WINDOW_VALUE_HOURS_2` |
-| `METRIC_TIME_WINDOW_VALUE_HOURS_4` |
-| `METRIC_TIME_WINDOW_VALUE_HOURS_6` |
-| `METRIC_TIME_WINDOW_VALUE_HOURS_12` |
-| `METRIC_TIME_WINDOW_VALUE_HOURS_24` |
-| `METRIC_TIME_WINDOW_VALUE_HOURS_36` |
-</details>
-<details>
-  <summary>MetricThresholdConditionType</summary>
+### FlowStagesGroups
 
-  | Value |
-|-------|
-| `METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED` |
-| `METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN` |
-| `METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS` |
-| `METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS` |
-</details>
-<details>
-  <summary>NextOp</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| groups | FlowStagesGroup | repeated |  |
 
-  | Value |
-|-------|
-| `NEXT_OP_AND_OR_UNSPECIFIED` |
-| `NEXT_OP_OR` |
-</details>
-<details>
-  <summary>AlertsOp</summary>
+### FlowStagesGroupsAlertDefs
 
-  | Value |
-|-------|
-| `ALERTS_OP_AND_OR_UNSPECIFIED` |
-| `ALERTS_OP_OR` |
-</details>
-<details>
-  <summary>TimeframeType</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | google.protobuf.StringValue |  |  |
+| not | google.protobuf.BoolValue |  |  |
 
-  | Value |
-|-------|
-| `TIMEFRAME_TYPE_UNSPECIFIED` |
-| `TIMEFRAME_TYPE_UP_TO` |
-</details>
-<details>
-  <summary>AlertStatus</summary>
+### FlowType
 
-  | Value |
-|-------|
-| `ALERT_STATUS_RESOLVED_OR_UNSPECIFIED` |
-| `ALERT_STATUS_TRIGGERED` |
-</details>
-<details>
-  <summary>OrderByAlertEventFields</summary>
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| stages | FlowStages | repeated |  |
+| enforce_suppression | google.protobuf.BoolValue |  |  |
 
-  | Value |
-|-------|
-| `ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED` |
-| `ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP` |
-</details>
-<details>
-  <summary>OrderByAlertEventDirection</summary>
+### AlertsOp
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ALERTS_OP_AND_OR_UNSPECIFIED | 0 |  |
+| ALERTS_OP_OR | 1 |  |
 
-  | Value |
-|-------|
-| `ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED` |
-| `ORDER_BY_ALERT_EVENT_DIRECTION_ASC` |
-| `ORDER_BY_ALERT_EVENT_DIRECTION_DESC` |
-</details>
-<details>
-  <summary>SpecialRatioValues</summary>
+### NextOp
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NEXT_OP_AND_OR_UNSPECIFIED | 0 |  |
+| NEXT_OP_OR | 1 |  |
 
-  | Value |
-|-------|
-| `SPECIAL_RATIO_VALUES_INFINITY_OR_UNSPECIFIED` |
-</details>
+### TimeframeType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TIMEFRAME_TYPE_UNSPECIFIED | 0 |  |
+| TIMEFRAME_TYPE_UP_TO | 1 |  |
+
+### LogsAnomalyConditionType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED | 0 |  |
+
+### LabelFilterType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | google.protobuf.StringValue |  |  |
+| operation | LogFilterOperationType |  |  |
+
+### LabelFilters
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| application_name | LabelFilterType | repeated |  |
+| subsystem_name | LabelFilterType | repeated |  |
+| severities | LogSeverity | repeated |  |
+
+### LogsFilter
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| simple_filter | LogsSimpleFilter |  |  |
+
+### LogsSimpleFilter
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| lucene_query | google.protobuf.StringValue |  |  |
+| label_filters | LabelFilters |  |  |
+
+### LogFilterOperationType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED | 0 |  |
+| LOG_FILTER_OPERATION_TYPE_INCLUDES | 1 |  |
+| LOG_FILTER_OPERATION_TYPE_ENDS_WITH | 2 |  |
+| LOG_FILTER_OPERATION_TYPE_STARTS_WITH | 3 |  |
+
+### LogSeverity
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOG_SEVERITY_VERBOSE_UNSPECIFIED | 0 |  |
+| LOG_SEVERITY_DEBUG | 1 |  |
+| LOG_SEVERITY_INFO | 2 |  |
+| LOG_SEVERITY_WARNING | 3 |  |
+| LOG_SEVERITY_ERROR | 4 |  |
+| LOG_SEVERITY_CRITICAL | 5 |  |
+
+### LogsTimeWindow
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_time_window_specific_value | LogsTimeWindowValue |  |  |
+
+### LogsTimeWindowValue
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED | 0 |  |
+| LOGS_TIME_WINDOW_VALUE_MINUTES_10 | 1 |  |
+| LOGS_TIME_WINDOW_VALUE_MINUTES_20 | 2 |  |
+| LOGS_TIME_WINDOW_VALUE_MINUTES_15 | 3 |  |
+| LOGS_TIME_WINDOW_VALUE_MINUTES_30 | 4 |  |
+| LOGS_TIME_WINDOW_VALUE_HOUR_1 | 5 |  |
+| LOGS_TIME_WINDOW_VALUE_HOURS_2 | 6 |  |
+| LOGS_TIME_WINDOW_VALUE_HOURS_4 | 7 |  |
+| LOGS_TIME_WINDOW_VALUE_HOURS_6 | 8 |  |
+| LOGS_TIME_WINDOW_VALUE_HOURS_12 | 9 |  |
+| LOGS_TIME_WINDOW_VALUE_HOURS_24 | 10 |  |
+| LOGS_TIME_WINDOW_VALUE_HOURS_36 | 11 |  |
+
+### LogsAnomalyCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| minimum_threshold | google.protobuf.DoubleValue |  |  |
+| time_window | LogsTimeWindow |  |  |
+| condition_type | LogsAnomalyConditionType |  |  |
+
+### LogsAnomalyRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | LogsAnomalyCondition |  |  |
+
+### LogsAnomalyType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_filter | LogsFilter |  |  |
+| rules | LogsAnomalyRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+
+### LogsImmediateType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_filter | LogsFilter |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+
+### LogsNewValueCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keypath_to_track | google.protobuf.StringValue |  |  |
+| time_window | LogsNewValueTimeWindow |  |  |
+
+### LogsNewValueRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | LogsNewValueCondition |  |  |
+
+### LogsNewValueType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_filter | LogsFilter |  |  |
+| rules | LogsNewValueRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+
+### LogsRatioCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| threshold | google.protobuf.DoubleValue |  |  |
+| time_window | LogsRatioTimeWindow |  |  |
+| condition_type | LogsRatioConditionType |  |  |
+
+### LogsRatioRules
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | LogsRatioCondition |  |  |
+| override | AlertDefOverride |  |  |
+
+### LogsRatioThresholdType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| numerator | LogsFilter |  |  |
+| numerator_alias | google.protobuf.StringValue |  |  |
+| denominator | LogsFilter |  |  |
+| denominator_alias | google.protobuf.StringValue |  |  |
+| rules | LogsRatioRules | repeated |  |
+| ignore_infinity | google.protobuf.BoolValue |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+| group_by_for | LogsRatioGroupByFor |  |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
+
+### LogsThresholdCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| threshold | google.protobuf.DoubleValue |  |  |
+| time_window | LogsTimeWindow |  |  |
+| condition_type | LogsThresholdConditionType |  |  |
+
+### LogsThresholdRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | LogsThresholdCondition |  |  |
+| override | AlertDefOverride |  |  |
+
+### LogsThresholdType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_filter | LogsFilter |  |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
+| rules | LogsThresholdRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+
+### LogsTimeRelativeCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| threshold | google.protobuf.DoubleValue |  |  |
+| compared_to | LogsTimeRelativeComparedTo |  |  |
+| condition_type | LogsTimeRelativeConditionType |  |  |
+
+### LogsTimeRelativeRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | LogsTimeRelativeCondition |  |  |
+| override | AlertDefOverride |  |  |
+
+### LogsTimeRelativeThresholdType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_filter | LogsFilter |  |  |
+| rules | LogsTimeRelativeRule | repeated |  |
+| ignore_infinity | google.protobuf.BoolValue |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
+
+### LogsUniqueCountCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| max_unique_count | google.protobuf.Int64Value |  |  |
+| time_window | LogsUniqueValueTimeWindow |  |  |
+
+### LogsUniqueCountRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | LogsUniqueCountCondition |  |  |
+
+### LogsUniqueCountType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_filter | LogsFilter |  |  |
+| rules | LogsUniqueCountRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+| max_unique_count_per_group_by_key | google.protobuf.Int64Value |  |  |
+| unique_count_keypath | google.protobuf.StringValue |  |  |
+
+### LogsNewValueTimeWindow
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_new_value_time_window_specific_value | LogsNewValueTimeWindowValue |  |  |
+
+### LogsNewValueTimeWindowValue
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED | 0 |  |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_24 | 1 |  |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_48 | 2 |  |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_72 | 3 |  |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_WEEK_1 | 4 |  |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTH_1 | 5 |  |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_2 | 6 |  |
+| LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3 | 7 |  |
+
+### LogsRatioConditionType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
+| LOGS_RATIO_CONDITION_TYPE_LESS_THAN | 1 |  |
+
+### LogsRatioGroupByFor
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED | 0 |  |
+| LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY | 1 |  |
+| LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY | 2 |  |
+
+### LogsRatioTimeWindow
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_ratio_time_window_specific_value | LogsRatioTimeWindowValue |  |  |
+
+### LogsRatioTimeWindowValue
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED | 0 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_10 | 1 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_15 | 2 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_30 | 3 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_HOUR_1 | 4 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_2 | 5 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_4 | 6 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_6 | 7 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_12 | 8 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24 | 9 |  |
+| LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36 | 10 |  |
+
+### LogsThresholdConditionType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
+| LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN | 1 |  |
+
+### LogsTimeRelativeComparedTo
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED | 0 |  |
+| LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_YESTERDAY | 1 |  |
+| LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_LAST_WEEK | 2 |  |
+| LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY | 3 |  |
+| LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK | 4 |  |
+| LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH | 5 |  |
+
+### LogsTimeRelativeConditionType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
+| LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN | 1 |  |
+
+### LogsUniqueValueTimeWindow
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| logs_unique_value_time_window_specific_value | LogsUniqueValueTimeWindowValue |  |  |
+
+### LogsUniqueValueTimeWindowValue
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED | 0 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_15 | 1 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_20 | 2 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_30 | 3 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_1 | 4 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_2 | 5 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_4 | 6 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_6 | 7 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12 | 8 |  |
+| LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24 | 9 |  |
+
+### MetricAnomalyConditionType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED | 0 |  |
+| METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL | 1 |  |
+
+### MetricTimeWindow
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| metric_time_window_specific_value | MetricTimeWindowValue |  |  |
+
+### MetricTimeWindowValue
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED | 0 |  |
+| METRIC_TIME_WINDOW_VALUE_MINUTES_5 | 1 |  |
+| METRIC_TIME_WINDOW_VALUE_MINUTES_10 | 2 |  |
+| METRIC_TIME_WINDOW_VALUE_MINUTES_15 | 3 |  |
+| METRIC_TIME_WINDOW_VALUE_MINUTES_30 | 4 |  |
+| METRIC_TIME_WINDOW_VALUE_HOUR_1 | 5 |  |
+| METRIC_TIME_WINDOW_VALUE_HOURS_2 | 6 |  |
+| METRIC_TIME_WINDOW_VALUE_HOURS_4 | 7 |  |
+| METRIC_TIME_WINDOW_VALUE_HOURS_6 | 8 |  |
+| METRIC_TIME_WINDOW_VALUE_HOURS_12 | 9 |  |
+| METRIC_TIME_WINDOW_VALUE_HOURS_24 | 10 |  |
+
+### MetricFilter
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| promql | google.protobuf.StringValue |  |  |
+
+### MetricAnomalyCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| threshold | google.protobuf.DoubleValue |  |  |
+| for_over_pct | google.protobuf.UInt32Value |  |  |
+| of_the_last | MetricTimeWindow |  |  |
+| min_non_null_values_pct | google.protobuf.UInt32Value |  |  |
+| condition_type | MetricAnomalyConditionType |  |  |
+
+### MetricAnomalyRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | MetricAnomalyCondition |  |  |
+
+### MetricAnomalyType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| metric_filter | MetricFilter |  |  |
+| rules | MetricAnomalyRule | repeated |  |
+
+### MetricThresholdCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| threshold | google.protobuf.DoubleValue |  |  |
+| for_over_pct | google.protobuf.UInt32Value |  |  |
+| of_the_last | MetricTimeWindow |  |  |
+| condition_type | MetricThresholdConditionType |  |  |
+
+### MetricThresholdRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | MetricThresholdCondition |  |  |
+| override | AlertDefOverride |  |  |
+
+### MetricThresholdType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| metric_filter | MetricFilter |  |  |
+| rules | MetricThresholdRule | repeated |  |
+| missing_values | MetricMissingValues |  |  |
+| undetected_values_management | UndetectedValuesManagement |  |  |
+
+### MetricThresholdConditionType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
+| METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN | 1 |  |
+| METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS | 2 |  |
+| METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS | 3 |  |
+
+### MetricMissingValues
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| replace_with_zero | google.protobuf.BoolValue |  |  |
+| min_non_null_values_pct | google.protobuf.UInt32Value |  |  |
+
+### AlertDefOverride
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| priority | AlertDefPriority |  |  |
+
+### TracingFilter
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| simple_filter | TracingSimpleFilter |  |  |
+
+### TracingFilterType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| values | google.protobuf.StringValue | repeated |  |
+| operation | TracingFilterOperationType |  |  |
+
+### TracingLabelFilters
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| application_name | TracingFilterType | repeated |  |
+| subsystem_name | TracingFilterType | repeated |  |
+| service_name | TracingFilterType | repeated |  |
+| operation_name | TracingFilterType | repeated |  |
+| span_fields | TracingSpanFieldsFilterType | repeated |  |
+
+### TracingSimpleFilter
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tracing_label_filters | TracingLabelFilters |  |  |
+| latency_threshold_ms | google.protobuf.UInt32Value |  |  |
+
+### TracingSpanFieldsFilterType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | google.protobuf.StringValue |  |  |
+| filter_type | TracingFilterType |  |  |
+
+### TracingFilterOperationType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED | 0 |  |
+| TRACING_FILTER_OPERATION_TYPE_INCLUDES | 1 |  |
+| TRACING_FILTER_OPERATION_TYPE_ENDS_WITH | 2 |  |
+| TRACING_FILTER_OPERATION_TYPE_STARTS_WITH | 3 |  |
+| TRACING_FILTER_OPERATION_TYPE_IS_NOT | 4 |  |
+
+### TracingThresholdConditionType
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED | 0 |  |
+
+### TracingTimeWindow
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tracing_time_window_value | TracingTimeWindowValue |  |  |
+
+### TracingTimeWindowValue
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED | 0 |  |
+| TRACING_TIME_WINDOW_VALUE_MINUTES_10 | 1 |  |
+| TRACING_TIME_WINDOW_VALUE_MINUTES_15 | 2 |  |
+| TRACING_TIME_WINDOW_VALUE_MINUTES_30 | 3 |  |
+| TRACING_TIME_WINDOW_VALUE_HOUR_1 | 4 |  |
+| TRACING_TIME_WINDOW_VALUE_HOURS_2 | 5 |  |
+| TRACING_TIME_WINDOW_VALUE_HOURS_4 | 6 |  |
+| TRACING_TIME_WINDOW_VALUE_HOURS_6 | 7 |  |
+| TRACING_TIME_WINDOW_VALUE_HOURS_12 | 8 |  |
+| TRACING_TIME_WINDOW_VALUE_HOURS_24 | 9 |  |
+| TRACING_TIME_WINDOW_VALUE_HOURS_36 | 10 |  |
+
+### TracingImmediateType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tracing_filter | TracingFilter |  |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+
+### TracingThresholdCondition
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| span_amount | google.protobuf.DoubleValue |  |  |
+| time_window | TracingTimeWindow |  |  |
+| condition_type | TracingThresholdConditionType |  |  |
+
+### TracingThresholdRule
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| condition | TracingThresholdCondition |  |  |
+
+### TracingThresholdType
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tracing_filter | TracingFilter |  |  |
+| rules | TracingThresholdRule | repeated |  |
+| notification_payload_filter | google.protobuf.StringValue | repeated |  |
+
+### UndetectedValuesManagement
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| trigger_undetected_values | google.protobuf.BoolValue |  |  |
+| auto_retire_timeframe | AutoRetireTimeframe | optional |  |
+
+### AutoRetireTimeframe
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED | 0 |  |
+| AUTO_RETIRE_TIMEFRAME_MINUTES_5 | 1 |  |
+| AUTO_RETIRE_TIMEFRAME_MINUTES_10 | 2 |  |
+| AUTO_RETIRE_TIMEFRAME_HOUR_1 | 3 |  |
+| AUTO_RETIRE_TIMEFRAME_HOURS_2 | 4 |  |
+| AUTO_RETIRE_TIMEFRAME_HOURS_6 | 5 |  |
+| AUTO_RETIRE_TIMEFRAME_HOURS_12 | 6 |  |
+| AUTO_RETIRE_TIMEFRAME_HOURS_24 | 7 |  |
+
+### AuditLogDescription
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| description | string | optional |  |
+
+### BatchGetAlertDefRequest
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ids | google.protobuf.StringValue | repeated |  |
+
+### BatchGetAlertDefResponse
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_defs | BatchGetAlertDefResponse.AlertDefsEntry | repeated |  |
+| not_found_ids | google.protobuf.StringValue | repeated |  |
+
+### BatchGetAlertDefResponse.AlertDefsEntry
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | string |  |  |
+| value | AlertDef |  |  |
+
+### CreateAlertDefRequest
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_def_properties | AlertDefProperties |  |  |
+
+### CreateAlertDefResponse
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_def | AlertDef |  |  |
+
+### DeleteAlertDefRequest
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | google.protobuf.StringValue |  |  |
+
+### DeleteAlertDefResponse
+### DownloadAlertsRequest
+### DownloadAlertsResponse
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| content | bytes |  |  |
+
+### GetAlertDefRequest
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | google.protobuf.StringValue |  | The Alert's non changing ID |
+
+### GetAlertDefResponse
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_def | AlertDef |  |  |
+
+### ListAlertDefsRequest
+### ListAlertDefsResponse
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_defs | AlertDef | repeated |  |
+
+### OrderBy
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| field_name | OrderByFields |  |  |
+| direction | OrderByDirection |  |  |
+
+### ReplaceAlertDefRequest
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_def_properties | AlertDefProperties |  |  |
+| id | google.protobuf.StringValue |  | The AlertDef's ID to be replaced |
+
+### ReplaceAlertDefResponse
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alert_def | AlertDef |  |  |
+
+### SetActiveRequest
+```
+message AlertExecutionRequest {
+  oneof request {
+    CreateAlertDefRequest create = 1;
+    ReplaceAlertDefRequest replace = 2;
+    DeleteAlertDefRequest delete = 3;
+  }
+}
+
+message AlertExecutionResponse {
+  oneof response {
+    CreateAlertDefResponse create = 1;
+    ReplaceAlertDefResponse replace = 2;
+    DeleteAlertDefResponse delete = 3;
+  }
+}
+
+message GetLimitsRequest {}
+
+message GetLimitsResponse {
+  google.protobuf.StringValue company_id = 1;
+  google.protobuf.Int32Value limit = 2;
+  google.protobuf.Int32Value used = 3;
+}
+
+message ValidateAlertRequest {
+  Alert alert = 1;
+}
+
+message ValidateAlertResponse {
+  google.protobuf.BoolValue valid = 1;
+}
+```
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | google.protobuf.StringValue |  |  |
+| active | google.protobuf.BoolValue |  |  |
+
+### SetActiveResponse
+
+### OrderByDirection
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED | 0 |  |
+| ORDER_BY_DIRECTION_DESC | 1 |  |
+
+### OrderByFields
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `ORDER_BY_FIELDS_UNSPECIFIED`    | `0`    |  |
+| `ORDER_BY_FIELDS_NAME`           | `1`    |  |
+| `ORDER_BY_FIELDS_ID`             | `2`    |  |
+| `ORDER_BY_FIELDS_SEVERITY`       | `3`    |  |
+| `ORDER_BY_FIELDS_CREATED_TIME`   | `4`    |  |
+| `ORDER_BY_FIELDS_UPDATED_TIME`   | `5`    |  |
+| `ORDER_BY_FIELDS_LAST_TRIGGERED` | `6`    |  |
+
+### File-level Extensions
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+| audit_log_description | AuditLogDescription | .google.protobuf.MethodOptions | 5000 |  |

@@ -26,8 +26,8 @@ for file in service-overviews-latest/*-overview.mdx; do
     
     target_dir="api-reference/latest/$service_name"
     if [ ! -d "$target_dir" ]; then
-        echo "$target_dir does not exist, exiting"
-        exit 1
+        echo "$target_dir does not exist, skipping"
+        continue
     fi
     
     # Define the target file path
@@ -69,8 +69,8 @@ for file in service-overviews-lts/*-overview.mdx; do
     
     target_dir="api-reference/lts/$service_name"
     if [ ! -d "$target_dir" ]; then
-        echo "$target_dir does not exist, exiting"
-        exit 1
+        echo "$target_dir does not exist, skipping"
+        continue
     fi
     
     # Define the target file path
