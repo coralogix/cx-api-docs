@@ -250,6 +250,15 @@
             ]
           },
           {
+            "group": "IP Access Service",
+            "pages": [
+              "api-reference/latest/ip-access-service/create-company-ip-access-settings",
+              "api-reference/latest/ip-access-service/delete-company-ip-access-settings",
+              "api-reference/latest/ip-access-service/get-company-ip-access-settings",
+              "api-reference/latest/ip-access-service/replace-company-ip-access-settings"
+            ]
+          },
+          {
             "group": "Outgoing Webhooks Service",
             "pages": [
               "api-reference/latest/outgoing-webhooks-service/overview",

@@ -58,7 +58,8 @@ def get_group_name(service_dir: str) -> str:
         'views-service': 'Views',
         'outgoing-webhooks-service': 'Outgoing Webhooks Service',
         'recording-rules-service': 'Recording Rules Service',
-        'contextual-data-integration-service': 'Contextual Data Integration Service'
+        'contextual-data-integration-service': 'Contextual Data Integration Service',
+        'ip-access-service': 'IP Access Service'
     }
     
     return service_names.get(service_dir)
