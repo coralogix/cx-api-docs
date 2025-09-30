@@ -144,6 +144,17 @@
             ]
           },
           {
+            "group": "Events Service",
+            "pages": [
+              "api-reference/latest/events-service/overview",
+              "api-reference/latest/events-service/batch-get-event",
+              "api-reference/latest/events-service/get-event",
+              "api-reference/latest/events-service/get-events-statistics",
+              "api-reference/latest/events-service/list-events",
+              "api-reference/latest/events-service/list-events-count"
+            ]
+          },
+          {
             "group": "Events2Metrics Service",
             "pages": [
               "api-reference/latest/events2metrics-service/overview",
@@ -199,12 +210,14 @@
             "group": "Incidents Service",
             "pages": [
               "api-reference/latest/incidents-service/overview",
+              "api-reference/latest/incidents-service/acknowledge-incident-by-event-id",
               "api-reference/latest/incidents-service/acknowledge-incidents",
               "api-reference/latest/incidents-service/assign-incidents-to-a-user",
               "api-reference/latest/incidents-service/close-incidents",
               "api-reference/latest/incidents-service/get-available-filter-values",
               "api-reference/latest/incidents-service/get-available-incident-event-filter-values",
               "api-reference/latest/incidents-service/get-incident-aggregations",
+              "api-reference/latest/incidents-service/get-incident-by-event-id",
               "api-reference/latest/incidents-service/get-incident-by-id",
               "api-reference/latest/incidents-service/get-incident-events",
               "api-reference/latest/incidents-service/get-multiple-incidents-by-ids",
@@ -212,6 +225,7 @@
               "api-reference/latest/incidents-service/list-incident-events-with-filters",
               "api-reference/latest/incidents-service/list-incidents-with-filters",
               "api-reference/latest/incidents-service/remove-incident-user-assignments",
+              "api-reference/latest/incidents-service/resolve-incident-by-event-id",
               "api-reference/latest/incidents-service/resolve-incidents"
             ]
           },
