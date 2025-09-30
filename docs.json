@@ -258,7 +258,6 @@
               "api-reference/latest/outgoing-webhooks-service/get-outgoing-webhook-type-details",
               "api-reference/latest/outgoing-webhooks-service/get-outgoing-webhook-types",
               "api-reference/latest/outgoing-webhooks-service/list-all-outgoing-webhooks",
-              "api-reference/latest/outgoing-webhooks-service/list-ibm-event-notification-instances",
               "api-reference/latest/outgoing-webhooks-service/list-outbound-webhooks-summary",
               "api-reference/latest/outgoing-webhooks-service/list-outgoing-webhooks",
               "api-reference/latest/outgoing-webhooks-service/test-an-existing-outgoing-webhook",
