@@ -35,6 +35,7 @@
             "group": "Alert Definitions Service",
             "pages": [
               "api-reference/latest/alert-definitions-service/overview",
+              "api-reference/latest/alert-definitions-service/bulk-replace-alert-definitions",
               "api-reference/latest/alert-definitions-service/create-an-alert",
               "api-reference/latest/alert-definitions-service/deletealertdef",
               "api-reference/latest/alert-definitions-service/disable-or-enable-an-alert",
@@ -316,8 +317,7 @@
             "pages": [
               "api-reference/latest/target-service/overview",
               "api-reference/latest/target-service/get-target",
-              "api-reference/latest/target-service/set-target",
-              "api-reference/latest/target-service/validate-target"
+              "api-reference/latest/target-service/set-target"
             ]
           },
           {
