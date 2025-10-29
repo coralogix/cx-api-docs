@@ -252,6 +252,7 @@
           {
             "group": "IP Access Service",
             "pages": [
+              "api-reference/latest/ip-access-service/overview",
               "api-reference/latest/ip-access-service/create-company-ip-access-settings",
               "api-reference/latest/ip-access-service/delete-company-ip-access-settings",
               "api-reference/latest/ip-access-service/get-company-ip-access-settings",
