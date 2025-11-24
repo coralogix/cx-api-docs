@@ -1,0 +1,69 @@
+name: Sync Openapi Spec
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-protofetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Get the current timestamp and set it as an output
+      - name: Get current timestamp
+        id: timestamp
+        run: echo "timestamp=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT # The format will be YYYYMMDDHHMMSS
+
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Set up nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Install mintlify scrape
+        run: |
+          npm install @mintlify/scraping@latest -g
+
+      - name: Get OpenAPI Spec from staging
+        run: |
+          wget https://api.staging.coralogix.net/mgmt/openapi/latest/openapi.yaml
+          mv openapi.yaml openapi_latest.yaml
+
+      - name: Rebuild docs
+        run: |
+          make clean
+          make build
+
+      - name: Commit changes to new branch
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "github-actions[bot]"
+          author_email: "github-actions[bot]@users.noreply.github.com"
+          message: "chore: sync from staging"
+          add: |
+            openapi_latest.yaml
+            api-reference
+            docs.json
+          new_branch: "openapi_sync_${{ steps.timestamp.outputs.timestamp }}"
+
+      - name: Open Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: "openapi_sync_${{ steps.timestamp.outputs.timestamp }}"
+          base: main
+          title: "chore: Sync OpenAPI Spec with staging"
+          body: |
+            This PR updates:
+            - OpenAPI spec
+            - Gnerated go files
+          labels: sync
+          delete_branch: true
