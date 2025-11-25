@@ -277,6 +277,36 @@
             ]
           },
           {
+            "group": "Policies Service",
+            "pages": [
+              "api-reference/latest/policies-service/overview",
+              "api-reference/latest/policies-service/atomic-batch-create-policy",
+              "api-reference/latest/policies-service/atomic-overwrite-log-policies",
+              "api-reference/latest/policies-service/atomic-overwrite-span-policies",
+              "api-reference/latest/policies-service/bulk-test-log-policies",
+              "api-reference/latest/policies-service/create-policy",
+              "api-reference/latest/policies-service/delete-policy",
+              "api-reference/latest/policies-service/get-company-policies",
+              "api-reference/latest/policies-service/get-policy-by-id",
+              "api-reference/latest/policies-service/get-policy-priority-settings",
+              "api-reference/latest/policies-service/reorder-policies",
+              "api-reference/latest/policies-service/replace-policy-settings",
+              "api-reference/latest/policies-service/toggle-policies",
+              "api-reference/latest/policies-service/update-policy"
+            ]
+          },
+          {
+            "group": "Recording Rules Service",
+            "pages": [
+              "api-reference/latest/recording-rules-service/overview",
+              "api-reference/latest/recording-rules-service/create-recording-rules",
+              "api-reference/latest/recording-rules-service/delete-recording-rules",
+              "api-reference/latest/recording-rules-service/get-recording-rules",
+              "api-reference/latest/recording-rules-service/list-recording-rules",
+              "api-reference/latest/recording-rules-service/update-recording-rules"
+            ]
+          },
+          {
             "group": "Retentions Service",
             "pages": [
               "api-reference/latest/retentions-service/overview",
@@ -284,6 +314,20 @@
               "api-reference/latest/retentions-service/get-retentions",
               "api-reference/latest/retentions-service/get-retentions-enabled",
               "api-reference/latest/retentions-service/update-retentions"
+            ]
+          },
+          {
+            "group": "Rule Groups Service",
+            "pages": [
+              "api-reference/latest/rule-groups-service/overview",
+              "api-reference/latest/rule-groups-service/bulk-delete-rule-group",
+              "api-reference/latest/rule-groups-service/create-rule-group",
+              "api-reference/latest/rule-groups-service/delete-rule-group",
+              "api-reference/latest/rule-groups-service/get-company-usage-limits",
+              "api-reference/latest/rule-groups-service/get-rule-group",
+              "api-reference/latest/rule-groups-service/get-rule-group-model-mapping",
+              "api-reference/latest/rule-groups-service/list-rule-groups",
+              "api-reference/latest/rule-groups-service/update-rule-group"
             ]
           },
           {
