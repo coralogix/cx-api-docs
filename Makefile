@@ -1,3 +1,5 @@
+clean:
+	rm -r api-reference
 build:
 	mintlify-scrape openapi-file openapi_latest.yaml ../../openapi_latest.yaml -o api-reference/latest \
 	&& mintlify-scrape openapi-file openapi_lts.yaml ../../openapi_lts.yaml -o api-reference/lts \
