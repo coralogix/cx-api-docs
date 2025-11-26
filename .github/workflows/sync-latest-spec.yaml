@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-protofetch:
+  recompile-docs:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,47 +19,53 @@ jobs:
       - name: Checkout docs repo
         uses: actions/checkout@v4
 
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.MINTLIFY_SCRAPER_DEPLOY_KEY }}
+
       - name: Set up nodejs
         uses: actions/setup-node@v4
         with:
           node-version: 24
+
+      - name: Clone mintlify-scraper repository
+        run: |
+          git clone git@github.com:coralogix/mintlify-scraper.git
+
+      - name: Install mintlify-scraper
+        run: |
+          cd mintlify-scraper
+          npm install
+          npm install -g .
+          cd ../
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
 
-      - name: Install mintlify scrape
-        run: |
-          npm install @mintlify/scraping@latest -g
-
       - name: Get OpenAPI Spec from staging
         run: |
           wget https://api.staging.coralogix.net/mgmt/openapi/latest/openapi.yaml
           mv openapi.yaml openapi_latest.yaml
 
-      - name: Rebuild docs
+      - name: Rebuild docs and commit everything to a new branch
         run: |
           make clean
           make build
-
-      - name: Commit changes to new branch
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: "github-actions[bot]"
-          author_email: "github-actions[bot]@users.noreply.github.com"
-          message: "chore: sync from staging"
-          add: |
-            openapi_latest.yaml
-            api-reference
-            docs.json
-          new_branch: "openapi_sync_${{ steps.timestamp.outputs.timestamp }}"
+          rm -r mintlify-scraper
+          git config --global user.email "github@coralogix.com"
+          git config --global user.name "Github Actions"
+          git add .
+          git commit -m "chore: Sync from staging"
 
       - name: Open Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           branch: "openapi_sync_${{ steps.timestamp.outputs.timestamp }}"
           base: main
+          token: ${{ secrets.GH_TOKEN }}
           title: "chore: Sync OpenAPI Spec with staging"
           body: |
             This PR updates:
