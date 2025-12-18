@@ -26,6 +26,7 @@ def get_group_name(service_dir: str) -> str:
         'api-keys-service': 'API Keys Service',
         'events-service': 'Events Service',
         'actions-service': 'Actions Service',
+        'cases-service': 'Cases Service',
         'data-usage-service': 'Data Usage Service',
         'target-service': 'Target Service',
         'team-permissions-management-service': 'Team Permissions Management Service',

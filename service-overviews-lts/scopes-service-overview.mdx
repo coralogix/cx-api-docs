@@ -1,4 +1,16 @@
-# Cases service overview
+# Scopes service overview
 
-The Cases service manages case entities in Coralogix, which track and correlate events across the system and, like alerts, can generate notifications through the Notification Center. The service supports the full case lifecycle, including retrieving and listing cases with filters and pagination, updating case fields, assigning and unassigning owners, acknowledging cases, resolving and closing cases, and overriding computed priority values. It also provides bulk operations for all major actions and exposes aggregation, filter, and grouping metadata to support UI workflows and case organization. Case entities progress through defined states—from created and active, to acknowledged, resolved, and closed—enabling structured investigation, ownership, and follow-up.
-Learn more in our [documentation](https://coralogix.com/docs/user-guides/notification-center/entity-types/introduction/#work-with-case-entities).
+The Scopes Service provides API capabilities to manage data scopes within Coralogix, enabling fine-grained segmentation of logs and metrics for specific teams, applications, or services. A scope defines a logical boundary using entity filters and expressions, allowing for controlled visibility, permissions, and team-specific access. This service allows users to create, retrieve (individually or in bulk), update, and delete scopes tied to a team. Each scope includes metadata such as a display name, description, team ID, and customizable filters targeting specific entity types. 
+
+
+## Constants
+
+<details>
+  <summary>EntityType</summary>
+
+  | Value |
+|-------|
+| `ENTITY_TYPE_UNSPECIFIED` |
+| `ENTITY_TYPE_LOGS` |
+| `ENTITY_TYPE_SPANS` |
+</details>

@@ -67,6 +67,23 @@
             ]
           },
           {
+            "group": "Cases Service",
+            "pages": [
+              "api-reference/latest/cases-service/overview",
+              "api-reference/latest/cases-service/acknowledge-a-case",
+              "api-reference/latest/cases-service/assign-a-case-to-a-user",
+              "api-reference/latest/cases-service/close-a-case",
+              "api-reference/latest/cases-service/get-available-filter-values",
+              "api-reference/latest/cases-service/get-case-by-id",
+              "api-reference/latest/cases-service/list-cases-with-filters",
+              "api-reference/latest/cases-service/remove-case-assignment",
+              "api-reference/latest/cases-service/remove-priority-override",
+              "api-reference/latest/cases-service/resolve-a-case",
+              "api-reference/latest/cases-service/set-priority-override",
+              "api-reference/latest/cases-service/update-case-fields"
+            ]
+          },
+          {
             "group": "Contextual Data Integration Service",
             "pages": [
               "api-reference/latest/contextual-data-integration-service/overview",
