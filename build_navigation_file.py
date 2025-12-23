@@ -26,6 +26,7 @@ def get_group_name(service_dir: str) -> str:
         'api-keys-service': 'API Keys Service',
         'events-service': 'Events Service',
         'actions-service': 'Actions Service',
+        'cases-service': 'Cases Service',
         'data-usage-service': 'Data Usage Service',
         'target-service': 'Target Service',
         'team-permissions-management-service': 'Team Permissions Management Service',
@@ -98,7 +99,7 @@ def get_mdx_files(service_path: Path) -> List[str]:
     return mdx_files
 
 
-def build_navigation_structure(api_reference_path_latest: Path, api_reference_path_lts: Path) -> Dict[str, Any]:
+def build_navigation_structure(api_reference_path: Path) -> Dict[str, Any]:
     """
     Build the complete navigation structure for docs.json.
     
@@ -111,12 +112,11 @@ def build_navigation_structure(api_reference_path_latest: Path, api_reference_pa
     # Base structure
     docs_structure = json.load(open("docs.json"))
     # Get all directories in api-reference
-    add_groups_to_navigation_structure(api_reference_path_latest, docs_structure, False)
-    add_groups_to_navigation_structure(api_reference_path_lts, docs_structure, True)
+    add_groups_to_navigation_structure(api_reference_path, docs_structure)
     
     return docs_structure
 
-def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lts):
+def add_groups_to_navigation_structure(api_reference_path, docs_structure):
     service_dirs = []
     for item in api_reference_path.iterdir():
         if item.is_dir() and not item.name.startswith('.'):
@@ -137,7 +137,7 @@ def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lt
                 continue
             
             # Create page paths
-            subfolder = "lts" if is_lts else "latest"
+            subfolder = "latest"
             pages = [f"api-reference/{subfolder}/{service_name}/{file_name}" for file_name in mdx_files]
 
             
@@ -146,7 +146,7 @@ def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lt
                 "pages": pages
             }
             groups.append(group)
-    introduction_page = f"introduction-{'lts' if is_lts else 'latest'}"
+    introduction_page = "introduction-latest"
 
     introduction_and_use_cases_groups = [
         {
@@ -158,7 +158,7 @@ def add_groups_to_navigation_structure(api_reference_path, docs_structure, is_lt
             "pages": [f"copy_a_dashboard", "create_an_alert_with_an_outgoing_webhook", "setup_kubernetes_complete_observability_integration"]
         }
     ]
-    docs_structure["navigation"]["versions"][is_lts]["groups"] = introduction_and_use_cases_groups + groups
+    docs_structure["navigation"]["versions"][0]["groups"] = introduction_and_use_cases_groups + groups
 
 
 
@@ -169,14 +169,13 @@ def main():
     """
     # Get the current working directory
     current_dir = Path.cwd()
-    api_reference_path_latest = current_dir / "api-reference" / "latest"
-    api_reference_path_lts = current_dir / "api-reference" / "lts"
+    api_reference_path = current_dir / "api-reference" / "latest"
     
     
-    print(f"Scanning {api_reference_path_latest} for service directories...")
+    print(f"Scanning {api_reference_path} for service directories...")
     
     # Build the navigation structure
-    docs_structure = build_navigation_structure(api_reference_path_latest, api_reference_path_lts)
+    docs_structure = build_navigation_structure(api_reference_path)
     
     # Write to docs.json
     output_file = current_dir / "docs.json"
