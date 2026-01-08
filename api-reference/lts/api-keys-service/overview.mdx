@@ -1,101 +1,80 @@
 # API Keys service overview
 
-Coralogix API Keys provide secure, fine-grained access control for all platform APIs, enabling safe and auditable integrations with third-party systems, CI/CD pipelines, and automation scripts. The API Keys API allows users to programmatically create, retrieve, update, and delete API keys, each scoped with specific permissions or permission presets. Keys can be assigned to users, teams, or organizations, and tailored with granular read/write permissions across various services.
+Coralogix API Keys provide secure, fine-grained access control for all platform APIs, enabling safe and auditable integrations with third-party systems, CI/CD pipelines, and automation scripts. The API Keys API allows users to programmatically create, retrieve, update, and delete API keys, each scoped with specific permissions or permission presets. In addition, API keys support policy-based access control (PBAC), letting you control which users and groups can view or manage each key through configurable access policies. Keys can be assigned to users, teams, or organizations, and tailored with granular read/write permissions across Coralogix services. 
+Learn more in our [API Keys](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/) documentation.
 
+## Examples
 
-## Constants
+### Send-Your-Data API key Access Policy
 
-<details>
-  <summary>AssignableTo</summary>
+```
+{
+  "version": "v2025-01-01",
+  "rules": [],
+  "default": {
+    "permissions": {
+      "data-ingest-api-keys:ReadConfig": "grant",
+      "data-ingest-api-keys:Manage": "grant",
+      "data-ingest-api-keys:ReadAccessPolicy": "grant",
+      "data-ingest-api-keys:UpdateAccessPolicy": "grant"
+    },
+  }
+}
+```
 
-  | Value |
-|-------|
-| `ASSIGNABLE_TO_UNSPECIFIED` |
-| `ASSIGNABLE_TO_USER_GROUP` |
-| `ASSIGNABLE_TO_API_KEY` |
-</details>
-<details>
-  <summary>FilterType</summary>
+### Send-Your-Data API key Access Policy with rules
 
-  | Value |
-|-------|
-| `FILTER_TYPE_UNSPECIFIED` |
-| `FILTER_TYPE_STARTS_WITH` |
-| `FILTER_TYPE_ENDS_WITH` |
-| `FILTER_TYPE_CONTAINS` |
-| `FILTER_TYPE_EXACT` |
-</details>
-<details>
-  <summary>UserStatus</summary>
+!!! note
+  Rule amount is unlimited. 
 
-  | Value |
-|-------|
-| `USER_STATUS_UNSPECIFIED` |
-| `USER_STATUS_ACTIVE` |
-| `USER_STATUS_INACTIVE` |
-</details>
-<details>
-  <summary>GroupOrigin</summary>
+```
+{
+  "version": "v2025-01-01",
+  "rules": [
+    {
+      "targets": [
+        {
+          "group": "120173"
+        },
+        {
+          "group": "87434"
+        }
+      ],
+      "permissions": {
+        "data-ingest-api-keys:ReadConfig": "grant",
+        "data-ingest-api-keys:Manage": "grant"
+      },
+      "additionalInfo": null
+    }
+  ],
+  "default": {
+    "permissions": {
+      "data-ingest-api-keys:ReadConfig": "grant",
+      "data-ingest-api-keys:Manage": "grant",
+      "data-ingest-api-keys:ReadAccessPolicy": "grant",
+      "data-ingest-api-keys:UpdateAccessPolicy": "grant"
+    },
+    "additionalInfo": null
+  }
+}
+```
 
-  | Value |
-|-------|
-| `GROUP_ORIGIN_UNSPECIFIED` |
-| `GROUP_ORIGIN_BUILT_IN` |
-| `GROUP_ORIGIN_USER_DEFINED` |
-</details>
-<details>
-  <summary>Resource</summary>
+### Permissions
 
-  | Value |
-|-------|
-| `RESOURCE_UNSPECIFIED` |
-</details>
-<details>
-  <summary>Action</summary>
+#### Send-Your-Data API key
 
-  | Value |
-|-------|
-| `ACTION_UNSPECIFIED` |
-</details>
-<details>
-  <summary>PermissionGroup</summary>
+```
+"data-ingest-api-keys:ReadConfig": "Read Send-Your-Data-Key",
+"data-ingest-api-keys:Manage": "Update Send-Your-Data-Key",
+"data-ingest-api-keys:ReadAccessPolicy": "Read Access Policy",
+"data-ingest-api-keys:UpdateAccessPolicy": "Manage Access Policy"
+```
 
-  | Value |
-|-------|
-| `PERMISSION_GROUP_UNSPECIFIED` |
-</details>
-<details>
-  <summary>Permission</summary>
+#### Team key
 
-  | Value |
-|-------|
-| `PERMISSION_UNSPECIFIED` |
-</details>
-<details>
-  <summary>PredefinedLandingPage</summary>
-
-  | Value |
-|-------|
-| `PREDEFINED_LANDING_PAGE_UNSPECIFIED` |
-| `PREDEFINED_LANDING_PAGE_HOME_DASHBOARD` |
-| `PREDEFINED_LANDING_PAGE_CUSTOM_DASHBOARD` |
-| `PREDEFINED_LANDING_PAGE_EXPLORE_LOGS` |
-| `PREDEFINED_LANDING_PAGE_EXPLORE_TRACING` |
-| `PREDEFINED_LANDING_PAGE_INCIDENTS` |
-| `PREDEFINED_LANDING_PAGE_LIVETAIL` |
-| `PREDEFINED_LANDING_PAGE_RUM_ERROR_TRACKING` |
-| `PREDEFINED_LANDING_PAGE_RUM_USER_SESSIONS` |
-| `PREDEFINED_LANDING_PAGE_RUM_WEB_VITALS` |
-| `PREDEFINED_LANDING_PAGE_APM_SERVICE_CATALOG` |
-| `PREDEFINED_LANDING_PAGE_CSPM_OVERVIEW` |
-</details>
-<details>
-  <summary>AssertionError</summary>
-
-  | Value |
-|-------|
-| `ASSERTION_ERROR_UNSPECIFIED` |
-| `ASSERTION_ERROR_SIGNATURE` |
-| `ASSERTION_ERROR_AUDIENCE` |
-| `ASSERTION_ERROR_UNRESOLVED_SAML_CONFIG` |
-</details>
+```
+"team-custom-api-keys:ReadConfig": "Read Team API key",
+"team-custom-api-keys:Manage": "Update Team API Key",
+"team-custom-api-keys:ReadAccessPolicy": "Read Access Policy",
+"team-custom-api-keys:UpdateAccessPolicy": "Update Access Policy"
+```
