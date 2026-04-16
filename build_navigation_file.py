@@ -5,6 +5,7 @@ of the api-reference directory for multiple API versions.
 """
 
 import json
+import shutil
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
@@ -167,11 +168,36 @@ def build_navigation_structure(api_ref_path: Path) -> Dict[str, Any]:
     return docs_structure
 
 
+def copy_overviews(current_dir: Path, api_ref_path: Path):
+    """Copy service overview files to each version's service directories."""
+    overviews_dir = current_dir / "service-overviews"
+    if not overviews_dir.exists():
+        print(f"Warning: {overviews_dir} does not exist, skipping overview copy")
+        return
+    
+    for version in VERSION_CONFIG.keys():
+        version_path = api_ref_path / version
+        if not version_path.exists():
+            continue
+        
+        for overview_file in overviews_dir.glob("*-overview.mdx"):
+            service_name = overview_file.stem.replace("-overview", "")
+            service_dir = version_path / service_name
+            
+            if service_dir.exists():
+                dest = service_dir / "overview.mdx"
+                shutil.copy(overview_file, dest)
+                print(f"  Copied {overview_file.name} -> {version}/{service_name}/overview.mdx")
+
+
 def main():
     current_dir = Path.cwd()
     api_ref_path = current_dir / "api-reference"
     
     print(f"Scanning {api_ref_path} for API versions...")
+    
+    print("Copying service overviews...")
+    copy_overviews(current_dir, api_ref_path)
     
     docs_structure = build_navigation_structure(api_ref_path)
     

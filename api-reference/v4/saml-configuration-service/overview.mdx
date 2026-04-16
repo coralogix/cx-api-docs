@@ -1,0 +1,101 @@
+# SAML Configuration service overview
+
+The Coralogix SAML Configuration API enables secure setup and management of SAML-based Single Sign-On (SSO) for team authentication. This API allows you to programmatically retrieve and configure both service provider (SP) and identity provider (IDP) parameters, activate or deactivate SSO, and view current authentication settings. It supports secure, team-scoped operations for full lifecycle control of your SAML integration.
+
+
+## Constants
+
+<details>
+  <summary>AssignableTo</summary>
+
+  | Value |
+|-------|
+| `ASSIGNABLE_TO_UNSPECIFIED` |
+| `ASSIGNABLE_TO_USER_GROUP` |
+| `ASSIGNABLE_TO_API_KEY` |
+</details>
+<details>
+  <summary>FilterType</summary>
+
+  | Value |
+|-------|
+| `FILTER_TYPE_UNSPECIFIED` |
+| `FILTER_TYPE_STARTS_WITH` |
+| `FILTER_TYPE_ENDS_WITH` |
+| `FILTER_TYPE_CONTAINS` |
+| `FILTER_TYPE_EXACT` |
+</details>
+<details>
+  <summary>UserStatus</summary>
+
+  | Value |
+|-------|
+| `USER_STATUS_UNSPECIFIED` |
+| `USER_STATUS_ACTIVE` |
+| `USER_STATUS_INACTIVE` |
+</details>
+<details>
+  <summary>GroupOrigin</summary>
+
+  | Value |
+|-------|
+| `GROUP_ORIGIN_UNSPECIFIED` |
+| `GROUP_ORIGIN_BUILT_IN` |
+| `GROUP_ORIGIN_USER_DEFINED` |
+</details>
+<details>
+  <summary>Resource</summary>
+
+  | Value |
+|-------|
+| `RESOURCE_UNSPECIFIED` |
+</details>
+<details>
+  <summary>Action</summary>
+
+  | Value |
+|-------|
+| `ACTION_UNSPECIFIED` |
+</details>
+<details>
+  <summary>PermissionGroup</summary>
+
+  | Value |
+|-------|
+| `PERMISSION_GROUP_UNSPECIFIED` |
+</details>
+<details>
+  <summary>Permission</summary>
+
+  | Value |
+|-------|
+| `PERMISSION_UNSPECIFIED` |
+</details>
+<details>
+  <summary>PredefinedLandingPage</summary>
+
+  | Value |
+|-------|
+| `PREDEFINED_LANDING_PAGE_UNSPECIFIED` |
+| `PREDEFINED_LANDING_PAGE_HOME_DASHBOARD` |
+| `PREDEFINED_LANDING_PAGE_CUSTOM_DASHBOARD` |
+| `PREDEFINED_LANDING_PAGE_EXPLORE_LOGS` |
+| `PREDEFINED_LANDING_PAGE_EXPLORE_TRACING` |
+| `PREDEFINED_LANDING_PAGE_INCIDENTS` |
+| `PREDEFINED_LANDING_PAGE_LIVETAIL` |
+| `PREDEFINED_LANDING_PAGE_RUM_ERROR_TRACKING` |
+| `PREDEFINED_LANDING_PAGE_RUM_USER_SESSIONS` |
+| `PREDEFINED_LANDING_PAGE_RUM_WEB_VITALS` |
+| `PREDEFINED_LANDING_PAGE_APM_SERVICE_CATALOG` |
+| `PREDEFINED_LANDING_PAGE_CSPM_OVERVIEW` |
+</details>
+<details>
+  <summary>AssertionError</summary>
+
+  | Value |
+|-------|
+| `ASSERTION_ERROR_UNSPECIFIED` |
+| `ASSERTION_ERROR_SIGNATURE` |
+| `ASSERTION_ERROR_AUDIENCE` |
+| `ASSERTION_ERROR_UNRESOLVED_SAML_CONFIG` |
+</details>
