@@ -2,7 +2,7 @@
   "navigation": {
     "versions": [
       {
-        "version": "v1.9.0",
+        "version": "v5.0.0",
         "groups": [
           {
             "group": "Introduction",
@@ -35,10 +35,10 @@
             "group": "Alert Definitions Service",
             "pages": [
               "api-reference/latest/alert-definitions-service/overview",
+              "api-reference/latest/alert-definitions-service/bulk-delete-alert-definitions",
               "api-reference/latest/alert-definitions-service/bulk-replace-alert-definitions",
               "api-reference/latest/alert-definitions-service/create-an-alert",
               "api-reference/latest/alert-definitions-service/deletealertdef",
-              "api-reference/latest/alert-definitions-service/disable-or-enable-an-alert",
               "api-reference/latest/alert-definitions-service/download-alerts",
               "api-reference/latest/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions",
               "api-reference/latest/alert-definitions-service/get-alert-definition-by-alert-version-id",
@@ -56,6 +56,18 @@
             ]
           },
           {
+            "group": "Alert Scheduler Rule Service",
+            "pages": [
+              "api-reference/latest/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
+              "api-reference/latest/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
+              "api-reference/latest/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
+              "api-reference/latest/alert-scheduler-rule-service/get-an-alert-scheduler-rule",
+              "api-reference/latest/alert-scheduler-rule-service/get-multiple-alert-scheduler-rules",
+              "api-reference/latest/alert-scheduler-rule-service/update-an-alert-scheduler-rule",
+              "api-reference/latest/alert-scheduler-rule-service/update-multiple-alert-scheduler-rules"
+            ]
+          },
+          {
             "group": "API Keys Service",
             "pages": [
               "api-reference/latest/api-keys-service/overview",
@@ -67,20 +79,17 @@
             ]
           },
           {
-            "group": "Cases Service",
+            "group": "Connectors Service",
             "pages": [
-              "api-reference/latest/cases-service/overview",
-              "api-reference/latest/cases-service/acknowledge-a-case",
-              "api-reference/latest/cases-service/assign-a-case-to-a-user",
-              "api-reference/latest/cases-service/close-a-case",
-              "api-reference/latest/cases-service/get-available-filter-values",
-              "api-reference/latest/cases-service/get-case-by-id",
-              "api-reference/latest/cases-service/list-cases-with-filters",
-              "api-reference/latest/cases-service/remove-case-assignment",
-              "api-reference/latest/cases-service/remove-priority-override",
-              "api-reference/latest/cases-service/resolve-a-case",
-              "api-reference/latest/cases-service/set-priority-override",
-              "api-reference/latest/cases-service/update-case-fields"
+              "api-reference/latest/connectors-service/batch-get-connectors",
+              "api-reference/latest/connectors-service/batch-get-connectors-summaries",
+              "api-reference/latest/connectors-service/create-a-connector",
+              "api-reference/latest/connectors-service/delete-a-connector",
+              "api-reference/latest/connectors-service/get-a-connector",
+              "api-reference/latest/connectors-service/get-connector-type-summaries",
+              "api-reference/latest/connectors-service/list-connector-summaries",
+              "api-reference/latest/connectors-service/list-connectors",
+              "api-reference/latest/connectors-service/replace-a-connector"
             ]
           },
           {
@@ -154,11 +163,19 @@
             "pages": [
               "api-reference/latest/enrichments-service/overview",
               "api-reference/latest/enrichments-service/add-enrichments",
-              "api-reference/latest/enrichments-service/atomic-overwrite-enrichments",
+              "api-reference/latest/enrichments-service/atomic-overwrite-for-all-types-of-enrichments-the-request-is-the-desired-state-which-will-override-all-enrichments-warning:-this-operation-will-delete-all-existing-enrichments-and-replace-them-with-the-provided-ones",
+              "api-reference/latest/enrichments-service/atomic-overwrite-for-customenrichments-only",
               "api-reference/latest/enrichments-service/delete-enrichments",
               "api-reference/latest/enrichments-service/get-company-enrichment-settings",
               "api-reference/latest/enrichments-service/get-enrichment-limit",
               "api-reference/latest/enrichments-service/get-enrichments"
+            ]
+          },
+          {
+            "group": "Entities Service",
+            "pages": [
+              "api-reference/latest/entities-service/list-entity-subtypes",
+              "api-reference/latest/entities-service/list-entity-types"
             ]
           },
           {
@@ -215,7 +232,7 @@
             ]
           },
           {
-            "group": "Folders for Views",
+            "group": "Folders for Views Service",
             "pages": [
               "api-reference/latest/folders-for-views-service/overview",
               "api-reference/latest/folders-for-views-service/create-view-folder-service",
@@ -223,6 +240,17 @@
               "api-reference/latest/folders-for-views-service/get-view-folder-service",
               "api-reference/latest/folders-for-views-service/list-view-folders-service",
               "api-reference/latest/folders-for-views-service/replace-view-folder-service"
+            ]
+          },
+          {
+            "group": "Global Routers Service",
+            "pages": [
+              "api-reference/latest/global-routers-service/batch-get-global-routers",
+              "api-reference/latest/global-routers-service/create-global-router",
+              "api-reference/latest/global-routers-service/delete-global-router",
+              "api-reference/latest/global-routers-service/get-global-router",
+              "api-reference/latest/global-routers-service/list-global-routers",
+              "api-reference/latest/global-routers-service/replace-global-router"
             ]
           },
           {
@@ -278,6 +306,17 @@
             ]
           },
           {
+            "group": "Metrics Data Archive Service",
+            "pages": [
+              "api-reference/latest/metrics-data-archive-service/configuretenant",
+              "api-reference/latest/metrics-data-archive-service/disablearchive",
+              "api-reference/latest/metrics-data-archive-service/enablearchive",
+              "api-reference/latest/metrics-data-archive-service/gettenantconfig",
+              "api-reference/latest/metrics-data-archive-service/update",
+              "api-reference/latest/metrics-data-archive-service/validatebucket"
+            ]
+          },
+          {
             "group": "Outgoing Webhooks Service",
             "pages": [
               "api-reference/latest/outgoing-webhooks-service/overview",
@@ -298,7 +337,6 @@
             "group": "Policies Service",
             "pages": [
               "api-reference/latest/policies-service/overview",
-              "api-reference/latest/policies-service/atomic-batch-create-policy",
               "api-reference/latest/policies-service/atomic-overwrite-log-policies",
               "api-reference/latest/policies-service/atomic-overwrite-span-policies",
               "api-reference/latest/policies-service/bulk-test-log-policies",
@@ -309,8 +347,31 @@
               "api-reference/latest/policies-service/get-policy-priority-settings",
               "api-reference/latest/policies-service/reorder-policies",
               "api-reference/latest/policies-service/replace-policy-settings",
-              "api-reference/latest/policies-service/toggle-policies",
               "api-reference/latest/policies-service/update-policy"
+            ]
+          },
+          {
+            "group": "Presets Service",
+            "pages": [
+              "api-reference/latest/presets-service/batch-get-presets",
+              "api-reference/latest/presets-service/create-custom-preset",
+              "api-reference/latest/presets-service/delete-custom-preset",
+              "api-reference/latest/presets-service/get-default-preset-summary",
+              "api-reference/latest/presets-service/get-preset",
+              "api-reference/latest/presets-service/get-system-default-preset-summary",
+              "api-reference/latest/presets-service/list-preset-summaries",
+              "api-reference/latest/presets-service/replace-custom-preset",
+              "api-reference/latest/presets-service/set-custom-preset-as-default",
+              "api-reference/latest/presets-service/set-preset-as-default"
+            ]
+          },
+          {
+            "group": "Quota Allocation Rule Set Service",
+            "pages": [
+              "api-reference/latest/quota-allocation-rule-set-service/create-quota-allocation-rule-set",
+              "api-reference/latest/quota-allocation-rule-set-service/delete-quota-allocation-rule-set",
+              "api-reference/latest/quota-allocation-rule-set-service/get-quota-allocation-rule-set",
+              "api-reference/latest/quota-allocation-rule-set-service/replace-quota-allocation-rule-set"
             ]
           },
           {
@@ -332,6 +393,17 @@
               "api-reference/latest/retentions-service/get-retentions",
               "api-reference/latest/retentions-service/get-retentions-enabled",
               "api-reference/latest/retentions-service/update-retentions"
+            ]
+          },
+          {
+            "group": "Role Management Service",
+            "pages": [
+              "api-reference/latest/role-management-service/create-role",
+              "api-reference/latest/role-management-service/delete-role",
+              "api-reference/latest/role-management-service/get-custom-role",
+              "api-reference/latest/role-management-service/list-custom-roles",
+              "api-reference/latest/role-management-service/list-system-roles",
+              "api-reference/latest/role-management-service/update-role"
             ]
           },
           {
@@ -370,7 +442,7 @@
             ]
           },
           {
-            "group": "Slos Service",
+            "group": "SLOs Service",
             "pages": [
               "api-reference/latest/slos-service/overview",
               "api-reference/latest/slos-service/batch-execute-slo",
@@ -393,26 +465,30 @@
             ]
           },
           {
-            "group": "Team Permissions Management Service",
+            "group": "Team Config Service",
             "pages": [
-              "api-reference/latest/team-permissions-management-service/overview",
-              "api-reference/latest/team-permissions-management-service/add-users-to-team-group",
-              "api-reference/latest/team-permissions-management-service/add-users-to-team-groups",
-              "api-reference/latest/team-permissions-management-service/create-team-group",
-              "api-reference/latest/team-permissions-management-service/delete-team-group",
-              "api-reference/latest/team-permissions-management-service/get-group-users",
-              "api-reference/latest/team-permissions-management-service/get-team-group",
-              "api-reference/latest/team-permissions-management-service/get-team-group-by-name",
-              "api-reference/latest/team-permissions-management-service/get-team-group-scope",
-              "api-reference/latest/team-permissions-management-service/get-team-groups",
-              "api-reference/latest/team-permissions-management-service/remove-users-from-team-group",
-              "api-reference/latest/team-permissions-management-service/remove-users-from-team-groups",
-              "api-reference/latest/team-permissions-management-service/set-team-group-scope",
-              "api-reference/latest/team-permissions-management-service/update-team-group"
+              "api-reference/latest/team-config-service/create-a-team-configuration",
+              "api-reference/latest/team-config-service/delete-a-team-configuration",
+              "api-reference/latest/team-config-service/get-a-team-configuration",
+              "api-reference/latest/team-config-service/get-system-default-team-configuration-settings",
+              "api-reference/latest/team-config-service/get-the-active-team-configuration",
+              "api-reference/latest/team-config-service/update-a-team-configuration"
             ]
           },
           {
-            "group": "Views",
+            "group": "Team Groups Management Service",
+            "pages": [
+              "api-reference/latest/team-groups-management-service/create-team-group",
+              "api-reference/latest/team-groups-management-service/delete-team-group",
+              "api-reference/latest/team-groups-management-service/get-group-users",
+              "api-reference/latest/team-groups-management-service/get-team-group",
+              "api-reference/latest/team-groups-management-service/get-team-group-by-name",
+              "api-reference/latest/team-groups-management-service/get-team-groups",
+              "api-reference/latest/team-groups-management-service/update-team-group"
+            ]
+          },
+          {
+            "group": "Views Service",
             "pages": [
               "api-reference/latest/views-service/overview",
               "api-reference/latest/views-service/create-a-view-service",
