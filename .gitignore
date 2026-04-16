@@ -1,0 +1,33 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+venv/
+.venv/
+env/
+.env
+
+# Node (Mintlify)
+node_modules/
+.mintlify/
+
+# Build artifacts
+.cache/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
