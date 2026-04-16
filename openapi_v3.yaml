@@ -41893,12 +41893,12 @@ tags:
     externalDocs:
       url: ''
 servers:
-  - url: https://api.coralogix.com/mgmt/openapi/latest
-  - url: https://api.eu2.coralogix.com/mgmt/openapi/latest
-  - url: https://api.coralogix.us/mgmt/openapi/latest
-  - url: https://api.cx498.coralogix.com/mgmt/openapi/latest
-  - url: https://api.coralogix.in/mgmt/openapi/latest
-  - url: https://api.coralogixsg.com/mgmt/openapi/latest
-  - url: https://api.ap3.coralogix.com/mgmt/openapi/latest
+  - url: https://api.coralogix.com/mgmt/openapi/3
+  - url: https://api.eu2.coralogix.com/mgmt/openapi/3
+  - url: https://api.coralogix.us/mgmt/openapi/3
+  - url: https://api.cx498.coralogix.com/mgmt/openapi/3
+  - url: https://api.coralogix.in/mgmt/openapi/3
+  - url: https://api.coralogixsg.com/mgmt/openapi/3
+  - url: https://api.ap3.coralogix.com/mgmt/openapi/3
 security:
   - apiKeyAuth: []
