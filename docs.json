@@ -2,12 +2,12 @@
   "navigation": {
     "versions": [
       {
-        "version": "v3",
+        "version": "v5",
         "groups": [
           {
             "group": "Introduction",
             "pages": [
-              "introduction-v3"
+              "introduction-v5"
             ]
           },
           {
@@ -21,453 +21,485 @@
           {
             "group": "Actions Service",
             "pages": [
-              "api-reference/v3/actions-service/overview",
-              "api-reference/v3/actions-service/atomic-batch-execute-actions",
-              "api-reference/v3/actions-service/create-action",
-              "api-reference/v3/actions-service/delete-action",
-              "api-reference/v3/actions-service/get-action",
-              "api-reference/v3/actions-service/list-actions",
-              "api-reference/v3/actions-service/order-actions",
-              "api-reference/v3/actions-service/replace-action"
+              "api-reference/v5/actions-service/overview",
+              "api-reference/v5/actions-service/atomic-batch-execute-actions",
+              "api-reference/v5/actions-service/create-action",
+              "api-reference/v5/actions-service/delete-action",
+              "api-reference/v5/actions-service/get-action",
+              "api-reference/v5/actions-service/list-actions",
+              "api-reference/v5/actions-service/order-actions",
+              "api-reference/v5/actions-service/replace-action"
             ]
           },
           {
             "group": "Alert Definitions Service",
             "pages": [
-              "api-reference/v3/alert-definitions-service/overview",
-              "api-reference/v3/alert-definitions-service/bulk-replace-alert-definitions",
-              "api-reference/v3/alert-definitions-service/create-an-alert",
-              "api-reference/v3/alert-definitions-service/deletealertdef",
-              "api-reference/v3/alert-definitions-service/disable-or-enable-an-alert",
-              "api-reference/v3/alert-definitions-service/download-alerts",
-              "api-reference/v3/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions",
-              "api-reference/v3/alert-definitions-service/get-alert-definition-by-alert-version-id",
-              "api-reference/v3/alert-definitions-service/get-alert-definition-by-id",
-              "api-reference/v3/alert-definitions-service/get-counts-for-filter-options",
-              "api-reference/v3/alert-definitions-service/replace-an-alert-definition"
+              "api-reference/v5/alert-definitions-service/overview",
+              "api-reference/v5/alert-definitions-service/bulk-delete-alert-definitions",
+              "api-reference/v5/alert-definitions-service/bulk-replace-alert-definitions",
+              "api-reference/v5/alert-definitions-service/create-an-alert",
+              "api-reference/v5/alert-definitions-service/deletealertdef",
+              "api-reference/v5/alert-definitions-service/download-alerts",
+              "api-reference/v5/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions",
+              "api-reference/v5/alert-definitions-service/get-alert-definition-by-alert-version-id",
+              "api-reference/v5/alert-definitions-service/get-alert-definition-by-id",
+              "api-reference/v5/alert-definitions-service/get-counts-for-filter-options",
+              "api-reference/v5/alert-definitions-service/replace-an-alert-definition"
             ]
           },
           {
             "group": "Alert Events Service",
             "pages": [
-              "api-reference/v3/alert-events-service/overview",
-              "api-reference/v3/alert-events-service/get-alert-event-by-id",
-              "api-reference/v3/alert-events-service/get-alert-events-statistics"
+              "api-reference/v5/alert-events-service/overview",
+              "api-reference/v5/alert-events-service/get-alert-event-by-id",
+              "api-reference/v5/alert-events-service/get-alert-events-statistics"
             ]
           },
           {
             "group": "Alert Scheduler Rule Service",
             "pages": [
-              "api-reference/v3/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
-              "api-reference/v3/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
-              "api-reference/v3/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
-              "api-reference/v3/alert-scheduler-rule-service/get-an-alert-scheduler-rule",
-              "api-reference/v3/alert-scheduler-rule-service/get-multiple-alert-scheduler-rules",
-              "api-reference/v3/alert-scheduler-rule-service/update-an-alert-scheduler-rule",
-              "api-reference/v3/alert-scheduler-rule-service/update-multiple-alert-scheduler-rules"
+              "api-reference/v5/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
+              "api-reference/v5/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
+              "api-reference/v5/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
+              "api-reference/v5/alert-scheduler-rule-service/get-an-alert-scheduler-rule",
+              "api-reference/v5/alert-scheduler-rule-service/get-multiple-alert-scheduler-rules",
+              "api-reference/v5/alert-scheduler-rule-service/update-an-alert-scheduler-rule",
+              "api-reference/v5/alert-scheduler-rule-service/update-multiple-alert-scheduler-rules"
             ]
           },
           {
             "group": "API Keys Service",
             "pages": [
-              "api-reference/v3/api-keys-service/overview",
-              "api-reference/v3/api-keys-service/create-api-key",
-              "api-reference/v3/api-keys-service/delete-api-key",
-              "api-reference/v3/api-keys-service/get-\"send-data\"-api-keys",
-              "api-reference/v3/api-keys-service/get-api-key",
-              "api-reference/v3/api-keys-service/update-api-key"
+              "api-reference/v5/api-keys-service/overview",
+              "api-reference/v5/api-keys-service/create-api-key",
+              "api-reference/v5/api-keys-service/delete-api-key",
+              "api-reference/v5/api-keys-service/get-\"send-data\"-api-keys",
+              "api-reference/v5/api-keys-service/get-api-key",
+              "api-reference/v5/api-keys-service/update-api-key"
             ]
           },
           {
             "group": "Connectors Service",
             "pages": [
-              "api-reference/v3/connectors-service/overview",
-              "api-reference/v3/connectors-service/batch-get-connectors",
-              "api-reference/v3/connectors-service/batch-get-connectors-summaries",
-              "api-reference/v3/connectors-service/create-a-connector",
-              "api-reference/v3/connectors-service/delete-a-connector",
-              "api-reference/v3/connectors-service/get-a-connector",
-              "api-reference/v3/connectors-service/get-connector-type-summaries",
-              "api-reference/v3/connectors-service/list-connector-summaries",
-              "api-reference/v3/connectors-service/list-connectors",
-              "api-reference/v3/connectors-service/replace-a-connector"
+              "api-reference/v5/connectors-service/overview",
+              "api-reference/v5/connectors-service/batch-get-connectors",
+              "api-reference/v5/connectors-service/batch-get-connectors-summaries",
+              "api-reference/v5/connectors-service/create-a-connector",
+              "api-reference/v5/connectors-service/delete-a-connector",
+              "api-reference/v5/connectors-service/get-a-connector",
+              "api-reference/v5/connectors-service/get-connector-type-summaries",
+              "api-reference/v5/connectors-service/list-connector-summaries",
+              "api-reference/v5/connectors-service/list-connectors",
+              "api-reference/v5/connectors-service/replace-a-connector"
             ]
           },
           {
             "group": "Contextual Data Integration Service",
             "pages": [
-              "api-reference/v3/contextual-data-integration-service/overview",
-              "api-reference/v3/contextual-data-integration-service/delete-contextual-data-integration",
-              "api-reference/v3/contextual-data-integration-service/get-all-contextual-data-integrations-accessible",
-              "api-reference/v3/contextual-data-integration-service/get-contextual-data-integration-definition",
-              "api-reference/v3/contextual-data-integration-service/get-contextual-data-integration-details",
-              "api-reference/v3/contextual-data-integration-service/save-contextual-data-integration",
-              "api-reference/v3/contextual-data-integration-service/test-contextual-data-integration",
-              "api-reference/v3/contextual-data-integration-service/update-contextual-data-integration"
+              "api-reference/v5/contextual-data-integration-service/overview",
+              "api-reference/v5/contextual-data-integration-service/delete-contextual-data-integration",
+              "api-reference/v5/contextual-data-integration-service/get-all-contextual-data-integrations-accessible",
+              "api-reference/v5/contextual-data-integration-service/get-contextual-data-integration-definition",
+              "api-reference/v5/contextual-data-integration-service/get-contextual-data-integration-details",
+              "api-reference/v5/contextual-data-integration-service/save-contextual-data-integration",
+              "api-reference/v5/contextual-data-integration-service/test-contextual-data-integration",
+              "api-reference/v5/contextual-data-integration-service/update-contextual-data-integration"
             ]
           },
           {
             "group": "Custom Enrichments Service",
             "pages": [
-              "api-reference/v3/custom-enrichments-service/overview",
-              "api-reference/v3/custom-enrichments-service/create-custom-enrichments",
-              "api-reference/v3/custom-enrichments-service/delete-custom-enrichments",
-              "api-reference/v3/custom-enrichments-service/get-custom-enrichment",
-              "api-reference/v3/custom-enrichments-service/get-custom-enrichments",
-              "api-reference/v3/custom-enrichments-service/search-custom-enrichment-data",
-              "api-reference/v3/custom-enrichments-service/update-custom-enrichment"
+              "api-reference/v5/custom-enrichments-service/overview",
+              "api-reference/v5/custom-enrichments-service/create-custom-enrichments",
+              "api-reference/v5/custom-enrichments-service/delete-custom-enrichments",
+              "api-reference/v5/custom-enrichments-service/get-custom-enrichment",
+              "api-reference/v5/custom-enrichments-service/get-custom-enrichments",
+              "api-reference/v5/custom-enrichments-service/search-custom-enrichment-data",
+              "api-reference/v5/custom-enrichments-service/update-custom-enrichment"
             ]
           },
           {
             "group": "Dashboard Folders Service",
             "pages": [
-              "api-reference/v3/dashboard-folders-service/overview",
-              "api-reference/v3/dashboard-folders-service/create-a-dashboard-folder",
-              "api-reference/v3/dashboard-folders-service/delete-a-dashboard-folder",
-              "api-reference/v3/dashboard-folders-service/get-a-dashboard-folder",
-              "api-reference/v3/dashboard-folders-service/list-dashboard-folders",
-              "api-reference/v3/dashboard-folders-service/replace-a-dashboard-folder"
+              "api-reference/v5/dashboard-folders-service/overview",
+              "api-reference/v5/dashboard-folders-service/create-a-dashboard-folder",
+              "api-reference/v5/dashboard-folders-service/delete-a-dashboard-folder",
+              "api-reference/v5/dashboard-folders-service/get-a-dashboard-folder",
+              "api-reference/v5/dashboard-folders-service/list-dashboard-folders",
+              "api-reference/v5/dashboard-folders-service/replace-a-dashboard-folder"
             ]
           },
           {
             "group": "Dashboard Service",
             "pages": [
-              "api-reference/v3/dashboard-service/overview",
-              "api-reference/v3/dashboard-service/add-dashboard-to-favorites",
-              "api-reference/v3/dashboard-service/assign-a-dashboard-to-a-folder",
-              "api-reference/v3/dashboard-service/create-a-new-dashboard",
-              "api-reference/v3/dashboard-service/delete-a-dashboard",
-              "api-reference/v3/dashboard-service/get-a-dashboard",
-              "api-reference/v3/dashboard-service/get-a-dashboard-by-url-slug",
-              "api-reference/v3/dashboard-service/get-dashboard-catalog",
-              "api-reference/v3/dashboard-service/remove-dashboard-from-favorites",
-              "api-reference/v3/dashboard-service/replace-a-dashboard",
-              "api-reference/v3/dashboard-service/replace-the-default-dashboard"
+              "api-reference/v5/dashboard-service/overview",
+              "api-reference/v5/dashboard-service/add-dashboard-to-favorites",
+              "api-reference/v5/dashboard-service/assign-a-dashboard-to-a-folder",
+              "api-reference/v5/dashboard-service/create-a-new-dashboard",
+              "api-reference/v5/dashboard-service/delete-a-dashboard",
+              "api-reference/v5/dashboard-service/get-a-dashboard",
+              "api-reference/v5/dashboard-service/get-a-dashboard-by-url-slug",
+              "api-reference/v5/dashboard-service/get-dashboard-catalog",
+              "api-reference/v5/dashboard-service/remove-dashboard-from-favorites",
+              "api-reference/v5/dashboard-service/replace-a-dashboard",
+              "api-reference/v5/dashboard-service/replace-the-default-dashboard"
             ]
           },
           {
             "group": "Data Usage Service",
             "pages": [
-              "api-reference/v3/data-usage-service/overview",
-              "api-reference/v3/data-usage-service/get-daily-usage-evaluation-tokens",
-              "api-reference/v3/data-usage-service/get-daily-usage-processed-gbs",
-              "api-reference/v3/data-usage-service/get-daily-usage-units",
-              "api-reference/v3/data-usage-service/get-data-usage",
-              "api-reference/v3/data-usage-service/get-data-usage-metrics-export-status",
-              "api-reference/v3/data-usage-service/get-logs-count",
-              "api-reference/v3/data-usage-service/get-spans-count",
-              "api-reference/v3/data-usage-service/update-data-usage-metrics-export-status"
+              "api-reference/v5/data-usage-service/overview",
+              "api-reference/v5/data-usage-service/get-daily-usage-evaluation-tokens",
+              "api-reference/v5/data-usage-service/get-daily-usage-processed-gbs",
+              "api-reference/v5/data-usage-service/get-daily-usage-units",
+              "api-reference/v5/data-usage-service/get-data-usage",
+              "api-reference/v5/data-usage-service/get-data-usage-metrics-export-status",
+              "api-reference/v5/data-usage-service/get-logs-count",
+              "api-reference/v5/data-usage-service/get-spans-count",
+              "api-reference/v5/data-usage-service/update-data-usage-metrics-export-status"
             ]
           },
           {
             "group": "Enrichments Service",
             "pages": [
-              "api-reference/v3/enrichments-service/overview",
-              "api-reference/v3/enrichments-service/add-enrichments",
-              "api-reference/v3/enrichments-service/atomic-overwrite-enrichments",
-              "api-reference/v3/enrichments-service/delete-enrichments",
-              "api-reference/v3/enrichments-service/get-company-enrichment-settings",
-              "api-reference/v3/enrichments-service/get-enrichment-limit",
-              "api-reference/v3/enrichments-service/get-enrichments"
+              "api-reference/v5/enrichments-service/overview",
+              "api-reference/v5/enrichments-service/add-enrichments",
+              "api-reference/v5/enrichments-service/atomic-overwrite-for-all-types-of-enrichments-the-request-is-the-desired-state-which-will-override-all-enrichments-warning:-this-operation-will-delete-all-existing-enrichments-and-replace-them-with-the-provided-ones",
+              "api-reference/v5/enrichments-service/atomic-overwrite-for-customenrichments-only",
+              "api-reference/v5/enrichments-service/delete-enrichments",
+              "api-reference/v5/enrichments-service/get-company-enrichment-settings",
+              "api-reference/v5/enrichments-service/get-enrichment-limit",
+              "api-reference/v5/enrichments-service/get-enrichments"
             ]
           },
           {
             "group": "Entities Service",
             "pages": [
-              "api-reference/v3/entities-service/overview",
-              "api-reference/v3/entities-service/list-entity-subtypes",
-              "api-reference/v3/entities-service/list-entity-types"
+              "api-reference/v5/entities-service/overview",
+              "api-reference/v5/entities-service/list-entity-subtypes",
+              "api-reference/v5/entities-service/list-entity-types"
+            ]
+          },
+          {
+            "group": "Events Service",
+            "pages": [
+              "api-reference/v5/events-service/overview",
+              "api-reference/v5/events-service/batch-get-event",
+              "api-reference/v5/events-service/get-event",
+              "api-reference/v5/events-service/get-events-statistics",
+              "api-reference/v5/events-service/list-alert-events",
+              "api-reference/v5/events-service/list-events",
+              "api-reference/v5/events-service/list-events-count"
             ]
           },
           {
             "group": "Events2Metrics Service",
             "pages": [
-              "api-reference/v3/events2metrics-service/overview",
-              "api-reference/v3/events2metrics-service/atomic-batch-execute-e2m",
-              "api-reference/v3/events2metrics-service/create-a-new-e2m",
-              "api-reference/v3/events2metrics-service/delete-an-e2m",
-              "api-reference/v3/events2metrics-service/get-an-e2m",
-              "api-reference/v3/events2metrics-service/get-e2m-limits",
-              "api-reference/v3/events2metrics-service/list-e2m-labels-cardinality",
-              "api-reference/v3/events2metrics-service/list-e2ms",
-              "api-reference/v3/events2metrics-service/replace-an-e2m"
+              "api-reference/v5/events2metrics-service/overview",
+              "api-reference/v5/events2metrics-service/atomic-batch-execute-e2m",
+              "api-reference/v5/events2metrics-service/create-a-new-e2m",
+              "api-reference/v5/events2metrics-service/delete-an-e2m",
+              "api-reference/v5/events2metrics-service/get-an-e2m",
+              "api-reference/v5/events2metrics-service/get-e2m-limits",
+              "api-reference/v5/events2metrics-service/list-e2m-labels-cardinality",
+              "api-reference/v5/events2metrics-service/list-e2ms",
+              "api-reference/v5/events2metrics-service/replace-an-e2m"
             ]
           },
           {
             "group": "Extension Deployment Service",
             "pages": [
-              "api-reference/v3/extension-deployment-service/overview",
-              "api-reference/v3/extension-deployment-service/deploy-extension",
-              "api-reference/v3/extension-deployment-service/get-deployed-extensions",
-              "api-reference/v3/extension-deployment-service/revert-deployment-of-extension",
-              "api-reference/v3/extension-deployment-service/update-extension"
+              "api-reference/v5/extension-deployment-service/overview",
+              "api-reference/v5/extension-deployment-service/deploy-extension",
+              "api-reference/v5/extension-deployment-service/get-deployed-extensions",
+              "api-reference/v5/extension-deployment-service/revert-deployment-of-extension",
+              "api-reference/v5/extension-deployment-service/update-extension"
             ]
           },
           {
             "group": "Extension Service",
             "pages": [
-              "api-reference/v3/extension-service/overview",
-              "api-reference/v3/extension-service/get-all-extensions",
-              "api-reference/v3/extension-service/get-extension-by-id"
+              "api-reference/v5/extension-service/overview",
+              "api-reference/v5/extension-service/get-all-extensions",
+              "api-reference/v5/extension-service/get-extension-by-id"
             ]
           },
           {
             "group": "Extension Testing Service",
             "pages": [
-              "api-reference/v3/extension-testing-service/overview",
-              "api-reference/v3/extension-testing-service/cleanup-testing-extension",
-              "api-reference/v3/extension-testing-service/initialize-testing-revision",
-              "api-reference/v3/extension-testing-service/test-extension-revision"
+              "api-reference/v5/extension-testing-service/overview",
+              "api-reference/v5/extension-testing-service/cleanup-testing-extension",
+              "api-reference/v5/extension-testing-service/initialize-testing-revision",
+              "api-reference/v5/extension-testing-service/test-extension-revision"
             ]
           },
           {
             "group": "Folders for Views Service",
             "pages": [
-              "api-reference/v3/folders-for-views-service/overview",
-              "api-reference/v3/folders-for-views-service/create-view-folder-service",
-              "api-reference/v3/folders-for-views-service/delete-view-folder-service",
-              "api-reference/v3/folders-for-views-service/get-view-folder-service",
-              "api-reference/v3/folders-for-views-service/list-view-folders-service",
-              "api-reference/v3/folders-for-views-service/replace-view-folder-service"
+              "api-reference/v5/folders-for-views-service/overview",
+              "api-reference/v5/folders-for-views-service/create-view-folder-service",
+              "api-reference/v5/folders-for-views-service/delete-view-folder-service",
+              "api-reference/v5/folders-for-views-service/get-view-folder-service",
+              "api-reference/v5/folders-for-views-service/list-view-folders-service",
+              "api-reference/v5/folders-for-views-service/replace-view-folder-service"
             ]
           },
           {
             "group": "Global Routers Service",
             "pages": [
-              "api-reference/v3/global-routers-service/overview",
-              "api-reference/v3/global-routers-service/batch-get-global-routers",
-              "api-reference/v3/global-routers-service/create-global-router",
-              "api-reference/v3/global-routers-service/delete-global-router",
-              "api-reference/v3/global-routers-service/get-global-router",
-              "api-reference/v3/global-routers-service/list-global-routers",
-              "api-reference/v3/global-routers-service/replace-global-router"
+              "api-reference/v5/global-routers-service/overview",
+              "api-reference/v5/global-routers-service/batch-get-global-routers",
+              "api-reference/v5/global-routers-service/create-global-router",
+              "api-reference/v5/global-routers-service/delete-global-router",
+              "api-reference/v5/global-routers-service/get-global-router",
+              "api-reference/v5/global-routers-service/list-global-routers",
+              "api-reference/v5/global-routers-service/replace-global-router"
             ]
           },
           {
             "group": "Incidents Service",
             "pages": [
-              "api-reference/v3/incidents-service/overview",
-              "api-reference/v3/incidents-service/acknowledge-incident-by-event-id",
-              "api-reference/v3/incidents-service/acknowledge-incidents",
-              "api-reference/v3/incidents-service/assign-incidents-to-a-user",
-              "api-reference/v3/incidents-service/close-incidents",
-              "api-reference/v3/incidents-service/get-available-filter-values",
-              "api-reference/v3/incidents-service/get-available-incident-event-filter-values",
-              "api-reference/v3/incidents-service/get-incident-aggregations",
-              "api-reference/v3/incidents-service/get-incident-by-event-id",
-              "api-reference/v3/incidents-service/get-incident-by-id",
-              "api-reference/v3/incidents-service/get-incident-events",
-              "api-reference/v3/incidents-service/get-multiple-incidents-by-ids",
-              "api-reference/v3/incidents-service/get-total-count-of-incident-events",
-              "api-reference/v3/incidents-service/list-incident-events-with-filters",
-              "api-reference/v3/incidents-service/list-incidents-with-filters",
-              "api-reference/v3/incidents-service/remove-incident-user-assignments",
-              "api-reference/v3/incidents-service/resolve-incident-by-event-id",
-              "api-reference/v3/incidents-service/resolve-incidents"
+              "api-reference/v5/incidents-service/overview",
+              "api-reference/v5/incidents-service/acknowledge-incident-by-event-id",
+              "api-reference/v5/incidents-service/acknowledge-incidents",
+              "api-reference/v5/incidents-service/assign-incidents-to-a-user",
+              "api-reference/v5/incidents-service/close-incidents",
+              "api-reference/v5/incidents-service/get-available-filter-values",
+              "api-reference/v5/incidents-service/get-available-incident-event-filter-values",
+              "api-reference/v5/incidents-service/get-incident-aggregations",
+              "api-reference/v5/incidents-service/get-incident-by-event-id",
+              "api-reference/v5/incidents-service/get-incident-by-id",
+              "api-reference/v5/incidents-service/get-incident-events",
+              "api-reference/v5/incidents-service/get-multiple-incidents-by-ids",
+              "api-reference/v5/incidents-service/get-total-count-of-incident-events",
+              "api-reference/v5/incidents-service/list-incident-events-with-filters",
+              "api-reference/v5/incidents-service/list-incidents-with-filters",
+              "api-reference/v5/incidents-service/remove-incident-user-assignments",
+              "api-reference/v5/incidents-service/resolve-incident-by-event-id",
+              "api-reference/v5/incidents-service/resolve-incidents"
             ]
           },
           {
             "group": "Integration Service",
             "pages": [
-              "api-reference/v3/integration-service/overview",
-              "api-reference/v3/integration-service/delete-integration",
-              "api-reference/v3/integration-service/get-all-integrations",
-              "api-reference/v3/integration-service/get-deployed-integration",
-              "api-reference/v3/integration-service/get-integration-definition",
-              "api-reference/v3/integration-service/get-integration-details",
-              "api-reference/v3/integration-service/get-integration-template",
-              "api-reference/v3/integration-service/get-managed-integration-status",
-              "api-reference/v3/integration-service/get-rum-integration-versions-data",
-              "api-reference/v3/integration-service/list-managed-integration-keys",
-              "api-reference/v3/integration-service/save-integration-registration-metadata",
-              "api-reference/v3/integration-service/test-integration",
-              "api-reference/v3/integration-service/trigger-sync-of-rum-integration-data",
-              "api-reference/v3/integration-service/update-integration"
+              "api-reference/v5/integration-service/overview",
+              "api-reference/v5/integration-service/delete-integration",
+              "api-reference/v5/integration-service/get-all-integrations",
+              "api-reference/v5/integration-service/get-deployed-integration",
+              "api-reference/v5/integration-service/get-integration-definition",
+              "api-reference/v5/integration-service/get-integration-details",
+              "api-reference/v5/integration-service/get-integration-template",
+              "api-reference/v5/integration-service/get-managed-integration-status",
+              "api-reference/v5/integration-service/get-rum-integration-versions-data",
+              "api-reference/v5/integration-service/list-managed-integration-keys",
+              "api-reference/v5/integration-service/save-integration-registration-metadata",
+              "api-reference/v5/integration-service/test-integration",
+              "api-reference/v5/integration-service/trigger-sync-of-rum-integration-data",
+              "api-reference/v5/integration-service/update-integration"
             ]
           },
           {
             "group": "IP Access Service",
             "pages": [
-              "api-reference/v3/ip-access-service/overview",
-              "api-reference/v3/ip-access-service/create-company-ip-access-settings",
-              "api-reference/v3/ip-access-service/delete-company-ip-access-settings",
-              "api-reference/v3/ip-access-service/get-company-ip-access-settings",
-              "api-reference/v3/ip-access-service/replace-company-ip-access-settings"
+              "api-reference/v5/ip-access-service/overview",
+              "api-reference/v5/ip-access-service/create-company-ip-access-settings",
+              "api-reference/v5/ip-access-service/delete-company-ip-access-settings",
+              "api-reference/v5/ip-access-service/get-company-ip-access-settings",
+              "api-reference/v5/ip-access-service/replace-company-ip-access-settings"
             ]
           },
           {
             "group": "Metrics Data Archive Service",
             "pages": [
-              "api-reference/v3/metrics-data-archive-service/configuretenant",
-              "api-reference/v3/metrics-data-archive-service/disablearchive",
-              "api-reference/v3/metrics-data-archive-service/enablearchive",
-              "api-reference/v3/metrics-data-archive-service/gettenantconfig",
-              "api-reference/v3/metrics-data-archive-service/update",
-              "api-reference/v3/metrics-data-archive-service/validatebucket"
+              "api-reference/v5/metrics-data-archive-service/configuretenant",
+              "api-reference/v5/metrics-data-archive-service/disablearchive",
+              "api-reference/v5/metrics-data-archive-service/enablearchive",
+              "api-reference/v5/metrics-data-archive-service/gettenantconfig",
+              "api-reference/v5/metrics-data-archive-service/update",
+              "api-reference/v5/metrics-data-archive-service/validatebucket"
             ]
           },
           {
             "group": "Outgoing Webhooks Service",
             "pages": [
-              "api-reference/v3/outgoing-webhooks-service/overview",
-              "api-reference/v3/outgoing-webhooks-service/create-an-outgoing-webhook",
-              "api-reference/v3/outgoing-webhooks-service/delete-an-outgoing-webhook",
-              "api-reference/v3/outgoing-webhooks-service/get-outgoing-webhook",
-              "api-reference/v3/outgoing-webhooks-service/get-outgoing-webhook-type-details",
-              "api-reference/v3/outgoing-webhooks-service/get-outgoing-webhook-types",
-              "api-reference/v3/outgoing-webhooks-service/list-all-outgoing-webhooks",
-              "api-reference/v3/outgoing-webhooks-service/list-outbound-webhooks-summary",
-              "api-reference/v3/outgoing-webhooks-service/list-outgoing-webhooks",
-              "api-reference/v3/outgoing-webhooks-service/test-an-existing-outgoing-webhook",
-              "api-reference/v3/outgoing-webhooks-service/test-an-outgoing-webhook",
-              "api-reference/v3/outgoing-webhooks-service/update-an-outgoing-webhook"
+              "api-reference/v5/outgoing-webhooks-service/overview",
+              "api-reference/v5/outgoing-webhooks-service/create-an-outgoing-webhook",
+              "api-reference/v5/outgoing-webhooks-service/delete-an-outgoing-webhook",
+              "api-reference/v5/outgoing-webhooks-service/get-outgoing-webhook",
+              "api-reference/v5/outgoing-webhooks-service/get-outgoing-webhook-type-details",
+              "api-reference/v5/outgoing-webhooks-service/get-outgoing-webhook-types",
+              "api-reference/v5/outgoing-webhooks-service/list-all-outgoing-webhooks",
+              "api-reference/v5/outgoing-webhooks-service/list-outbound-webhooks-summary",
+              "api-reference/v5/outgoing-webhooks-service/list-outgoing-webhooks",
+              "api-reference/v5/outgoing-webhooks-service/test-an-existing-outgoing-webhook",
+              "api-reference/v5/outgoing-webhooks-service/test-an-outgoing-webhook",
+              "api-reference/v5/outgoing-webhooks-service/update-an-outgoing-webhook"
             ]
           },
           {
             "group": "Policies Service",
             "pages": [
-              "api-reference/v3/policies-service/overview",
-              "api-reference/v3/policies-service/atomic-batch-create-policy",
-              "api-reference/v3/policies-service/atomic-overwrite-log-policies",
-              "api-reference/v3/policies-service/atomic-overwrite-span-policies",
-              "api-reference/v3/policies-service/bulk-test-log-policies",
-              "api-reference/v3/policies-service/create-policy",
-              "api-reference/v3/policies-service/delete-policy",
-              "api-reference/v3/policies-service/get-company-policies",
-              "api-reference/v3/policies-service/get-policy-by-id",
-              "api-reference/v3/policies-service/get-policy-priority-settings",
-              "api-reference/v3/policies-service/reorder-policies",
-              "api-reference/v3/policies-service/replace-policy-settings",
-              "api-reference/v3/policies-service/toggle-policies",
-              "api-reference/v3/policies-service/update-policy"
+              "api-reference/v5/policies-service/overview",
+              "api-reference/v5/policies-service/atomic-overwrite-log-policies",
+              "api-reference/v5/policies-service/atomic-overwrite-span-policies",
+              "api-reference/v5/policies-service/bulk-test-log-policies",
+              "api-reference/v5/policies-service/create-policy",
+              "api-reference/v5/policies-service/delete-policy",
+              "api-reference/v5/policies-service/get-company-policies",
+              "api-reference/v5/policies-service/get-policy-by-id",
+              "api-reference/v5/policies-service/get-policy-priority-settings",
+              "api-reference/v5/policies-service/reorder-policies",
+              "api-reference/v5/policies-service/replace-policy-settings",
+              "api-reference/v5/policies-service/update-policy"
             ]
           },
           {
             "group": "Presets Service",
             "pages": [
-              "api-reference/v3/presets-service/overview",
-              "api-reference/v3/presets-service/batch-get-presets",
-              "api-reference/v3/presets-service/create-custom-preset",
-              "api-reference/v3/presets-service/delete-custom-preset",
-              "api-reference/v3/presets-service/get-default-preset-summary",
-              "api-reference/v3/presets-service/get-preset",
-              "api-reference/v3/presets-service/get-system-default-preset-summary",
-              "api-reference/v3/presets-service/list-preset-summaries",
-              "api-reference/v3/presets-service/replace-custom-preset",
-              "api-reference/v3/presets-service/set-custom-preset-as-default",
-              "api-reference/v3/presets-service/set-preset-as-default"
+              "api-reference/v5/presets-service/overview",
+              "api-reference/v5/presets-service/batch-get-presets",
+              "api-reference/v5/presets-service/create-custom-preset",
+              "api-reference/v5/presets-service/delete-custom-preset",
+              "api-reference/v5/presets-service/get-default-preset-summary",
+              "api-reference/v5/presets-service/get-preset",
+              "api-reference/v5/presets-service/get-system-default-preset-summary",
+              "api-reference/v5/presets-service/list-preset-summaries",
+              "api-reference/v5/presets-service/replace-custom-preset",
+              "api-reference/v5/presets-service/set-custom-preset-as-default",
+              "api-reference/v5/presets-service/set-preset-as-default"
+            ]
+          },
+          {
+            "group": "Quota Allocation Rule Set Service",
+            "pages": [
+              "api-reference/v5/quota-allocation-rule-set-service/create-quota-allocation-rule-set",
+              "api-reference/v5/quota-allocation-rule-set-service/delete-quota-allocation-rule-set",
+              "api-reference/v5/quota-allocation-rule-set-service/get-quota-allocation-rule-set",
+              "api-reference/v5/quota-allocation-rule-set-service/replace-quota-allocation-rule-set"
             ]
           },
           {
             "group": "Recording Rules Service",
             "pages": [
-              "api-reference/v3/recording-rules-service/overview",
-              "api-reference/v3/recording-rules-service/create-recording-rules",
-              "api-reference/v3/recording-rules-service/delete-recording-rules",
-              "api-reference/v3/recording-rules-service/get-recording-rules",
-              "api-reference/v3/recording-rules-service/list-recording-rules",
-              "api-reference/v3/recording-rules-service/update-recording-rules"
+              "api-reference/v5/recording-rules-service/overview",
+              "api-reference/v5/recording-rules-service/create-recording-rules",
+              "api-reference/v5/recording-rules-service/delete-recording-rules",
+              "api-reference/v5/recording-rules-service/get-recording-rules",
+              "api-reference/v5/recording-rules-service/list-recording-rules",
+              "api-reference/v5/recording-rules-service/update-recording-rules"
             ]
           },
           {
             "group": "Retentions Service",
             "pages": [
-              "api-reference/v3/retentions-service/overview",
-              "api-reference/v3/retentions-service/activate-retentions",
-              "api-reference/v3/retentions-service/get-retentions",
-              "api-reference/v3/retentions-service/get-retentions-enabled",
-              "api-reference/v3/retentions-service/update-retentions"
+              "api-reference/v5/retentions-service/overview",
+              "api-reference/v5/retentions-service/activate-retentions",
+              "api-reference/v5/retentions-service/get-retentions",
+              "api-reference/v5/retentions-service/get-retentions-enabled",
+              "api-reference/v5/retentions-service/update-retentions"
             ]
           },
           {
             "group": "Role Management Service",
             "pages": [
-              "api-reference/v3/role-management-service/create-role",
-              "api-reference/v3/role-management-service/delete-role",
-              "api-reference/v3/role-management-service/get-custom-role",
-              "api-reference/v3/role-management-service/list-custom-roles",
-              "api-reference/v3/role-management-service/list-system-roles",
-              "api-reference/v3/role-management-service/update-role"
+              "api-reference/v5/role-management-service/create-role",
+              "api-reference/v5/role-management-service/delete-role",
+              "api-reference/v5/role-management-service/get-custom-role",
+              "api-reference/v5/role-management-service/list-custom-roles",
+              "api-reference/v5/role-management-service/list-system-roles",
+              "api-reference/v5/role-management-service/update-role"
             ]
           },
           {
             "group": "Rule Groups Service",
             "pages": [
-              "api-reference/v3/rule-groups-service/overview",
-              "api-reference/v3/rule-groups-service/bulk-delete-rule-group",
-              "api-reference/v3/rule-groups-service/create-rule-group",
-              "api-reference/v3/rule-groups-service/delete-rule-group",
-              "api-reference/v3/rule-groups-service/get-company-usage-limits",
-              "api-reference/v3/rule-groups-service/get-rule-group",
-              "api-reference/v3/rule-groups-service/get-rule-group-model-mapping",
-              "api-reference/v3/rule-groups-service/list-rule-groups",
-              "api-reference/v3/rule-groups-service/update-rule-group"
+              "api-reference/v5/rule-groups-service/overview",
+              "api-reference/v5/rule-groups-service/bulk-delete-rule-group",
+              "api-reference/v5/rule-groups-service/create-rule-group",
+              "api-reference/v5/rule-groups-service/delete-rule-group",
+              "api-reference/v5/rule-groups-service/get-company-usage-limits",
+              "api-reference/v5/rule-groups-service/get-rule-group",
+              "api-reference/v5/rule-groups-service/get-rule-group-model-mapping",
+              "api-reference/v5/rule-groups-service/list-rule-groups",
+              "api-reference/v5/rule-groups-service/update-rule-group"
             ]
           },
           {
             "group": "SAML Configuration Service",
             "pages": [
-              "api-reference/v3/saml-configuration-service/overview",
-              "api-reference/v3/saml-configuration-service/activatedeactivate-saml",
-              "api-reference/v3/saml-configuration-service/get-saml-configuration",
-              "api-reference/v3/saml-configuration-service/get-sp-parameters",
-              "api-reference/v3/saml-configuration-service/set-idp-parameters"
+              "api-reference/v5/saml-configuration-service/overview",
+              "api-reference/v5/saml-configuration-service/activatedeactivate-saml",
+              "api-reference/v5/saml-configuration-service/get-saml-configuration",
+              "api-reference/v5/saml-configuration-service/get-sp-parameters",
+              "api-reference/v5/saml-configuration-service/set-idp-parameters"
             ]
           },
           {
             "group": "Scopes Service",
             "pages": [
-              "api-reference/v3/scopes-service/overview",
-              "api-reference/v3/scopes-service/create-scope",
-              "api-reference/v3/scopes-service/delete-scope",
-              "api-reference/v3/scopes-service/get-team-scopes",
-              "api-reference/v3/scopes-service/get-team-scopes-by-ids",
-              "api-reference/v3/scopes-service/update-scope"
+              "api-reference/v5/scopes-service/overview",
+              "api-reference/v5/scopes-service/create-scope",
+              "api-reference/v5/scopes-service/delete-scope",
+              "api-reference/v5/scopes-service/get-team-scopes",
+              "api-reference/v5/scopes-service/get-team-scopes-by-ids",
+              "api-reference/v5/scopes-service/update-scope"
             ]
           },
           {
             "group": "SLOs Service",
             "pages": [
-              "api-reference/v3/slos-service/overview",
-              "api-reference/v3/slos-service/batch-execute-slo",
-              "api-reference/v3/slos-service/batch-get-slo",
-              "api-reference/v3/slos-service/create-slo",
-              "api-reference/v3/slos-service/delete-slo",
-              "api-reference/v3/slos-service/get-slo",
-              "api-reference/v3/slos-service/get-slo-zero-state",
-              "api-reference/v3/slos-service/list-slos",
-              "api-reference/v3/slos-service/replace-slo",
-              "api-reference/v3/slos-service/replace-slo-pre-validate-alerts"
+              "api-reference/v5/slos-service/overview",
+              "api-reference/v5/slos-service/batch-execute-slo",
+              "api-reference/v5/slos-service/batch-get-slo",
+              "api-reference/v5/slos-service/create-slo",
+              "api-reference/v5/slos-service/delete-slo",
+              "api-reference/v5/slos-service/get-slo",
+              "api-reference/v5/slos-service/get-slo-zero-state",
+              "api-reference/v5/slos-service/list-slos",
+              "api-reference/v5/slos-service/replace-slo",
+              "api-reference/v5/slos-service/replace-slo-pre-validate-alerts"
             ]
           },
           {
             "group": "Target Service",
             "pages": [
-              "api-reference/v3/target-service/overview",
-              "api-reference/v3/target-service/get-target",
-              "api-reference/v3/target-service/set-target"
+              "api-reference/v5/target-service/overview",
+              "api-reference/v5/target-service/get-target",
+              "api-reference/v5/target-service/set-target"
             ]
           },
           {
             "group": "Team Config Service",
             "pages": [
-              "api-reference/v3/team-config-service/create-a-team-configuration",
-              "api-reference/v3/team-config-service/delete-a-team-configuration",
-              "api-reference/v3/team-config-service/get-a-team-configuration",
-              "api-reference/v3/team-config-service/get-system-default-team-configuration-settings",
-              "api-reference/v3/team-config-service/get-the-active-team-configuration",
-              "api-reference/v3/team-config-service/update-a-team-configuration"
+              "api-reference/v5/team-config-service/create-a-team-configuration",
+              "api-reference/v5/team-config-service/delete-a-team-configuration",
+              "api-reference/v5/team-config-service/get-a-team-configuration",
+              "api-reference/v5/team-config-service/get-system-default-team-configuration-settings",
+              "api-reference/v5/team-config-service/get-the-active-team-configuration",
+              "api-reference/v5/team-config-service/update-a-team-configuration"
+            ]
+          },
+          {
+            "group": "Team Groups Management Service",
+            "pages": [
+              "api-reference/v5/team-groups-management-service/create-team-group",
+              "api-reference/v5/team-groups-management-service/delete-team-group",
+              "api-reference/v5/team-groups-management-service/get-group-users",
+              "api-reference/v5/team-groups-management-service/get-team-group",
+              "api-reference/v5/team-groups-management-service/get-team-group-by-name",
+              "api-reference/v5/team-groups-management-service/get-team-groups",
+              "api-reference/v5/team-groups-management-service/update-team-group"
             ]
           },
           {
             "group": "Views Service",
             "pages": [
-              "api-reference/v3/views-service/overview",
-              "api-reference/v3/views-service/create-a-view-service",
-              "api-reference/v3/views-service/delete-view-service",
-              "api-reference/v3/views-service/get-view-service",
-              "api-reference/v3/views-service/list-views-service",
-              "api-reference/v3/views-service/replace-a-view-service"
+              "api-reference/v5/views-service/overview",
+              "api-reference/v5/views-service/create-a-view-service",
+              "api-reference/v5/views-service/delete-view-service",
+              "api-reference/v5/views-service/get-view-service",
+              "api-reference/v5/views-service/list-views-service",
+              "api-reference/v5/views-service/replace-a-view-service"
             ]
           }
         ]
@@ -975,12 +1007,12 @@
         ]
       },
       {
-        "version": "v5",
+        "version": "v3",
         "groups": [
           {
             "group": "Introduction",
             "pages": [
-              "introduction-v5"
+              "introduction-v3"
             ]
           },
           {
@@ -994,485 +1026,453 @@
           {
             "group": "Actions Service",
             "pages": [
-              "api-reference/v5/actions-service/overview",
-              "api-reference/v5/actions-service/atomic-batch-execute-actions",
-              "api-reference/v5/actions-service/create-action",
-              "api-reference/v5/actions-service/delete-action",
-              "api-reference/v5/actions-service/get-action",
-              "api-reference/v5/actions-service/list-actions",
-              "api-reference/v5/actions-service/order-actions",
-              "api-reference/v5/actions-service/replace-action"
+              "api-reference/v3/actions-service/overview",
+              "api-reference/v3/actions-service/atomic-batch-execute-actions",
+              "api-reference/v3/actions-service/create-action",
+              "api-reference/v3/actions-service/delete-action",
+              "api-reference/v3/actions-service/get-action",
+              "api-reference/v3/actions-service/list-actions",
+              "api-reference/v3/actions-service/order-actions",
+              "api-reference/v3/actions-service/replace-action"
             ]
           },
           {
             "group": "Alert Definitions Service",
             "pages": [
-              "api-reference/v5/alert-definitions-service/overview",
-              "api-reference/v5/alert-definitions-service/bulk-delete-alert-definitions",
-              "api-reference/v5/alert-definitions-service/bulk-replace-alert-definitions",
-              "api-reference/v5/alert-definitions-service/create-an-alert",
-              "api-reference/v5/alert-definitions-service/deletealertdef",
-              "api-reference/v5/alert-definitions-service/download-alerts",
-              "api-reference/v5/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions",
-              "api-reference/v5/alert-definitions-service/get-alert-definition-by-alert-version-id",
-              "api-reference/v5/alert-definitions-service/get-alert-definition-by-id",
-              "api-reference/v5/alert-definitions-service/get-counts-for-filter-options",
-              "api-reference/v5/alert-definitions-service/replace-an-alert-definition"
+              "api-reference/v3/alert-definitions-service/overview",
+              "api-reference/v3/alert-definitions-service/bulk-replace-alert-definitions",
+              "api-reference/v3/alert-definitions-service/create-an-alert",
+              "api-reference/v3/alert-definitions-service/deletealertdef",
+              "api-reference/v3/alert-definitions-service/disable-or-enable-an-alert",
+              "api-reference/v3/alert-definitions-service/download-alerts",
+              "api-reference/v3/alert-definitions-service/get-a-list-of-all-accessible-alert-definitions",
+              "api-reference/v3/alert-definitions-service/get-alert-definition-by-alert-version-id",
+              "api-reference/v3/alert-definitions-service/get-alert-definition-by-id",
+              "api-reference/v3/alert-definitions-service/get-counts-for-filter-options",
+              "api-reference/v3/alert-definitions-service/replace-an-alert-definition"
             ]
           },
           {
             "group": "Alert Events Service",
             "pages": [
-              "api-reference/v5/alert-events-service/overview",
-              "api-reference/v5/alert-events-service/get-alert-event-by-id",
-              "api-reference/v5/alert-events-service/get-alert-events-statistics"
+              "api-reference/v3/alert-events-service/overview",
+              "api-reference/v3/alert-events-service/get-alert-event-by-id",
+              "api-reference/v3/alert-events-service/get-alert-events-statistics"
             ]
           },
           {
             "group": "Alert Scheduler Rule Service",
             "pages": [
-              "api-reference/v5/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
-              "api-reference/v5/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
-              "api-reference/v5/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
-              "api-reference/v5/alert-scheduler-rule-service/get-an-alert-scheduler-rule",
-              "api-reference/v5/alert-scheduler-rule-service/get-multiple-alert-scheduler-rules",
-              "api-reference/v5/alert-scheduler-rule-service/update-an-alert-scheduler-rule",
-              "api-reference/v5/alert-scheduler-rule-service/update-multiple-alert-scheduler-rules"
+              "api-reference/v3/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
+              "api-reference/v3/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
+              "api-reference/v3/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
+              "api-reference/v3/alert-scheduler-rule-service/get-an-alert-scheduler-rule",
+              "api-reference/v3/alert-scheduler-rule-service/get-multiple-alert-scheduler-rules",
+              "api-reference/v3/alert-scheduler-rule-service/update-an-alert-scheduler-rule",
+              "api-reference/v3/alert-scheduler-rule-service/update-multiple-alert-scheduler-rules"
             ]
           },
           {
             "group": "API Keys Service",
             "pages": [
-              "api-reference/v5/api-keys-service/overview",
-              "api-reference/v5/api-keys-service/create-api-key",
-              "api-reference/v5/api-keys-service/delete-api-key",
-              "api-reference/v5/api-keys-service/get-\"send-data\"-api-keys",
-              "api-reference/v5/api-keys-service/get-api-key",
-              "api-reference/v5/api-keys-service/update-api-key"
+              "api-reference/v3/api-keys-service/overview",
+              "api-reference/v3/api-keys-service/create-api-key",
+              "api-reference/v3/api-keys-service/delete-api-key",
+              "api-reference/v3/api-keys-service/get-\"send-data\"-api-keys",
+              "api-reference/v3/api-keys-service/get-api-key",
+              "api-reference/v3/api-keys-service/update-api-key"
             ]
           },
           {
             "group": "Connectors Service",
             "pages": [
-              "api-reference/v5/connectors-service/overview",
-              "api-reference/v5/connectors-service/batch-get-connectors",
-              "api-reference/v5/connectors-service/batch-get-connectors-summaries",
-              "api-reference/v5/connectors-service/create-a-connector",
-              "api-reference/v5/connectors-service/delete-a-connector",
-              "api-reference/v5/connectors-service/get-a-connector",
-              "api-reference/v5/connectors-service/get-connector-type-summaries",
-              "api-reference/v5/connectors-service/list-connector-summaries",
-              "api-reference/v5/connectors-service/list-connectors",
-              "api-reference/v5/connectors-service/replace-a-connector"
+              "api-reference/v3/connectors-service/overview",
+              "api-reference/v3/connectors-service/batch-get-connectors",
+              "api-reference/v3/connectors-service/batch-get-connectors-summaries",
+              "api-reference/v3/connectors-service/create-a-connector",
+              "api-reference/v3/connectors-service/delete-a-connector",
+              "api-reference/v3/connectors-service/get-a-connector",
+              "api-reference/v3/connectors-service/get-connector-type-summaries",
+              "api-reference/v3/connectors-service/list-connector-summaries",
+              "api-reference/v3/connectors-service/list-connectors",
+              "api-reference/v3/connectors-service/replace-a-connector"
             ]
           },
           {
             "group": "Contextual Data Integration Service",
             "pages": [
-              "api-reference/v5/contextual-data-integration-service/overview",
-              "api-reference/v5/contextual-data-integration-service/delete-contextual-data-integration",
-              "api-reference/v5/contextual-data-integration-service/get-all-contextual-data-integrations-accessible",
-              "api-reference/v5/contextual-data-integration-service/get-contextual-data-integration-definition",
-              "api-reference/v5/contextual-data-integration-service/get-contextual-data-integration-details",
-              "api-reference/v5/contextual-data-integration-service/save-contextual-data-integration",
-              "api-reference/v5/contextual-data-integration-service/test-contextual-data-integration",
-              "api-reference/v5/contextual-data-integration-service/update-contextual-data-integration"
+              "api-reference/v3/contextual-data-integration-service/overview",
+              "api-reference/v3/contextual-data-integration-service/delete-contextual-data-integration",
+              "api-reference/v3/contextual-data-integration-service/get-all-contextual-data-integrations-accessible",
+              "api-reference/v3/contextual-data-integration-service/get-contextual-data-integration-definition",
+              "api-reference/v3/contextual-data-integration-service/get-contextual-data-integration-details",
+              "api-reference/v3/contextual-data-integration-service/save-contextual-data-integration",
+              "api-reference/v3/contextual-data-integration-service/test-contextual-data-integration",
+              "api-reference/v3/contextual-data-integration-service/update-contextual-data-integration"
             ]
           },
           {
             "group": "Custom Enrichments Service",
             "pages": [
-              "api-reference/v5/custom-enrichments-service/overview",
-              "api-reference/v5/custom-enrichments-service/create-custom-enrichments",
-              "api-reference/v5/custom-enrichments-service/delete-custom-enrichments",
-              "api-reference/v5/custom-enrichments-service/get-custom-enrichment",
-              "api-reference/v5/custom-enrichments-service/get-custom-enrichments",
-              "api-reference/v5/custom-enrichments-service/search-custom-enrichment-data",
-              "api-reference/v5/custom-enrichments-service/update-custom-enrichment"
+              "api-reference/v3/custom-enrichments-service/overview",
+              "api-reference/v3/custom-enrichments-service/create-custom-enrichments",
+              "api-reference/v3/custom-enrichments-service/delete-custom-enrichments",
+              "api-reference/v3/custom-enrichments-service/get-custom-enrichment",
+              "api-reference/v3/custom-enrichments-service/get-custom-enrichments",
+              "api-reference/v3/custom-enrichments-service/search-custom-enrichment-data",
+              "api-reference/v3/custom-enrichments-service/update-custom-enrichment"
             ]
           },
           {
             "group": "Dashboard Folders Service",
             "pages": [
-              "api-reference/v5/dashboard-folders-service/overview",
-              "api-reference/v5/dashboard-folders-service/create-a-dashboard-folder",
-              "api-reference/v5/dashboard-folders-service/delete-a-dashboard-folder",
-              "api-reference/v5/dashboard-folders-service/get-a-dashboard-folder",
-              "api-reference/v5/dashboard-folders-service/list-dashboard-folders",
-              "api-reference/v5/dashboard-folders-service/replace-a-dashboard-folder"
+              "api-reference/v3/dashboard-folders-service/overview",
+              "api-reference/v3/dashboard-folders-service/create-a-dashboard-folder",
+              "api-reference/v3/dashboard-folders-service/delete-a-dashboard-folder",
+              "api-reference/v3/dashboard-folders-service/get-a-dashboard-folder",
+              "api-reference/v3/dashboard-folders-service/list-dashboard-folders",
+              "api-reference/v3/dashboard-folders-service/replace-a-dashboard-folder"
             ]
           },
           {
             "group": "Dashboard Service",
             "pages": [
-              "api-reference/v5/dashboard-service/overview",
-              "api-reference/v5/dashboard-service/add-dashboard-to-favorites",
-              "api-reference/v5/dashboard-service/assign-a-dashboard-to-a-folder",
-              "api-reference/v5/dashboard-service/create-a-new-dashboard",
-              "api-reference/v5/dashboard-service/delete-a-dashboard",
-              "api-reference/v5/dashboard-service/get-a-dashboard",
-              "api-reference/v5/dashboard-service/get-a-dashboard-by-url-slug",
-              "api-reference/v5/dashboard-service/get-dashboard-catalog",
-              "api-reference/v5/dashboard-service/remove-dashboard-from-favorites",
-              "api-reference/v5/dashboard-service/replace-a-dashboard",
-              "api-reference/v5/dashboard-service/replace-the-default-dashboard"
+              "api-reference/v3/dashboard-service/overview",
+              "api-reference/v3/dashboard-service/add-dashboard-to-favorites",
+              "api-reference/v3/dashboard-service/assign-a-dashboard-to-a-folder",
+              "api-reference/v3/dashboard-service/create-a-new-dashboard",
+              "api-reference/v3/dashboard-service/delete-a-dashboard",
+              "api-reference/v3/dashboard-service/get-a-dashboard",
+              "api-reference/v3/dashboard-service/get-a-dashboard-by-url-slug",
+              "api-reference/v3/dashboard-service/get-dashboard-catalog",
+              "api-reference/v3/dashboard-service/remove-dashboard-from-favorites",
+              "api-reference/v3/dashboard-service/replace-a-dashboard",
+              "api-reference/v3/dashboard-service/replace-the-default-dashboard"
             ]
           },
           {
             "group": "Data Usage Service",
             "pages": [
-              "api-reference/v5/data-usage-service/overview",
-              "api-reference/v5/data-usage-service/get-daily-usage-evaluation-tokens",
-              "api-reference/v5/data-usage-service/get-daily-usage-processed-gbs",
-              "api-reference/v5/data-usage-service/get-daily-usage-units",
-              "api-reference/v5/data-usage-service/get-data-usage",
-              "api-reference/v5/data-usage-service/get-data-usage-metrics-export-status",
-              "api-reference/v5/data-usage-service/get-logs-count",
-              "api-reference/v5/data-usage-service/get-spans-count",
-              "api-reference/v5/data-usage-service/update-data-usage-metrics-export-status"
+              "api-reference/v3/data-usage-service/overview",
+              "api-reference/v3/data-usage-service/get-daily-usage-evaluation-tokens",
+              "api-reference/v3/data-usage-service/get-daily-usage-processed-gbs",
+              "api-reference/v3/data-usage-service/get-daily-usage-units",
+              "api-reference/v3/data-usage-service/get-data-usage",
+              "api-reference/v3/data-usage-service/get-data-usage-metrics-export-status",
+              "api-reference/v3/data-usage-service/get-logs-count",
+              "api-reference/v3/data-usage-service/get-spans-count",
+              "api-reference/v3/data-usage-service/update-data-usage-metrics-export-status"
             ]
           },
           {
             "group": "Enrichments Service",
             "pages": [
-              "api-reference/v5/enrichments-service/overview",
-              "api-reference/v5/enrichments-service/add-enrichments",
-              "api-reference/v5/enrichments-service/atomic-overwrite-for-all-types-of-enrichments-the-request-is-the-desired-state-which-will-override-all-enrichments-warning:-this-operation-will-delete-all-existing-enrichments-and-replace-them-with-the-provided-ones",
-              "api-reference/v5/enrichments-service/atomic-overwrite-for-customenrichments-only",
-              "api-reference/v5/enrichments-service/delete-enrichments",
-              "api-reference/v5/enrichments-service/get-company-enrichment-settings",
-              "api-reference/v5/enrichments-service/get-enrichment-limit",
-              "api-reference/v5/enrichments-service/get-enrichments"
+              "api-reference/v3/enrichments-service/overview",
+              "api-reference/v3/enrichments-service/add-enrichments",
+              "api-reference/v3/enrichments-service/atomic-overwrite-enrichments",
+              "api-reference/v3/enrichments-service/delete-enrichments",
+              "api-reference/v3/enrichments-service/get-company-enrichment-settings",
+              "api-reference/v3/enrichments-service/get-enrichment-limit",
+              "api-reference/v3/enrichments-service/get-enrichments"
             ]
           },
           {
             "group": "Entities Service",
             "pages": [
-              "api-reference/v5/entities-service/overview",
-              "api-reference/v5/entities-service/list-entity-subtypes",
-              "api-reference/v5/entities-service/list-entity-types"
-            ]
-          },
-          {
-            "group": "Events Service",
-            "pages": [
-              "api-reference/v5/events-service/overview",
-              "api-reference/v5/events-service/batch-get-event",
-              "api-reference/v5/events-service/get-event",
-              "api-reference/v5/events-service/get-events-statistics",
-              "api-reference/v5/events-service/list-alert-events",
-              "api-reference/v5/events-service/list-events",
-              "api-reference/v5/events-service/list-events-count"
+              "api-reference/v3/entities-service/overview",
+              "api-reference/v3/entities-service/list-entity-subtypes",
+              "api-reference/v3/entities-service/list-entity-types"
             ]
           },
           {
             "group": "Events2Metrics Service",
             "pages": [
-              "api-reference/v5/events2metrics-service/overview",
-              "api-reference/v5/events2metrics-service/atomic-batch-execute-e2m",
-              "api-reference/v5/events2metrics-service/create-a-new-e2m",
-              "api-reference/v5/events2metrics-service/delete-an-e2m",
-              "api-reference/v5/events2metrics-service/get-an-e2m",
-              "api-reference/v5/events2metrics-service/get-e2m-limits",
-              "api-reference/v5/events2metrics-service/list-e2m-labels-cardinality",
-              "api-reference/v5/events2metrics-service/list-e2ms",
-              "api-reference/v5/events2metrics-service/replace-an-e2m"
+              "api-reference/v3/events2metrics-service/overview",
+              "api-reference/v3/events2metrics-service/atomic-batch-execute-e2m",
+              "api-reference/v3/events2metrics-service/create-a-new-e2m",
+              "api-reference/v3/events2metrics-service/delete-an-e2m",
+              "api-reference/v3/events2metrics-service/get-an-e2m",
+              "api-reference/v3/events2metrics-service/get-e2m-limits",
+              "api-reference/v3/events2metrics-service/list-e2m-labels-cardinality",
+              "api-reference/v3/events2metrics-service/list-e2ms",
+              "api-reference/v3/events2metrics-service/replace-an-e2m"
             ]
           },
           {
             "group": "Extension Deployment Service",
             "pages": [
-              "api-reference/v5/extension-deployment-service/overview",
-              "api-reference/v5/extension-deployment-service/deploy-extension",
-              "api-reference/v5/extension-deployment-service/get-deployed-extensions",
-              "api-reference/v5/extension-deployment-service/revert-deployment-of-extension",
-              "api-reference/v5/extension-deployment-service/update-extension"
+              "api-reference/v3/extension-deployment-service/overview",
+              "api-reference/v3/extension-deployment-service/deploy-extension",
+              "api-reference/v3/extension-deployment-service/get-deployed-extensions",
+              "api-reference/v3/extension-deployment-service/revert-deployment-of-extension",
+              "api-reference/v3/extension-deployment-service/update-extension"
             ]
           },
           {
             "group": "Extension Service",
             "pages": [
-              "api-reference/v5/extension-service/overview",
-              "api-reference/v5/extension-service/get-all-extensions",
-              "api-reference/v5/extension-service/get-extension-by-id"
+              "api-reference/v3/extension-service/overview",
+              "api-reference/v3/extension-service/get-all-extensions",
+              "api-reference/v3/extension-service/get-extension-by-id"
             ]
           },
           {
             "group": "Extension Testing Service",
             "pages": [
-              "api-reference/v5/extension-testing-service/overview",
-              "api-reference/v5/extension-testing-service/cleanup-testing-extension",
-              "api-reference/v5/extension-testing-service/initialize-testing-revision",
-              "api-reference/v5/extension-testing-service/test-extension-revision"
+              "api-reference/v3/extension-testing-service/overview",
+              "api-reference/v3/extension-testing-service/cleanup-testing-extension",
+              "api-reference/v3/extension-testing-service/initialize-testing-revision",
+              "api-reference/v3/extension-testing-service/test-extension-revision"
             ]
           },
           {
             "group": "Folders for Views Service",
             "pages": [
-              "api-reference/v5/folders-for-views-service/overview",
-              "api-reference/v5/folders-for-views-service/create-view-folder-service",
-              "api-reference/v5/folders-for-views-service/delete-view-folder-service",
-              "api-reference/v5/folders-for-views-service/get-view-folder-service",
-              "api-reference/v5/folders-for-views-service/list-view-folders-service",
-              "api-reference/v5/folders-for-views-service/replace-view-folder-service"
+              "api-reference/v3/folders-for-views-service/overview",
+              "api-reference/v3/folders-for-views-service/create-view-folder-service",
+              "api-reference/v3/folders-for-views-service/delete-view-folder-service",
+              "api-reference/v3/folders-for-views-service/get-view-folder-service",
+              "api-reference/v3/folders-for-views-service/list-view-folders-service",
+              "api-reference/v3/folders-for-views-service/replace-view-folder-service"
             ]
           },
           {
             "group": "Global Routers Service",
             "pages": [
-              "api-reference/v5/global-routers-service/overview",
-              "api-reference/v5/global-routers-service/batch-get-global-routers",
-              "api-reference/v5/global-routers-service/create-global-router",
-              "api-reference/v5/global-routers-service/delete-global-router",
-              "api-reference/v5/global-routers-service/get-global-router",
-              "api-reference/v5/global-routers-service/list-global-routers",
-              "api-reference/v5/global-routers-service/replace-global-router"
+              "api-reference/v3/global-routers-service/overview",
+              "api-reference/v3/global-routers-service/batch-get-global-routers",
+              "api-reference/v3/global-routers-service/create-global-router",
+              "api-reference/v3/global-routers-service/delete-global-router",
+              "api-reference/v3/global-routers-service/get-global-router",
+              "api-reference/v3/global-routers-service/list-global-routers",
+              "api-reference/v3/global-routers-service/replace-global-router"
             ]
           },
           {
             "group": "Incidents Service",
             "pages": [
-              "api-reference/v5/incidents-service/overview",
-              "api-reference/v5/incidents-service/acknowledge-incident-by-event-id",
-              "api-reference/v5/incidents-service/acknowledge-incidents",
-              "api-reference/v5/incidents-service/assign-incidents-to-a-user",
-              "api-reference/v5/incidents-service/close-incidents",
-              "api-reference/v5/incidents-service/get-available-filter-values",
-              "api-reference/v5/incidents-service/get-available-incident-event-filter-values",
-              "api-reference/v5/incidents-service/get-incident-aggregations",
-              "api-reference/v5/incidents-service/get-incident-by-event-id",
-              "api-reference/v5/incidents-service/get-incident-by-id",
-              "api-reference/v5/incidents-service/get-incident-events",
-              "api-reference/v5/incidents-service/get-multiple-incidents-by-ids",
-              "api-reference/v5/incidents-service/get-total-count-of-incident-events",
-              "api-reference/v5/incidents-service/list-incident-events-with-filters",
-              "api-reference/v5/incidents-service/list-incidents-with-filters",
-              "api-reference/v5/incidents-service/remove-incident-user-assignments",
-              "api-reference/v5/incidents-service/resolve-incident-by-event-id",
-              "api-reference/v5/incidents-service/resolve-incidents"
+              "api-reference/v3/incidents-service/overview",
+              "api-reference/v3/incidents-service/acknowledge-incident-by-event-id",
+              "api-reference/v3/incidents-service/acknowledge-incidents",
+              "api-reference/v3/incidents-service/assign-incidents-to-a-user",
+              "api-reference/v3/incidents-service/close-incidents",
+              "api-reference/v3/incidents-service/get-available-filter-values",
+              "api-reference/v3/incidents-service/get-available-incident-event-filter-values",
+              "api-reference/v3/incidents-service/get-incident-aggregations",
+              "api-reference/v3/incidents-service/get-incident-by-event-id",
+              "api-reference/v3/incidents-service/get-incident-by-id",
+              "api-reference/v3/incidents-service/get-incident-events",
+              "api-reference/v3/incidents-service/get-multiple-incidents-by-ids",
+              "api-reference/v3/incidents-service/get-total-count-of-incident-events",
+              "api-reference/v3/incidents-service/list-incident-events-with-filters",
+              "api-reference/v3/incidents-service/list-incidents-with-filters",
+              "api-reference/v3/incidents-service/remove-incident-user-assignments",
+              "api-reference/v3/incidents-service/resolve-incident-by-event-id",
+              "api-reference/v3/incidents-service/resolve-incidents"
             ]
           },
           {
             "group": "Integration Service",
             "pages": [
-              "api-reference/v5/integration-service/overview",
-              "api-reference/v5/integration-service/delete-integration",
-              "api-reference/v5/integration-service/get-all-integrations",
-              "api-reference/v5/integration-service/get-deployed-integration",
-              "api-reference/v5/integration-service/get-integration-definition",
-              "api-reference/v5/integration-service/get-integration-details",
-              "api-reference/v5/integration-service/get-integration-template",
-              "api-reference/v5/integration-service/get-managed-integration-status",
-              "api-reference/v5/integration-service/get-rum-integration-versions-data",
-              "api-reference/v5/integration-service/list-managed-integration-keys",
-              "api-reference/v5/integration-service/save-integration-registration-metadata",
-              "api-reference/v5/integration-service/test-integration",
-              "api-reference/v5/integration-service/trigger-sync-of-rum-integration-data",
-              "api-reference/v5/integration-service/update-integration"
+              "api-reference/v3/integration-service/overview",
+              "api-reference/v3/integration-service/delete-integration",
+              "api-reference/v3/integration-service/get-all-integrations",
+              "api-reference/v3/integration-service/get-deployed-integration",
+              "api-reference/v3/integration-service/get-integration-definition",
+              "api-reference/v3/integration-service/get-integration-details",
+              "api-reference/v3/integration-service/get-integration-template",
+              "api-reference/v3/integration-service/get-managed-integration-status",
+              "api-reference/v3/integration-service/get-rum-integration-versions-data",
+              "api-reference/v3/integration-service/list-managed-integration-keys",
+              "api-reference/v3/integration-service/save-integration-registration-metadata",
+              "api-reference/v3/integration-service/test-integration",
+              "api-reference/v3/integration-service/trigger-sync-of-rum-integration-data",
+              "api-reference/v3/integration-service/update-integration"
             ]
           },
           {
             "group": "IP Access Service",
             "pages": [
-              "api-reference/v5/ip-access-service/overview",
-              "api-reference/v5/ip-access-service/create-company-ip-access-settings",
-              "api-reference/v5/ip-access-service/delete-company-ip-access-settings",
-              "api-reference/v5/ip-access-service/get-company-ip-access-settings",
-              "api-reference/v5/ip-access-service/replace-company-ip-access-settings"
+              "api-reference/v3/ip-access-service/overview",
+              "api-reference/v3/ip-access-service/create-company-ip-access-settings",
+              "api-reference/v3/ip-access-service/delete-company-ip-access-settings",
+              "api-reference/v3/ip-access-service/get-company-ip-access-settings",
+              "api-reference/v3/ip-access-service/replace-company-ip-access-settings"
             ]
           },
           {
             "group": "Metrics Data Archive Service",
             "pages": [
-              "api-reference/v5/metrics-data-archive-service/configuretenant",
-              "api-reference/v5/metrics-data-archive-service/disablearchive",
-              "api-reference/v5/metrics-data-archive-service/enablearchive",
-              "api-reference/v5/metrics-data-archive-service/gettenantconfig",
-              "api-reference/v5/metrics-data-archive-service/update",
-              "api-reference/v5/metrics-data-archive-service/validatebucket"
+              "api-reference/v3/metrics-data-archive-service/configuretenant",
+              "api-reference/v3/metrics-data-archive-service/disablearchive",
+              "api-reference/v3/metrics-data-archive-service/enablearchive",
+              "api-reference/v3/metrics-data-archive-service/gettenantconfig",
+              "api-reference/v3/metrics-data-archive-service/update",
+              "api-reference/v3/metrics-data-archive-service/validatebucket"
             ]
           },
           {
             "group": "Outgoing Webhooks Service",
             "pages": [
-              "api-reference/v5/outgoing-webhooks-service/overview",
-              "api-reference/v5/outgoing-webhooks-service/create-an-outgoing-webhook",
-              "api-reference/v5/outgoing-webhooks-service/delete-an-outgoing-webhook",
-              "api-reference/v5/outgoing-webhooks-service/get-outgoing-webhook",
-              "api-reference/v5/outgoing-webhooks-service/get-outgoing-webhook-type-details",
-              "api-reference/v5/outgoing-webhooks-service/get-outgoing-webhook-types",
-              "api-reference/v5/outgoing-webhooks-service/list-all-outgoing-webhooks",
-              "api-reference/v5/outgoing-webhooks-service/list-outbound-webhooks-summary",
-              "api-reference/v5/outgoing-webhooks-service/list-outgoing-webhooks",
-              "api-reference/v5/outgoing-webhooks-service/test-an-existing-outgoing-webhook",
-              "api-reference/v5/outgoing-webhooks-service/test-an-outgoing-webhook",
-              "api-reference/v5/outgoing-webhooks-service/update-an-outgoing-webhook"
+              "api-reference/v3/outgoing-webhooks-service/overview",
+              "api-reference/v3/outgoing-webhooks-service/create-an-outgoing-webhook",
+              "api-reference/v3/outgoing-webhooks-service/delete-an-outgoing-webhook",
+              "api-reference/v3/outgoing-webhooks-service/get-outgoing-webhook",
+              "api-reference/v3/outgoing-webhooks-service/get-outgoing-webhook-type-details",
+              "api-reference/v3/outgoing-webhooks-service/get-outgoing-webhook-types",
+              "api-reference/v3/outgoing-webhooks-service/list-all-outgoing-webhooks",
+              "api-reference/v3/outgoing-webhooks-service/list-outbound-webhooks-summary",
+              "api-reference/v3/outgoing-webhooks-service/list-outgoing-webhooks",
+              "api-reference/v3/outgoing-webhooks-service/test-an-existing-outgoing-webhook",
+              "api-reference/v3/outgoing-webhooks-service/test-an-outgoing-webhook",
+              "api-reference/v3/outgoing-webhooks-service/update-an-outgoing-webhook"
             ]
           },
           {
             "group": "Policies Service",
             "pages": [
-              "api-reference/v5/policies-service/overview",
-              "api-reference/v5/policies-service/atomic-overwrite-log-policies",
-              "api-reference/v5/policies-service/atomic-overwrite-span-policies",
-              "api-reference/v5/policies-service/bulk-test-log-policies",
-              "api-reference/v5/policies-service/create-policy",
-              "api-reference/v5/policies-service/delete-policy",
-              "api-reference/v5/policies-service/get-company-policies",
-              "api-reference/v5/policies-service/get-policy-by-id",
-              "api-reference/v5/policies-service/get-policy-priority-settings",
-              "api-reference/v5/policies-service/reorder-policies",
-              "api-reference/v5/policies-service/replace-policy-settings",
-              "api-reference/v5/policies-service/update-policy"
+              "api-reference/v3/policies-service/overview",
+              "api-reference/v3/policies-service/atomic-batch-create-policy",
+              "api-reference/v3/policies-service/atomic-overwrite-log-policies",
+              "api-reference/v3/policies-service/atomic-overwrite-span-policies",
+              "api-reference/v3/policies-service/bulk-test-log-policies",
+              "api-reference/v3/policies-service/create-policy",
+              "api-reference/v3/policies-service/delete-policy",
+              "api-reference/v3/policies-service/get-company-policies",
+              "api-reference/v3/policies-service/get-policy-by-id",
+              "api-reference/v3/policies-service/get-policy-priority-settings",
+              "api-reference/v3/policies-service/reorder-policies",
+              "api-reference/v3/policies-service/replace-policy-settings",
+              "api-reference/v3/policies-service/toggle-policies",
+              "api-reference/v3/policies-service/update-policy"
             ]
           },
           {
             "group": "Presets Service",
             "pages": [
-              "api-reference/v5/presets-service/overview",
-              "api-reference/v5/presets-service/batch-get-presets",
-              "api-reference/v5/presets-service/create-custom-preset",
-              "api-reference/v5/presets-service/delete-custom-preset",
-              "api-reference/v5/presets-service/get-default-preset-summary",
-              "api-reference/v5/presets-service/get-preset",
-              "api-reference/v5/presets-service/get-system-default-preset-summary",
-              "api-reference/v5/presets-service/list-preset-summaries",
-              "api-reference/v5/presets-service/replace-custom-preset",
-              "api-reference/v5/presets-service/set-custom-preset-as-default",
-              "api-reference/v5/presets-service/set-preset-as-default"
-            ]
-          },
-          {
-            "group": "Quota Allocation Rule Set Service",
-            "pages": [
-              "api-reference/v5/quota-allocation-rule-set-service/create-quota-allocation-rule-set",
-              "api-reference/v5/quota-allocation-rule-set-service/delete-quota-allocation-rule-set",
-              "api-reference/v5/quota-allocation-rule-set-service/get-quota-allocation-rule-set",
-              "api-reference/v5/quota-allocation-rule-set-service/replace-quota-allocation-rule-set"
+              "api-reference/v3/presets-service/overview",
+              "api-reference/v3/presets-service/batch-get-presets",
+              "api-reference/v3/presets-service/create-custom-preset",
+              "api-reference/v3/presets-service/delete-custom-preset",
+              "api-reference/v3/presets-service/get-default-preset-summary",
+              "api-reference/v3/presets-service/get-preset",
+              "api-reference/v3/presets-service/get-system-default-preset-summary",
+              "api-reference/v3/presets-service/list-preset-summaries",
+              "api-reference/v3/presets-service/replace-custom-preset",
+              "api-reference/v3/presets-service/set-custom-preset-as-default",
+              "api-reference/v3/presets-service/set-preset-as-default"
             ]
           },
           {
             "group": "Recording Rules Service",
             "pages": [
-              "api-reference/v5/recording-rules-service/overview",
-              "api-reference/v5/recording-rules-service/create-recording-rules",
-              "api-reference/v5/recording-rules-service/delete-recording-rules",
-              "api-reference/v5/recording-rules-service/get-recording-rules",
-              "api-reference/v5/recording-rules-service/list-recording-rules",
-              "api-reference/v5/recording-rules-service/update-recording-rules"
+              "api-reference/v3/recording-rules-service/overview",
+              "api-reference/v3/recording-rules-service/create-recording-rules",
+              "api-reference/v3/recording-rules-service/delete-recording-rules",
+              "api-reference/v3/recording-rules-service/get-recording-rules",
+              "api-reference/v3/recording-rules-service/list-recording-rules",
+              "api-reference/v3/recording-rules-service/update-recording-rules"
             ]
           },
           {
             "group": "Retentions Service",
             "pages": [
-              "api-reference/v5/retentions-service/overview",
-              "api-reference/v5/retentions-service/activate-retentions",
-              "api-reference/v5/retentions-service/get-retentions",
-              "api-reference/v5/retentions-service/get-retentions-enabled",
-              "api-reference/v5/retentions-service/update-retentions"
+              "api-reference/v3/retentions-service/overview",
+              "api-reference/v3/retentions-service/activate-retentions",
+              "api-reference/v3/retentions-service/get-retentions",
+              "api-reference/v3/retentions-service/get-retentions-enabled",
+              "api-reference/v3/retentions-service/update-retentions"
             ]
           },
           {
             "group": "Role Management Service",
             "pages": [
-              "api-reference/v5/role-management-service/create-role",
-              "api-reference/v5/role-management-service/delete-role",
-              "api-reference/v5/role-management-service/get-custom-role",
-              "api-reference/v5/role-management-service/list-custom-roles",
-              "api-reference/v5/role-management-service/list-system-roles",
-              "api-reference/v5/role-management-service/update-role"
+              "api-reference/v3/role-management-service/create-role",
+              "api-reference/v3/role-management-service/delete-role",
+              "api-reference/v3/role-management-service/get-custom-role",
+              "api-reference/v3/role-management-service/list-custom-roles",
+              "api-reference/v3/role-management-service/list-system-roles",
+              "api-reference/v3/role-management-service/update-role"
             ]
           },
           {
             "group": "Rule Groups Service",
             "pages": [
-              "api-reference/v5/rule-groups-service/overview",
-              "api-reference/v5/rule-groups-service/bulk-delete-rule-group",
-              "api-reference/v5/rule-groups-service/create-rule-group",
-              "api-reference/v5/rule-groups-service/delete-rule-group",
-              "api-reference/v5/rule-groups-service/get-company-usage-limits",
-              "api-reference/v5/rule-groups-service/get-rule-group",
-              "api-reference/v5/rule-groups-service/get-rule-group-model-mapping",
-              "api-reference/v5/rule-groups-service/list-rule-groups",
-              "api-reference/v5/rule-groups-service/update-rule-group"
+              "api-reference/v3/rule-groups-service/overview",
+              "api-reference/v3/rule-groups-service/bulk-delete-rule-group",
+              "api-reference/v3/rule-groups-service/create-rule-group",
+              "api-reference/v3/rule-groups-service/delete-rule-group",
+              "api-reference/v3/rule-groups-service/get-company-usage-limits",
+              "api-reference/v3/rule-groups-service/get-rule-group",
+              "api-reference/v3/rule-groups-service/get-rule-group-model-mapping",
+              "api-reference/v3/rule-groups-service/list-rule-groups",
+              "api-reference/v3/rule-groups-service/update-rule-group"
             ]
           },
           {
             "group": "SAML Configuration Service",
             "pages": [
-              "api-reference/v5/saml-configuration-service/overview",
-              "api-reference/v5/saml-configuration-service/activatedeactivate-saml",
-              "api-reference/v5/saml-configuration-service/get-saml-configuration",
-              "api-reference/v5/saml-configuration-service/get-sp-parameters",
-              "api-reference/v5/saml-configuration-service/set-idp-parameters"
+              "api-reference/v3/saml-configuration-service/overview",
+              "api-reference/v3/saml-configuration-service/activatedeactivate-saml",
+              "api-reference/v3/saml-configuration-service/get-saml-configuration",
+              "api-reference/v3/saml-configuration-service/get-sp-parameters",
+              "api-reference/v3/saml-configuration-service/set-idp-parameters"
             ]
           },
           {
             "group": "Scopes Service",
             "pages": [
-              "api-reference/v5/scopes-service/overview",
-              "api-reference/v5/scopes-service/create-scope",
-              "api-reference/v5/scopes-service/delete-scope",
-              "api-reference/v5/scopes-service/get-team-scopes",
-              "api-reference/v5/scopes-service/get-team-scopes-by-ids",
-              "api-reference/v5/scopes-service/update-scope"
+              "api-reference/v3/scopes-service/overview",
+              "api-reference/v3/scopes-service/create-scope",
+              "api-reference/v3/scopes-service/delete-scope",
+              "api-reference/v3/scopes-service/get-team-scopes",
+              "api-reference/v3/scopes-service/get-team-scopes-by-ids",
+              "api-reference/v3/scopes-service/update-scope"
             ]
           },
           {
             "group": "SLOs Service",
             "pages": [
-              "api-reference/v5/slos-service/overview",
-              "api-reference/v5/slos-service/batch-execute-slo",
-              "api-reference/v5/slos-service/batch-get-slo",
-              "api-reference/v5/slos-service/create-slo",
-              "api-reference/v5/slos-service/delete-slo",
-              "api-reference/v5/slos-service/get-slo",
-              "api-reference/v5/slos-service/get-slo-zero-state",
-              "api-reference/v5/slos-service/list-slos",
-              "api-reference/v5/slos-service/replace-slo",
-              "api-reference/v5/slos-service/replace-slo-pre-validate-alerts"
+              "api-reference/v3/slos-service/overview",
+              "api-reference/v3/slos-service/batch-execute-slo",
+              "api-reference/v3/slos-service/batch-get-slo",
+              "api-reference/v3/slos-service/create-slo",
+              "api-reference/v3/slos-service/delete-slo",
+              "api-reference/v3/slos-service/get-slo",
+              "api-reference/v3/slos-service/get-slo-zero-state",
+              "api-reference/v3/slos-service/list-slos",
+              "api-reference/v3/slos-service/replace-slo",
+              "api-reference/v3/slos-service/replace-slo-pre-validate-alerts"
             ]
           },
           {
             "group": "Target Service",
             "pages": [
-              "api-reference/v5/target-service/overview",
-              "api-reference/v5/target-service/get-target",
-              "api-reference/v5/target-service/set-target"
+              "api-reference/v3/target-service/overview",
+              "api-reference/v3/target-service/get-target",
+              "api-reference/v3/target-service/set-target"
             ]
           },
           {
             "group": "Team Config Service",
             "pages": [
-              "api-reference/v5/team-config-service/create-a-team-configuration",
-              "api-reference/v5/team-config-service/delete-a-team-configuration",
-              "api-reference/v5/team-config-service/get-a-team-configuration",
-              "api-reference/v5/team-config-service/get-system-default-team-configuration-settings",
-              "api-reference/v5/team-config-service/get-the-active-team-configuration",
-              "api-reference/v5/team-config-service/update-a-team-configuration"
-            ]
-          },
-          {
-            "group": "Team Groups Management Service",
-            "pages": [
-              "api-reference/v5/team-groups-management-service/create-team-group",
-              "api-reference/v5/team-groups-management-service/delete-team-group",
-              "api-reference/v5/team-groups-management-service/get-group-users",
-              "api-reference/v5/team-groups-management-service/get-team-group",
-              "api-reference/v5/team-groups-management-service/get-team-group-by-name",
-              "api-reference/v5/team-groups-management-service/get-team-groups",
-              "api-reference/v5/team-groups-management-service/update-team-group"
+              "api-reference/v3/team-config-service/create-a-team-configuration",
+              "api-reference/v3/team-config-service/delete-a-team-configuration",
+              "api-reference/v3/team-config-service/get-a-team-configuration",
+              "api-reference/v3/team-config-service/get-system-default-team-configuration-settings",
+              "api-reference/v3/team-config-service/get-the-active-team-configuration",
+              "api-reference/v3/team-config-service/update-a-team-configuration"
             ]
           },
           {
             "group": "Views Service",
             "pages": [
-              "api-reference/v5/views-service/overview",
-              "api-reference/v5/views-service/create-a-view-service",
-              "api-reference/v5/views-service/delete-view-service",
-              "api-reference/v5/views-service/get-view-service",
-              "api-reference/v5/views-service/list-views-service",
-              "api-reference/v5/views-service/replace-a-view-service"
+              "api-reference/v3/views-service/overview",
+              "api-reference/v3/views-service/create-a-view-service",
+              "api-reference/v3/views-service/delete-view-service",
+              "api-reference/v3/views-service/get-view-service",
+              "api-reference/v3/views-service/list-views-service",
+              "api-reference/v3/views-service/replace-a-view-service"
             ]
           }
         ]

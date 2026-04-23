@@ -65,20 +65,20 @@ V5_SERVICES = {
 }
 
 VERSION_CONFIG = {
-    'v3': {
-        'display_name': 'v3',
-        'services': V3_SERVICES,
-        'intro_page': 'introduction-v3',
+    'v5': {
+        'display_name': 'v5',
+        'services': V5_SERVICES,
+        'intro_page': 'introduction-v5',
     },
     'v4': {
         'display_name': 'v4',
         'services': V4_SERVICES,
         'intro_page': 'introduction-v4',
     },
-    'v5': {
-        'display_name': 'v5',
-        'services': V5_SERVICES,
-        'intro_page': 'introduction-v5',
+    'v3': {
+        'display_name': 'v3',
+        'services': V3_SERVICES,
+        'intro_page': 'introduction-v3',
     },
 }
 
