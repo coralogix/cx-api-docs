@@ -1511,5 +1511,11 @@
     "playground": {
       "display": "none"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/api-reference/latest/:slug*",
+      "destination": "/api-reference/v5/:slug*"
+    }
+  ]
 }
