@@ -1,0 +1,132 @@
+name: Sync OpenAPI from openapi-facade
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  repository_dispatch:
+    types: [facade-spec-updated]
+
+  workflow_dispatch:
+    inputs:
+      facade_ref:
+        description: "openapi-facade ref (commit SHA or branch). Leave empty to use master HEAD."
+        required: false
+        type: string
+        default: ""
+
+env:
+  FACADE_REPO: coralogix/openapi-facade
+  FACADE_SPEC_PATH: may26/openapi.yaml
+  TARGET_SPEC_FILE: openapi_v5.yaml
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.MINTLIFY_SCRAPER_DEPLOY_KEY }}
+
+      - name: Set up nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Clone mintlify-scraper repository
+        run: git clone git@github.com:coralogix/mintlify-scraper.git
+
+      - name: Install mintlify-scraper
+        run: |
+          cd mintlify-scraper
+          npm install
+          npm install -g .
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Resolve openapi-facade ref
+        id: facade
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          DISPATCH_SHA="${{ github.event.client_payload.commit_sha }}"
+          INPUT_REF="${{ github.event.inputs.facade_ref }}"
+          if [ -n "$DISPATCH_SHA" ]; then
+            REF="$DISPATCH_SHA"
+          elif [ -n "$INPUT_REF" ]; then
+            REF="$INPUT_REF"
+          else
+            REF=$(gh api "repos/${FACADE_REPO}/commits/master" --jq .sha)
+          fi
+          if [ -z "$REF" ]; then
+            echo "::error::Could not resolve openapi-facade ref"
+            exit 1
+          fi
+          # Resolve to a full SHA (in case ref is a branch name)
+          SHA=$(gh api "repos/${FACADE_REPO}/commits/${REF}" --jq .sha)
+          echo "Using openapi-facade SHA: $SHA"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${SHA:0:7}" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch openapi.yaml from openapi-facade
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh api "repos/${FACADE_REPO}/contents/${FACADE_SPEC_PATH}?ref=${{ steps.facade.outputs.sha }}" \
+            --jq .content | base64 -d > "${TARGET_SPEC_FILE}"
+          if [ ! -s "${TARGET_SPEC_FILE}" ]; then
+            echo "::error::Fetched ${TARGET_SPEC_FILE} is empty"
+            exit 1
+          fi
+
+      - name: Rebuild docs
+        run: |
+          make clean
+          make build
+          rm -rf mintlify-scraper
+
+      - name: Skip if no changes
+        id: diff
+        run: |
+          if git diff --quiet -- openapi_v5.yaml api-reference docs.json; then
+            echo "No changes after sync; nothing to PR."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open Pull Request
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          base: main
+          branch: "facade-sync/${{ steps.facade.outputs.short_sha }}"
+          delete-branch: true
+          add-paths: |
+            openapi_v5.yaml
+            api-reference/**
+            docs.json
+          commit-message: "${{ steps.facade.outputs.short_sha }}: Sync openapi_v5 from openapi-facade"
+          title: "${{ steps.facade.outputs.short_sha }}: Sync openapi_v5 from openapi-facade"
+          body: |
+            Automated sync of `openapi_v5.yaml` from `coralogix/openapi-facade` `may26/openapi.yaml`.
+
+            Source commit: [`${{ steps.facade.outputs.short_sha }}`](https://github.com/coralogix/openapi-facade/commit/${{ steps.facade.outputs.sha }})
+
+            Regenerated:
+            - `openapi_v5.yaml`
+            - `api-reference/**` (mintlify-scrape output)
+            - `docs.json` (`build_navigation_file.py`)
+          labels: |
+            sync
+            facade-sync
