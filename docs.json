@@ -58,6 +58,7 @@
           {
             "group": "Alert Scheduler Rule Service",
             "pages": [
+              "api-reference/v5/alert-scheduler-rule-service/overview",
               "api-reference/v5/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
               "api-reference/v5/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
               "api-reference/v5/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
@@ -311,6 +312,7 @@
           {
             "group": "Metrics Data Archive Service",
             "pages": [
+              "api-reference/v5/metrics-data-archive-service/overview",
               "api-reference/v5/metrics-data-archive-service/configuretenant",
               "api-reference/v5/metrics-data-archive-service/disablearchive",
               "api-reference/v5/metrics-data-archive-service/enablearchive",
@@ -372,6 +374,7 @@
           {
             "group": "Quota Allocation Rule Set Service",
             "pages": [
+              "api-reference/v5/quota-allocation-rule-set-service/overview",
               "api-reference/v5/quota-allocation-rule-set-service/create-quota-allocation-rule-set",
               "api-reference/v5/quota-allocation-rule-set-service/delete-quota-allocation-rule-set",
               "api-reference/v5/quota-allocation-rule-set-service/get-quota-allocation-rule-set",
@@ -402,6 +405,7 @@
           {
             "group": "Role Management Service",
             "pages": [
+              "api-reference/v5/role-management-service/overview",
               "api-reference/v5/role-management-service/create-role",
               "api-reference/v5/role-management-service/delete-role",
               "api-reference/v5/role-management-service/get-custom-role",
@@ -482,6 +486,7 @@
           {
             "group": "Team Groups Management Service",
             "pages": [
+              "api-reference/v5/team-groups-management-service/overview",
               "api-reference/v5/team-groups-management-service/create-team-group",
               "api-reference/v5/team-groups-management-service/delete-team-group",
               "api-reference/v5/team-groups-management-service/get-group-users",
@@ -561,6 +566,7 @@
           {
             "group": "Alert Scheduler Rule Service",
             "pages": [
+              "api-reference/v4/alert-scheduler-rule-service/overview",
               "api-reference/v4/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
               "api-reference/v4/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
               "api-reference/v4/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
@@ -813,6 +819,7 @@
           {
             "group": "Metrics Data Archive Service",
             "pages": [
+              "api-reference/v4/metrics-data-archive-service/overview",
               "api-reference/v4/metrics-data-archive-service/configuretenant",
               "api-reference/v4/metrics-data-archive-service/disablearchive",
               "api-reference/v4/metrics-data-archive-service/enablearchive",
@@ -874,6 +881,7 @@
           {
             "group": "Quota Allocation Rule Set Service",
             "pages": [
+              "api-reference/v4/quota-allocation-rule-set-service/overview",
               "api-reference/v4/quota-allocation-rule-set-service/create-quota-allocation-rule-set",
               "api-reference/v4/quota-allocation-rule-set-service/delete-quota-allocation-rule-set",
               "api-reference/v4/quota-allocation-rule-set-service/get-quota-allocation-rule-set",
@@ -904,6 +912,7 @@
           {
             "group": "Role Management Service",
             "pages": [
+              "api-reference/v4/role-management-service/overview",
               "api-reference/v4/role-management-service/create-role",
               "api-reference/v4/role-management-service/delete-role",
               "api-reference/v4/role-management-service/get-custom-role",
@@ -984,6 +993,7 @@
           {
             "group": "Team Groups Management Service",
             "pages": [
+              "api-reference/v4/team-groups-management-service/overview",
               "api-reference/v4/team-groups-management-service/create-team-group",
               "api-reference/v4/team-groups-management-service/delete-team-group",
               "api-reference/v4/team-groups-management-service/get-group-users",
@@ -1063,6 +1073,7 @@
           {
             "group": "Alert Scheduler Rule Service",
             "pages": [
+              "api-reference/v3/alert-scheduler-rule-service/overview",
               "api-reference/v3/alert-scheduler-rule-service/create-an-alert-scheduler-rule",
               "api-reference/v3/alert-scheduler-rule-service/create-multiple-alert-scheduler-rules",
               "api-reference/v3/alert-scheduler-rule-service/delete-an-alert-scheduler-rule",
@@ -1303,6 +1314,7 @@
           {
             "group": "Metrics Data Archive Service",
             "pages": [
+              "api-reference/v3/metrics-data-archive-service/overview",
               "api-reference/v3/metrics-data-archive-service/configuretenant",
               "api-reference/v3/metrics-data-archive-service/disablearchive",
               "api-reference/v3/metrics-data-archive-service/enablearchive",
@@ -1387,6 +1399,7 @@
           {
             "group": "Role Management Service",
             "pages": [
+              "api-reference/v3/role-management-service/overview",
               "api-reference/v3/role-management-service/create-role",
               "api-reference/v3/role-management-service/delete-role",
               "api-reference/v3/role-management-service/get-custom-role",
