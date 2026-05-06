@@ -169,28 +169,25 @@ def build_navigation_structure(api_ref_path: Path) -> Dict[str, Any]:
 
 
 def copy_overviews(current_dir: Path, api_ref_path: Path):
-    """Copy service overview files into v5's service directories.
-
-    v3 and v4 are frozen: their existing overview.mdx files are left as-is and
-    not refreshed from service-overviews/. Only v5 tracks the latest spec.
-    """
+    """Copy service overview files to each version's service directories."""
     overviews_dir = current_dir / "service-overviews"
     if not overviews_dir.exists():
         print(f"Warning: {overviews_dir} does not exist, skipping overview copy")
         return
 
-    version_path = api_ref_path / "v5"
-    if not version_path.exists():
-        return
+    for version in VERSION_CONFIG.keys():
+        version_path = api_ref_path / version
+        if not version_path.exists():
+            continue
 
-    for overview_file in overviews_dir.glob("*-overview.mdx"):
-        service_name = overview_file.stem.replace("-overview", "")
-        service_dir = version_path / service_name
+        for overview_file in overviews_dir.glob("*-overview.mdx"):
+            service_name = overview_file.stem.replace("-overview", "")
+            service_dir = version_path / service_name
 
-        if service_dir.exists():
-            dest = service_dir / "overview.mdx"
-            shutil.copy(overview_file, dest)
-            print(f"  Copied {overview_file.name} -> v5/{service_name}/overview.mdx")
+            if service_dir.exists():
+                dest = service_dir / "overview.mdx"
+                shutil.copy(overview_file, dest)
+                print(f"  Copied {overview_file.name} -> {version}/{service_name}/overview.mdx")
 
 
 def main():
