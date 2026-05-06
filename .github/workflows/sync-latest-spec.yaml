@@ -1,4 +1,4 @@
-name: Sync OpenAPI from openapi-facade
+name: Sync OpenAPI Spec
 
 permissions:
   contents: write
