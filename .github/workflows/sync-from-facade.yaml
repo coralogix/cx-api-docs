@@ -100,7 +100,7 @@ jobs:
       - name: Skip if no changes
         id: diff
         run: |
-          if git diff --quiet -- openapi_v5.yaml api-reference docs.json; then
+          if git diff --quiet -- openapi_v5.yaml api-reference/v5 docs.json service-overviews; then
             echo "No changes after sync; nothing to PR."
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
@@ -117,7 +117,8 @@ jobs:
           delete-branch: true
           add-paths: |
             openapi_v5.yaml
-            api-reference/**
+            api-reference/v5/**
+            service-overviews/**
             docs.json
           commit-message: "${{ steps.facade.outputs.short_sha }}: Sync openapi_v5 from openapi-facade"
           title: "${{ steps.facade.outputs.short_sha }}: Sync openapi_v5 from openapi-facade"

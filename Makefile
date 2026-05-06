@@ -1,12 +1,10 @@
 .PHONY: clean build generate-overviews test install install-dev
 
 clean:
-	rm -rf api-reference
+	rm -rf api-reference/v5
 
 build:
-	mintlify-scrape openapi-file openapi_v3.yaml openapi_v3.yaml -o api-reference/v3 \
-	&& mintlify-scrape openapi-file openapi_v4.yaml openapi_v4.yaml -o api-reference/v4 \
-	&& mintlify-scrape openapi-file openapi_v5.yaml openapi_v5.yaml -o api-reference/v5 \
+	mintlify-scrape openapi-file openapi_v5.yaml openapi_v5.yaml -o api-reference/v5 \
 	&& python3 generate_service_overviews.py \
 	&& python3 build_navigation_file.py
 
