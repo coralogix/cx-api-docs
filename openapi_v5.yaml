@@ -166,6 +166,34 @@ paths:
       summary: Update API Keys Status
       tags:
         - API Keys Admin Service
+  /aaa/api-keys/v3/list:
+    get:
+      externalDocs:
+        url: ''
+      operationId: ApiKeysService_GetApiKeys
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApiKeysResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get API Keys
+      tags:
+        - API Keys Service
+      description: No description available
   /aaa/api-keys/v3/{key_id}:
     get:
       externalDocs:
@@ -1779,6 +1807,10 @@ paths:
                   items:
                     type: string
                   type: array
+                description:
+                  type: string
+                dpxlFilter:
+                  type: string
                 isPrivate:
                   type: boolean
                 name:
@@ -1791,6 +1823,10 @@ paths:
                   type: array
                 url:
                   type: string
+                urlFields:
+                  items:
+                    $ref: '#/components/schemas/UrlField'
+                  type: array
               type: object
       responses:
         '200':
@@ -2884,9 +2920,9 @@ paths:
           schema:
             oneOf:
               - $ref: >-
-                  #/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds
-              - $ref: >-
                   #/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
+              - $ref: >-
+                  #/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds
         - in: query
           name: next_page_token
           required: false
@@ -3557,56 +3593,6 @@ paths:
       summary: List events for a case
       tags:
         - Case Events service
-      x-coralogixPermissions:
-        - case:Read
-  /cases/cases/v1/{case_id}/external-references:
-    get:
-      description: >-
-        Retrieve all external references that link a case to external systems
-        such as ServiceNow. Returns the complete list of external references
-        associated with the specified case.
-
-
-        Requires the following permissions:
-
-        - `case:Read`
-      externalDocs:
-        url: ''
-      operationId: CasesService_GetCaseExternalReferences
-      parameters:
-        - in: path
-          name: case_id
-          required: true
-          schema:
-            description: The unique identifier of the case in UUID format
-            example: 550e8400-e29b-41d4-a716-446655440000
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetCaseExternalReferencesResponse'
-          description: ''
-        '400':
-          content:
-            application/json: {}
-          description: Bad Request
-        '401':
-          content:
-            application/json: {}
-          description: Unauthorized request
-        '404':
-          content:
-            application/json: {}
-          description: Case not found
-        '500':
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get external references for a case
-      tags:
-        - Cases service
       x-coralogixPermissions:
         - case:Read
   /cases/cases/v1/{case_id}/sync-external-thread-comments:
@@ -5140,11 +5126,11 @@ paths:
           schema:
             items:
               oneOf:
+                - $ref: '#/components/schemas/DimensionPillar'
                 - $ref: '#/components/schemas/DimensionGenericDimension'
                 - $ref: '#/components/schemas/DimensionTier'
                 - $ref: '#/components/schemas/DimensionSeverity'
                 - $ref: '#/components/schemas/DimensionPriority'
-                - $ref: '#/components/schemas/DimensionPillar'
             type: array
       responses:
         '200':
@@ -6043,8 +6029,8 @@ paths:
           schema:
             items:
               oneOf:
-                - $ref: '#/components/schemas/SearchClauseId'
                 - $ref: '#/components/schemas/SearchClauseName'
+                - $ref: '#/components/schemas/SearchClauseId'
             type: array
       responses:
         '200':
@@ -6320,8 +6306,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/E2MCreateParamsSpansQuery'
                 - $ref: '#/components/schemas/E2MCreateParamsLogsQuery'
+                - $ref: '#/components/schemas/E2MCreateParamsSpansQuery'
               type: object
       responses:
         '200':
@@ -6582,18 +6568,7 @@ paths:
                 description: Indicates if the incident is muted
                 type: boolean
               metaLabels:
-                items:
-                  externalDocs:
-                    url: ''
-                  properties:
-                    key:
-                      example: key
-                      type: string
-                    value:
-                      example: value
-                      type: string
-                  title: Incident meta label
-                  type: object
+                items: {}
                 type: array
               metaLabelsOp:
                 $ref: '#/components/schemas/v1.FilterOperator'
@@ -6701,11 +6676,35 @@ paths:
               url: ''
             properties:
               contextualLabels:
-                additionalProperties: {}
+                additionalProperties:
+                  description: Represents contextual label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    contextualLabelValues:
+                      items:
+                        type: string
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
-                additionalProperties: {}
+                additionalProperties:
+                  description: Represents display label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    displayLabelValues:
+                      items:
+                        type: string
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -6723,7 +6722,24 @@ paths:
                 items:
                   $ref: '#/components/schemas/IncidentStatus'
                 type: array
-              timestamp: {}
+              timestamp:
+                description: Represents a time range with start and end timestamps
+                externalDocs:
+                  url: ''
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    type: string
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    type: string
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
         - in: query
@@ -6804,11 +6820,35 @@ paths:
               url: ''
             properties:
               contextualLabels:
-                additionalProperties: {}
+                additionalProperties:
+                  description: Represents contextual label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    contextualLabelValues:
+                      items:
+                        type: string
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
-                additionalProperties: {}
+                additionalProperties:
+                  description: Represents display label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    displayLabelValues:
+                      items:
+                        type: string
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -6826,7 +6866,24 @@ paths:
                 items:
                   $ref: '#/components/schemas/IncidentStatus'
                 type: array
-              timestamp: {}
+              timestamp:
+                description: Represents a time range with start and end timestamps
+                externalDocs:
+                  url: ''
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    type: string
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    type: string
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
       responses:
@@ -7037,11 +7094,35 @@ paths:
               url: ''
             properties:
               contextualLabels:
-                additionalProperties: {}
+                additionalProperties:
+                  description: Represents contextual label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    contextualLabelValues:
+                      items:
+                        type: string
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
-                additionalProperties: {}
+                additionalProperties:
+                  description: Represents display label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    displayLabelValues:
+                      items:
+                        type: string
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -7059,7 +7140,24 @@ paths:
                 items:
                   $ref: '#/components/schemas/IncidentStatus'
                 type: array
-              timestamp: {}
+              timestamp:
+                description: Represents a time range with start and end timestamps
+                externalDocs:
+                  url: ''
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    type: string
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    type: string
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
       responses:
@@ -9264,9 +9362,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/UpdateRequestIbm'
                 - $ref: '#/components/schemas/UpdateRequestS3'
                 - $ref: '#/components/schemas/UpdateRequestGcs'
+                - $ref: '#/components/schemas/UpdateRequestIbm'
               type: object
       responses:
         '200':
@@ -9393,9 +9491,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/ValidateBucketRequestGcs'
                 - $ref: '#/components/schemas/ValidateBucketRequestIbm'
                 - $ref: '#/components/schemas/ValidateBucketRequestS3'
+                - $ref: '#/components/schemas/ValidateBucketRequestGcs'
               type: object
       responses:
         '200':
@@ -9438,7 +9536,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetConnectorSchemaResponse'
           description: ''
-      summary: GetConnectorSchema
+      summary: Get Connector Schema
+      tags:
+        - Connector Schema service
       description: No description available
   /notifications/notification-center/v1/connectors:
     get:
@@ -9628,7 +9728,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TestConnectorConfigResponse'
           description: ''
-      summary: TestConnectorConfig
+      summary: Test Connector Config
+      tags:
+        - Notifications testing service
       description: No description available
   /notifications/notification-center/v1/connectors/types/summaries:
     get:
@@ -9734,7 +9836,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TestDestinationResponse'
           description: ''
-      summary: TestDestination
+      summary: Test Destination
+      tags:
+        - Notifications testing service
       description: No description available
   /notifications/notification-center/v1/entity-types:
     get:
@@ -9797,7 +9901,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TestExistingConnectorResponse'
           description: ''
-      summary: TestExistingConnector
+      summary: Test Existing Connector
+      tags:
+        - Notifications testing service
       description: No description available
   /notifications/notification-center/v1/presets:
     get:
@@ -10000,7 +10106,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TestExistingPresetResponse'
           description: ''
-      summary: TestExistingPreset
+      summary: Test Existing Preset
+      tags:
+        - Notifications testing service
       description: No description available
   /notifications/notification-center/v1/presets/tests/config:
     post:
@@ -10033,7 +10141,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TestPresetConfigResponse'
           description: ''
-      summary: TestPresetConfig
+      summary: Test Preset Config
+      tags:
+        - Notifications testing service
       description: No description available
   /notifications/notification-center/v1/presets/{id}:
     get:
@@ -10237,7 +10347,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidateEntityLabelMatcherResponse'
           description: ''
-      summary: ValidateEntityLabelMatcher
+      summary: Validate Entity Label Matcher
+      tags:
+        - Global routers service
       description: No description available
   /notifications/notification-center/v1/routers/{id}:
     get:
@@ -10307,7 +10419,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TestRoutingConditionValidResponse'
           description: ''
-      summary: TestRoutingConditionValid
+      summary: Test Routing Condition Valid
+      tags:
+        - Notifications testing service
       description: No description available
   /notifications/notification-center/v1/template-render/tests:
     post:
@@ -10335,7 +10449,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TestTemplateRenderResponse'
           description: ''
-      summary: TestTemplateRender
+      summary: Test Template Render
+      tags:
+        - Notifications testing service
       description: No description available
   /parsing-rules/limits/v1:
     post:
@@ -10855,77 +10971,6 @@ paths:
       tags:
         - Recording Rules Service
       description: No description available
-  /slo/apm/v1/slos:
-    post:
-      externalDocs:
-        url: ''
-      operationId: ApmSloService_CreateApmSlo
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: Request to create a new APM SLO with automatic query generation
-              properties:
-                apmSlo:
-                  $ref: '#/components/schemas/ApmSloInput'
-                metricSource:
-                  $ref: '#/components/schemas/ApmSource'
-                silenceDataValidations:
-                  deprecated: true
-                  description: Skip data validation checks (deprecated)
-                  type: boolean
-              title: CreateApmSloRequest
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateApmSloResponse'
-          description: ''
-      summary: CreateApmSlo
-      description: No description available
-  /slo/apm/v1/{id}:
-    put:
-      externalDocs:
-        url: ''
-      operationId: ApmSloService_ReplaceApmSlo
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            description: ID of the SLO to replace
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: >-
-                Request to replace an existing APM SLO. Updates the
-                configuration and regenerates queries automatically.
-              properties:
-                apmSlo:
-                  $ref: '#/components/schemas/ApmSloInput'
-                metricSource:
-                  $ref: '#/components/schemas/ApmSource'
-                revision:
-                  $ref: '#/components/schemas/v1.Revision'
-                silenceDataValidations:
-                  deprecated: true
-                  description: Skip data validation checks (deprecated)
-                  type: boolean
-              title: ReplaceApmSloRequest
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReplaceApmSloResponse'
-          description: ''
-      summary: ReplaceApmSlo
-      description: No description available
   /slo/slos/v1:
     get:
       externalDocs:
@@ -10946,6 +10991,11 @@ paths:
                     - $ref: '#/components/schemas/SloFilterFieldSloType'
                     - $ref: '#/components/schemas/SloFilterFieldProductType'
                     - $ref: '#/components/schemas/SloFilterFieldServiceName'
+                    - $ref: >-
+                        #/components/schemas/SloFilterFieldOwnershipServiceValues
+                    - $ref: >-
+                        #/components/schemas/SloFilterFieldOwnershipEnvironmentValues
+                    - $ref: '#/components/schemas/SloFilterFieldOwnershipTeamValues'
                     - $ref: '#/components/schemas/SloFilterFieldConstFilter'
                     - $ref: '#/components/schemas/SloFilterFieldLabelName'
                 predicate:
@@ -11003,9 +11053,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/SloWindowBasedMetricSli'
                 - $ref: '#/components/schemas/SloApmSli'
                 - $ref: '#/components/schemas/SloRequestBasedMetricSli'
+                - $ref: '#/components/schemas/SloWindowBasedMetricSli'
               type: object
       responses:
         '200':
@@ -11046,9 +11096,9 @@ paths:
           application/json:
             schema:
               oneOf:
+                - $ref: '#/components/schemas/SloRequestBasedMetricSli'
                 - $ref: '#/components/schemas/SloWindowBasedMetricSli'
                 - $ref: '#/components/schemas/SloApmSli'
-                - $ref: '#/components/schemas/SloRequestBasedMetricSli'
               type: object
       responses:
         '200':
@@ -11229,9 +11279,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/SloApmSli'
                 - $ref: '#/components/schemas/SloRequestBasedMetricSli'
                 - $ref: '#/components/schemas/SloWindowBasedMetricSli'
+                - $ref: '#/components/schemas/SloApmSli'
               type: object
       responses:
         '200':
@@ -11542,8 +11592,8 @@ components:
       type: string
     ActionDefinition:
       oneOf:
-        - $ref: '#/components/schemas/ActionDefinitionCustomAction'
         - $ref: '#/components/schemas/ActionDefinitionGoToDashboardAction'
+        - $ref: '#/components/schemas/ActionDefinitionCustomAction'
     ActionDefinitionCustomAction:
       required:
         - customAction
@@ -11560,9 +11610,9 @@ components:
           $ref: '#/components/schemas/GoToDashboardTemplateAction'
     ActionExecutionRequest:
       oneOf:
+        - $ref: '#/components/schemas/ActionExecutionRequestDelete'
         - $ref: '#/components/schemas/ActionExecutionRequestCreate'
         - $ref: '#/components/schemas/ActionExecutionRequestReplace'
-        - $ref: '#/components/schemas/ActionExecutionRequestDelete'
     ActionExecutionRequestCreate:
       required:
         - create
@@ -11595,9 +11645,9 @@ components:
         url: ''
     ActionExecutionResponse:
       oneOf:
+        - $ref: '#/components/schemas/ActionExecutionResponseDelete'
         - $ref: '#/components/schemas/ActionExecutionResponseCreate'
         - $ref: '#/components/schemas/ActionExecutionResponseReplace'
-        - $ref: '#/components/schemas/ActionExecutionResponseDelete'
     ActionExecutionResponseCreate:
       required:
         - create
@@ -12027,19 +12077,19 @@ components:
         url: ''
     AlertDefProperties:
       oneOf:
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsRatioThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesMetricThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesSloThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesTracingThreshold'
         - $ref: '#/components/schemas/AlertDefPropertiesFlow'
         - $ref: '#/components/schemas/AlertDefPropertiesLogsAnomaly'
         - $ref: '#/components/schemas/AlertDefPropertiesMetricAnomaly'
         - $ref: '#/components/schemas/AlertDefPropertiesLogsNewValue'
         - $ref: '#/components/schemas/AlertDefPropertiesLogsUniqueCount'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsRatioThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesMetricThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesTracingThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesSloThreshold'
         - $ref: '#/components/schemas/AlertDefPropertiesLogsImmediate'
         - $ref: '#/components/schemas/AlertDefPropertiesTracingImmediate'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold'
     AlertDefProperties.EntityLabelsEntry:
       type: object
       properties:
@@ -13425,12 +13475,12 @@ components:
           $ref: '#/components/schemas/Annotation.Source'
     Annotation.Source:
       oneOf:
-        - $ref: '#/components/schemas/AnnotationSourceMetrics'
-        - $ref: '#/components/schemas/AnnotationSourceLogs'
-        - $ref: '#/components/schemas/AnnotationSourceSpans'
         - $ref: '#/components/schemas/AnnotationSourceDataprime'
         - $ref: '#/components/schemas/AnnotationSourceManual'
         - $ref: '#/components/schemas/AnnotationSourceEventRecurrence'
+        - $ref: '#/components/schemas/AnnotationSourceMetrics'
+        - $ref: '#/components/schemas/AnnotationSourceLogs'
+        - $ref: '#/components/schemas/AnnotationSourceSpans'
     Annotation.WidgetScope:
       oneOf:
         - $ref: '#/components/schemas/AnnotationWidgetScopeAllWidgetsVariant'
@@ -13850,42 +13900,30 @@ components:
       externalDocs:
         url: ''
     ApmSlo:
-      title: ApmSlo
       type: object
       properties:
         slo:
           $ref: '#/components/schemas/Slo'
-      description: APM SLO response containing the full SLO with generated queries.
-      externalDocs:
-        url: ''
     ApmSloInput:
-      title: ApmSloInput
       type: object
       properties:
         apmSli:
           $ref: '#/components/schemas/ApmSli'
         description:
           type: string
-          description: Optional description of the SLO
         labels:
           type: object
           additionalProperties:
             type: string
-          description: Optional labels for categorization
         name:
           type: string
-          description: Name of the SLO
+        ownershipTags:
+          $ref: '#/components/schemas/SloOwnershipTags'
         sloTimeFrame:
           $ref: '#/components/schemas/SloTimeFrame'
         targetThresholdPercentage:
           type: number
-          description: Target percentage (e.g., 99.9 for 99.9%)
           format: float
-      description: >-
-        Input for creating an APM SLO. Backend will generate queries
-        automatically from apm_sli configuration.
-      externalDocs:
-        url: ''
     ApmSloInput.LabelsEntry:
       type: object
       properties:
@@ -13910,6 +13948,13 @@ components:
       properties:
         value:
           type: string
+    ArchivePublicConfigurationGroupRequest:
+      type: object
+      properties:
+        cxId:
+          type: string
+    ArchivePublicConfigurationGroupResponse:
+      type: object
     ArchiveRetention:
       type: object
       properties:
@@ -14620,10 +14665,10 @@ components:
         url: ''
     BarChart.Query:
       oneOf:
+        - $ref: '#/components/schemas/BarChartQueryDataprime'
         - $ref: '#/components/schemas/BarChartQueryLogs'
         - $ref: '#/components/schemas/BarChartQuerySpans'
         - $ref: '#/components/schemas/BarChartQueryMetrics'
-        - $ref: '#/components/schemas/BarChartQueryDataprime'
     BarChart.SpansQuery:
       title: SpansQuery
       type: object
@@ -15452,6 +15497,9 @@ components:
           type: string
           description: When the case was acknowledged
           format: date-time
+        aiSummary:
+          type: string
+          description: AI summary of the case
         alertIndicators:
           type: array
           items:
@@ -15465,10 +15513,6 @@ components:
           description: When the case was created
           format: date-time
           example: '2025-09-22T10:30:00.000Z'
-        description:
-          type: string
-          description: Detailed description of the case
-          example: Investigating DB connection errors in prod
         duration:
           type: string
           description: Measures how long the Case is/was opened in milliseconds
@@ -15554,17 +15598,17 @@ components:
         url: ''
     CaseEventData:
       oneOf:
-        - $ref: '#/components/schemas/CaseEventDataUnassigned'
-        - $ref: '#/components/schemas/CaseEventDataComment'
-        - $ref: '#/components/schemas/CaseEventDataStatusChanged'
-        - $ref: '#/components/schemas/CaseEventDataNotificationSent'
         - $ref: '#/components/schemas/CaseEventDataNotificationFailed'
         - $ref: '#/components/schemas/CaseEventDataCreated'
-        - $ref: '#/components/schemas/CaseEventDataPriorityDetailsChanged'
         - $ref: '#/components/schemas/CaseEventDataTitleChangedEvent'
-        - $ref: '#/components/schemas/CaseEventDataAssigned'
-        - $ref: '#/components/schemas/CaseEventDataResolutionReasonChangedEvent'
         - $ref: '#/components/schemas/CaseEventDataChangeAssigneeFailed'
+        - $ref: '#/components/schemas/CaseEventDataAssigned'
+        - $ref: '#/components/schemas/CaseEventDataUnassigned'
+        - $ref: '#/components/schemas/CaseEventDataNotificationSent'
+        - $ref: '#/components/schemas/CaseEventDataPriorityDetailsChanged'
+        - $ref: '#/components/schemas/CaseEventDataResolutionReasonChangedEvent'
+        - $ref: '#/components/schemas/CaseEventDataComment'
+        - $ref: '#/components/schemas/CaseEventDataStatusChanged'
     CaseEventDataAssigned:
       title: Case event data
       required:
@@ -15686,24 +15730,6 @@ components:
       description: One-of wrapper for concrete case event types.
       externalDocs:
         url: ''
-    CaseExternalReference:
-      title: Case external reference
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the case in the external system
-          example: INC0012345
-        url:
-          type: string
-          description: The direct URL to view the case in the external system
-          example: >-
-            https://instance.service-now.com/nav_to.do?uri=incident.do?sys_id=abc123
-        vendor:
-          $ref: '#/components/schemas/ExternalReferenceVendor'
-      description: External reference linking a case to an external system
-      externalDocs:
-        url: ''
     CaseFilters:
       title: Case filters
       type: object
@@ -15723,6 +15749,10 @@ components:
           example:
             - CASE_CATEGORY_SECURITY
             - CASE_CATEGORY_AVAILABILITY
+        connectorTypeFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorTypeFilter'
         dateRange:
           $ref: '#/components/schemas/DateRangeFilter'
         groupings:
@@ -16214,11 +16244,11 @@ components:
       type: string
     ColorsBy:
       oneOf:
+        - $ref: '#/components/schemas/ColorsByCategoryVariant'
+        - $ref: '#/components/schemas/ColorsByStackVariant'
         - $ref: '#/components/schemas/ColorsByGroupByVariant'
         - $ref: '#/components/schemas/ColorsByAggregationVariant'
         - $ref: '#/components/schemas/ColorsByQueryVariant'
-        - $ref: '#/components/schemas/ColorsByCategoryVariant'
-        - $ref: '#/components/schemas/ColorsByStackVariant'
     ColorsByAggregation:
       type: object
     ColorsByAggregationVariant:
@@ -16685,6 +16715,32 @@ components:
         updateTime:
           type: string
           format: date-time
+    ConnectorTypeFilter:
+      oneOf:
+        - $ref: '#/components/schemas/ConnectorTypeFilterConnectorType'
+        - $ref: '#/components/schemas/ConnectorTypeFilterNoConnector'
+    ConnectorTypeFilterConnectorType:
+      title: Connector type filters
+      required:
+        - connectorType
+      type: object
+      properties:
+        connectorType:
+          $ref: '#/components/schemas/v1.ConnectorType'
+      description: Filters applied to cases based on connector types.
+      externalDocs:
+        url: ''
+    ConnectorTypeFilterNoConnector:
+      title: Connector type filters
+      required:
+        - noConnector
+      type: object
+      properties:
+        noConnector:
+          $ref: '#/components/schemas/NoConnector'
+      description: Filters applied to cases based on connector types.
+      externalDocs:
+        url: ''
     ConnectorTypeSummary:
       title: Connector Type Summary
       type: object
@@ -16826,6 +16882,10 @@ components:
           type: array
           items:
             type: string
+        description:
+          type: string
+        dpxlFilter:
+          type: string
         isPrivate:
           type: boolean
         name:
@@ -16838,6 +16898,10 @@ components:
             type: string
         url:
           type: string
+        urlFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/UrlField'
       description: This data structure represents the request to create an Action.
       externalDocs:
         url: ''
@@ -16959,7 +17023,6 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
     CreateApmSloRequest:
-      title: CreateApmSloRequest
       type: object
       properties:
         apmSlo:
@@ -16968,20 +17031,12 @@ components:
           $ref: '#/components/schemas/ApmSource'
         silenceDataValidations:
           type: boolean
-          description: Skip data validation checks (deprecated)
           deprecated: true
-      description: Request to create a new APM SLO with automatic query generation
-      externalDocs:
-        url: ''
     CreateApmSloResponse:
-      title: CreateApmSloResponse
       type: object
       properties:
         slo:
           $ref: '#/components/schemas/ApmSlo'
-      description: Response after creating a new APM SLO
-      externalDocs:
-        url: ''
     CreateBulkAlertSchedulerRuleRequest:
       title: Create bulk alert scheduler rule request data structure
       required:
@@ -17428,6 +17483,16 @@ components:
         description: Find out more about quota management.
         url: >-
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
+    CreatePublicConfigurationGroupRequest:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/PublicConfigurationGroupRequest'
+    CreatePublicConfigurationGroupResponse:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/PublicConfigurationGroup'
     CreateQuotaAllocationRuleSetRequest:
       title: Create quota allocation rule set request
       required:
@@ -17452,8 +17517,8 @@ components:
         url: ''
     CreateRoleRequest:
       oneOf:
-        - $ref: '#/components/schemas/CreateRoleRequestParentRoleId'
         - $ref: '#/components/schemas/CreateRoleRequestParentRoleName'
+        - $ref: '#/components/schemas/CreateRoleRequestParentRoleId'
     CreateRoleRequestParentRoleId:
       required:
         - parentRoleId
@@ -18129,16 +18194,16 @@ components:
       type: object
     Dashboard:
       oneOf:
-        - $ref: '#/components/schemas/DashboardTwoMinutesRelativeTimeFrame'
-        - $ref: '#/components/schemas/DashboardFiveMinutesAbsoluteTimeFrame'
-        - $ref: '#/components/schemas/DashboardOneMinuteRelativeTimeFrame'
-        - $ref: '#/components/schemas/DashboardFifteenMinutesRelativeTimeFrame'
         - $ref: '#/components/schemas/DashboardOffAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardTwoMinutesRelativeTimeFrame'
         - $ref: '#/components/schemas/DashboardFiveMinutesRelativeTimeFrame'
         - $ref: '#/components/schemas/DashboardOneMinuteAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardOneMinuteRelativeTimeFrame'
         - $ref: '#/components/schemas/DashboardFifteenMinutesAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardFifteenMinutesRelativeTimeFrame'
         - $ref: '#/components/schemas/DashboardOffRelativeTimeFrame'
         - $ref: '#/components/schemas/DashboardTwoMinutesAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardFiveMinutesAbsoluteTimeFrame'
     DashboardAction:
       title: Dashboard Action
       type: object
@@ -18961,10 +19026,10 @@ components:
         url: ''
     DataTable.Query:
       oneOf:
+        - $ref: '#/components/schemas/DataTableQueryMetrics'
         - $ref: '#/components/schemas/DataTableQueryDataprime'
         - $ref: '#/components/schemas/DataTableQueryLogs'
         - $ref: '#/components/schemas/DataTableQuerySpans'
-        - $ref: '#/components/schemas/DataTableQueryMetrics'
     DataTable.SpansQuery:
       title: SpansQuery
       type: object
@@ -19087,9 +19152,9 @@ components:
           $ref: '#/components/schemas/DataprimeSource.Strategy'
     DataprimeSource.Strategy:
       oneOf:
+        - $ref: '#/components/schemas/DataprimeSourceStrategyInstantVariant'
         - $ref: '#/components/schemas/DataprimeSourceStrategyRangeVariant'
         - $ref: '#/components/schemas/DataprimeSourceStrategyDurationVariant'
-        - $ref: '#/components/schemas/DataprimeSourceStrategyInstantVariant'
     DataprimeSource.Strategy.Duration:
       type: object
       properties:
@@ -19992,11 +20057,11 @@ components:
       type: string
     Dimension:
       oneOf:
+        - $ref: '#/components/schemas/DimensionPriority'
         - $ref: '#/components/schemas/DimensionPillar'
         - $ref: '#/components/schemas/DimensionGenericDimension'
         - $ref: '#/components/schemas/DimensionTier'
         - $ref: '#/components/schemas/DimensionSeverity'
-        - $ref: '#/components/schemas/DimensionPriority'
     DimensionAggregation:
       type: object
       properties:
@@ -20155,10 +20220,10 @@ components:
       type: string
     Dynamic.Query:
       oneOf:
+        - $ref: '#/components/schemas/DynamicQueryDataprime'
         - $ref: '#/components/schemas/DynamicQueryLogs'
         - $ref: '#/components/schemas/DynamicQuerySpans'
         - $ref: '#/components/schemas/DynamicQueryMetrics'
-        - $ref: '#/components/schemas/DynamicQueryDataprime'
     Dynamic.QueryDefinition:
       title: QueryDefinition
       required:
@@ -20219,8 +20284,8 @@ components:
           $ref: '#/components/schemas/Spans'
     E2M:
       oneOf:
-        - $ref: '#/components/schemas/E2MLogsQuery'
         - $ref: '#/components/schemas/E2MSpansQuery'
+        - $ref: '#/components/schemas/E2MLogsQuery'
     E2MAggHistogram:
       title: E2M Aggregate Histogram
       type: object
@@ -20327,9 +20392,9 @@ components:
           https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
     E2MExecutionRequest:
       oneOf:
+        - $ref: '#/components/schemas/E2MExecutionRequestDelete'
         - $ref: '#/components/schemas/E2MExecutionRequestCreate'
         - $ref: '#/components/schemas/E2MExecutionRequestReplace'
-        - $ref: '#/components/schemas/E2MExecutionRequestDelete'
     E2MExecutionRequestCreate:
       required:
         - create
@@ -20353,9 +20418,9 @@ components:
           $ref: '#/components/schemas/ReplaceE2MRequest'
     E2MExecutionResponse:
       oneOf:
-        - $ref: '#/components/schemas/E2MExecutionResponseDeleted'
         - $ref: '#/components/schemas/E2MExecutionResponseCreated'
         - $ref: '#/components/schemas/E2MExecutionResponseReplaced'
+        - $ref: '#/components/schemas/E2MExecutionResponseDeleted'
     E2MExecutionResponseCreated:
       required:
         - created
@@ -20802,11 +20867,11 @@ components:
           type: string
     EventActor:
       oneOf:
+        - $ref: '#/components/schemas/EventActorUser'
         - $ref: '#/components/schemas/EventActorServiceNow'
         - $ref: '#/components/schemas/EventActorApiKey'
         - $ref: '#/components/schemas/EventActorSlack'
         - $ref: '#/components/schemas/EventActorSystem'
-        - $ref: '#/components/schemas/EventActorUser'
     EventActorApiKey:
       title: Event actor
       required:
@@ -21699,11 +21764,6 @@ components:
           type: string
       externalDocs:
         url: ''
-    ExternalReferenceVendor:
-      enum:
-        - EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED
-        - EXTERNAL_REFERENCE_VENDOR_SERVICE_NOW
-      type: string
     ExternalUrl:
       title: External URL
       type: object
@@ -21933,12 +21993,12 @@ components:
           type: string
     FieldInformation:
       oneOf:
-        - $ref: '#/components/schemas/FieldInformationMultiText'
-        - $ref: '#/components/schemas/FieldInformationMultipleSelection'
         - $ref: '#/components/schemas/FieldInformationSingleBoolean'
         - $ref: '#/components/schemas/FieldInformationSelection'
         - $ref: '#/components/schemas/FieldInformationSingleNumber'
         - $ref: '#/components/schemas/FieldInformationSingle'
+        - $ref: '#/components/schemas/FieldInformationMultiText'
+        - $ref: '#/components/schemas/FieldInformationMultipleSelection'
     FieldInformationMultiText:
       title: Field information
       required:
@@ -22193,11 +22253,12 @@ components:
         - DATE
         - URL
         - ARRAY_OF_STRINGS
+        - BOOLEAN
       type: string
     File:
       oneOf:
-        - $ref: '#/components/schemas/FileBinary'
         - $ref: '#/components/schemas/FileTextual'
+        - $ref: '#/components/schemas/FileBinary'
     FileAttachment:
       title: File attachment
       required:
@@ -22308,9 +22369,9 @@ components:
         - $ref: '#/components/schemas/FilterOperatorNotEquals'
     Filter.Source:
       oneOf:
+        - $ref: '#/components/schemas/FilterSourceMetrics'
         - $ref: '#/components/schemas/FilterSourceLogs'
         - $ref: '#/components/schemas/FilterSourceSpans'
-        - $ref: '#/components/schemas/FilterSourceMetrics'
     Filter.WidgetScope:
       type: object
       properties:
@@ -23097,11 +23158,11 @@ components:
           $ref: '#/components/schemas/common.Unit'
     GeomapAggregation:
       oneOf:
+        - $ref: '#/components/schemas/GeomapAggregationCount'
+        - $ref: '#/components/schemas/GeomapAggregationSum'
         - $ref: '#/components/schemas/GeomapAggregationMin'
         - $ref: '#/components/schemas/GeomapAggregationMax'
         - $ref: '#/components/schemas/GeomapAggregationAvg'
-        - $ref: '#/components/schemas/GeomapAggregationCount'
-        - $ref: '#/components/schemas/GeomapAggregationSum'
     GeomapAggregationAvg:
       required:
         - avg
@@ -23289,8 +23350,8 @@ components:
         url: ''
     GetAlertEventResponse:
       oneOf:
-        - $ref: '#/components/schemas/GetAlertEventResponseSinglePermutation'
         - $ref: '#/components/schemas/GetAlertEventResponseMultiplePermutation'
+        - $ref: '#/components/schemas/GetAlertEventResponseSinglePermutation'
     GetAlertEventResponseMultiplePermutation:
       title: Get alert event response
       required:
@@ -23487,6 +23548,23 @@ components:
         description: Find out more about api keys
         url: >-
           https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+    GetApiKeysRequest:
+      type: object
+    GetApiKeysResponse:
+      title: Get Api Keys Response
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyInfo'
+      description: >-
+        This data structure is the response obtained when retrieving all API
+        keys.
+      externalDocs:
+        description: Find out more about api keys
+        url: >-
+          https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
     GetBulkAlertSchedulerRuleRequest:
       title: Get bulk alert scheduler rule request data structure
       type: object
@@ -23536,28 +23614,6 @@ components:
           type: array
           items:
             type: string
-    GetCaseExternalReferencesRequest:
-      title: Get case external references request
-      type: object
-      properties:
-        caseId:
-          type: string
-          description: The unique identifier of the case in UUID format
-          example: 550e8400-e29b-41d4-a716-446655440000
-      description: Request to retrieve external references for a case
-      externalDocs:
-        url: ''
-    GetCaseExternalReferencesResponse:
-      title: Get case external references response
-      type: object
-      properties:
-        externalReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/CaseExternalReference'
-      description: Response containing the list of external references for a case
-      externalDocs:
-        url: ''
     GetCaseRequest:
       title: Get case request
       required:
@@ -25008,6 +25064,18 @@ components:
       properties:
         preset:
           $ref: '#/components/schemas/Preset'
+    GetPublicConfigurationGroupRequest:
+      type: object
+      properties:
+        cxId:
+          type: string
+        latestFamilyOnly:
+          type: boolean
+    GetPublicConfigurationGroupResponse:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/PublicConfigurationGroup'
     GetQueriesRequest:
       type: object
       properties:
@@ -26402,10 +26470,10 @@ components:
         url: ''
     HorizontalBarChart.Query:
       oneOf:
-        - $ref: '#/components/schemas/HorizontalBarChartQueryLogs'
-        - $ref: '#/components/schemas/HorizontalBarChartQuerySpans'
         - $ref: '#/components/schemas/HorizontalBarChartQueryMetrics'
         - $ref: '#/components/schemas/HorizontalBarChartQueryDataprime'
+        - $ref: '#/components/schemas/HorizontalBarChartQueryLogs'
+        - $ref: '#/components/schemas/HorizontalBarChartQuerySpans'
     HorizontalBarChart.SpansQuery:
       title: SpansQuery
       type: object
@@ -27033,18 +27101,18 @@ components:
         url: ''
     IncidentEvent:
       oneOf:
-        - $ref: '#/components/schemas/IncidentEventUnassignAdministrativeEvent'
-        - $ref: '#/components/schemas/IncidentEventUpsertStateOperationalEvent'
-        - $ref: '#/components/schemas/IncidentEventAcknowledgeOperationalEvent'
-        - $ref: '#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent'
         - $ref: '#/components/schemas/IncidentEventAssignmentAdministrativeEvent'
+        - $ref: '#/components/schemas/IncidentEventAssignmentOperationalEvent'
         - $ref: '#/components/schemas/IncidentEventUnassignOperationalEvent'
-        - $ref: '#/components/schemas/IncidentEventUpsertStateAdministrativeEvent'
+        - $ref: '#/components/schemas/IncidentEventUpsertStateOperationalEvent'
         - $ref: '#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent'
-        - $ref: '#/components/schemas/IncidentEventCloseAdministrativeEvent'
         - $ref: '#/components/schemas/IncidentEventCloseOperationalEvent'
         - $ref: '#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent'
-        - $ref: '#/components/schemas/IncidentEventAssignmentOperationalEvent'
+        - $ref: '#/components/schemas/IncidentEventUnassignAdministrativeEvent'
+        - $ref: '#/components/schemas/IncidentEventUpsertStateAdministrativeEvent'
+        - $ref: '#/components/schemas/IncidentEventAcknowledgeOperationalEvent'
+        - $ref: '#/components/schemas/IncidentEventCloseAdministrativeEvent'
+        - $ref: '#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent'
     IncidentEventAcknowledge:
       type: object
       properties:
@@ -27542,17 +27610,17 @@ components:
         url: ''
     IncidentFieldOneOf:
       oneOf:
-        - $ref: '#/components/schemas/IncidentFieldOneOfDuration'
-        - $ref: '#/components/schemas/IncidentFieldOneOfId'
-        - $ref: '#/components/schemas/IncidentFieldOneOfName'
         - $ref: '#/components/schemas/IncidentFieldOneOfClosedAt'
-        - $ref: '#/components/schemas/IncidentFieldOneOfStatus'
         - $ref: '#/components/schemas/IncidentFieldOneOfLastStateUpdateTime'
         - $ref: '#/components/schemas/IncidentFieldOneOfApplicationName'
-        - $ref: '#/components/schemas/IncidentFieldOneOfSubsystemName'
+        - $ref: '#/components/schemas/IncidentFieldOneOfDuration'
+        - $ref: '#/components/schemas/IncidentFieldOneOfId'
         - $ref: '#/components/schemas/IncidentFieldOneOfSeverity'
+        - $ref: '#/components/schemas/IncidentFieldOneOfName'
         - $ref: '#/components/schemas/IncidentFieldOneOfCreatedAt'
         - $ref: '#/components/schemas/IncidentFieldOneOfState'
+        - $ref: '#/components/schemas/IncidentFieldOneOfStatus'
+        - $ref: '#/components/schemas/IncidentFieldOneOfSubsystemName'
     IncidentFieldOneOfApplicationName:
       required:
         - applicationName
@@ -28248,12 +28316,12 @@ components:
         url: ''
     IntegrationRevision:
       oneOf:
-        - $ref: '#/components/schemas/IntegrationRevisionHelmChart'
         - $ref: '#/components/schemas/IntegrationRevisionAzureArmTemplate'
         - $ref: '#/components/schemas/IntegrationRevisionRum'
         - $ref: '#/components/schemas/IntegrationRevisionTerraform'
         - $ref: '#/components/schemas/IntegrationRevisionCloudFormation'
         - $ref: '#/components/schemas/IntegrationRevisionManagedService'
+        - $ref: '#/components/schemas/IntegrationRevisionHelmChart'
     IntegrationRevision.Group:
       title: Group
       type: object
@@ -28463,9 +28531,9 @@ components:
       type: object
     InternalUpdateRequest:
       oneOf:
+        - $ref: '#/components/schemas/InternalUpdateRequestIbm'
         - $ref: '#/components/schemas/InternalUpdateRequestS3'
         - $ref: '#/components/schemas/InternalUpdateRequestGcs'
-        - $ref: '#/components/schemas/InternalUpdateRequestIbm'
     InternalUpdateRequestGcs:
       required:
         - gcs
@@ -28604,9 +28672,9 @@ components:
           $ref: '#/components/schemas/IpAccess'
     IsFilterPredicate:
       oneOf:
+        - $ref: '#/components/schemas/IsFilterPredicateStringValues'
         - $ref: '#/components/schemas/IsFilterPredicateTypeValues'
         - $ref: '#/components/schemas/IsFilterPredicateProductTypeValues'
-        - $ref: '#/components/schemas/IsFilterPredicateStringValues'
     IsFilterPredicateProductTypeValues:
       title: IsFilterPredicate
       required:
@@ -29060,10 +29128,10 @@ components:
           $ref: '#/components/schemas/TimeFrameSelect'
     LineChart.Query:
       oneOf:
+        - $ref: '#/components/schemas/LineChartQueryLogs'
         - $ref: '#/components/schemas/LineChartQueryMetrics'
         - $ref: '#/components/schemas/LineChartQuerySpans'
         - $ref: '#/components/schemas/LineChartQueryDataprime'
-        - $ref: '#/components/schemas/LineChartQueryLogs'
     LineChart.QueryDefinition:
       title: LineChart
       required:
@@ -29743,8 +29811,8 @@ components:
         url: ''
     ListLabelsCardinalityRequest:
       oneOf:
-        - $ref: '#/components/schemas/ListLabelsCardinalityRequestLogsQuery'
         - $ref: '#/components/schemas/ListLabelsCardinalityRequestSpansQuery'
+        - $ref: '#/components/schemas/ListLabelsCardinalityRequestLogsQuery'
     ListLabelsCardinalityRequestLogsQuery:
       required:
         - logsQuery
@@ -30009,6 +30077,13 @@ components:
           additionalProperties:
             type: string
         text:
+          type: string
+    Log.MetadataEntry:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
           type: string
     LogAttachment:
       title: Log attachment
@@ -30552,9 +30627,9 @@ components:
           $ref: '#/components/schemas/LogsSource.Strategy'
     LogsSource.Strategy:
       oneOf:
+        - $ref: '#/components/schemas/LogsSourceStrategyInstantVariant'
         - $ref: '#/components/schemas/LogsSourceStrategyRangeVariant'
         - $ref: '#/components/schemas/LogsSourceStrategyDurationVariant'
-        - $ref: '#/components/schemas/LogsSourceStrategyInstantVariant'
     LogsSource.Strategy.Duration:
       type: object
       properties:
@@ -31141,13 +31216,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/meta_labels_protobuf.v1.MetaLabel'
-    MetadataEntry:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
     MetadataField:
       enum:
         - METADATA_FIELD_UNSPECIFIED
@@ -31553,8 +31621,8 @@ components:
           $ref: '#/components/schemas/ObservationField'
     MinMax:
       oneOf:
-        - $ref: '#/components/schemas/MinMaxAutoVariant'
         - $ref: '#/components/schemas/MinMaxCustomVariant'
+        - $ref: '#/components/schemas/MinMaxAutoVariant'
     MinMaxAuto:
       type: object
     MinMaxAutoVariant:
@@ -31659,9 +31727,9 @@ components:
           $ref: '#/components/schemas/OrderDirection'
     MultiSelect.Query:
       oneOf:
-        - $ref: '#/components/schemas/MultiSelectQuerySpansQuery'
         - $ref: '#/components/schemas/MultiSelectQueryLogsQuery'
         - $ref: '#/components/schemas/MultiSelectQueryMetricsQuery'
+        - $ref: '#/components/schemas/MultiSelectQuerySpansQuery'
     MultiSelect.QuerySource:
       type: object
       properties:
@@ -31696,11 +31764,11 @@ components:
             type: string
     MultiSelect.Source:
       oneOf:
+        - $ref: '#/components/schemas/MultiSelectSourceLogsPath'
+        - $ref: '#/components/schemas/MultiSelectSourceMetricLabel'
         - $ref: '#/components/schemas/MultiSelectSourceConstantList'
         - $ref: '#/components/schemas/MultiSelectSourceSpanField'
         - $ref: '#/components/schemas/MultiSelectSourceQuery'
-        - $ref: '#/components/schemas/MultiSelectSourceLogsPath'
-        - $ref: '#/components/schemas/MultiSelectSourceMetricLabel'
     MultiSelect.ValueDisplayOptions:
       type: object
       properties:
@@ -31838,6 +31906,8 @@ components:
         - NEXT_OP_AND_OR_UNSPECIFIED
         - NEXT_OP_OR
       type: string
+    NoConnector:
+      type: object
     NoDataPolicy:
       type: object
       properties:
@@ -32299,18 +32369,18 @@ components:
         url: ''
     OutgoingWebhook:
       oneOf:
-        - $ref: '#/components/schemas/OutgoingWebhookJira'
         - $ref: '#/components/schemas/OutgoingWebhookDemisto'
         - $ref: '#/components/schemas/OutgoingWebhookIbmEventNotifications'
         - $ref: '#/components/schemas/OutgoingWebhookMsTeamsWorkflow'
-        - $ref: '#/components/schemas/OutgoingWebhookSlack'
         - $ref: '#/components/schemas/OutgoingWebhookPagerDuty'
         - $ref: '#/components/schemas/OutgoingWebhookEmailGroup'
         - $ref: '#/components/schemas/OutgoingWebhookMicrosoftTeams'
         - $ref: '#/components/schemas/OutgoingWebhookOpsgenie'
         - $ref: '#/components/schemas/OutgoingWebhookAwsEventBridge'
         - $ref: '#/components/schemas/OutgoingWebhookGenericWebhook'
+        - $ref: '#/components/schemas/OutgoingWebhookSlack'
         - $ref: '#/components/schemas/OutgoingWebhookSendLog'
+        - $ref: '#/components/schemas/OutgoingWebhookJira'
     OutgoingWebhookAwsEventBridge:
       title: Outgoing webhook
       required:
@@ -32506,18 +32576,18 @@ components:
         url: ''
     OutgoingWebhookInputData:
       oneOf:
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataDemisto'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataSlack'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataJira'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataAwsEventBridge'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataGenericWebhook'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataPagerDuty'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataSendLog'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataEmailGroup'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataOpsgenie'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataDemisto'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataAwsEventBridge'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataGenericWebhook'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataPagerDuty'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataEmailGroup'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataJira'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataSlack'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataSendLog'
     OutgoingWebhookInputDataAwsEventBridge:
       title: Outgoing webhook input data
       required:
@@ -32993,9 +33063,9 @@ components:
         url: ''
     Owner:
       oneOf:
+        - $ref: '#/components/schemas/OwnerOrganisationId'
         - $ref: '#/components/schemas/OwnerUserId'
         - $ref: '#/components/schemas/OwnerTeamId'
-        - $ref: '#/components/schemas/OwnerOrganisationId'
     OwnerOrganisationId:
       required:
         - organisationId
@@ -33051,12 +33121,12 @@ components:
           format: int32
     Parameter:
       oneOf:
-        - $ref: '#/components/schemas/ParameterStringValue'
         - $ref: '#/components/schemas/ParameterBooleanValue'
         - $ref: '#/components/schemas/ParameterStringList'
         - $ref: '#/components/schemas/ParameterApiKey'
         - $ref: '#/components/schemas/ParameterNumericValue'
         - $ref: '#/components/schemas/ParameterSensitiveData'
+        - $ref: '#/components/schemas/ParameterStringValue'
     ParameterApiKey:
       title: Parameter
       required:
@@ -33826,14 +33896,14 @@ components:
           $ref: '#/components/schemas/UUID'
     PropertyDefinition:
       oneOf:
-        - $ref: '#/components/schemas/PropertyDefinitionRegexExtract'
-        - $ref: '#/components/schemas/PropertyDefinitionLink'
         - $ref: '#/components/schemas/PropertyDefinitionValuesAlias'
         - $ref: '#/components/schemas/PropertyDefinitionValuesMapping'
         - $ref: '#/components/schemas/PropertyDefinitionColumnDisplayName'
         - $ref: '#/components/schemas/PropertyDefinitionThresholds'
         - $ref: '#/components/schemas/PropertyDefinitionAlignment'
         - $ref: '#/components/schemas/PropertyDefinitionUnits'
+        - $ref: '#/components/schemas/PropertyDefinitionRegexExtract'
+        - $ref: '#/components/schemas/PropertyDefinitionLink'
     PropertyDefinitionAlignment:
       required:
         - alignment
@@ -33976,6 +34046,184 @@ components:
         - PROVIDER_TYPE_S3
         - PROVIDER_TYPE_IBM_COS
       type: string
+    PublicAgentSelectorRequest:
+      type: object
+      properties:
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+    PublicAgentSelectorRequest.AttributesEntry:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    PublicAgentSelectorResponse:
+      type: object
+      properties:
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+    PublicAgentSelectorResponse.AttributesEntry:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    PublicChartName:
+      enum:
+        - PUBLIC_CHART_NAME_UNSPECIFIED
+        - PUBLIC_CHART_NAME_OTEL_INTEGRATION
+        - PUBLIC_CHART_NAME_OPENTELEMETRY_COLLECTOR
+        - PUBLIC_CHART_NAME_OTEL_LINUX_STANDALONE
+        - PUBLIC_CHART_NAME_OTEL_WINDOWS_STANDALONE
+        - PUBLIC_CHART_NAME_OTEL_MACOS_STANDALONE
+        - PUBLIC_CHART_NAME_OTEL_ECS_EC2
+      type: string
+    PublicConfigurationFamilyRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        basedOnConfigurationFamilyId:
+          type: string
+        collectorVersion:
+          type: string
+        cxId:
+          type: string
+        description:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        remoteConfigurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicRemoteConfigurationRequest'
+    PublicConfigurationFamilyRequest.MetadataEntry:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    PublicConfigurationFamilyResponse:
+      type: object
+      properties:
+        active:
+          type: boolean
+        basedOnConfigurationFamilyId:
+          type: string
+        chartName:
+          $ref: '#/components/schemas/PublicChartName'
+        chartVersion:
+          type: string
+        collectorVersion:
+          type: string
+        cxId:
+          type: string
+        description:
+          type: string
+        integrationVersion:
+          type: string
+        lastActivatedAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        remoteConfigurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicRemoteConfigurationResponse'
+        version:
+          type: string
+    PublicConfigurationFamilyResponse.MetadataEntry:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    PublicConfigurationGroup:
+      type: object
+      properties:
+        cxId:
+          type: string
+        cxTags:
+          type: array
+          items:
+            type: string
+        cxVersion:
+          type: integer
+          format: int32
+        description:
+          type: string
+        families:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicConfigurationFamilyResponse'
+        name:
+          type: string
+        priorityOrder:
+          type: integer
+          format: int32
+    PublicConfigurationGroupRequest:
+      type: object
+      properties:
+        cxId:
+          type: string
+        cxTags:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        families:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicConfigurationFamilyRequest'
+        name:
+          type: string
+        priorityOrder:
+          type: integer
+          format: int32
+    PublicRemoteConfigurationRequest:
+      type: object
+      properties:
+        agentSelector:
+          $ref: '#/components/schemas/PublicAgentSelectorRequest'
+        cxId:
+          type: string
+        name:
+          type: string
+        rawConfiguration:
+          type: string
+    PublicRemoteConfigurationResponse:
+      type: object
+      properties:
+        agentSelector:
+          $ref: '#/components/schemas/PublicAgentSelectorResponse'
+        createdAt:
+          type: string
+          format: date-time
+        cxId:
+          type: string
+        hash:
+          type: string
+        name:
+          type: string
+        rawConfiguration:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
     PushBasedContextualData:
       title: Push based contextual data
       type: object
@@ -34027,8 +34275,8 @@ components:
           $ref: '#/components/schemas/Query.MetricsQuery.Selection'
     Query.MetricsQuery.Operator:
       oneOf:
-        - $ref: '#/components/schemas/QueryMetricsQueryOperatorEquals'
         - $ref: '#/components/schemas/QueryMetricsQueryOperatorNotEquals'
+        - $ref: '#/components/schemas/QueryMetricsQueryOperatorEquals'
     Query.MetricsQuery.Selection:
       type: object
       properties:
@@ -34043,13 +34291,13 @@ components:
             $ref: '#/components/schemas/Query.MetricsQuery.StringOrVariable'
     Query.MetricsQuery.StringOrVariable:
       oneOf:
-        - $ref: '#/components/schemas/QueryMetricsQueryStringOrVariableVariableName'
         - $ref: '#/components/schemas/QueryMetricsQueryStringOrVariableStringValue'
+        - $ref: '#/components/schemas/QueryMetricsQueryStringOrVariableVariableName'
     Query.MetricsQuery.Type:
       oneOf:
-        - $ref: '#/components/schemas/QueryMetricsQueryTypeMetricNameVariant'
         - $ref: '#/components/schemas/QueryMetricsQueryTypeLabelNameVariant'
         - $ref: '#/components/schemas/QueryMetricsQueryTypeLabelValueVariant'
+        - $ref: '#/components/schemas/QueryMetricsQueryTypeMetricNameVariant'
     Query.MetricsQuery.Type.LabelName:
       type: object
       properties:
@@ -34271,8 +34519,8 @@ components:
           $ref: '#/components/schemas/QuerySource.LogsQuery.Type'
     QuerySource.LogsQuery.Type:
       oneOf:
-        - $ref: '#/components/schemas/QuerySourceLogsQueryTypeFieldValueVariant'
         - $ref: '#/components/schemas/QuerySourceLogsQueryTypeFieldNameVariant'
+        - $ref: '#/components/schemas/QuerySourceLogsQueryTypeFieldValueVariant'
     QuerySource.LogsQuery.Type.FieldName:
       type: object
       properties:
@@ -34309,8 +34557,8 @@ components:
           $ref: '#/components/schemas/QuerySource.MetricsQuery.Selection'
     QuerySource.MetricsQuery.Operator:
       oneOf:
-        - $ref: '#/components/schemas/QuerySourceMetricsQueryOperatorNotEquals'
         - $ref: '#/components/schemas/QuerySourceMetricsQueryOperatorEquals'
+        - $ref: '#/components/schemas/QuerySourceMetricsQueryOperatorNotEquals'
     QuerySource.MetricsQuery.Selection:
       type: object
       properties:
@@ -34332,9 +34580,9 @@ components:
             #/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName
     QuerySource.MetricsQuery.Type:
       oneOf:
+        - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeMetricNameVariant'
         - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeLabelNameVariant'
         - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeLabelValueVariant'
-        - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeMetricNameVariant'
     QuerySource.MetricsQuery.Type.LabelName:
       type: object
       properties:
@@ -34634,9 +34882,9 @@ components:
         - $ref: '#/components/schemas/RecurringSchedule'
     Recurring.Dynamic:
       oneOf:
-        - $ref: '#/components/schemas/RecurringDynamicDaily'
         - $ref: '#/components/schemas/RecurringDynamicWeekly'
         - $ref: '#/components/schemas/RecurringDynamicMonthly'
+        - $ref: '#/components/schemas/RecurringDynamicDaily'
     RecurringAlwaysActive:
       required:
         - alwaysActive
@@ -34996,41 +35244,28 @@ components:
       externalDocs:
         url: ''
     ReplaceApmSloRequest:
-      title: ReplaceApmSloRequest
       type: object
       properties:
         apmSlo:
           $ref: '#/components/schemas/ApmSloInput'
         id:
           type: string
-          description: ID of the SLO to replace
         metricSource:
           $ref: '#/components/schemas/ApmSource'
         revision:
           $ref: '#/components/schemas/v1.Revision'
         silenceDataValidations:
           type: boolean
-          description: Skip data validation checks (deprecated)
           deprecated: true
-      description: >-
-        Request to replace an existing APM SLO. Updates the configuration and
-        regenerates queries automatically.
-      externalDocs:
-        url: ''
     ReplaceApmSloResponse:
-      title: ReplaceApmSloResponse
       type: object
       properties:
         effectedSloAlertIds:
           type: array
           items:
             type: string
-            description: List of alert IDs that were affected by the SLO update
         slo:
           $ref: '#/components/schemas/ApmSlo'
-      description: Response after replacing an APM SLO
-      externalDocs:
-        url: ''
     ReplaceCompanyIpAccessSettingsRequest:
       title: Replace company IP access settings request
       type: object
@@ -35263,6 +35498,16 @@ components:
         contains the complete resource including server-generated fields.
       externalDocs:
         url: ''
+    ReplacePublicConfigurationGroupRequest:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/PublicConfigurationGroupRequest'
+    ReplacePublicConfigurationGroupResponse:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/PublicConfigurationGroup'
     ReplaceQuotaAllocationRuleSetRequest:
       title: Replace quota allocation rule set request
       required:
@@ -35625,8 +35870,8 @@ components:
           https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
     RoleUpdateAction:
       oneOf:
-        - $ref: '#/components/schemas/RoleUpdateActionSetRoleId'
         - $ref: '#/components/schemas/RoleUpdateActionClear'
+        - $ref: '#/components/schemas/RoleUpdateActionSetRoleId'
       discriminator:
         propertyName: action_type
         mapping:
@@ -35855,9 +36100,9 @@ components:
           https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
     RuleMatcher:
       oneOf:
-        - $ref: '#/components/schemas/RuleMatcherApplicationName'
         - $ref: '#/components/schemas/RuleMatcherSubsystemName'
         - $ref: '#/components/schemas/RuleMatcherSeverity'
+        - $ref: '#/components/schemas/RuleMatcherApplicationName'
     RuleMatcherApplicationName:
       required:
         - applicationName
@@ -35881,16 +36126,16 @@ components:
           $ref: '#/components/schemas/SubsystemNameConstraint'
     RuleParameters:
       oneOf:
-        - $ref: '#/components/schemas/RuleParametersExtractParameters'
+        - $ref: '#/components/schemas/RuleParametersRemoveFieldsParameters'
+        - $ref: '#/components/schemas/RuleParametersJsonStringifyParameters'
         - $ref: '#/components/schemas/RuleParametersJsonExtractParameters'
+        - $ref: '#/components/schemas/RuleParametersAllowParameters'
+        - $ref: '#/components/schemas/RuleParametersBlockParameters'
+        - $ref: '#/components/schemas/RuleParametersJsonParseParameters'
+        - $ref: '#/components/schemas/RuleParametersExtractParameters'
         - $ref: '#/components/schemas/RuleParametersReplaceParameters'
         - $ref: '#/components/schemas/RuleParametersParseParameters'
-        - $ref: '#/components/schemas/RuleParametersBlockParameters'
-        - $ref: '#/components/schemas/RuleParametersRemoveFieldsParameters'
-        - $ref: '#/components/schemas/RuleParametersJsonParseParameters'
-        - $ref: '#/components/schemas/RuleParametersAllowParameters'
         - $ref: '#/components/schemas/RuleParametersExtractTimestampParameters'
-        - $ref: '#/components/schemas/RuleParametersJsonStringifyParameters'
     RuleParametersAllowParameters:
       required:
         - allowParameters
@@ -36424,8 +36669,8 @@ components:
           $ref: '#/components/schemas/SectionPredefinedColor'
     SectionOptions:
       oneOf:
-        - $ref: '#/components/schemas/SectionOptionsInternal'
         - $ref: '#/components/schemas/SectionOptionsCustom'
+        - $ref: '#/components/schemas/SectionOptionsInternal'
     SectionOptionsCustom:
       required:
         - custom
@@ -36923,6 +37168,8 @@ components:
       properties:
         apmSli:
           $ref: '#/components/schemas/ApmSli'
+        apmSliMetadata:
+          $ref: '#/components/schemas/ApmSli'
         createTime:
           type: string
           format: date-time
@@ -36944,6 +37191,8 @@ components:
         name:
           type: string
           example: Example Slo Name
+        ownershipTags:
+          $ref: '#/components/schemas/SloOwnershipTags'
         productType:
           $ref: '#/components/schemas/SloProductType'
         revision:
@@ -37063,9 +37312,9 @@ components:
         url: ''
     SloExecutionResponse:
       oneOf:
-        - $ref: '#/components/schemas/SloExecutionResponseReplaceSloResponse'
         - $ref: '#/components/schemas/SloExecutionResponseDeleteSloResponse'
         - $ref: '#/components/schemas/SloExecutionResponseCreateSloResponse'
+        - $ref: '#/components/schemas/SloExecutionResponseReplaceSloResponse'
     SloExecutionResponseCreateSloResponse:
       title: SloExecutionResponse
       required:
@@ -37112,11 +37361,14 @@ components:
         url: ''
     SloFilterField:
       oneOf:
+        - $ref: '#/components/schemas/SloFilterFieldServiceName'
+        - $ref: '#/components/schemas/SloFilterFieldOwnershipServiceValues'
+        - $ref: '#/components/schemas/SloFilterFieldOwnershipEnvironmentValues'
+        - $ref: '#/components/schemas/SloFilterFieldOwnershipTeamValues'
         - $ref: '#/components/schemas/SloFilterFieldConstFilter'
         - $ref: '#/components/schemas/SloFilterFieldLabelName'
         - $ref: '#/components/schemas/SloFilterFieldSloType'
         - $ref: '#/components/schemas/SloFilterFieldProductType'
-        - $ref: '#/components/schemas/SloFilterFieldServiceName'
     SloFilterFieldConstFilter:
       title: SloFilterField
       required:
@@ -37140,6 +37392,39 @@ components:
       description: Field used for filtering SLOs
       externalDocs:
         url: ''
+    SloFilterFieldOwnershipEnvironmentValues:
+      title: SloFilterField
+      required:
+        - ownershipEnvironmentValues
+      type: object
+      properties:
+        ownershipEnvironmentValues:
+          $ref: '#/components/schemas/StringValues'
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ''
+    SloFilterFieldOwnershipServiceValues:
+      title: SloFilterField
+      required:
+        - ownershipServiceValues
+      type: object
+      properties:
+        ownershipServiceValues:
+          $ref: '#/components/schemas/StringValues'
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ''
+    SloFilterFieldOwnershipTeamValues:
+      title: SloFilterField
+      required:
+        - ownershipTeamValues
+      type: object
+      properties:
+        ownershipTeamValues:
+          $ref: '#/components/schemas/StringValues'
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ''
     SloFilterFieldProductType:
       title: SloFilterField
       required:
@@ -37160,10 +37445,11 @@ components:
         serviceName:
           type: string
           description: >-
-            Filter by service name. Only applicable to product types that
-            support services (e.g., APM). MUST be used together with
-            product_type filter. Will throw an error if used without
-            product_type.
+            Filter by service name from the APM SLI services list (not ownership
+            tags). Only valid for APM product SLOs. MUST be used together with a
+            product_type filter that includes APM; the server may reject the
+            request otherwise. To filter by configured ownership service on any
+            SLO type, use ownership_service_values instead.
           example: payment-service
       description: Field used for filtering SLOs
       externalDocs:
@@ -37207,8 +37493,8 @@ components:
           type: string
     SloMetricMissingValues:
       oneOf:
-        - $ref: '#/components/schemas/SloMetricMissingValuesMinNonNullValuesPct'
         - $ref: '#/components/schemas/SloMetricMissingValuesReplaceWithZero'
+        - $ref: '#/components/schemas/SloMetricMissingValuesMinNonNullValuesPct'
     SloMetricMissingValuesMinNonNullValuesPct:
       required:
         - minNonNullValuesPct
@@ -37239,6 +37525,52 @@ components:
         - SLO_METRIC_TIME_WINDOW_VALUE_UNSPECIFIED
         - SLO_METRIC_TIME_WINDOW_VALUE_1_MINUTE
       type: string
+    SloOwnershipTag:
+      title: SloOwnershipTag
+      type: object
+      properties:
+        labelKeys:
+          type: array
+          items:
+            type: string
+            description: >-
+              Metric label names to use as sources (label-driven). Actual values
+              come from series at query time. Empty if not using label-driven
+              for this dimension.
+          example:
+            - deployment_environment
+            - k8s_namespace
+        staticValues:
+          type: array
+          items:
+            type: string
+            description: >-
+              Group-wide static values (broad). Empty if not using broad for
+              this dimension.
+          example:
+            - checkout-api
+      description: >-
+        Ownership for one dimension (service, environment, or team).
+        static_values are group-wide (broad) assignments. label_keys are metric
+        label names whose values are read per permutation (label-driven). Both
+        may be set; when both lists are empty, that dimension is unset.
+      externalDocs:
+        url: ''
+    SloOwnershipTags:
+      title: SloOwnershipTags
+      type: object
+      properties:
+        environment:
+          $ref: '#/components/schemas/SloOwnershipTag'
+        service:
+          $ref: '#/components/schemas/SloOwnershipTag'
+        team:
+          $ref: '#/components/schemas/SloOwnershipTag'
+      description: >-
+        Service, environment, and team ownership for the SLO group. At most one
+        SloOwnershipTag per dimension; omit a dimension when unset.
+      externalDocs:
+        url: ''
     SloPermutationData:
       oneOf:
         - $ref: '#/components/schemas/SloPermutationDataRequestBasedPermutationData'
@@ -37292,6 +37624,8 @@ components:
         - requestBasedMetricSli
       type: object
       properties:
+        apmSliMetadata:
+          $ref: '#/components/schemas/ApmSli'
         createTime:
           type: string
           format: date-time
@@ -37313,6 +37647,8 @@ components:
         name:
           type: string
           example: Example Slo Name
+        ownershipTags:
+          $ref: '#/components/schemas/SloOwnershipTags'
         productType:
           $ref: '#/components/schemas/SloProductType'
         requestBasedMetricSli:
@@ -37383,8 +37719,8 @@ components:
         url: ''
     SloThresholdType:
       oneOf:
-        - $ref: '#/components/schemas/SloThresholdTypeErrorBudget'
         - $ref: '#/components/schemas/SloThresholdTypeBurnRate'
+        - $ref: '#/components/schemas/SloThresholdTypeErrorBudget'
     SloThresholdTypeBurnRate:
       title: SLO Threshold Type
       required:
@@ -37430,6 +37766,8 @@ components:
         - windowBasedMetricSli
       type: object
       properties:
+        apmSliMetadata:
+          $ref: '#/components/schemas/ApmSli'
         createTime:
           type: string
           format: date-time
@@ -37451,6 +37789,8 @@ components:
         name:
           type: string
           example: Example Slo Name
+        ownershipTags:
+          $ref: '#/components/schemas/SloOwnershipTags'
         productType:
           $ref: '#/components/schemas/SloProductType'
         revision:
@@ -37769,9 +38109,9 @@ components:
           $ref: '#/components/schemas/SpansSource.Strategy'
     SpansSource.Strategy:
       oneOf:
-        - $ref: '#/components/schemas/SpansSourceStrategyInstantVariant'
         - $ref: '#/components/schemas/SpansSourceStrategyRangeVariant'
         - $ref: '#/components/schemas/SpansSourceStrategyDurationVariant'
+        - $ref: '#/components/schemas/SpansSourceStrategyInstantVariant'
     SpansSource.Strategy.Duration:
       type: object
       properties:
@@ -37929,8 +38269,8 @@ components:
         url: ''
     StatVisualElement:
       oneOf:
-        - $ref: '#/components/schemas/StatVisualElementMappedValues'
         - $ref: '#/components/schemas/StatVisualElementObservationField'
+        - $ref: '#/components/schemas/StatVisualElementMappedValues'
     StatVisualElementMappedValues:
       title: StatVisualElement
       required:
@@ -38427,9 +38767,9 @@ components:
           format: int64
     TenantConfigV2:
       oneOf:
+        - $ref: '#/components/schemas/TenantConfigV2Ibm'
         - $ref: '#/components/schemas/TenantConfigV2S3'
         - $ref: '#/components/schemas/TenantConfigV2Gcs'
-        - $ref: '#/components/schemas/TenantConfigV2Ibm'
     TenantConfigV2Gcs:
       required:
         - gcs
@@ -40245,9 +40585,9 @@ components:
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
     UpdateRequest:
       oneOf:
-        - $ref: '#/components/schemas/UpdateRequestGcs'
         - $ref: '#/components/schemas/UpdateRequestIbm'
         - $ref: '#/components/schemas/UpdateRequestS3'
+        - $ref: '#/components/schemas/UpdateRequestGcs'
     UpdateRequestGcs:
       title: Update Tenant Request
       required:
@@ -40720,6 +41060,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Measurement'
+    UrlField:
+      type: object
+      properties:
+        name:
+          type: string
+        required:
+          type: boolean
+      description: >-
+        Declares a URL field that may be required for the Action to be invokable
+        on a log.
+      externalDocs:
+        url: ''
     UsageTier:
       type: object
       properties:
@@ -41596,10 +41948,10 @@ components:
         - $ref: '#/components/schemas/VariableSourceV2Textbox'
     VariableSourceV2.QuerySource:
       oneOf:
+        - $ref: '#/components/schemas/VariableSourceV2QuerySourceLogsQuery'
         - $ref: '#/components/schemas/VariableSourceV2QuerySourceMetricsQuery'
         - $ref: '#/components/schemas/VariableSourceV2QuerySourceSpansQuery'
         - $ref: '#/components/schemas/VariableSourceV2QuerySourceDataprimeQuery'
-        - $ref: '#/components/schemas/VariableSourceV2QuerySourceLogsQuery'
     VariableSourceV2.RefreshStrategy:
       enum:
         - REFRESH_STRATEGY_UNSPECIFIED
@@ -41715,12 +42067,12 @@ components:
           $ref: '#/components/schemas/VariableValueV2'
     VariableValueV2:
       oneOf:
-        - $ref: '#/components/schemas/VariableValueV2Regex'
         - $ref: '#/components/schemas/VariableValueV2Lucene'
         - $ref: '#/components/schemas/VariableValueV2Interval'
         - $ref: '#/components/schemas/VariableValueV2MultiString'
         - $ref: '#/components/schemas/VariableValueV2SingleString'
         - $ref: '#/components/schemas/VariableValueV2SingleNumeric'
+        - $ref: '#/components/schemas/VariableValueV2Regex'
     VariableValueV2.SingleNumericValue:
       type: object
       properties:
@@ -41995,20 +42347,20 @@ components:
       type: string
     Visualization:
       oneOf:
-        - $ref: '#/components/schemas/VisualizationTable'
+        - $ref: '#/components/schemas/VisualizationTimeSeriesLines'
+        - $ref: '#/components/schemas/VisualizationStat'
         - $ref: '#/components/schemas/VisualizationGaugeVariant'
         - $ref: '#/components/schemas/VisualizationHexagonBins'
-        - $ref: '#/components/schemas/VisualizationHeatmap'
-        - $ref: '#/components/schemas/VisualizationTimeSeriesLinesMulti'
-        - $ref: '#/components/schemas/VisualizationTimeSeriesLines'
+        - $ref: '#/components/schemas/VisualizationPieChartVariant'
+        - $ref: '#/components/schemas/VisualizationHorizontalBarsMulti'
+        - $ref: '#/components/schemas/VisualizationTable'
         - $ref: '#/components/schemas/VisualizationTimeSeriesBars'
-        - $ref: '#/components/schemas/VisualizationStat'
-        - $ref: '#/components/schemas/VisualizationVerticalBarsMulti'
         - $ref: '#/components/schemas/VisualizationHorizontalBars'
         - $ref: '#/components/schemas/VisualizationVerticalBars'
+        - $ref: '#/components/schemas/VisualizationHeatmap'
         - $ref: '#/components/schemas/VisualizationGeomap'
-        - $ref: '#/components/schemas/VisualizationHorizontalBarsMulti'
-        - $ref: '#/components/schemas/VisualizationPieChartVariant'
+        - $ref: '#/components/schemas/VisualizationTimeSeriesLinesMulti'
+        - $ref: '#/components/schemas/VisualizationVerticalBarsMulti'
         - $ref: '#/components/schemas/VisualizationStatCard'
     Visualization.BarValueDisplay:
       enum:
@@ -42386,15 +42738,15 @@ components:
           format: int32
     Widget.Definition:
       oneOf:
-        - $ref: '#/components/schemas/WidgetDefinitionDataTable'
-        - $ref: '#/components/schemas/WidgetDefinitionGauge'
-        - $ref: '#/components/schemas/WidgetDefinitionPieChart'
-        - $ref: '#/components/schemas/WidgetDefinitionMarkdown'
-        - $ref: '#/components/schemas/WidgetDefinitionHexagon'
-        - $ref: '#/components/schemas/WidgetDefinitionLineChart'
         - $ref: '#/components/schemas/WidgetDefinitionBarChart'
         - $ref: '#/components/schemas/WidgetDefinitionHorizontalBarChart'
         - $ref: '#/components/schemas/WidgetDefinitionDynamic'
+        - $ref: '#/components/schemas/WidgetDefinitionLineChart'
+        - $ref: '#/components/schemas/WidgetDefinitionDataTable'
+        - $ref: '#/components/schemas/WidgetDefinitionPieChart'
+        - $ref: '#/components/schemas/WidgetDefinitionMarkdown'
+        - $ref: '#/components/schemas/WidgetDefinitionHexagon'
+        - $ref: '#/components/schemas/WidgetDefinitionGauge'
     WidgetDefinitionBarChart:
       required:
         - barChart
@@ -42514,9 +42866,9 @@ components:
       type: string
     XAxis:
       oneOf:
-        - $ref: '#/components/schemas/XAxisTimeBuckets'
         - $ref: '#/components/schemas/XAxisValue'
         - $ref: '#/components/schemas/XAxisTime'
+        - $ref: '#/components/schemas/XAxisTimeBuckets'
     XAxisByTime:
       title: XAxisByTime
       type: object
@@ -43386,13 +43738,13 @@ components:
         url: ''
     v1.IntegrationType:
       oneOf:
-        - $ref: '#/components/schemas/V1IntegrationTypeManaged'
-        - $ref: '#/components/schemas/V1IntegrationTypeUntracked'
-        - $ref: '#/components/schemas/V1IntegrationTypeCloudformation'
         - $ref: '#/components/schemas/V1IntegrationTypeArm'
         - $ref: '#/components/schemas/V1IntegrationTypePushBasedContextualData'
         - $ref: '#/components/schemas/V1IntegrationTypeContextualData'
         - $ref: '#/components/schemas/V1IntegrationTypeGenericWebhook'
+        - $ref: '#/components/schemas/V1IntegrationTypeManaged'
+        - $ref: '#/components/schemas/V1IntegrationTypeUntracked'
+        - $ref: '#/components/schemas/V1IntegrationTypeCloudformation'
     v1.KeyValue:
       title: Key-value pair
       required:
@@ -43687,6 +44039,10 @@ components:
             type: string
         createdBy:
           type: string
+        description:
+          type: string
+        dpxlFilter:
+          type: string
         id:
           type: string
         isHidden:
@@ -43703,6 +44059,10 @@ components:
             type: string
         url:
           type: string
+        urlFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/UrlField'
       description: This data structure represents an Action.
       externalDocs:
         url: ''
@@ -44031,22 +44391,22 @@ components:
           $ref: '#/components/schemas/events.v3.PaginationResponse'
     v3.Group:
       oneOf:
-        - $ref: '#/components/schemas/V3GroupFlow'
-        - $ref: '#/components/schemas/V3GroupTimeRelativeThreshold'
-        - $ref: '#/components/schemas/V3GroupUniqueCount'
-        - $ref: '#/components/schemas/V3GroupLogsThreshold'
-        - $ref: '#/components/schemas/V3GroupMetricThreshold'
         - $ref: '#/components/schemas/V3GroupSloBurnRateThreshold'
         - $ref: '#/components/schemas/V3GroupSloErrorBudgetThreshold'
-        - $ref: '#/components/schemas/V3GroupNewValue'
-        - $ref: '#/components/schemas/V3GroupRatioThreshold'
         - $ref: '#/components/schemas/V3GroupTracingImmediate'
         - $ref: '#/components/schemas/V3GroupTracingThreshold'
         - $ref: '#/components/schemas/V3GroupLogsImmediate'
+        - $ref: '#/components/schemas/V3GroupMetricThreshold'
+        - $ref: '#/components/schemas/V3GroupFlow'
+        - $ref: '#/components/schemas/V3GroupNewValue'
+        - $ref: '#/components/schemas/V3GroupRatioThreshold'
+        - $ref: '#/components/schemas/V3GroupTimeRelativeThreshold'
+        - $ref: '#/components/schemas/V3GroupUniqueCount'
+        - $ref: '#/components/schemas/V3GroupLogsThreshold'
     v3.IntegrationType:
       oneOf:
-        - $ref: '#/components/schemas/V3IntegrationTypeIntegrationId'
         - $ref: '#/components/schemas/V3IntegrationTypeRecipients'
+        - $ref: '#/components/schemas/V3IntegrationTypeIntegrationId'
     v3.ListEventsRequest:
       title: ListEventsRequest
       required:
@@ -44614,8 +44974,62 @@ components:
       name: Authorization
       description: API key authentication
 tags:
+  - name: Events Service
+    description: A service for querying events.
+    externalDocs:
+      description: Learn more about alerts in our documentation
+      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
+  - name: Alert Scheduler Rule service
+    description: Manage your alert scheduler rules.
+    externalDocs:
+      url: ''
   - name: Slos Service
     description: A service for managing Service Level Objectives (SLOs).
+    externalDocs:
+      url: ''
+  - name: Views service
+    description: Create and manage views.
+    externalDocs:
+      url: ''
+  - name: Connector Schema service
+    description: Retrieve connector schemas for notification center integrations
+    externalDocs:
+      description: Learn more about connectors in our documentation
+      url: >-
+        https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/
+  - name: Presets service
+    description: >-
+      View and manage your presets - pre-configured templates for notification
+      content rendering
+    externalDocs:
+      description: Lean more about presets in our documentation
+      url: >-
+        https://coralogix.com/docs/user-guides/notification-center/presets/introduction/
+  - name: API Keys Admin Service
+    description: Administrative operations for API Keys management.
+    externalDocs:
+      url: ''
+  - name: Events2Metrics Service
+    description: Manage your events2metrics.
+    externalDocs:
+      url: ''
+  - name: Recording Rules Service
+    description: A service to manage recording rules.
+    externalDocs:
+      url: ''
+  - name: Custom Enrichments Service
+    description: Manage your enrichments.
+    externalDocs:
+      url: ''
+  - name: Entities service
+    description: Query information about registered entities in the notification center
+    externalDocs:
+      description: Lean more about the notification center in our documentation
+      url: https://coralogix.com/docs/user-guides/notification-center/introduction/
+  - name: Users Management Service
+    description: >-
+      Manage team members (users) including creation, updates, search, and
+      status management.
     externalDocs:
       url: ''
   - name: Target Service
@@ -44624,27 +45038,31 @@ tags:
       description: Find out more about archives
       url: >-
         https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-  - name: IP access service
-    description: >-
-      IP access service provides the API for managing company IP access
-      settings.
-    externalDocs:
-      url: ''
-  - name: Outgoing webhooks service
-    externalDocs:
-      description: Find out more about outbound webhooks in our documentation.
-      url: >-
-        https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/
-  - name: Enrichments Service
-    description: Manage your enrichments.
-    externalDocs:
-      url: ''
   - name: Scopes Service
     description: A service to manage scopes
     externalDocs:
       url: ''
-  - name: Alert Scheduler Rule service
-    description: Manage your alert scheduler rules.
+  - name: Actions Service
+    description: View and manage your Actions.
+    externalDocs:
+      url: ''
+  - name: Notifications testing service
+    description: >-
+      Test your notification center configurations including connectors,
+      presets, and templates
+    externalDocs:
+      description: Lean more about the notification center in our documentation
+      url: https://coralogix.com/docs/user-guides/notification-center/introduction/
+  - name: Connectors service
+    description: >-
+      View and manage your connectors - integration instances for notification
+      destinations
+    externalDocs:
+      description: Lean more about connectors in our documentation
+      url: >-
+        https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/
+  - name: Cases notification service
+    description: Track notification adjacent data for cases.
     externalDocs:
       url: ''
   - name: Role Management Service
@@ -44655,84 +45073,8 @@ tags:
     description: Manage your API Keys.
     externalDocs:
       url: ''
-  - name: Recording Rules Service
-    description: A service to manage recording rules.
-    externalDocs:
-      url: ''
-  - name: Dashboard service
-    description: Get information about the Coralogix Dashboard catalog.
-    externalDocs:
-      url: ''
-  - name: Events2Metrics Service
-    description: Manage your events2metrics.
-    externalDocs:
-      url: ''
-  - name: Global routers service
-    description: >-
-      View and manage your global routers - entities that direct notifications
-      to configured destinations based on conditions
-    externalDocs:
-      description: Lean more about global routers in our documentation
-      url: >-
-        https://coralogix.com/docs/user-guides/notification-center/routing/introduction/
-  - name: Team Groups Management Service
-    description: Manage Team Groups.
-    externalDocs:
-      url: ''
-  - name: Dashboard folders service
-    description: Manage your dashboard folders.
-    externalDocs:
-      url: ''
-  - name: Quota Allocation Rule Set service
-    description: Manage quota allocation rules for different entity types.
-    externalDocs:
-      url: ''
-  - name: Incidents service
-    description: >-
-      Handle all operations related to incident management within Coralogix.
-      Identify, manage, and resolve incidents efficiently through automated
-      workflows and team collaboration.
-    externalDocs:
-      description: Find out more about incident management in our documentation
-      url: https://coralogix.com/docs/user-guides/alerting/incidents/
-  - name: Metrics Data Archive Service
-    description: View and manage your storage targets for metrics.
-    externalDocs:
-      description: Find out more about archives
-      url: >-
-        https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-  - name: Extension deployment service
-    description: A service that enables querying for extension deployment information.
-    externalDocs:
-      description: Find out more about extensions in our documentation.
-      url: https://coralogix.com/docs/integrations/extensions/
-  - name: Integration service
-    description: A service that enables querying for integration information.
-    externalDocs:
-      description: Find out more about integrations in our documentation.
-      url: https://coralogix.com/docs/integrations/getting-started/
-  - name: Entities service
-    description: Query information about registered entities in the notification center
-    externalDocs:
-      description: Lean more about the notification center in our documentation
-      url: https://coralogix.com/docs/user-guides/notification-center/introduction/
-  - name: Alert definitions service
-    description: >-
-      View and manage your alerts using alert definitions - data structures that
-      contain the configuration required to create an alert.
-    externalDocs:
-      description: Learn more about alerts in our documentation
-      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
-  - name: Contextual data integration service
-    description: Query for contextual data integration information.
-    externalDocs:
-      url: ''
-  - name: Policies Service
-    description: View and manage your TCO policies
-    externalDocs:
-      url: ''
-  - name: Cases notification service
-    description: Track notification adjacent data for cases.
+  - name: Retentions Service
+    description: View and manage retentions
     externalDocs:
       url: ''
   - name: Alert events service
@@ -44742,8 +45084,74 @@ tags:
     externalDocs:
       description: Learn more about alert events and incidents in our documentation.
       url: https://coralogix.com/docs/user-guides/alerting/incidents/
-  - name: Actions Service
-    description: View and manage your Actions.
+  - name: Global routers service
+    description: >-
+      View and manage your global routers - entities that direct notifications
+      to configured destinations based on conditions
+    externalDocs:
+      description: Lean more about global routers in our documentation
+      url: >-
+        https://coralogix.com/docs/user-guides/notification-center/routing/introduction/
+  - name: Incidents service
+    description: >-
+      Handle all operations related to incident management within Coralogix.
+      Identify, manage, and resolve incidents efficiently through automated
+      workflows and team collaboration.
+    externalDocs:
+      description: Find out more about incident management in our documentation
+      url: https://coralogix.com/docs/user-guides/alerting/incidents/
+  - name: Quota Allocation Rule Set service
+    description: Manage quota allocation rules for different entity types.
+    externalDocs:
+      url: ''
+  - name: Team Groups Management Service
+    description: Manage Team Groups.
+    externalDocs:
+      url: ''
+  - name: Metrics Data Archive Service
+    description: View and manage your storage targets for metrics.
+    externalDocs:
+      description: Find out more about archives
+      url: >-
+        https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+  - name: Enrichments Service
+    description: Manage your enrichments.
+    externalDocs:
+      url: ''
+  - name: Extension testing service
+    externalDocs:
+      description: Find out more about extensions in our documentation.
+      url: https://coralogix.com/docs/integrations/extensions/
+  - name: Dashboard service
+    description: Manage your dashboards.
+    externalDocs:
+      url: ''
+  - name: Dashboard folders service
+    description: Manage your dashboard folders.
+    externalDocs:
+      url: ''
+  - name: Alert definitions service
+    description: >-
+      View and manage your alerts using alert definitions - data structures that
+      contain the configuration required to create an alert.
+    externalDocs:
+      description: Learn more about alerts in our documentation
+      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
+  - name: Rule Groups Service
+    description: A service to manage rule groups.
+    externalDocs:
+      url: ''
+  - name: Data Usage Service
+    description: A service to manage data usage metrics.
+    externalDocs:
+      url: ''
+  - name: Integration service
+    description: A service that enables querying for integration information.
+    externalDocs:
+      description: Find out more about integrations in our documentation.
+      url: https://coralogix.com/docs/integrations/getting-started/
+  - name: Policies Service
+    description: View and manage your TCO policies
     externalDocs:
       url: ''
   - name: Extension service
@@ -44751,75 +45159,32 @@ tags:
     externalDocs:
       description: Learn more about extensions in our documentation.
       url: https://coralogix.com/docs/integrations/extensions/
-  - name: Extension testing service
-    externalDocs:
-      description: Find out more about extensions in our documentation.
-      url: https://coralogix.com/docs/integrations/extensions/
-  - name: Connectors service
-    description: >-
-      View and manage your connectors - integration instances for notification
-      destinations
-    externalDocs:
-      description: Lean more about connectors in our documentation
-      url: >-
-        https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/
-  - name: Events Service
-    description: A service for querying events.
-    externalDocs:
-      description: Learn more about alerts in our documentation
-      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
-  - name: Retentions Service
-    description: View and manage retentions
+  - name: SAML Configuration Service
+    description: Manage your SAML configuration
     externalDocs:
       url: ''
-  - name: Presets service
+  - name: IP access service
     description: >-
-      View and manage your presets - pre-configured templates for notification
-      content rendering
-    externalDocs:
-      description: Lean more about presets in our documentation
-      url: >-
-        https://coralogix.com/docs/user-guides/notification-center/presets/introduction/
-  - name: Users Management Service
-    description: >-
-      Manage team members (users) including creation, updates, search, and
-      status management.
-    externalDocs:
-      url: ''
-  - name: API Keys Admin Service
-    description: Administrative operations for API Keys management.
+      IP access service provides the API for managing company IP access
+      settings.
     externalDocs:
       url: ''
   - name: Folders for views service
     description: Create and manage view folders.
     externalDocs:
       url: ''
-  - name: Views service
-    description: Create and manage views.
+  - name: Outgoing webhooks service
     externalDocs:
-      url: ''
-  - name: Data Usage Service
-    description: A service to manage data usage metrics.
+      description: Find out more about outbound webhooks in our documentation.
+      url: >-
+        https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/
+  - name: Extension deployment service
+    description: A service that enables querying for extension deployment information.
     externalDocs:
-      url: ''
-  - name: Rule Groups Service
-    description: A service to manage rule groups.
-    externalDocs:
-      url: ''
-  - name: Custom Enrichments Service
-    description: Manage your enrichments.
-    externalDocs:
-      url: ''
-  - name: Cases service
-    description: >-
-      Manage cases throughout their lifecycle. Create, view, assign,
-      acknowledge, unacknowledge, resolve, and close cases to streamline
-      investigations and follow-ups.
-    externalDocs:
-      description: Learn more about Cases in our documentation
-      url: https://coralogix.com/docs/user-guides/cases/
-  - name: SAML Configuration Service
-    description: Manage your SAML configuration
+      description: Find out more about extensions in our documentation.
+      url: https://coralogix.com/docs/integrations/extensions/
+  - name: Contextual data integration service
+    description: Query for contextual data integration information.
     externalDocs:
       url: ''
 servers:
