@@ -16,10 +16,8 @@ __pycache__/
 .Python
 venv/
 .venv/
-.venv-*/
 env/
 .env
-.pytest_cache/
 
 # Node (Mintlify)
 node_modules/
