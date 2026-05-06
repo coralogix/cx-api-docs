@@ -81,8 +81,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          gh api "repos/${FACADE_REPO}/contents/${FACADE_SPEC_PATH}?ref=${{ steps.facade.outputs.sha }}" \
-            --jq .content | base64 -d > "${TARGET_SPEC_FILE}"
+          # Use the raw media type so files >1MB don't come back base64-empty.
+          # https://docs.github.com/en/rest/repos/contents (works up to 100MB).
+          gh api -H "Accept: application/vnd.github.raw" \
+            "repos/${FACADE_REPO}/contents/${FACADE_SPEC_PATH}?ref=${{ steps.facade.outputs.sha }}" \
+            > "${TARGET_SPEC_FILE}"
           if [ ! -s "${TARGET_SPEC_FILE}" ]; then
             echo "::error::Fetched ${TARGET_SPEC_FILE} is empty"
             exit 1
