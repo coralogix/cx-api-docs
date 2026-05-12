@@ -1,11 +1,11 @@
 # API Keys Admin service overview
 
-The API Keys Admin service provides team-wide, administrator-level operations for managing API keys across all team members in Coralogix. Unlike the [API Keys Service](../api-keys-service/overview), which scopes each call to an individual user's own keys, this service lets administrators list every API key issued to team members, bulk-delete keys, and bulk-activate or bulk-deactivate keys by status. Use it for offboarding flows, periodic key rotation, and team-wide audits. Access is governed by API-key admin permissions; see the [API Keys](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/) user guide for the underlying key model and permission presets.
+The API Keys Admin service provides team-wide, administrative operations on API keys in Coralogix. While the [API Keys Service](../api-keys-service/overview) handles per-key CRUD against a single key ID, this service lets administrators list every API key issued to team members and perform bulk delete or bulk activate/deactivate actions. Typical uses include periodic [key rotation](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#security), revoking keys when offboarding users, and team-wide audits. Access requires team-admin–level privileges; see the [API Keys](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/) user guide for the key model, permission presets, and the [permissions list](https://coralogix.com/docs/user-guides/aaa/access-control/permissions/permissions-list/) for the underlying permissions.
 
 ## Methods
 
 | Method | Path | Description |
 |--------|------|-------------|
 | `GET` | `/aaa/api-keys/v3` | Retrieve all API keys for team members. |
-| `POST` | `/aaa/api-keys/v3/all/delete` | Delete a list of specified API keys in bulk. |
-| `POST` | `/aaa/api-keys/v3/all/status` | Activate or deactivate a list of specified API keys in bulk. |
+| `POST` | `/aaa/api-keys/v3/all/delete` | Delete the specified API keys. |
+| `POST` | `/aaa/api-keys/v3/all/status` | Activate or deactivate the specified API keys. |
