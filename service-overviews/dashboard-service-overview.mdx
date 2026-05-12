@@ -477,6 +477,6 @@ When the dashboard renders an annotation, each emitted event is either:
 
 ### Widget-side: filtering an annotation's series
 
-`AnnotationSeriesVisibility` is **not** part of the `Annotation` message — it lives under `widgets/common/series_visibility.proto`. It's an entry inside a widget's `SeriesVisibility.annotation_series` list, with `annotation_id`, a `SeriesVisibilityMode` (`HIDE_ALL` / `SHOW_ONLY`), and a `series_names` list. Use it on the widget side to control which series of an already-defined annotation render on that widget.
+`AnnotationSeriesVisibility` is **not** part of the `Annotation` message — it's defined alongside the widget-level `SeriesVisibility` schema. It's an entry inside a widget's `SeriesVisibility.annotation_series` list, with `annotation_id`, a `SeriesVisibilityMode` (`HIDE_ALL` / `SHOW_ONLY`), and a `series_names` list. Use it on the widget side to control which series of an already-defined annotation render on that widget.
 
-For the full message structure and field-level documentation, see [`annotation.proto`](https://github.com/coralogix/cx-management-apis/blob/master/proto/com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto) in the `cx-management-apis` repository.
+For the full message structure, see the `Annotation` and `Annotation.Source.*` schema families in `openapi_v5.yaml`.
