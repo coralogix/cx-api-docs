@@ -447,21 +447,21 @@ An `Annotation` message has:
 
 A `oneof` over six source types:
 
-- **`MetricsSource`** — events from a PromQL query. Carries a `Strategy` (currently `StartTimeMetric` — uses the first data point's value as the annotation timestamp), a `message_template`, label list, `AnnotationOrientation`, and an `IntervalResolution`.
-- **`LogsSource`** — events from a Lucene logs query. The strategy is a `oneof` over `Instant` (single timestamp field), `Range` (start + end timestamp fields), and `Duration` (start timestamp + duration field). Supports `label_fields` and `DataModeType`.
+- **`MetricsSource`** — events from a PromQL query (`promql_query`). Carries a `Strategy` (currently `StartTimeMetric` — uses the first data point's value as the annotation timestamp), a `message_template`, label list, `AnnotationOrientation`, and an `IntervalResolution`.
+- **`LogsSource`** — events from a Lucene logs query (`lucene_query`). The strategy is a `oneof` over `Instant` (single timestamp field), `Range` (start + end timestamp fields), and `Duration` (start timestamp + duration field). Supports `label_fields` and `DataModeType`.
 - **`SpansSource`** — same shape as `LogsSource` but over spans.
-- **`DataprimeSource`** — events from a DataPrime query with the same Instant/Range/Duration strategy variants.
-- **`ManualSource`** — events entered by hand in the dashboard UI.
-- **`EventRecurrenceSource`** — events from a recurring schedule.
+- **`DataprimeSource`** — events from a DataPrime query (`query`) with the same Instant/Range/Duration strategy variants.
+- **`ManualSource`** — manually configured events with an `Instant` (single `value` + `Unit`) or `Range` (`start_value` / `end_value` + `Unit`) strategy. Optional `custom_unit`, `message_template`, and `AnnotationOrientation`.
+- **`EventRecurrenceSource`** — events from a recurring schedule. Currently only `WeeklyRecurrence` (with selectable `days_of_week` from a `Weekday` enum) is supported, paired with an `Instant` (start hour) or `Duration` (start hour + length) strategy.
 
-### Scope (`Annotation.WidgetScope`) — v5 only
+### Scope — `Annotation.WidgetScope` (v5 only)
 
-In `openapi_v5.yaml`, `WidgetScope` is a `oneof` over:
+`Annotation.WidgetScope` is a `oneof` over:
 
 - **`AllWidgets`** — annotation overlays every widget on the dashboard.
-- **`SpecificWidgets`** — annotation overlays only the listed widget IDs.
+- **`SpecificWidgets`** — annotation overlays only the listed `widget_ids`.
 
-Earlier spec versions (`v3`, `v4`) do not include `WidgetScope`; the annotation surface there is the 15-schema subset without per-widget targeting.
+Earlier spec versions (`v3`, `v4`) do not scope annotations to specific widgets — that surface is v5-only. (A separate top-level `WidgetScope` family exists in `v3` and `v4` for `Filter` scoping; it's unrelated to annotations.)
 
 ### Events (`AnnotationEvent`)
 
