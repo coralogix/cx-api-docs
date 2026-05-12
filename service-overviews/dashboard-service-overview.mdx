@@ -439,7 +439,7 @@ A `Dynamic` message has the following fields:
 - **`time_frame`** — Optional override for the dashboard-level time frame.
 - **`interpretation`** — How the query result should be interpreted.
 - **`visualization`** — How the interpreted result should be rendered.
-- **`query`** — *Deprecated.* Single-query form, superseded by `query_definitions`. **The deprecation is marked in the proto (`[deprecated = true]`) but is not propagated to the generated openapi spec — treat the field as deprecated regardless of what the spec reports.** New integrations should populate `query_definitions` only.
+- **`query`** — *Deprecated.* Single-query form, superseded by `query_definitions`. **The field is deprecated in the upstream service definition but the deprecation does not propagate to the generated openapi spec — treat the field as deprecated regardless of what the spec reports.** New integrations should populate `query_definitions` only.
 
 ### Query variants (`Dynamic.Query`)
 
@@ -450,4 +450,4 @@ The `query` field (legacy) and each `QueryDefinition.query` are a `oneof` over f
 - **Metrics** — PromQL query (`PromQlQuery`).
 - **DataPrime** — DataPrime query.
 
-For the full message structure and field-level documentation, see [`dynamic.proto`](https://github.com/coralogix/cx-management-apis/blob/master/proto/com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto) in the `cx-management-apis` repository.
+For the full message structure, see the `Dynamic.Query`, `Dynamic.QueryDefinition`, and per-data-source `DynamicQuery*` schemas in `openapi_v5.yaml`.
