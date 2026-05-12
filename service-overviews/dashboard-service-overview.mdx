@@ -428,3 +428,52 @@ To use the Dashboard service API you need to [create a personal or team API key]
 | `AGGREGATION_TYPE_AVG` |
 | `AGGREGATION_TYPE_SUM` |
 </details>
+
+## Annotations
+
+Annotations mark significant events on dashboard widgets — for example, deploys, incidents, or business milestones — so they appear as overlays on charts that match their scope. An annotation is sourced from a Coralogix query, manual input, or a recurring event, and can be scoped to all widgets on the dashboard or a specific set.
+
+An `Annotation` message has:
+
+- `id` — unique identifier
+- `name` — display name
+- `description` — optional description
+- `enabled` — boolean toggle
+- `source` — where the events come from (see below)
+- `scope` — which widgets the annotation overlays
+- `color` — an `AnnotationColor` enum value
+
+### Source (`Annotation.Source`)
+
+A `oneof` over six source types:
+
+- **`MetricsSource`** — events from a PromQL query. Carries a `Strategy` (currently `StartTimeMetric` — uses the first data point's value as the annotation timestamp), a `message_template`, label list, `AnnotationOrientation`, and an `IntervalResolution`.
+- **`LogsSource`** — events from a Lucene logs query. The strategy is a `oneof` over `Instant` (single timestamp field), `Range` (start + end timestamp fields), and `Duration` (start timestamp + duration field). Supports `label_fields` and `DataModeType`.
+- **`SpansSource`** — same shape as `LogsSource` but over spans.
+- **`DataprimeSource`** — events from a DataPrime query with the same Instant/Range/Duration strategy variants.
+- **`ManualSource`** — events entered by hand in the dashboard UI.
+- **`EventRecurrenceSource`** — events from a recurring schedule.
+
+### Scope (`Annotation.WidgetScope`) — v5 only
+
+In `openapi_v5.yaml`, `WidgetScope` is a `oneof` over:
+
+- **`AllWidgets`** — annotation overlays every widget on the dashboard.
+- **`SpecificWidgets`** — annotation overlays only the listed widget IDs.
+
+Earlier spec versions (`v3`, `v4`) do not include `WidgetScope`; the annotation surface there is the 15-schema subset without per-widget targeting.
+
+### Events (`AnnotationEvent`)
+
+When the dashboard renders an annotation, each emitted event is either:
+
+- **`Instant`** — a point in time with `timestamp`, `labels`, and `payload`.
+- **`Range`** — a span with `start`, `end`, `labels`, and `payload`.
+
+### Related types
+
+- `AnnotationColor` *(enum)* — color the annotation renders with.
+- `AnnotationOrientation` *(enum)* — vertical / horizontal placement for metrics-sourced annotations.
+- `AnnotationSeriesVisibility` — widget-level configuration controlling which series in an annotation are visible.
+
+For the full message structure and field-level documentation, see [`annotation.proto`](https://github.com/coralogix/cx-management-apis/blob/master/proto/com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto) in the `cx-management-apis` repository.
