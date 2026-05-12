@@ -433,28 +433,28 @@ To use the Dashboard service API you need to [create a personal or team API key]
 
 Variables let a dashboard accept user-supplied or query-derived values that are substituted into widget queries at view time. The dashboard payload carries the **V2** variable model (proto package `com.coralogixapis.dashboards.v1.ast.variables_v2`); the older V1 model (`Variable` / `Variable.Definition` / `VariableDefinitionConstant` / `VariableDefinitionMultiSelect`) is still present in the spec for backward compatibility.
 
-A V2 variable (`VariableV2`) has a name, optional display name and description, a [display type](#variabledisplaytypev2), a source that produces its candidate values, and a value selection.
+A `VariableV2` carries: a unique `id` (UUID), `name`, optional `display_name` and `description`, a [display type](#variabledisplaytypev2), a `source` that produces candidate values, a `value` selection, and a `display_full_row` toggle.
 
 ### Source (`VariableSourceV2`)
 
 A `oneof` over three variants:
 
-- **Query** — values come from a Coralogix query against logs, spans, metrics, or DataPrime. Each query variant supports a refresh strategy, optional value-display options (label/value regex), and an "All" option.
-- **Static** — values are an inline list.
-- **Textbox** — value is free-form text entered in the dashboard UI.
+- **`QuerySource`** — values come from a Coralogix query against logs, spans, metrics, or DataPrime. Carries a `refresh_strategy`, `value_display_options` (label/value regex), and an `all_option`.
+- **`StaticSource`** — values are an inline list (with an `all_option`).
+- **`TextboxSource`** — value is free-form text entered in the dashboard UI.
 
-The Query variant itself has four sub-variants (`VariableSourceV2QuerySource*`): `LogsQuery`, `SpansQuery`, `MetricsQuery`, `DataprimeQuery`.
+`QuerySource` has four sub-variants matching its data source: `LogsQuery`, `SpansQuery`, `MetricsQuery`, `DataprimeQuery` (openapi schema names: `VariableSourceV2QuerySourceLogsQuery`, `…SpansQuery`, `…MetricsQuery`, `…DataprimeQuery`).
 
 ### Value (`VariableValueV2`)
 
-A `oneof` describing what the user (or default) has selected:
+A `oneof` over six variants (proto names):
 
-- `SingleString`
-- `SingleNumeric` — plus `SingleNumericValue` for the inner number
-- `MultiString`
-- `Lucene`
-- `Regex`
-- `Interval`
+- `SingleStringValue`
+- `SingleNumericValue`
+- `MultiStringValue` — wraps either an `AllValue`, a `ListValue`, or a `SelectedAllValue`
+- `LuceneQueryValue`
+- `RegexValue`
+- `IntervalValue`
 
 <details>
   <summary>VariableDisplayTypeV2</summary>
