@@ -19,6 +19,110 @@ To use the Dashboard service API you need to [create a personal or team API key]
 | `401 Unauthorized` | Response code 401 |
 | `500 Internal Server Error` | Response code 500 |
 
+## Widget catalog
+
+Each widget type below corresponds to one variant of the `Widget.Definition` `oneof`. Every chart widget accepts a query over one of four data sources — Logs (Lucene), Spans (Lucene), Metrics (PromQL), or DataPrime — and renders the result with a type-specific visualization. The `Markdown` widget is the exception: it carries no query and just renders user-supplied markdown text.
+
+### LineChart
+
+Renders one or more queries as line series over time. Supports multi-query overlays through `query_definitions` (repeated) — each definition has an `id`, a `query`, and an optional `name`.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query_definitions` | `[QueryDefinition]` | **Required.** One or more line series. Each definition's `query` is a `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `legend` | `Legend` | Legend placement and content options. |
+| `tooltip` | `Tooltip` | Hover-tooltip behavior. |
+| `stacked_line` | `StackedLine` enum | One of `UNSPECIFIED`, `ABSOLUTE`, `RELATIVE`. Controls whether series stack and how. |
+| `connect_nulls` | `boolean` | Whether to bridge gaps in data instead of producing scattered points when null values appear. |
+| `x_axis_time_format` | `XAxisTimeFormat` | Optional override of the X axis time format. |
+
+See the `LineChart` and `LineChart.QueryDefinition` schemas in `openapi_v5.yaml` for the per-query-source field list.
+
+### BarChart
+
+Vertical bar chart. Single-query (does not use `query_definitions`).
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | A `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `max_bars_per_chart` | `int32` | Cap on bar count. |
+| `group_name_template` | `string` | Custom display name for grouped bars; supports `{{ variable }}` substitution. |
+| `stack_definition` | `StackDefinition` | If set, bars stack; controls per-stack appearance. |
+| `scale_type` | `ScaleType` | `LINEAR` or `LOGARITHMIC`. |
+| `colors_by` | `ColorsBy` | How bar colors are assigned (by group, by stack, etc.). |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+
+### HorizontalBarChart
+
+Bar chart with horizontal bars. Same payload shape as `BarChart`: single `query`, `max_bars_per_chart`, `group_name_template`, `stack_definition`, `scale_type`, `colors_by`, `unit`. Use when the category axis is long enough that horizontal layout is more readable.
+
+### PieChart
+
+Pie / donut chart. Single-query.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | A `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `max_slices_per_chart` | `int32` | Cap on slice count. |
+| `min_slice_percentage` | `int32` | Slices below this percentage are folded into an "other" group. |
+| `stack_definition` | `StackDefinition` | If set, produces a stacked / donut layout. |
+| `label_definition` | `LabelDefinition` | Slice label rendering options. |
+| `group_name_template` | `string` | Slice-group naming; supports `{{ variable }}` substitution. |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+| `show_legend` | `boolean` | *Marked "to be deprecated" in the proto.* Legend visibility is migrating to `Legend.is_visible`. |
+
+### Gauge
+
+Single-value gauge. Shows one number against a min/max range with optional thresholds.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | Single-query (returns one numeric value). |
+| `min`, `max` | `double` | Range used both for the visual arc and for percentage-threshold calculation. |
+| `show_inner_arc` | `boolean` | Whether the inner arc (which graphically represents the value) renders. |
+| `show_outer_arc` | `boolean` | Whether the outer arc (which represents the min/max range) renders. |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+| `thresholds` | `[Threshold]` | Color bands keyed off the value, each with an optional name label. |
+
+### Hexagon
+
+Single-value display rendered as a hexagonal cell, typically used in a grid of hexagons in a dashboard section. Shape is similar to `Gauge` but without the arc visualization.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | Single-query. |
+| `min`, `max` | `double` | Range used for percentage-threshold calculation. |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+| `thresholds` | `[Threshold]` | Color bands; each can carry a name label. |
+
+### DataTable
+
+Tabular renderer. Returns one row per result item, with developer-defined columns.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | A `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `results_per_page` | `int32` | Page size. |
+| `row_style` | `RowStyle` | One of `ONE_LINE`, `TWO_LINE`, `CONDENSED`, `JSON`, `LIST` (see the Constants section). |
+| `columns` | `[Column]` | Ordered list of column definitions (field reference, width, formatting). |
+| `order_by` | `OrderingField` | Server-side ordering of the result set. |
+| `data_mode_type` | `DataModeType` | `HIGH` or `ARCHIVE`. |
+
+### Markdown
+
+Static prose widget. Does not run a query.
+
+| Field | Type | Notes |
+|---|---|---|
+| `markdown_text` | `string` | The body content; standard Markdown syntax. |
+| `tooltip_text` | `string` | Tooltip shown on widget hover. |
+
+Use the Markdown widget for runbook links, dashboard headers, contextual notes, or anywhere a fixed text panel needs to live in the grid.
+
+### Dynamic
+
+Generic query-driven widget — different from the chart widgets above in that it accepts query results in a shape-agnostic form and lets the dashboard renderer choose the visualization. See the Dynamic widget section.
+
 ## Constants
 
 <details>
