@@ -1,6 +1,12 @@
 # Dashboard service overview
 
-Manage your dashboards.
+The Dashboard service API manages Coralogix Custom Dashboards: it lets you create, retrieve, update, delete, and organize dashboards, pin them to favorites, and look up a catalog of every dashboard the caller can see. A *dashboard* is a JSON payload describing a `Layout` of `Section`s, each containing `Row`s of `Widget`s, parameterized by `Variable`s and annotated with `Annotation`s. The same payload is consumed by Create and Replace operations and returned by Get.
+
+This overview describes:
+
+- The 10 endpoints exposed by the Dashboards service (CRUD + pinning + slug lookup + folder assignment + catalog).
+- The structure of the dashboard payload (`Dashboard` message and its components).
+- The widget, variable, filter, annotation, and action types that compose a dashboard.
 
 ## Authentication and permissions
 
@@ -18,6 +24,169 @@ To use the Dashboard service API you need to [create a personal or team API key]
 | `400 Bad Request` | Response code 400 |
 | `401 Unauthorized` | Response code 401 |
 | `500 Internal Server Error` | Response code 500 |
+
+## Endpoints
+
+### Dashboards (CRUD, pinning, slug, folder assignment)
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `POST` | `/dashboards/dashboards/v1` | Create a new dashboard |
+| `PUT` | `/dashboards/dashboards/v1` | Replace a dashboard |
+| `GET` | `/dashboards/dashboards/v1/{dashboard_id}` | Get a dashboard |
+| `DELETE` | `/dashboards/dashboards/v1/{dashboard_id}` | Delete a dashboard |
+| `GET` | `/dashboards/dashboards/v1/slugs/{slug}` | Get a dashboard by URL slug |
+| `PUT` | `/dashboards/dashboards/v1/{dashboard_id}/default` | Replace the default dashboard |
+| `POST` | `/dashboards/dashboards/v1/{dashboard_id}/folder` | Assign a dashboard to a folder |
+| `PUT` | `/dashboards/pinned/v1/{dashboard_id}` | Add dashboard to favorites |
+| `DELETE` | `/dashboards/pinned/v1/{dashboard_id}` | Remove dashboard from favorites |
+
+### Dashboard catalog
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `GET` | `/dashboards/dashboards/v1/catalog` | Get a list of all dashboards accessible to the caller |
+
+For folder operations (list, get, create, replace, delete), see the [Dashboard folders service](../dashboard-folders-service/overview).
+
+## Dashboard payload
+
+The `Dashboard` message is the unit accepted by Create / Replace and returned by Get. Required fields: `name` and `layout`. All other fields are optional.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | A unique identifier of the dashboard. |
+| `name` | `string` | **Required.** Display name. |
+| `description` | `string` | Optional summary of the dashboard's purpose. |
+| `slug_name` | `string` | Optional alias used by `GET /slugs/{slug}`. |
+| `layout` | `Layout` | **Required.** Sections, rows, and widgets — see [Layout](#layout). |
+| `variables_v2` | `[VariableV2]` | Dashboard parameterization — see the Variables (V2) section. The legacy `variables` field is deprecated. |
+| `variables` | `[Variable]` | *Deprecated.* Use `variables_v2`. See [Variables (V1, deprecated)](#variables-v1-deprecated). |
+| `filters` | `[Filter]` | Dashboard-wide filters — see [Filters](#filters). |
+| `annotations` | `[Annotation]` | Dashboard-wide event annotations — see the Annotations section. |
+| `actions` | `[DashboardAction]` | Public actions available within the dashboard — see [Actions](#actions). |
+| `folder_id` or `folder_path` | `string` / `FolderPath` | Mutually exclusive. Either reference an existing folder by id, or supply a `FolderPath` (list of segments) to place the dashboard. |
+| `time_frame` | `oneof` | `absolute_time_frame` (`{from, to}` timestamps) or `relative_time_frame` (a duration relative to "now"). See [Time frame](#time-frame). |
+| `auto_refresh` | `oneof` | One of: `off`, `one_minute`, `two_minutes`, `five_minutes`, `fifteen_minutes`. |
+
+## Layout
+
+A `Layout` is an ordered list of `Section`s. Each `Section` contains an ordered list of `Row`s, and each `Row` contains an ordered list of `Widget`s. The hierarchy is fixed at three levels: `Layout → Section → Row → Widget`.
+
+### Section
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Section's unique identifier. |
+| `rows` | `[Row]` | Rows in the section. |
+| `options` | `SectionOptions` | A `oneof` over `internal` (system-managed) or `custom`. |
+
+`CustomSectionOptions` carries: `name`, `description`, `collapsed` (boolean), `color` (a `SectionPredefinedColor` enum: cyan / green / blue / purple / magenta / pink / orange), and optionally a `repetitive_var` (a variable name that turns the section into a repeating block — one rendered copy per selected value of that variable).
+
+### Row
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Row's unique identifier. |
+| `appearance.height` | `int32` | Height multiplier — `1` = one unit of base height, `2` = two units, and so on. |
+| `widgets` | `[Widget]` | Widgets to render side-by-side in this row. |
+
+## Widgets
+
+A `Widget` carries either a `definition` (an inline widget configuration) **or** a `reference` (a `WidgetReference` pointing at a widget defined on another dashboard). The two are mutually exclusive — the backend rejects payloads that set both or neither.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Widget's unique identifier. |
+| `title` | `string` | Display name. |
+| `description` | `string` | Optional caption. |
+| `definition` | `Widget.Definition` | A `oneof` over the 9 widget types listed below. |
+| `reference` | `WidgetReference` | Alternative to `definition` (see [Cross-dashboard widget reuse](#cross-dashboard-widget-reuse)). |
+
+### Widget types
+
+`Widget.Definition.value` is a `oneof` over:
+
+- **Line chart** (`line_chart` → `LineChart`)
+- **Bar chart** (`bar_chart` → `BarChart`)
+- **Horizontal bar chart** (`horizontal_bar_chart` → `HorizontalBarChart`)
+- **Pie chart** (`pie_chart` → `PieChart`)
+- **Gauge** (`gauge` → `Gauge`)
+- **Hexagon** (`hexagon` → `Hexagon`)
+- **Data table** (`data_table` → `DataTable`)
+- **Markdown** (`markdown` → `Markdown`)
+- **Dynamic** (`dynamic` → `Dynamic`) — generic, query-driven widget. See the Dynamic widget section.
+
+Per-widget sections (LineChart, BarChart, …) document each variant's query shape and visualization options.
+
+### Cross-dashboard widget reuse
+
+A `WidgetReference` re-renders a widget defined on a different dashboard:
+
+| Field | Type | Notes |
+|---|---|---|
+| `dashboard_id` | `string` | ID of the dashboard that owns the source widget. |
+| `widget_id` | `UUID` | ID of the widget within that dashboard. |
+
+Use a reference when you want a widget to appear on multiple dashboards without copying its definition; updates to the source widget propagate to every dashboard that references it.
+
+## Variables (V1, deprecated)
+
+The `Dashboard.variables` field uses the **V1** variable model (proto package `variables`). It is deprecated; new dashboards should populate `variables_v2` instead (see the Variables (V2) section).
+
+A V1 `Variable` has `name`, optional `display_name` / `description`, a `display_type` (`VariableDisplayType` enum), and a `Definition`. The `Definition.value` is a `oneof` over:
+
+- **`Constant`** — *(deprecated within V1)* a single fixed value.
+- **`MultiSelect`** — a value selected from a list, sourced from one of: a logs path (`LogsPathSource`), a metric label (`MetricLabelSource`), a constant list (`ConstantListSource`), a span field (`SpanFieldSource`), or an arbitrary query (`QuerySource`). Supports `selection` (single or multi-value), an `OrderDirection`, and `VariableSelectionOptions`.
+
+V1 schemas remain in the spec for backward compatibility with existing dashboards. The `MultiSelect.selected` field within V1 is also marked deprecated — current dashboards encode the user's selection through `VariableSelectionOptions` and the consuming UI.
+
+## Filters
+
+A `Filter` constrains the data that widgets render. Each filter has:
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Filter's unique identifier. |
+| `display_name` | `string` | Optional UI label. |
+| `enabled` | `boolean` | Whether the filter currently applies. |
+| `collapsed` | `boolean` | UI hint — whether the filter chip renders collapsed or expanded. |
+| `source` | `Filter.Source` | A `oneof` over `LogsFilter`, `SpansFilter`, or `MetricsFilter`. |
+| `scope` | `Filter.WidgetScope` | Which widgets the filter targets. |
+
+`Filter.WidgetScope` is a `oneof` over:
+
+- **`AllWidgets`** — the filter applies to every widget on the dashboard.
+- **`SpecificWidgets`** — the filter applies only to the listed `widget_ids`.
+
+Each `Source` variant carries source-appropriate fields (e.g., `LogsFilter` carries `field`, `operator`, and `observation_field`). For the full per-source field list, see the `Filter.LogsFilter`, `Filter.SpansFilter`, and `Filter.MetricsFilter` schemas in `openapi_v5.yaml`.
+
+## Time frame
+
+The dashboard's time frame is a `oneof`:
+
+- **`absolute_time_frame`** — a `TimeFrame` with `from` and `to` protobuf `Timestamp`s. Fixed start and end times.
+- **`relative_time_frame`** — a `google.protobuf.Duration` interpreted as an offset from "now."
+
+A dashboard-level time frame applies to every widget by default. Individual widgets (for example, the Dynamic widget) can override the dashboard time frame on a per-widget basis.
+
+## Actions
+
+The dashboard payload carries `actions` as a list of `DashboardAction` — publicly available actions a viewer can trigger from a dashboard or one of its widgets.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | A unique identifier of the action. |
+| `name` | `string` | Display name. |
+| `should_open_in_new_window` | `boolean` | Whether the action opens in a new tab/window. |
+| `widget_id` | `string` *(optional)* | Scopes the action to a specific widget. Null = dashboard-wide. |
+| `query_id` | `string` *(optional)* | Scopes the action to a specific query within a widget. Null = widget-wide or dashboard-wide. |
+| `definition` | `ActionDefinition` | A `oneof` over `CustomAction` (a URL template with `{{variable_name}}` placeholders) or `GoToDashboardTemplateAction` (`dashboard_id` of the target dashboard). |
+| `data_source` | `ActionDataSourceType` *(optional)* | One of `LOGS`, `SPANS`, `METRICS`, `DATAPRIME`. |
+
+The `Custom URL` template supports variable substitution: any `{{variable_name}}` in the URL is replaced with the matching variable's resolved value when the user clicks the action.
+
+> **Note:** A separate, older `Action` message exists in the spec but is marked deprecated. The proto file describes it as "Unused dormant model that was part of plans of the product team, however it is now on hold. Recommended to not use this model or rely on it in any way." Always use `DashboardAction` for the `Dashboard.actions` field.
 
 ## Constants
 

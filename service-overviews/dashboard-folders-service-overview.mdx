@@ -1,6 +1,8 @@
 # Dashboard folders service overview
 
-Manage your dashboard folders.
+The Dashboard folders service organizes Custom Dashboards into folders. Folders are flat by default but support a nested structure through `parent_id` references; a folder's full path is exposed as a `FolderPath` (an ordered list of name segments). Use this service to list every folder the caller can see, fetch a single folder by id, and create / replace / delete folders.
+
+For attaching a dashboard to a folder, see [`POST /dashboards/dashboards/v1/{dashboard_id}/folder`](../dashboard-service/overview#endpoints) on the Dashboard service.
 
 ## Authentication and permissions
 
@@ -18,6 +20,35 @@ To use the Dashboard folders service API you need to [create a personal or team 
 | `400 Bad Request` | Response code 400 |
 | `401 Unauthorized` | Response code 401 |
 | `500 Internal Server Error` | Response code 500 |
+
+## Endpoints
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `GET` | `/dashboards/folders/v1` | List dashboard folders |
+| `POST` | `/dashboards/folders/v1` | Create a dashboard folder |
+| `PUT` | `/dashboards/folders/v1` | Replace a dashboard folder |
+| `GET` | `/dashboards/folders/v1/{folder_id}` | Get a dashboard folder |
+| `DELETE` | `/dashboards/folders/v1/{folder_id}` | Delete a dashboard folder |
+
+## Folder payload
+
+The `DashboardFolder` message is small and flat:
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | Unique identifier. |
+| `name` | `string` | Display name. |
+| `parent_id` | `string` | Optional parent folder id. Omit (or leave null) for a top-level folder. |
+
+## Folder hierarchy (`FolderPath`)
+
+Where the dashboard payload itself references a folder, you can supply either:
+
+- **`folder_id`** — an existing folder's id, *or*
+- **`folder_path`** — a `FolderPath` with `segments`, an ordered list of folder names from the root down to the target folder. `folder_id` and `folder_path` are mutually exclusive.
+
+A `FolderPath` is useful for declarative dashboard payloads where the destination folder may be created on the fly. The path is positional, not name-mangled — duplicates of a name at different depths are distinct paths.
 
 ## Constants
 
