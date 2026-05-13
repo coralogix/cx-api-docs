@@ -1,6 +1,14 @@
 # Dashboard service overview
 
-Manage your dashboards.
+The Dashboard service API manages Coralogix Custom Dashboards: it lets you create, retrieve, update, delete, and organize dashboards, pin them to favorites, and look up a catalog of every dashboard the caller can see. A *dashboard* is a JSON payload describing a `Layout` of `Section`s, each containing `Row`s of `Widget`s, parameterized by `Variable`s and annotated with `Annotation`s. The same payload is consumed by Create and Replace operations and returned by Get.
+
+This overview describes:
+
+- The 10 endpoints exposed by the Dashboards service (CRUD + pinning + slug lookup + folder assignment + catalog).
+- The structure of the dashboard payload (`Dashboard` message and its components).
+- The widget, variable, filter, annotation, and action types that compose a dashboard.
+
+For user-facing concept introductions and step-by-step tutorials, see the [Custom Dashboards user guide](https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/).
 
 ## Authentication and permissions
 
@@ -18,6 +26,398 @@ To use the Dashboard service API you need to [create a personal or team API key]
 | `400 Bad Request` | Response code 400 |
 | `401 Unauthorized` | Response code 401 |
 | `500 Internal Server Error` | Response code 500 |
+
+## Endpoints
+
+### Dashboards (CRUD, pinning, slug, folder assignment)
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `POST` | `/dashboards/dashboards/v1` | Create a new dashboard |
+| `PUT` | `/dashboards/dashboards/v1` | Replace a dashboard |
+| `GET` | `/dashboards/dashboards/v1/{dashboard_id}` | Get a dashboard |
+| `DELETE` | `/dashboards/dashboards/v1/{dashboard_id}` | Delete a dashboard |
+| `GET` | `/dashboards/dashboards/v1/slugs/{slug}` | Get a dashboard by URL slug |
+| `PUT` | `/dashboards/dashboards/v1/{dashboard_id}/default` | Replace the default dashboard |
+| `POST` | `/dashboards/dashboards/v1/{dashboard_id}/folder` | Assign a dashboard to a folder |
+| `PUT` | `/dashboards/pinned/v1/{dashboard_id}` | Add dashboard to favorites |
+| `DELETE` | `/dashboards/pinned/v1/{dashboard_id}` | Remove dashboard from favorites |
+
+### Dashboard catalog
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `GET` | `/dashboards/dashboards/v1/catalog` | Get dashboard catalog |
+
+The catalog endpoint mirrors the [Manage dashboard catalog](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-catalog/) tutorial on the user-guide side.
+
+For folder operations (list, get, create, replace, delete), see the [Dashboard folders service](../dashboard-folders-service/overview).
+
+## Dashboard payload
+
+The `Dashboard` message is the unit accepted by Create / Replace and returned by Get. Required fields: `name` and `layout`. All other fields are optional.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | A unique identifier of the dashboard. |
+| `name` | `string` | **Required.** Display name. |
+| `description` | `string` | Optional summary of the dashboard's purpose. |
+| `slug_name` | `string` | Optional alias used by `GET /slugs/{slug}`. |
+| `layout` | `Layout` | **Required.** Sections, rows, and widgets — see [Layout](#layout). |
+| `variables_v2` | `[VariableV2]` | Dashboard parameterization — see [Variables (V2)](#variables-v2). The legacy `variables` field is deprecated. |
+| `variables` | `[Variable]` | *Deprecated.* Use `variables_v2`. See [Variables (V1, deprecated)](#variables-v1-deprecated). |
+| `filters` | `[Filter]` | Dashboard-wide filters — see [Filters](#filters). |
+| `annotations` | `[Annotation]` | Dashboard-wide event annotations — see [Annotations](#annotations). |
+| `actions` | `[DashboardAction]` | Public actions available within the dashboard — see [Actions](#actions). |
+| `folder_id` or `folder_path` | `string` / `FolderPath` | Mutually exclusive. Either reference an existing folder by id, or supply a `FolderPath` (list of segments) to place the dashboard. |
+| `time_frame` | `oneof` | `absolute_time_frame` (`{from, to}` timestamps) or `relative_time_frame` (a duration relative to "now"). See [Time frame](#time-frame). |
+| `auto_refresh` | `oneof` | One of: `off`, `one_minute`, `two_minutes`, `five_minutes`, `fifteen_minutes`. See the [Auto-refresh](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/auto-refresh/) tutorial on the user-guide side. |
+
+For broader product context, see [Manage dashboard settings](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/) and [Dashboard metadata](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/dashboard-metadata/).
+
+## Layout
+
+A `Layout` is an ordered list of `Section`s. Each `Section` contains an ordered list of `Row`s, and each `Row` contains an ordered list of `Widget`s. The hierarchy is fixed at three levels: `Layout → Section → Row → Widget`.
+
+For the user-facing concept and UI walkthrough, see the [Sections](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/sections/) tutorial.
+
+### Section
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Section's unique identifier. |
+| `rows` | `[Row]` | Rows in the section. |
+| `options` | `SectionOptions` | A `oneof` over `internal` (system-managed) or `custom`. |
+
+`CustomSectionOptions` carries: `name`, `description`, `collapsed` (boolean), `color` (a `SectionPredefinedColor` enum: cyan / green / blue / purple / magenta / pink / orange), and optionally a `repetitive_var` (a variable name that turns the section into a repeating block — one rendered copy per selected value of that variable).
+
+### Row
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Row's unique identifier. |
+| `appearance.height` | `int32` | Height multiplier — `1` = one unit of base height, `2` = two units, and so on. |
+| `widgets` | `[Widget]` | Widgets to render side-by-side in this row. |
+
+## Widgets
+
+A `Widget` carries either a `definition` (an inline widget configuration) **or** a `reference` (a `WidgetReference` pointing at a widget defined on another dashboard). The two are mutually exclusive — the backend rejects payloads that set both or neither.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Widget's unique identifier. |
+| `title` | `string` | Display name. |
+| `description` | `string` | Optional caption. |
+| `definition` | `Widget.Definition` | A `oneof` over the 9 widget types listed below. |
+| `reference` | `WidgetReference` | Alternative to `definition` (see [Cross-dashboard widget reuse](#cross-dashboard-widget-reuse)). |
+
+For user-facing widget creation walkthroughs, see [Add monitoring data to widgets](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/add-monitoring-data-to-custom-dashboard-widgets/) and the [getting-started guide](https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/#add-new-widgets).
+
+### Widget types
+
+`Widget.Definition.value` is a `oneof` over:
+
+- **Line chart** (`line_chart` → `LineChart`) — see [LineChart](#linechart).
+- **Bar chart** (`bar_chart` → `BarChart`) — see [BarChart](#barchart).
+- **Horizontal bar chart** (`horizontal_bar_chart` → `HorizontalBarChart`) — see [HorizontalBarChart](#horizontalbarchart).
+- **Pie chart** (`pie_chart` → `PieChart`) — see [PieChart](#piechart).
+- **Gauge** (`gauge` → `Gauge`) — see [Gauge](#gauge).
+- **Hexagon** (`hexagon` → `Hexagon`) — see [Hexagon](#hexagon).
+- **Data table** (`data_table` → `DataTable`) — see [DataTable](#datatable).
+- **Markdown** (`markdown` → `Markdown`) — see [Markdown](#markdown).
+- **Dynamic** (`dynamic` → `Dynamic`) — see [Dynamic widget](#dynamic-widget).
+
+### Cross-dashboard widget reuse
+
+A `WidgetReference` re-renders a widget defined on a different dashboard:
+
+| Field | Type | Notes |
+|---|---|---|
+| `dashboard_id` | `string` | ID of the dashboard that owns the source widget. |
+| `widget_id` | `UUID` | ID of the widget within that dashboard. |
+
+Use a reference when you want a widget to appear on multiple dashboards without copying its definition; updates to the source widget propagate to every dashboard that references it.
+
+## Widget catalog
+
+Each widget type below corresponds to one variant of the `Widget.Definition` `oneof`. Every chart widget accepts a query over one of four data sources — Logs (Lucene), Spans (Lucene), Metrics (PromQL), or DataPrime — and renders the result with a type-specific visualization. The `Markdown` widget is the exception: it carries no query and just renders user-supplied markdown text.
+
+Each section below lists the **key fields** most relevant to constructing a widget payload. For the full field set per widget (color schemes, legend configuration, decimal precision, axis bounds, custom units, etc.), see the corresponding schema in `openapi_v5.yaml`.
+
+### LineChart
+
+Renders one or more queries as line series over time. Supports multi-query overlays through `query_definitions` (repeated) — each definition has an `id`, a `query`, and an optional `name`.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query_definitions` | `[QueryDefinition]` | **Required.** One or more line series. Each definition's `query` is a `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `legend` | `Legend` | Legend placement and content options. |
+| `tooltip` | `Tooltip` | Hover-tooltip behavior. |
+| `stacked_line` | `StackedLine` enum | One of `UNSPECIFIED`, `ABSOLUTE`, `RELATIVE`. Controls whether series stack and how. |
+| `connect_nulls` | `boolean` | Whether to bridge gaps in data instead of producing scattered points when null values appear. |
+| `x_axis_time_format` | `XAxisTimeFormat` | Optional override of the X axis time format. |
+
+For multi-query patterns, see [Multiple queries in custom dashboards](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/multiple-queries-in-custom-dashboards/). See the `LineChart` and `LineChart.QueryDefinition` schemas in `openapi_v5.yaml` for the per-query-source field list.
+
+### BarChart
+
+Vertical bar chart. Single-query (does not use `query_definitions`).
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | A `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `max_bars_per_chart` | `int32` | Cap on bar count. |
+| `group_name_template` | `string` | Custom display name for grouped bars; supports `{{ variable }}` substitution. |
+| `stack_definition` | `StackDefinition` | If set, bars stack; controls per-stack appearance. |
+| `scale_type` | `ScaleType` | `LINEAR` or `LOGARITHMIC`. |
+| `colors_by` | `ColorsBy` | How bar colors are assigned (by group, by stack, etc.). |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+
+### HorizontalBarChart
+
+Bar chart with horizontal bars. Mostly mirrors `BarChart` (single `query`, `max_bars_per_chart`, `group_name_template`, `stack_definition`, `scale_type`, `colors_by`, `unit`) but the axis-handling controls differ: `HorizontalBarChart` uses `y_axis_view_by` (category vs value bucketing) and `display_on_bar` (bar-label placement) where `BarChart` uses `x_axis` and `bar_value_display`. Use the horizontal layout when the category axis is long enough that vertical labels would overflow.
+
+### PieChart
+
+Pie / donut chart. Single-query.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | A `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `max_slices_per_chart` | `int32` | Cap on slice count. |
+| `min_slice_percentage` | `int32` | Slices below this percentage are folded into an "other" group. |
+| `stack_definition` | `StackDefinition` | If set, produces a stacked / donut layout. |
+| `label_definition` | `LabelDefinition` | Slice label rendering options. |
+| `group_name_template` | `string` | Slice-group naming; supports `{{ variable }}` substitution. |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+| `show_legend` | `boolean` | The upstream service definition describes this field as "not used, to be deprecated." |
+
+### Gauge
+
+Single-value gauge. Shows one number against a min/max range with optional thresholds.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | Single-query (returns one numeric value). |
+| `min`, `max` | `double` | Range used both for the visual arc and for percentage-threshold calculation. |
+| `show_inner_arc` | `boolean` | Whether the inner arc (which graphically represents the value) renders. |
+| `show_outer_arc` | `boolean` | Whether the outer arc (which represents the min/max range) renders. |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+| `thresholds` | `[Threshold]` | Color bands keyed off the value, each with an optional name label. |
+
+### Hexagon
+
+Single-value display rendered as a hexagonal cell, typically used in a grid of hexagons in a dashboard section. Shape is similar to `Gauge` but without the arc visualization.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | Single-query. |
+| `min`, `max` | `double` | Range used for percentage-threshold calculation. |
+| `unit` | `Unit` | One from the `Unit` enum or `CUSTOM`. |
+| `thresholds` | `[Threshold]` | Color bands; each can carry a name label. |
+
+### DataTable
+
+Tabular renderer. Returns one row per result item, with developer-defined columns. For the dynamic-table variant, see [Build a dynamic table widget](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/build-a-dynamic-table-widget/) on the user-guide side.
+
+| Field | Type | Notes |
+|---|---|---|
+| `query` | `Query` | A `oneof` over Logs / Spans / Metrics / DataPrime. |
+| `results_per_page` | `int32` | Page size. |
+| `row_style` | `RowStyle` | One of `ONE_LINE`, `TWO_LINE`, `CONDENSED`, `JSON`, `LIST` (see the Constants section). |
+| `columns` | `[Column]` | Ordered list of column definitions (field reference, width, formatting). |
+| `order_by` | `OrderingField` | Server-side ordering of the result set. |
+| `data_mode_type` | `DataModeType` | `HIGH` or `ARCHIVE`. |
+
+### Markdown
+
+Static prose widget. Does not run a query.
+
+| Field | Type | Notes |
+|---|---|---|
+| `markdown_text` | `string` | The body content; standard Markdown syntax. |
+| `tooltip_text` | `string` | Tooltip shown on widget hover. |
+
+Use the Markdown widget for runbook links, dashboard headers, contextual notes, or anywhere a fixed text panel needs to live in the grid.
+
+### Dynamic widget
+
+The Dynamic widget is a generic, query-driven widget that visualizes results from one or more queries against Coralogix data. Unlike the chart-specific widget types (`LineChart`, `BarChart`, `PieChart`, `Gauge`, etc.), the Dynamic widget accepts a query payload plus an interpretation and visualization configuration, letting the dashboard render the result with the renderer that fits the data shape.
+
+A `Dynamic` message has the following fields:
+
+- **`query_definitions`** *(repeated)* — One or more `QueryDefinition` entries, each with an `id`, a `query`, and an optional `name`. Use this for multi-query widgets (overlays, comparisons). See [Multiple queries in custom dashboards](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/multiple-queries-in-custom-dashboards/).
+- **`time_frame`** — Optional override for the dashboard-level time frame.
+- **`interpretation`** — How the query result should be interpreted.
+- **`visualization`** — How the interpreted result should be rendered.
+- **`query`** — *Deprecated.* Single-query form, superseded by `query_definitions`. **The field is deprecated in the upstream service definition but the deprecation does not propagate to the generated openapi spec — treat the field as deprecated regardless of what the spec reports.** New integrations should populate `query_definitions` only.
+
+#### Query variants (`Dynamic.Query`)
+
+The `query` field (legacy) and each `QueryDefinition.query` are a `oneof` over four data sources:
+
+- **Logs** — Lucene query (`LuceneQuery`).
+- **Spans** — Lucene query.
+- **Metrics** — PromQL query (`PromQlQuery`).
+- **DataPrime** — DataPrime query.
+
+For the full message structure, see the `Dynamic.Query`, `Dynamic.QueryDefinition`, and per-data-source `DynamicQuery*` schemas in `openapi_v5.yaml`.
+
+## Variables (V1, deprecated)
+
+The `Dashboard.variables` field uses the **V1** variable model (proto package `variables`). It is deprecated; new dashboards should populate `variables_v2` instead (see [Variables (V2)](#variables-v2)).
+
+For user-facing variable concepts and UI walkthroughs, see [Create and manage variables](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/create-and-manage-variables/).
+
+A V1 `Variable` has `name`, optional `display_name` / `description`, a `display_type` (`VariableDisplayType` enum), and a `Definition`. The `Definition.value` is a `oneof` over:
+
+- **`Constant`** — *(deprecated within V1)* a single fixed value.
+- **`MultiSelect`** — a value selected from a list, sourced from one of: a logs path (`LogsPathSource`), a metric label (`MetricLabelSource`), a constant list (`ConstantListSource`), a span field (`SpanFieldSource`), or an arbitrary query (`QuerySource`). Supports `selection` (single or multi-value), an `OrderDirection`, and `VariableSelectionOptions`.
+
+V1 schemas remain in the spec for backward compatibility with existing dashboards. The `MultiSelect.selected` field within V1 is also marked deprecated — current dashboards encode the user's selection through `VariableSelectionOptions` and the consuming UI.
+
+## Variables (V2)
+
+Variables let a dashboard accept user-supplied or query-derived values that are substituted into widget queries at view time. The dashboard payload carries the **V2** variable model (proto package `com.coralogixapis.dashboards.v1.ast.variables_v2`); the older V1 model (`Variable` / `Variable.Definition` / `VariableDefinitionConstant` / `VariableDefinitionMultiSelect`) is still present in the spec for backward compatibility — see [Variables (V1, deprecated)](#variables-v1-deprecated).
+
+A `VariableV2` carries: a unique `id` (UUID), `name`, optional `display_name` and `description`, a [display type](#variabledisplaytypev2), a `source` that produces candidate values, a `value` selection, and a `display_full_row` toggle.
+
+### Source (`VariableSourceV2`)
+
+A `oneof` over three variants:
+
+- **`QuerySource`** — values come from a Coralogix query against logs, spans, metrics, or DataPrime. Carries a `refresh_strategy`, `value_display_options` (label/value regex), and an `all_option`.
+- **`StaticSource`** — values are an inline list (with an `all_option`).
+- **`TextboxSource`** — value is free-form text entered in the dashboard UI.
+
+`QuerySource` has four sub-variants matching its data source: `LogsQuery`, `SpansQuery`, `MetricsQuery`, `DataprimeQuery` (openapi schema names: `VariableSourceV2QuerySourceLogsQuery`, `…SpansQuery`, `…MetricsQuery`, `…DataprimeQuery`).
+
+### Value (`VariableValueV2`)
+
+A `oneof` over six variants (proto names):
+
+- `SingleStringValue`
+- `SingleNumericValue`
+- `MultiStringValue` — wraps either an `AllValue`, a `ListValue`, or a `SelectedAllValue`
+- `LuceneQueryValue`
+- `RegexValue`
+- `IntervalValue`
+
+<details>
+  <summary>VariableDisplayTypeV2</summary>
+
+  | Value |
+|-------|
+| `VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED` |
+| `VARIABLE_DISPLAY_TYPE_V2_LABEL_VALUE` |
+| `VARIABLE_DISPLAY_TYPE_V2_VALUE` |
+| `VARIABLE_DISPLAY_TYPE_V2_NOTHING` |
+</details>
+
+For the full message structure, see the `VariableV2`, `VariableSourceV2.*`, `VariableValueV2.*`, and `VariableDisplayTypeV2` schemas in `openapi_v5.yaml`. For user-facing variable usage, see [Create and manage variables](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/create-and-manage-variables/).
+
+## Filters
+
+A `Filter` constrains the data that widgets render. Each filter has:
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Filter's unique identifier. |
+| `display_name` | `string` | Optional UI label. |
+| `enabled` | `boolean` | Whether the filter currently applies. |
+| `collapsed` | `boolean` | UI hint — whether the filter chip renders collapsed or expanded. |
+| `source` | `Filter.Source` | A `oneof` over `LogsFilter`, `SpansFilter`, or `MetricsFilter`. |
+| `scope` | `Filter.WidgetScope` | Which widgets the filter targets. |
+
+`Filter.WidgetScope` is a `oneof` over:
+
+- **`AllWidgets`** — the filter applies to every widget on the dashboard.
+- **`SpecificWidgets`** — the filter applies only to the listed `widget_ids`.
+
+Each `Source` variant carries source-appropriate fields (e.g., `LogsFilter` carries `field`, `operator`, and `observation_field`). For the full per-source field list, see the `Filter.LogsFilter`, `Filter.SpansFilter`, and `Filter.MetricsFilter` schemas in `openapi_v5.yaml`.
+
+## Annotations
+
+Annotations mark significant events on dashboard widgets — for example, deploys, incidents, or business milestones — so they appear as overlays on charts that match their scope. An annotation is sourced from a Coralogix query, manual input, or a recurring event, and can be scoped to all widgets on the dashboard or a specific set.
+
+For user-facing concept and creation walkthrough, see [Create annotations](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/create-annotations/).
+
+An `Annotation` message has:
+
+- `id` — unique identifier
+- `name` — display name
+- `description` — optional description
+- `enabled` — boolean toggle
+- `source` — where the events come from (see below)
+- `scope` — which widgets the annotation overlays
+- `color` — an `AnnotationColor` enum value
+
+### Source (`Annotation.Source`)
+
+A `oneof` over six source types:
+
+- **`MetricsSource`** — events from a PromQL query (`promql_query`). Carries a `Strategy` (currently `StartTimeMetric` — uses the first data point's value as the annotation timestamp), a `message_template`, label list, `AnnotationOrientation`, and an `IntervalResolution`.
+- **`LogsSource`** — events from a Lucene logs query (`lucene_query`). The strategy is a `oneof` over `Instant` (single timestamp field), `Range` (start + end timestamp fields), and `Duration` (start timestamp + duration field). Supports `label_fields` and `DataModeType`.
+- **`SpansSource`** — same shape as `LogsSource` but over spans.
+- **`DataprimeSource`** — events from a DataPrime query (`query`) with the same Instant/Range/Duration strategy variants.
+- **`ManualSource`** — manually configured events with an `Instant` (single `value` + `Unit`) or `Range` (`start_value` / `end_value` + `Unit`) strategy. Optional `custom_unit`, `message_template`, and `AnnotationOrientation`.
+- **`EventRecurrenceSource`** — events from a recurring schedule. Currently only `WeeklyRecurrence` (with selectable `days_of_week` from a `Weekday` enum) is supported, paired with an `Instant` (start hour) or `Duration` (start hour + length) strategy.
+
+### Scope — `Annotation.WidgetScope` (v5 only)
+
+`Annotation.WidgetScope` is a `oneof` over:
+
+- **`AllWidgets`** — annotation overlays every widget on the dashboard.
+- **`SpecificWidgets`** — annotation overlays only the listed `widget_ids`.
+
+Earlier spec versions (`v3`, `v4`) do not scope annotations to specific widgets — that surface is v5-only. (A separate top-level `WidgetScope` family exists in `v3` and `v4` for `Filter` scoping; it's unrelated to annotations.)
+
+### Events (`AnnotationEvent`)
+
+When the dashboard renders an annotation, each emitted event is either:
+
+- **`Instant`** — a point in time with `timestamp`, `labels`, and `payload`.
+- **`Range`** — a span with `start`, `end`, `labels`, and `payload`.
+
+### Related types
+
+- `AnnotationColor` *(enum)* — color the annotation renders with.
+- `AnnotationOrientation` *(enum)* — vertical / horizontal placement for metrics-sourced annotations.
+
+### Widget-side: filtering an annotation's series
+
+`AnnotationSeriesVisibility` is **not** part of the `Annotation` message — it's defined alongside the widget-level `SeriesVisibility` schema. It's an entry inside a widget's `SeriesVisibility.annotation_series` list, with `annotation_id`, a `SeriesVisibilityMode` (`HIDE_ALL` / `SHOW_ONLY`), and a `series_names` list. Use it on the widget side to control which series of an already-defined annotation render on that widget.
+
+For the full message structure, see the `Annotation` and `Annotation.Source.*` schema families in `openapi_v5.yaml`.
+
+## Time frame
+
+The dashboard's time frame is a `oneof`:
+
+- **`absolute_time_frame`** — a `TimeFrame` with `from` and `to` protobuf `Timestamp`s. Fixed start and end times.
+- **`relative_time_frame`** — a `google.protobuf.Duration` interpreted as an offset from "now."
+
+A dashboard-level time frame applies to every widget by default. Individual widgets (for example, the Dynamic widget) can override the dashboard time frame on a per-widget basis.
+
+For the user-facing time-interval picker UI, see [Configure time interval](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/configure-time-interval/).
+
+## Actions
+
+The dashboard payload carries `actions` as a list of `DashboardAction` — publicly available actions a viewer can trigger from a dashboard or one of its widgets.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | A unique identifier of the action. |
+| `name` | `string` | Display name. |
+| `should_open_in_new_window` | `boolean` | Whether the action opens in a new tab/window. |
+| `widget_id` | `string` *(optional)* | Scopes the action to a specific widget. Null = dashboard-wide. |
+| `query_id` | `string` *(optional)* | Scopes the action to a specific query within a widget. Null = widget-wide or dashboard-wide. |
+| `definition` | `ActionDefinition` | A `oneof` over `CustomAction` (a URL template with `{{variable_name}}` placeholders) or `GoToDashboardTemplateAction` (`dashboard_id` of the target dashboard). |
+| `data_source` | `ActionDataSourceType` *(optional)* | One of `LOGS`, `SPANS`, `METRICS`, `DATAPRIME`. |
+
+The `Custom URL` template supports variable substitution: any `{{variable_name}}` in the URL is replaced with the matching variable's resolved value when the user clicks the action.
+
+> **Note:** A separate, older `Action` message exists in the spec but is marked deprecated. The proto file describes it as "Unused dormant model that was part of plans of the product team, however it is now on hold. Recommended to not use this model or rely on it in any way." Always use `DashboardAction` for the `Dashboard.actions` field.
 
 ## Constants
 
