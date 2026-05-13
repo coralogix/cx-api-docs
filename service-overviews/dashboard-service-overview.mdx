@@ -73,7 +73,7 @@ The `Dashboard` message is the unit accepted by Create / Replace and returned by
 | `time_frame` | `oneof` | `absolute_time_frame` (`{from, to}` timestamps) or `relative_time_frame` (a duration relative to "now"). See [Time frame](#time-frame). |
 | `auto_refresh` | `oneof` | One of: `off`, `one_minute`, `two_minutes`, `five_minutes`, `fifteen_minutes`. See the [Auto-refresh](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/auto-refresh/) tutorial on the user-guide side. |
 
-For broader product context, see [Manage dashboard settings](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/) and [Dashboard metadata](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/dashboard-metadata/).
+For broader product context, see [Manage dashboard settings](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/).
 
 ## Layout
 
@@ -280,7 +280,7 @@ V1 schemas remain in the spec for backward compatibility with existing dashboard
 
 Variables let a dashboard accept user-supplied or query-derived values that are substituted into widget queries at view time. The dashboard payload carries the **V2** variable model (proto package `com.coralogixapis.dashboards.v1.ast.variables_v2`); the older V1 model (`Variable` / `Variable.Definition` / `VariableDefinitionConstant` / `VariableDefinitionMultiSelect`) is still present in the spec for backward compatibility — see [Variables (V1, deprecated)](#variables-v1-deprecated).
 
-A `VariableV2` carries: a unique `id` (UUID), `name`, optional `display_name` and `description`, a [display type](#variabledisplaytypev2), a `source` that produces candidate values, a `value` selection, and a `display_full_row` toggle.
+A `VariableV2` carries: a unique `id` (UUID), `name`, optional `display_name` and `description`, a `display_type` (`VariableDisplayTypeV2` enum — values in the collapsible below), a `source` that produces candidate values, a `value` selection, and a `display_full_row` toggle.
 
 ### Source (`VariableSourceV2`)
 
