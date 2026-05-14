@@ -1,6 +1,6 @@
 # Dashboard folders service overview
 
-The Dashboard folders service organizes Custom Dashboards into folders. Folders are flat by default but support a nested structure through `parent_id` references; a folder's full path is exposed as a `FolderPath` (an ordered list of name segments). Use this service to list every folder the caller can see, fetch a single folder by id, and create / replace / delete folders.
+The Dashboard folders service organizes dashboards into folders. Folders are flat by default but support a nested structure through `parent_id` references; a folder's full path is exposed as a `FolderPath` (an ordered list of name segments). Use this service to list every folder the caller can see, fetch a single folder by id, and create / replace / delete folders.
 
 For attaching a dashboard to a folder, see [`POST /dashboards/dashboards/v1/{dashboard_id}/folder`](../dashboard-service/overview#endpoints) on the Dashboard service. For user-facing folder concepts, see the [Custom Dashboards user guide](https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/).
 
