@@ -75,6 +75,7 @@
               "api-reference/v5/api-keys-service/delete-api-key",
               "api-reference/v5/api-keys-service/get-\"send-data\"-api-keys",
               "api-reference/v5/api-keys-service/get-api-key",
+              "api-reference/v5/api-keys-service/get-api-keys",
               "api-reference/v5/api-keys-service/update-api-key"
             ]
           },
@@ -253,7 +254,8 @@
               "api-reference/v5/global-routers-service/delete-global-router",
               "api-reference/v5/global-routers-service/get-global-router",
               "api-reference/v5/global-routers-service/list-global-routers",
-              "api-reference/v5/global-routers-service/replace-global-router"
+              "api-reference/v5/global-routers-service/replace-global-router",
+              "api-reference/v5/global-routers-service/validate-entity-label-matcher"
             ]
           },
           {
