@@ -1,6 +1,14 @@
 # Dashboard service overview
 
-Manage your dashboards.
+The Dashboard service API manages Coralogix dashboards: it lets you create, retrieve, update, delete, and organize dashboards, pin them to favorites, and look up a catalog of every dashboard the caller can see. A *dashboard* is a JSON payload describing a `Layout` of `Section`s, each containing `Row`s of `Widget`s, parameterized by `Variable`s and annotated with `Annotation`s. The same payload is consumed by Create and Replace operations and returned by Get.
+
+This overview describes:
+
+- The 10 endpoints exposed by the Dashboards service (CRUD + pinning + slug lookup + folder assignment + catalog).
+- The structure of the dashboard payload (`Dashboard` message and its components).
+- The widget, variable, filter, annotation, and action types that compose a dashboard.
+
+For user-facing concept introductions and step-by-step tutorials, see the [Custom Dashboards user guide](https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/).
 
 ## Authentication and permissions
 
@@ -19,412 +27,279 @@ To use the Dashboard service API you need to [create a personal or team API key]
 | `401 Unauthorized` | Response code 401 |
 | `500 Internal Server Error` | Response code 500 |
 
+## Endpoints
+
+### Dashboards (CRUD, pinning, slug, folder assignment)
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `POST` | `/dashboards/dashboards/v1` | Create a new dashboard |
+| `PUT` | `/dashboards/dashboards/v1` | Replace a dashboard |
+| `GET` | `/dashboards/dashboards/v1/{dashboard_id}` | Get a dashboard |
+| `DELETE` | `/dashboards/dashboards/v1/{dashboard_id}` | Delete a dashboard |
+| `GET` | `/dashboards/dashboards/v1/slugs/{slug}` | Get a dashboard by URL slug |
+| `PUT` | `/dashboards/dashboards/v1/{dashboard_id}/default` | Replace the default dashboard |
+| `POST` | `/dashboards/dashboards/v1/{dashboard_id}/folder` | Assign a dashboard to a folder |
+| `PUT` | `/dashboards/pinned/v1/{dashboard_id}` | Add dashboard to favorites |
+| `DELETE` | `/dashboards/pinned/v1/{dashboard_id}` | Remove dashboard from favorites |
+
+### Dashboard catalog
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `GET` | `/dashboards/dashboards/v1/catalog` | Get dashboard catalog |
+
+The catalog endpoint mirrors the [Manage dashboard catalog](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-catalog/) tutorial on the user-guide side.
+
+For folder operations (list, get, create, replace, delete), see the [Dashboard folders service](../dashboard-folders-service/overview).
+
+## Dashboard payload
+
+The `Dashboard` message is the unit accepted by Create / Replace and returned by Get. Required fields: `name` and `layout`. All other fields are optional.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | A unique identifier of the dashboard. |
+| `name` | `string` | **Required.** Display name. |
+| `description` | `string` | Optional summary of the dashboard's purpose. |
+| `slug_name` | `string` | Optional alias used by `GET /slugs/{slug}`. |
+| `layout` | `Layout` | **Required.** Sections, rows, and widgets — see [Layout](#layout). |
+| `variables_v2` | `[VariableV2]` | Dashboard parameterization — see [Variables (V2)](#variables-v2). The legacy `variables` field is deprecated. |
+| `variables` | `[Variable]` | *Deprecated.* Use `variables_v2`. See [Variables (V1, deprecated)](#variables-v1-deprecated). |
+| `filters` | `[Filter]` | Dashboard-wide filters — see [Filters](#filters). |
+| `annotations` | `[Annotation]` | Dashboard-wide event annotations — see [Annotations](#annotations). |
+| `actions` | `[DashboardAction]` | Public actions available within the dashboard — see [Actions](#actions). |
+| `folder_id` or `folder_path` | `string` / `FolderPath` | Mutually exclusive. Either reference an existing folder by id, or supply a `FolderPath` (list of segments) to place the dashboard. |
+| `time_frame` | `oneof` | `absolute_time_frame` (`{from, to}` timestamps) or `relative_time_frame` (a duration relative to "now"). See [Time frame](#time-frame). |
+| `auto_refresh` | `oneof` | One of: `off`, `one_minute`, `two_minutes`, `five_minutes`, `fifteen_minutes`. See the [Auto-refresh](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/auto-refresh/) tutorial on the user-guide side. |
+
+For broader product context, see [Manage dashboard settings](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/).
+
+## Layout
+
+A `Layout` is an ordered list of `Section`s. Each `Section` contains an ordered list of `Row`s, and each `Row` contains an ordered list of `Widget`s. The hierarchy is fixed at three levels: `Layout → Section → Row → Widget`.
+
+For the user-facing concept and UI walkthrough, see the [Sections](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/sections/) tutorial.
+
+### Section
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Section's unique identifier. |
+| `rows` | `[Row]` | Rows in the section. |
+| `options` | `SectionOptions` | A `oneof` over `internal` (system-managed) or `custom`. |
+
+`CustomSectionOptions` carries: `name`, `description`, `collapsed` (boolean), `color` (a `SectionPredefinedColor` enum: cyan / green / blue / purple / magenta / pink / orange), and optionally a `repetitive_var` (a variable name that turns the section into a repeating block — one rendered copy per selected value of that variable).
+
+### Row
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Row's unique identifier. |
+| `appearance.height` | `int32` | Height multiplier — `1` = one unit of base height, `2` = two units, and so on. |
+| `widgets` | `[Widget]` | Widgets to render side-by-side in this row. |
+
+## Widgets
+
+A `Widget` carries either a `definition` (an inline widget configuration) **or** a `reference` (a `WidgetReference` pointing at a widget defined on another dashboard). The two are mutually exclusive — the backend rejects payloads that set both or neither.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Widget's unique identifier. |
+| `title` | `string` | Display name. |
+| `description` | `string` | Optional caption. |
+| `definition` | `Widget.Definition` | A `oneof` over the 9 widget types listed below. |
+| `reference` | `WidgetReference` | Alternative to `definition` (see [Cross-dashboard widget reuse](#cross-dashboard-widget-reuse)). |
+
+For user-facing widget creation walkthroughs, see [Add monitoring data to widgets](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/add-monitoring-data-to-custom-dashboard-widgets/) and the [getting-started guide](https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/#add-new-widgets).
+
+### Cross-dashboard widget reuse
+
+A `WidgetReference` re-renders a widget defined on a different dashboard:
+
+| Field | Type | Notes |
+|---|---|---|
+| `dashboard_id` | `string` | ID of the dashboard that owns the source widget. |
+| `widget_id` | `UUID` | ID of the widget within that dashboard. |
+
+Use a reference when you want a widget to appear on multiple dashboards without copying its definition; updates to the source widget propagate to every dashboard that references it.
+
+## Widget catalog
+
+Each widget's `definition` is a `oneof` over the variants below. Every chart accepts a query over one of four data sources — Logs (Lucene), Spans (Lucene), Metrics (PromQL), or DataPrime — except `Markdown`, which carries no query. For the full field set per widget (color schemes, legend, axis bounds, units, etc.), see the corresponding schema in `openapi_v5.yaml`.
+
+| Widget | Purpose |
+|---|---|
+| `LineChart` | Time-series lines; supports multi-query overlays via `query_definitions`. |
+| `BarChart` | Vertical bars; single-query. |
+| `HorizontalBarChart` | Horizontal-orientation bars; mirrors `BarChart` with axis-handling differences. |
+| `PieChart` | Pie or donut chart; single-query. |
+| `Gauge` | Single-value gauge with min/max range and threshold bands. |
+| `Hexagon` | Single-value hex cell, typically used in a hex grid. |
+| `DataTable` | Tabular renderer with developer-defined columns; for the dynamic-table variant use `Dynamic widget`. |
+| `Markdown` | Static prose panel; no query. |
+| `Dynamic widget` | Query-driven widget that picks its renderer at runtime via `interpretation` + `visualization` — see [Build a dynamic table widget](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/build-a-dynamic-table-widget/). The legacy `query` field is deprecated; populate `query_definitions` only. |
+
+## Variables (V1, deprecated)
+
+The `Dashboard.variables` field uses the **V1** variable model (proto package `variables`). It is deprecated; new dashboards should populate `variables_v2` instead (see [Variables (V2)](#variables-v2)).
+
+For user-facing variable concepts and UI walkthroughs, see [Create and manage variables](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/create-and-manage-variables/).
+
+A V1 `Variable` has `name`, optional `display_name` / `description`, a `display_type` (`VariableDisplayType` enum), and a `Definition`. The `Definition.value` is a `oneof` over:
+
+- **`Constant`** — *(deprecated within V1)* a single fixed value.
+- **`MultiSelect`** — a value selected from a list, sourced from one of: a logs path (`LogsPathSource`), a metric label (`MetricLabelSource`), a constant list (`ConstantListSource`), a span field (`SpanFieldSource`), or an arbitrary query (`QuerySource`). Supports `selection` (single or multi-value), an `OrderDirection`, and `VariableSelectionOptions`.
+
+V1 schemas remain in the spec for backward compatibility with existing dashboards. The `MultiSelect.selected` field within V1 is also marked deprecated — current dashboards encode the user's selection through `VariableSelectionOptions` and the consuming UI.
+
+## Variables (V2)
+
+Variables let a dashboard accept user-supplied or query-derived values that are substituted into widget queries at view time. The dashboard payload carries the **V2** variable model (proto package `com.coralogixapis.dashboards.v1.ast.variables_v2`); the older V1 model (`Variable` / `Variable.Definition` / `VariableDefinitionConstant` / `VariableDefinitionMultiSelect`) is still present in the spec for backward compatibility — see [Variables (V1, deprecated)](#variables-v1-deprecated).
+
+A `VariableV2` carries: a unique `id` (UUID), `name`, optional `display_name` and `description`, a `display_type` (`VariableDisplayTypeV2` enum — values in the collapsible below), a `source` that produces candidate values, a `value` selection, and a `display_full_row` toggle.
+
+### Source (`VariableSourceV2`)
+
+A `oneof` over three variants:
+
+- **`QuerySource`** — values come from a Coralogix query against logs, spans, metrics, or DataPrime. Carries a `refresh_strategy`, `value_display_options` (label/value regex), and an `all_option`.
+- **`StaticSource`** — values are an inline list (with an `all_option`).
+- **`TextboxSource`** — value is free-form text entered in the dashboard UI.
+
+`QuerySource` has four sub-variants matching its data source: `LogsQuery`, `SpansQuery`, `MetricsQuery`, `DataprimeQuery` (openapi schema names: `VariableSourceV2QuerySourceLogsQuery`, `…SpansQuery`, `…MetricsQuery`, `…DataprimeQuery`).
+
+### Value (`VariableValueV2`)
+
+A `oneof` over six variants (proto names):
+
+- `SingleStringValue`
+- `SingleNumericValue`
+- `MultiStringValue` — wraps either an `AllValue`, a `ListValue`, or a `SelectedAllValue`
+- `LuceneQueryValue`
+- `RegexValue`
+- `IntervalValue`
+
+<details>
+  <summary>VariableDisplayTypeV2</summary>
+
+  | Value |
+|-------|
+| `VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED` |
+| `VARIABLE_DISPLAY_TYPE_V2_LABEL_VALUE` |
+| `VARIABLE_DISPLAY_TYPE_V2_VALUE` |
+| `VARIABLE_DISPLAY_TYPE_V2_NOTHING` |
+</details>
+
+For the full message structure, see the `VariableV2`, `VariableSourceV2.*`, `VariableValueV2.*`, and `VariableDisplayTypeV2` schemas in `openapi_v5.yaml`. For user-facing variable usage, see [Create and manage variables](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/create-and-manage-variables/).
+
+## Filters
+
+A `Filter` constrains the data that widgets render. Each filter has:
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `UUID` | Filter's unique identifier. |
+| `display_name` | `string` | Optional UI label. |
+| `enabled` | `boolean` | Whether the filter currently applies. |
+| `collapsed` | `boolean` | UI hint — whether the filter chip renders collapsed or expanded. |
+| `source` | `Filter.Source` | A `oneof` over `LogsFilter`, `SpansFilter`, or `MetricsFilter`. |
+| `scope` | `Filter.WidgetScope` | Which widgets the filter targets. |
+
+`Filter.WidgetScope` is a `oneof` over:
+
+- **`AllWidgets`** — the filter applies to every widget on the dashboard.
+- **`SpecificWidgets`** — the filter applies only to the listed `widget_ids`.
+
+Each `Source` variant carries source-appropriate fields (e.g., `LogsFilter` carries `field`, `operator`, and `observation_field`). For the full per-source field list, see the `Filter.LogsFilter`, `Filter.SpansFilter`, and `Filter.MetricsFilter` schemas in `openapi_v5.yaml`.
+
+## Annotations
+
+Annotations mark significant events on dashboard widgets — for example, deploys, incidents, or business milestones — so they appear as overlays on charts that match their scope. An annotation is sourced from a Coralogix query, manual input, or a recurring event, and can be scoped to all widgets on the dashboard or a specific set.
+
+For user-facing concept and creation walkthrough, see [Create annotations](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/create-annotations/).
+
+An `Annotation` message has:
+
+- `id` — unique identifier
+- `name` — display name
+- `description` — optional description
+- `enabled` — boolean toggle
+- `source` — where the events come from (see below)
+- `scope` — which widgets the annotation overlays
+- `color` — an `AnnotationColor` enum value
+
+### Source (`Annotation.Source`)
+
+A `oneof` over six source types:
+
+- **`MetricsSource`** — events from a PromQL query (`promql_query`). Carries a `Strategy` (currently `StartTimeMetric` — uses the first data point's value as the annotation timestamp), a `message_template`, label list, `AnnotationOrientation`, and an `IntervalResolution`.
+- **`LogsSource`** — events from a Lucene logs query (`lucene_query`). The strategy is a `oneof` over `Instant` (single timestamp field), `Range` (start + end timestamp fields), and `Duration` (start timestamp + duration field). Supports `label_fields` and `DataModeType`.
+- **`SpansSource`** — same shape as `LogsSource` but over spans.
+- **`DataprimeSource`** — events from a DataPrime query (`query`) with the same Instant/Range/Duration strategy variants.
+- **`ManualSource`** — manually configured events with an `Instant` (single `value` + `Unit`) or `Range` (`start_value` / `end_value` + `Unit`) strategy. Optional `custom_unit`, `message_template`, and `AnnotationOrientation`.
+- **`EventRecurrenceSource`** — events from a recurring schedule. Currently only `WeeklyRecurrence` (with selectable `days_of_week` from a `Weekday` enum) is supported, paired with an `Instant` (start hour) or `Duration` (start hour + length) strategy.
+
+### Scope — `Annotation.WidgetScope` (v5 only)
+
+`Annotation.WidgetScope` is a `oneof` over:
+
+- **`AllWidgets`** — annotation overlays every widget on the dashboard.
+- **`SpecificWidgets`** — annotation overlays only the listed `widget_ids`.
+
+Earlier spec versions (`v3`, `v4`) do not scope annotations to specific widgets — that surface is v5-only. (A separate top-level `WidgetScope` family exists in `v3` and `v4` for `Filter` scoping; it's unrelated to annotations.)
+
+### Events (`AnnotationEvent`)
+
+When the dashboard renders an annotation, each emitted event is either:
+
+- **`Instant`** — a point in time with `timestamp`, `labels`, and `payload`.
+- **`Range`** — a span with `start`, `end`, `labels`, and `payload`.
+
+### Related types
+
+- `AnnotationColor` *(enum)* — color the annotation renders with.
+- `AnnotationOrientation` *(enum)* — vertical / horizontal placement for metrics-sourced annotations.
+
+### Widget-side: filtering an annotation's series
+
+`AnnotationSeriesVisibility` is **not** part of the `Annotation` message — it's defined alongside the widget-level `SeriesVisibility` schema. It's an entry inside a widget's `SeriesVisibility.annotation_series` list, with `annotation_id`, a `SeriesVisibilityMode` (`HIDE_ALL` / `SHOW_ONLY`), and a `series_names` list. Use it on the widget side to control which series of an already-defined annotation render on that widget.
+
+For the full message structure, see the `Annotation` and `Annotation.Source.*` schema families in `openapi_v5.yaml`.
+
+## Time frame
+
+The dashboard's time frame is a `oneof`:
+
+- **`absolute_time_frame`** — a `TimeFrame` with `from` and `to` protobuf `Timestamp`s. Fixed start and end times.
+- **`relative_time_frame`** — a `google.protobuf.Duration` interpreted as an offset from "now."
+
+A dashboard-level time frame applies to every widget by default. Individual widgets (for example, the Dynamic widget) can override the dashboard time frame on a per-widget basis.
+
+For the user-facing time-interval picker UI, see [Configure time interval](https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/configure-time-interval/).
+
+## Actions
+
+The dashboard payload carries `actions` as a list of `DashboardAction` — publicly available actions a viewer can trigger from a dashboard or one of its widgets.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | A unique identifier of the action. |
+| `name` | `string` | Display name. |
+| `should_open_in_new_window` | `boolean` | Whether the action opens in a new tab/window. |
+| `widget_id` | `string` *(optional)* | Scopes the action to a specific widget. Null = dashboard-wide. |
+| `query_id` | `string` *(optional)* | Scopes the action to a specific query within a widget. Null = widget-wide or dashboard-wide. |
+| `definition` | `ActionDefinition` | A `oneof` over `CustomAction` (a URL template with `{{variable_name}}` placeholders) or `GoToDashboardTemplateAction` (`dashboard_id` of the target dashboard). |
+| `data_source` | `ActionDataSourceType` *(optional)* | One of `LOGS`, `SPANS`, `METRICS`, `DATAPRIME`. |
+
+The `Custom URL` template supports variable substitution: any `{{variable_name}}` in the URL is replaced with the matching variable's resolved value when the user clicks the action.
+
+> **Note:** A separate, older `Action` message exists in the spec but is marked deprecated. The proto file describes it as "Unused dormant model that was part of plans of the product team, however it is now on hold. Recommended to not use this model or rely on it in any way." Always use `DashboardAction` for the `Dashboard.actions` field.
+
 ## Constants
 
-<details>
-  <summary>SpanRelationType</summary>
+This service references a number of enum types across query, display, variable, and identity schemas. For the full value list of each enum, see `#/components/schemas/<EnumName>` in `openapi_v5.yaml`. Notable enums:
 
-  | Value |
-|-------|
-| `SPAN_RELATION_TYPE_NONE_UNSPECIFIED` |
-| `SPAN_RELATION_TYPE_OTHER` |
-| `SPAN_RELATION_TYPE_PARENT` |
-| `SPAN_RELATION_TYPE_ROOT` |
-</details>
-<details>
-  <summary>DataModeType</summary>
-
-  | Value |
-|-------|
-| `DATA_MODE_TYPE_HIGH_UNSPECIFIED` |
-| `DATA_MODE_TYPE_ARCHIVE` |
-</details>
-<details>
-  <summary>ActionDataSourceType</summary>
-
-  | Value |
-|-------|
-| `ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED` |
-| `ACTION_DATA_SOURCE_TYPE_LOGS` |
-| `ACTION_DATA_SOURCE_TYPE_SPANS` |
-| `ACTION_DATA_SOURCE_TYPE_METRICS` |
-| `ACTION_DATA_SOURCE_TYPE_DATAPRIME` |
-</details>
-<details>
-  <summary>LogSeverityLevel</summary>
-
-  | Value |
-|-------|
-| `LOG_SEVERITY_LEVEL_UNSPECIFIED` |
-| `LOG_SEVERITY_LEVEL_DEBUG` |
-| `LOG_SEVERITY_LEVEL_VERBOSE` |
-| `LOG_SEVERITY_LEVEL_INFO` |
-| `LOG_SEVERITY_LEVEL_WARNING` |
-| `LOG_SEVERITY_LEVEL_ERROR` |
-| `LOG_SEVERITY_LEVEL_CRITICAL` |
-</details>
-<details>
-  <summary>PromQLQueryType</summary>
-
-  | Value |
-|-------|
-| `PROM_QL_QUERY_TYPE_UNSPECIFIED` |
-| `PROM_QL_QUERY_TYPE_RANGE` |
-| `PROM_QL_QUERY_TYPE_INSTANT` |
-</details>
-<details>
-  <summary>OrderDirection</summary>
-
-  | Value |
-|-------|
-| `ORDER_DIRECTION_UNSPECIFIED` |
-| `ORDER_DIRECTION_ASC` |
-| `ORDER_DIRECTION_DESC` |
-</details>
-<details>
-  <summary>MetricField</summary>
-
-  | Value |
-|-------|
-| `METRIC_FIELD_UNSPECIFIED` |
-| `METRIC_FIELD_DURATION` |
-</details>
-<details>
-  <summary>MetricAggregationType</summary>
-
-  | Value |
-|-------|
-| `METRIC_AGGREGATION_TYPE_UNSPECIFIED` |
-| `METRIC_AGGREGATION_TYPE_MIN` |
-| `METRIC_AGGREGATION_TYPE_MAX` |
-| `METRIC_AGGREGATION_TYPE_AVERAGE` |
-| `METRIC_AGGREGATION_TYPE_SUM` |
-| `METRIC_AGGREGATION_TYPE_PERCENTILE_99` |
-| `METRIC_AGGREGATION_TYPE_PERCENTILE_95` |
-| `METRIC_AGGREGATION_TYPE_PERCENTILE_50` |
-</details>
-<details>
-  <summary>DimensionField</summary>
-
-  | Value |
-|-------|
-| `DIMENSION_FIELD_UNSPECIFIED` |
-| `DIMENSION_FIELD_TRACE_ID` |
-</details>
-<details>
-  <summary>DimensionAggregationType</summary>
-
-  | Value |
-|-------|
-| `DIMENSION_AGGREGATION_TYPE_UNSPECIFIED` |
-| `DIMENSION_AGGREGATION_TYPE_UNIQUE_COUNT` |
-| `DIMENSION_AGGREGATION_TYPE_ERROR_COUNT` |
-</details>
-<details>
-  <summary>DatasetScope</summary>
-
-  | Value |
-|-------|
-| `DATASET_SCOPE_UNSPECIFIED` |
-| `DATASET_SCOPE_USER_DATA` |
-| `DATASET_SCOPE_LABEL` |
-| `DATASET_SCOPE_METADATA` |
-</details>
-<details>
-  <summary>MetadataField</summary>
-
-  | Value |
-|-------|
-| `METADATA_FIELD_UNSPECIFIED` |
-| `METADATA_FIELD_APPLICATION_NAME` |
-| `METADATA_FIELD_SUBSYSTEM_NAME` |
-| `METADATA_FIELD_SERVICE_NAME` |
-| `METADATA_FIELD_OPERATION_NAME` |
-</details>
-<details>
-  <summary>SectionPredefinedColor</summary>
-
-  | Value |
-|-------|
-| `SECTION_PREDEFINED_COLOR_UNSPECIFIED` |
-| `SECTION_PREDEFINED_COLOR_CYAN` |
-| `SECTION_PREDEFINED_COLOR_GREEN` |
-| `SECTION_PREDEFINED_COLOR_BLUE` |
-| `SECTION_PREDEFINED_COLOR_PURPLE` |
-| `SECTION_PREDEFINED_COLOR_MAGENTA` |
-| `SECTION_PREDEFINED_COLOR_PINK` |
-| `SECTION_PREDEFINED_COLOR_ORANGE` |
-</details>
-<details>
-  <summary>VariableDisplayType</summary>
-
-  | Value |
-|-------|
-| `VARIABLE_DISPLAY_TYPE_UNSPECIFIED` |
-| `VARIABLE_DISPLAY_TYPE_LABEL_VALUE` |
-| `VARIABLE_DISPLAY_TYPE_VALUE` |
-| `VARIABLE_DISPLAY_TYPE_NOTHING` |
-</details>
-<details>
-  <summary>RefreshStrategy</summary>
-
-  | Value |
-|-------|
-| `REFRESH_STRATEGY_UNSPECIFIED` |
-| `REFRESH_STRATEGY_ON_DASHBOARD_LOAD` |
-| `REFRESH_STRATEGY_ON_TIME_FRAME_CHANGE` |
-</details>
-<details>
-  <summary>SelectionType</summary>
-
-  | Value |
-|-------|
-| `SELECTION_TYPE_UNSPECIFIED` |
-| `SELECTION_TYPE_MULTI_ALL` |
-| `SELECTION_TYPE_MULTI` |
-| `SELECTION_TYPE_SINGLE` |
-</details>
-<details>
-  <summary>TooltipType</summary>
-
-  | Value |
-|-------|
-| `TOOLTIP_TYPE_UNSPECIFIED` |
-| `TOOLTIP_TYPE_ALL` |
-| `TOOLTIP_TYPE_SINGLE` |
-</details>
-<details>
-  <summary>StackedLine</summary>
-
-  | Value |
-|-------|
-| `STACKED_LINE_UNSPECIFIED` |
-| `STACKED_LINE_ABSOLUTE` |
-| `STACKED_LINE_RELATIVE` |
-</details>
-<details>
-  <summary>Aggregation</summary>
-
-  | Value |
-|-------|
-| `AGGREGATION_UNSPECIFIED` |
-| `AGGREGATION_LAST` |
-| `AGGREGATION_MIN` |
-| `AGGREGATION_MAX` |
-| `AGGREGATION_AVG` |
-| `AGGREGATION_SUM` |
-</details>
-<details>
-  <summary>Unit</summary>
-
-  | Value |
-|-------|
-| `UNIT_UNSPECIFIED` |
-| `UNIT_NUMBER` |
-| `UNIT_PERCENT` |
-| `UNIT_MICROSECONDS` |
-| `UNIT_MILLISECONDS` |
-| `UNIT_SECONDS` |
-| `UNIT_BYTES` |
-| `UNIT_KBYTES` |
-| `UNIT_MBYTES` |
-| `UNIT_GBYTES` |
-| `UNIT_BYTES_IEC` |
-| `UNIT_KIBYTES` |
-| `UNIT_MIBYTES` |
-| `UNIT_GIBYTES` |
-| `UNIT_EUR_CENTS` |
-| `UNIT_EUR` |
-| `UNIT_USD_CENTS` |
-| `UNIT_USD` |
-| `UNIT_CUSTOM` |
-| `UNIT_PERCENT_ZERO_ONE` |
-| `UNIT_PERCENT_ZERO_HUNDRED` |
-| `UNIT_NANOSECONDS` |
-</details>
-<details>
-  <summary>ThresholdBy</summary>
-
-  | Value |
-|-------|
-| `THRESHOLD_BY_UNSPECIFIED` |
-| `THRESHOLD_BY_VALUE` |
-| `THRESHOLD_BY_BACKGROUND` |
-</details>
-<details>
-  <summary>RowStyle</summary>
-
-  | Value |
-|-------|
-| `ROW_STYLE_UNSPECIFIED` |
-| `ROW_STYLE_ONE_LINE` |
-| `ROW_STYLE_TWO_LINE` |
-| `ROW_STYLE_CONDENSED` |
-| `ROW_STYLE_JSON` |
-| `ROW_STYLE_LIST` |
-</details>
-<details>
-  <summary>BarValueDisplay</summary>
-
-  | Value |
-|-------|
-| `BAR_VALUE_DISPLAY_UNSPECIFIED` |
-| `BAR_VALUE_DISPLAY_TOP` |
-| `BAR_VALUE_DISPLAY_INSIDE` |
-| `BAR_VALUE_DISPLAY_BOTH` |
-</details>
-<details>
-  <summary>LabelSource</summary>
-
-  | Value |
-|-------|
-| `LABEL_SOURCE_UNSPECIFIED` |
-| `LABEL_SOURCE_INNER` |
-| `LABEL_SOURCE_STACK` |
-</details>
-<details>
-  <summary>MetricsQueryEditorMode</summary>
-
-  | Value |
-|-------|
-| `METRICS_QUERY_EDITOR_MODE_UNSPECIFIED` |
-| `METRICS_QUERY_EDITOR_MODE_TEXT` |
-| `METRICS_QUERY_EDITOR_MODE_BUILDER` |
-</details>
-<details>
-  <summary>Aggregation</summary>
-
-  | Value |
-|-------|
-| `AGGREGATION_UNSPECIFIED` |
-| `AGGREGATION_LAST` |
-| `AGGREGATION_MIN` |
-| `AGGREGATION_MAX` |
-| `AGGREGATION_AVG` |
-| `AGGREGATION_SUM` |
-</details>
-<details>
-  <summary>SortByType</summary>
-
-  | Value |
-|-------|
-| `SORT_BY_TYPE_UNSPECIFIED` |
-| `SORT_BY_TYPE_VALUE` |
-| `SORT_BY_TYPE_NAME` |
-</details>
-<details>
-  <summary>DataModeType</summary>
-
-  | Value |
-|-------|
-| `DATA_MODE_TYPE_HIGH_UNSPECIFIED` |
-| `DATA_MODE_TYPE_ARCHIVE` |
-</details>
-<details>
-  <summary>ScaleType</summary>
-
-  | Value |
-|-------|
-| `SCALE_TYPE_UNSPECIFIED` |
-| `SCALE_TYPE_LINEAR` |
-| `SCALE_TYPE_LOGARITHMIC` |
-</details>
-<details>
-  <summary>LegendColumn</summary>
-
-  | Value |
-|-------|
-| `LEGEND_COLUMN_UNSPECIFIED` |
-| `LEGEND_COLUMN_MIN` |
-| `LEGEND_COLUMN_MAX` |
-| `LEGEND_COLUMN_SUM` |
-| `LEGEND_COLUMN_AVG` |
-| `LEGEND_COLUMN_LAST` |
-| `LEGEND_COLUMN_NAME` |
-</details>
-<details>
-  <summary>LegendPlacement</summary>
-
-  | Value |
-|-------|
-| `LEGEND_PLACEMENT_UNSPECIFIED` |
-| `LEGEND_PLACEMENT_AUTO` |
-| `LEGEND_PLACEMENT_BOTTOM` |
-| `LEGEND_PLACEMENT_SIDE` |
-| `LEGEND_PLACEMENT_HIDDEN` |
-</details>
-<details>
-  <summary>LegendBy</summary>
-
-  | Value |
-|-------|
-| `LEGEND_BY_UNSPECIFIED` |
-| `LEGEND_BY_THRESHOLDS` |
-| `LEGEND_BY_GROUPS` |
-</details>
-<details>
-  <summary>Unit</summary>
-
-  | Value |
-|-------|
-| `UNIT_UNSPECIFIED` |
-| `UNIT_MICROSECONDS` |
-| `UNIT_MILLISECONDS` |
-| `UNIT_SECONDS` |
-| `UNIT_BYTES` |
-| `UNIT_KBYTES` |
-| `UNIT_MBYTES` |
-| `UNIT_GBYTES` |
-| `UNIT_BYTES_IEC` |
-| `UNIT_KIBYTES` |
-| `UNIT_MIBYTES` |
-| `UNIT_GIBYTES` |
-| `UNIT_EUR_CENTS` |
-| `UNIT_EUR` |
-| `UNIT_USD_CENTS` |
-| `UNIT_USD` |
-| `UNIT_NANOSECONDS` |
-| `UNIT_CUSTOM` |
-| `UNIT_PERCENT_ZERO_ONE` |
-| `UNIT_PERCENT_ZERO_HUNDRED` |
-| `UNIT_PERCENT` |
-</details>
-<details>
-  <summary>ThresholdType</summary>
-
-  | Value |
-|-------|
-| `THRESHOLD_TYPE_UNSPECIFIED` |
-| `THRESHOLD_TYPE_RELATIVE` |
-| `THRESHOLD_TYPE_ABSOLUTE` |
-</details>
-<details>
-  <summary>ThresholdBy</summary>
-
-  | Value |
-|-------|
-| `THRESHOLD_BY_UNSPECIFIED` |
-| `THRESHOLD_BY_VALUE` |
-| `THRESHOLD_BY_BACKGROUND` |
-</details>
-<details>
-  <summary>TokenOriginType</summary>
-
-  | Value |
-|-------|
-| `TOKEN_ORIGIN_TYPE_UNSPECIFIED` |
-| `TOKEN_ORIGIN_TYPE_USER` |
-| `TOKEN_ORIGIN_TYPE_API` |
-</details>
-<details>
-  <summary>AggregationType</summary>
-
-  | Value |
-|-------|
-| `AGGREGATION_TYPE_UNSPECIFIED` |
-| `AGGREGATION_TYPE_LAST` |
-| `AGGREGATION_TYPE_MIN` |
-| `AGGREGATION_TYPE_MAX` |
-| `AGGREGATION_TYPE_AVG` |
-| `AGGREGATION_TYPE_SUM` |
-</details>
+- **Query and data source:** `ActionDataSourceType`, `DataModeType`, `LogSeverityLevel`, `PromQLQueryType`, `SpanRelationType`, `MetricField`, `MetricAggregationType`, `DimensionField`, `DimensionAggregationType`, `MetadataField`, `DatasetScope`, `MetricsQueryEditorMode`, `Aggregation`, `AggregationType`, `SortByType`, `OrderDirection`.
+- **Display and layout:** `VariableDisplayType`, `RefreshStrategy`, `SelectionType`, `TooltipType`, `StackedLine`, `RowStyle`, `BarValueDisplay`, `LabelSource`, `ScaleType`, `LegendColumn`, `LegendPlacement`, `LegendBy`, `Unit`, `ThresholdBy`, `ThresholdType`, `SectionPredefinedColor`.
+- **Identity:** `TokenOriginType`.
