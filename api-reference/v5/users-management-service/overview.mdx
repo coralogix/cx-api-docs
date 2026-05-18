@@ -1,0 +1,13 @@
+# Users Management service overview
+
+The Users Management service provides programmatic, team-scoped administration of users in Coralogix. Use it to create a user in a team, update a user's attributes, activate or revoke one or more users, retrieve a single user by account ID, or search users in a team by username and status. All operations are scoped to a `team_id` path parameter. This is the API behind the Team Members page; see the [Manage team members](https://coralogix.com/docs/user-guides/account-management/user-management/manage-team-members/) user guide for the corresponding UI and the [Teams](https://coralogix.com/docs/user-guides/account-management/user-management/teams/) and [Groups](https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/) guides for the underlying user, group, and permission model.
+
+## Methods
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/aaa/teams/v2/{team_id}/members` | Create a user in a team. |
+| `PUT` | `/aaa/teams/v2/{team_id}/members` | Update a user in a team. |
+| `PATCH` | `/aaa/teams/v2/{team_id}/members/status` | Activate or revoke one or more users in a team. |
+| `GET` | `/aaa/teams/v2/{team_id}/members/{user_account_id}` | Retrieve a single user by account ID. |
+| `GET` | `/aaa/teams/v2/{team_id}/search` | Search users in a team by username and status. |

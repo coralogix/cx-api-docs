@@ -80,6 +80,15 @@
             ]
           },
           {
+            "group": "API Keys Admin Service",
+            "pages": [
+              "api-reference/v5/api-keys-admin-service/overview",
+              "api-reference/v5/api-keys-admin-service/delete-api-keys",
+              "api-reference/v5/api-keys-admin-service/get-team-members-api-keys",
+              "api-reference/v5/api-keys-admin-service/update-api-keys-status"
+            ]
+          },
+          {
             "group": "Connectors Service",
             "pages": [
               "api-reference/v5/connectors-service/overview",
@@ -494,6 +503,17 @@
             ]
           },
           {
+            "group": "Users Management Service",
+            "pages": [
+              "api-reference/v5/users-management-service/overview",
+              "api-reference/v5/users-management-service/activaterevoke-users",
+              "api-reference/v5/users-management-service/create-users",
+              "api-reference/v5/users-management-service/get-user",
+              "api-reference/v5/users-management-service/search-users",
+              "api-reference/v5/users-management-service/update-users"
+            ]
+          },
+          {
             "group": "Views Service",
             "pages": [
               "api-reference/v5/views-service/overview",
@@ -581,6 +601,15 @@
               "api-reference/v4/api-keys-service/get-\"send-data\"-api-keys",
               "api-reference/v4/api-keys-service/get-api-key",
               "api-reference/v4/api-keys-service/update-api-key"
+            ]
+          },
+          {
+            "group": "API Keys Admin Service",
+            "pages": [
+              "api-reference/v4/api-keys-admin-service/overview",
+              "api-reference/v4/api-keys-admin-service/delete-api-keys",
+              "api-reference/v4/api-keys-admin-service/get-team-members-api-keys",
+              "api-reference/v4/api-keys-admin-service/update-api-keys-status"
             ]
           },
           {
