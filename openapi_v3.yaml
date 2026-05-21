@@ -4476,44 +4476,6 @@ paths:
       tags:
         - Data Usage Service
       description: No description available
-  /dataplans/data-usage/v2/daily:evaluation-tokens:
-    post:
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetDailyUsageEvaluationTokens
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - $ref: >-
-                    #/components/schemas/GetDailyUsageEvaluationTokensRequestRange
-                - $ref: >-
-                    #/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDailyUsageEvaluationTokensResponse'
-          description: ''
-        '400':
-          content:
-            application/json: {}
-          description: Bad Request
-        '401':
-          content:
-            application/json: {}
-          description: Unauthorized request
-        '500':
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Daily Usage Evaluation Tokens
-      tags:
-        - Data Usage Service
-      description: No description available
   /dataplans/data-usage/v2/daily:processed-gbs:
     post:
       externalDocs:
@@ -18848,18 +18810,6 @@ components:
         - DESTINATION_FIELD_SEVERITY
         - DESTINATION_FIELD_TEXT
       type: string
-    DetailedDailyEvaluationTokens:
-      type: object
-      properties:
-        evaluations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Evaluation'
-        statsDate:
-          type: string
-          format: date-time
-        totalTokens:
-          $ref: '#/components/schemas/Token'
     DetailedDailyProcessedGbs:
       type: object
       properties:
@@ -22575,29 +22525,6 @@ components:
       properties:
         role:
           $ref: '#/components/schemas/v2.CustomRole'
-    GetDailyUsageEvaluationTokensRequest:
-      oneOf:
-        - $ref: '#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange'
-        - $ref: '#/components/schemas/GetDailyUsageEvaluationTokensRequestRange'
-    GetDailyUsageEvaluationTokensRequestDateRange:
-      type: object
-      properties:
-        dateRange:
-          $ref: '#/components/schemas/v2.DateRange'
-      additionalProperties: false
-    GetDailyUsageEvaluationTokensRequestRange:
-      type: object
-      properties:
-        range:
-          $ref: '#/components/schemas/v2.Range'
-      additionalProperties: false
-    GetDailyUsageEvaluationTokensResponse:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/DetailedDailyEvaluationTokens'
     GetDailyUsageProcessedGbsRequest:
       oneOf:
         - $ref: '#/components/schemas/GetDailyUsageProcessedGbsRequestRange'

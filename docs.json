@@ -150,7 +150,6 @@
             "group": "Data Usage Service",
             "pages": [
               "api-reference/v5/data-usage-service/overview",
-              "api-reference/v5/data-usage-service/get-daily-usage-evaluation-tokens",
               "api-reference/v5/data-usage-service/get-daily-usage-processed-gbs",
               "api-reference/v5/data-usage-service/get-daily-usage-units",
               "api-reference/v5/data-usage-service/get-data-usage",
@@ -654,7 +653,6 @@
             "group": "Data Usage Service",
             "pages": [
               "api-reference/v4/data-usage-service/overview",
-              "api-reference/v4/data-usage-service/get-daily-usage-evaluation-tokens",
               "api-reference/v4/data-usage-service/get-daily-usage-processed-gbs",
               "api-reference/v4/data-usage-service/get-daily-usage-units",
               "api-reference/v4/data-usage-service/get-data-usage",
@@ -1156,7 +1154,6 @@
             "group": "Data Usage Service",
             "pages": [
               "api-reference/v3/data-usage-service/overview",
-              "api-reference/v3/data-usage-service/get-daily-usage-evaluation-tokens",
               "api-reference/v3/data-usage-service/get-daily-usage-processed-gbs",
               "api-reference/v3/data-usage-service/get-daily-usage-units",
               "api-reference/v3/data-usage-service/get-data-usage",
