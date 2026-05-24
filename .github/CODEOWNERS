@@ -20,16 +20,10 @@
 /api-reference/                                              @coralogix/team-technical-writers @coralogix/team-iac @coralogix/team-eco-system
 
 # --- Service-specific eng SMEs ---
-# Dashboards (Pavel Pazderník; CX-41827 in flight).
-/api-reference/v3/dashboard-service/                         @coralogix/team-technical-writers @pazdernik-coralogix
-/api-reference/v3/dashboard-folders-service/                 @coralogix/team-technical-writers @pazdernik-coralogix
-/api-reference/v4/dashboard-service/                         @coralogix/team-technical-writers @pazdernik-coralogix
-/api-reference/v4/dashboard-folders-service/                 @coralogix/team-technical-writers @pazdernik-coralogix
-/api-reference/v5/dashboard-service/                         @coralogix/team-technical-writers @pazdernik-coralogix
-/api-reference/v5/dashboard-folders-service/                 @coralogix/team-technical-writers @pazdernik-coralogix
-/service-overviews/dashboard-service-overview.mdx            @coralogix/team-technical-writers @pazdernik-coralogix
-/service-overviews/dashboard-folders-service-overview.mdx    @coralogix/team-technical-writers @pazdernik-coralogix
-/copy_a_dashboard.mdx                                        @coralogix/team-technical-writers @pazdernik-coralogix
+# Per-service eng SMEs will be added here as the per-team audits at
+# CX-41472 complete and each team confirms a default reviewer. Until
+# then, the cx-management-apis review groups above stay as the eng
+# signal-keepers for the auto-generated reference paths.
 
 # --- Hand-authored TW content (no engineering review required) ---
 /service-overviews/                                          @coralogix/team-technical-writers
