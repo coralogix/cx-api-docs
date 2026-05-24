@@ -1,0 +1,61 @@
+# CODEOWNERS for coralogix/cx-api-docs
+#
+# Routes PR review requests. Tech Writing owns the docs flow end-to-end;
+# engineering SMEs are added on the paths whose proto sources they own.
+#
+# Per-service SME routing for the long tail of services is a follow-up
+# tracked under CX-41472 (per-team API audits: Radiant, Halo, Citadel,
+# Highland + Cont Structure). Update this file as those audits land.
+#
+# Reference: https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/about-code-owners
+# Context: API docs in Mintlify proposal, Phase 1 (https://www.notion.so/coralogix/Proposal-API-documentation-in-Mintlify-tech-writer-owned-automation-359c048defad81fb84efde5091be1915)
+
+# --- Default ---
+# Tech Writing reviews everything by default.
+*                                                            @coralogix/team-technical-writers
+
+# --- Auto-generated REST API reference ---
+# Regenerated from openapi-facade. Keep the cx-management-apis review
+# groups in the loop so spec changes flow through cleanly.
+/api-reference/                                              @coralogix/team-technical-writers @coralogix/team-iac @coralogix/team-eco-system
+
+# --- Service-specific eng SMEs ---
+# Dashboards (Pavel Pazderník; CX-41827 in flight).
+/api-reference/v3/dashboard-service/                         @coralogix/team-technical-writers @pazdernik-coralogix
+/api-reference/v3/dashboard-folders-service/                 @coralogix/team-technical-writers @pazdernik-coralogix
+/api-reference/v4/dashboard-service/                         @coralogix/team-technical-writers @pazdernik-coralogix
+/api-reference/v4/dashboard-folders-service/                 @coralogix/team-technical-writers @pazdernik-coralogix
+/api-reference/v5/dashboard-service/                         @coralogix/team-technical-writers @pazdernik-coralogix
+/api-reference/v5/dashboard-folders-service/                 @coralogix/team-technical-writers @pazdernik-coralogix
+/service-overviews/dashboard-service-overview.mdx            @coralogix/team-technical-writers @pazdernik-coralogix
+/service-overviews/dashboard-folders-service-overview.mdx    @coralogix/team-technical-writers @pazdernik-coralogix
+/copy_a_dashboard.mdx                                        @coralogix/team-technical-writers @pazdernik-coralogix
+
+# --- Hand-authored TW content (no engineering review required) ---
+/service-overviews/                                          @coralogix/team-technical-writers
+/essentials/                                                 @coralogix/team-technical-writers
+/snippets/                                                   @coralogix/team-technical-writers
+/images/                                                     @coralogix/team-technical-writers
+/logo/                                                       @coralogix/team-technical-writers
+/introduction-v3.mdx                                         @coralogix/team-technical-writers
+/introduction-v4.mdx                                         @coralogix/team-technical-writers
+/introduction-v5.mdx                                         @coralogix/team-technical-writers
+/quickstart.mdx                                              @coralogix/team-technical-writers
+/development.mdx                                             @coralogix/team-technical-writers
+/create_an_alert_with_an_outgoing_webhook.mdx                @coralogix/team-technical-writers
+/docs.json                                                   @coralogix/team-technical-writers
+
+# --- OpenAPI spec snapshots ---
+# Refreshed by the sync workflow. Eng review groups stay in the loop.
+/openapi_v3.yaml                                             @coralogix/team-technical-writers @coralogix/team-iac @coralogix/team-eco-system
+/openapi_v4.yaml                                             @coralogix/team-technical-writers @coralogix/team-iac @coralogix/team-eco-system
+/openapi_v5.yaml                                             @coralogix/team-technical-writers @coralogix/team-iac @coralogix/team-eco-system
+
+# --- CI workflows + repo config ---
+# The dispatch path (sync-latest-spec.yaml) sits here; changes affect the
+# publishing pipeline. Add the named engineering platform partner once
+# Phase 2 prereq #1 closes.
+/.github/                                                    @coralogix/team-technical-writers @coralogix/team-iac
+/Makefile                                                    @coralogix/team-technical-writers
+/build_navigation_file.py                                    @coralogix/team-technical-writers
+/.gitignore                                                  @coralogix/team-technical-writers
