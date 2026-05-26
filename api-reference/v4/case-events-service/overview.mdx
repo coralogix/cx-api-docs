@@ -1,0 +1,24 @@
+# Case Events service overview
+
+The Case Events service manages the events that appear on a case's Activity timeline. Use it to list the events on a case, retrieve a single event by ID, and create, update, or delete comment events on a case. The service also exposes a sync endpoint that lets external systems (for example, ServiceNow) post events back into the case timeline.
+
+Learn more in our [documentation](https://coralogix.com/docs/user-guides/cases/working-with-cases/#activity-tab).
+
+## Authentication and permissions
+
+To use the Case Events service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). Cases do not ship with a permission preset; add the individual `case:*` permissions you need.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+|  | `case:Read` | List events for a case and retrieve a single event by ID. |
+|  | `case:Comment` | Create, update, or delete a comment event, and sync events from an external system into the case timeline. |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `403 Forbidden` | Response code 403 |
+| `404 Not Found` | Returned when the case or event does not exist. |
+| `500 Internal Server Error` | Response code 500 |

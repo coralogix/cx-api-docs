@@ -62,6 +62,9 @@ V4_SERVICES = {
 
 V5_SERVICES = {
     **V4_SERVICES,
+    'cases-service': 'Cases Service',
+    'case-events-service': 'Case Events Service',
+    'cases-notification-service': 'Cases Notification Service',
 }
 
 VERSION_CONFIG = {
