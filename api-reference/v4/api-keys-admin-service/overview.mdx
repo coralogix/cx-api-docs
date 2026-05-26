@@ -1,0 +1,11 @@
+# API Keys Admin service overview
+
+The API Keys Admin service provides team-wide, administrative operations on API keys in Coralogix. While the [API Keys Service](../api-keys-service/overview) handles individual key management, this service lets administrators list every API key issued to team members and perform bulk delete or bulk activate/deactivate actions. Typical uses include periodic [key rotation](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#security), revoking keys when offboarding users, and team-wide audits. Access requires team-admin–level privileges; see the [API Keys](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/) user guide for the key model, permission presets, and the [permissions list](https://coralogix.com/docs/user-guides/aaa/access-control/permissions/permissions-list/) for the underlying permissions.
+
+## Methods
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/aaa/api-keys/v3` | Retrieve all API keys for team members. |
+| `POST` | `/aaa/api-keys/v3/all/delete` | Delete the specified API keys. |
+| `POST` | `/aaa/api-keys/v3/all/status` | Activate or deactivate the specified API keys. |
