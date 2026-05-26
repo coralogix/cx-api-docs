@@ -89,6 +89,31 @@
             ]
           },
           {
+            "group": "Case Events Service",
+            "pages": [
+              "api-reference/v5/case-events-service/overview",
+              "api-reference/v5/case-events-service/create-a-comment-event",
+              "api-reference/v5/case-events-service/delete-a-comment-event",
+              "api-reference/v5/case-events-service/get-an-event-by-id",
+              "api-reference/v5/case-events-service/list-events-for-a-case",
+              "api-reference/v5/case-events-service/sync-external-case-events",
+              "api-reference/v5/case-events-service/update-a-comment-event"
+            ]
+          },
+          {
+            "group": "Cases Notification Service",
+            "pages": [
+              "api-reference/v5/cases-notification-service/overview",
+              "api-reference/v5/cases-notification-service/list-notification-deliveries-for-cases"
+            ]
+          },
+          {
+            "group": "Cases Service",
+            "pages": [
+              "api-reference/v5/cases-service/overview"
+            ]
+          },
+          {
             "group": "Connector Schema Service",
             "pages": [
               "api-reference/v5/connector-schema-service/overview",

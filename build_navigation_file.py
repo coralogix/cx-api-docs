@@ -64,6 +64,9 @@ V5_SERVICES = {
     **V4_SERVICES,
     'connector-schema-service': 'Connector Schema Service',
     'notifications-testing-service': 'Notifications Testing Service',
+    'cases-service': 'Cases Service',
+    'case-events-service': 'Case Events Service',
+    'cases-notification-service': 'Cases Notification Service',
 }
 
 VERSION_CONFIG = {
