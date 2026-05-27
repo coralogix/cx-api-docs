@@ -80,6 +80,13 @@
             ]
           },
           {
+            "group": "Connector Schema Service",
+            "pages": [
+              "api-reference/v5/connector-schema-service/overview",
+              "api-reference/v5/connector-schema-service/get-connector-schema"
+            ]
+          },
+          {
             "group": "Connectors Service",
             "pages": [
               "api-reference/v5/connectors-service/overview",
@@ -319,6 +326,19 @@
               "api-reference/v5/metrics-data-archive-service/gettenantconfig",
               "api-reference/v5/metrics-data-archive-service/update",
               "api-reference/v5/metrics-data-archive-service/validatebucket"
+            ]
+          },
+          {
+            "group": "Notifications Testing Service",
+            "pages": [
+              "api-reference/v5/notifications-testing-service/overview",
+              "api-reference/v5/notifications-testing-service/test-connector-config",
+              "api-reference/v5/notifications-testing-service/test-destination",
+              "api-reference/v5/notifications-testing-service/test-existing-connector",
+              "api-reference/v5/notifications-testing-service/test-existing-preset",
+              "api-reference/v5/notifications-testing-service/test-preset-config",
+              "api-reference/v5/notifications-testing-service/test-routing-condition-valid",
+              "api-reference/v5/notifications-testing-service/test-template-render"
             ]
           },
           {
