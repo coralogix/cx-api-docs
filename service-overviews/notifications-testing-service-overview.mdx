@@ -1,0 +1,84 @@
+# Notifications Testing service overview
+
+The Notifications Testing service lets you validate Notification Center configurations before you rely on them. Send a test notification through an existing connector or preset, test a connector or preset configuration before saving it, test a destination directly, validate that a template renders correctly, and check that a routing condition is valid.
+
+The service exposes the following operations:
+
+- **Test Connector Config** and **Test Existing Connector**: validate a connector configuration, or send a test notification through a connector that is already saved.
+- **Test Preset Config** and **Test Existing Preset**: validate a preset configuration, or test a preset that is already saved.
+- **Test Destination**: send a test notification to a destination.
+- **Test Template Render**: validate that a notification template renders without errors.
+- **Test Routing Condition Valid**: validate a routing condition.
+
+Learn more in our [documentation](https://coralogix.com/docs/user-guides/notification-center/introduction/).
+
+## Authentication and permissions
+
+To use the Notifications Testing service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). Add the Notification Center permissions for the resources you test.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+| NotificationCenter | `NOTIFICATION-CENTER-CONNECTORS:READCONFIG` | Test connector configurations and existing connectors. |
+| NotificationCenter | `NOTIFICATION-CENTER-PRESETS:READCONFIG` | Test preset configurations, existing presets, and template rendering. |
+| NotificationCenter | `NOTIFICATION-CENTER-ROUTERS:READCONFIG` | Test routing conditions. |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>OrderByDirection</summary>
+
+  | Value |
+|-------|
+| `ORDER_BY_DIRECTION_UNSPECIFIED` |
+| `ASC` |
+| `DESC` |
+</details>
+<details>
+  <summary>ConnectorType</summary>
+
+  | Value |
+|-------|
+| `CONNECTOR_TYPE_UNSPECIFIED` |
+| `SLACK` |
+| `GENERIC_HTTPS` |
+| `PAGERDUTY` |
+| `AWS` |
+| `IBM_EVENT_NOTIFICATIONS` |
+</details>
+<details>
+  <summary>PresetType</summary>
+
+  | Value |
+|-------|
+| `PRESET_TYPE_UNSPECIFIED` |
+| `SYSTEM` |
+| `CUSTOM` |
+</details>
+<details>
+  <summary>TriggerType</summary>
+
+  | Value |
+|-------|
+| `TRIGGER_TYPE_UNSPECIFIED` |
+| `MANUAL` |
+| `AUTOMATIC` |
+</details>
+<details>
+  <summary>FailureReason</summary>
+
+  | Value |
+|-------|
+| `FAILURE_REASON_UNSPECIFIED` |
+| `INVALID_TEMPLATE` |
+| `FIELD_NOT_FOUND` |
+| `TEMPLATE_EXCEEDS_MAX_LENGTH` |
+| `RENDERED_VALUE_EXCEEDS_MAX_LENGTH` |
+</details>
