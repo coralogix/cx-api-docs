@@ -1,0 +1,25 @@
+# Case Settings service overview
+
+The Case Settings service manages the team-level configurations that control how cases are created and handled, such as the suppression window and snooze period. Use it to create, retrieve, update, and delete case settings team configurations, to get the configuration currently active for the team, and to get the system default configuration.
+
+Learn more in our [documentation](https://coralogix.com/docs/user-guides/cases/cases-setting/).
+
+## Authentication and permissions
+
+To use the Case Settings service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). Add the individual `case-config:*` permissions you need.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+|  | `CASE-CONFIG:READ` | Get a case settings configuration, the active configuration, and the system default. |
+|  | `CASE-CONFIG:UPDATE` | Create, update, and delete case settings configurations. |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `403 Forbidden` | Response code 403 |
+| `404 Not Found` | Returned when the case settings configuration does not exist. |
+| `409 Conflict` | Returned when a configuration conflicts with an existing one. |
+| `500 Internal Server Error` | Response code 500 |

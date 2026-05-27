@@ -66,6 +66,7 @@ V5_SERVICES = {
     'notifications-testing-service': 'Notifications Testing Service',
     'cases-service': 'Cases Service',
     'case-events-service': 'Case Events Service',
+    'case-settings-service': 'Case Settings Service',
     'cases-notification-service': 'Cases Notification Service',
 }
 
