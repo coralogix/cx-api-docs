@@ -92,6 +92,12 @@
             ]
           },
           {
+            "group": "Case Settings Service",
+            "pages": [
+              "api-reference/v5/case-settings-service/overview"
+            ]
+          },
+          {
             "group": "Cases Notification Service",
             "pages": [
               "api-reference/v5/cases-notification-service/overview",
