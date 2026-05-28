@@ -14,13 +14,16 @@ Learn more in our [documentation](https://coralogix.com/docs/user-guides/notific
 
 ## Authentication and permissions
 
-To use the Notifications Testing service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). Add the Notification Center permissions for the resources you test.
+To use the Notifications Testing service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). Each method requires the Notification Center permissions listed below.
 
-| Presets | Permission            | Description                                      |
-|---------|-----------------------|--------------------------------------------------|
-| NotificationCenter | `NOTIFICATION-CENTER-CONNECTORS:READCONFIG` | Test connector configurations and existing connectors. |
-| NotificationCenter | `NOTIFICATION-CENTER-PRESETS:READCONFIG` | Test preset configurations, existing presets, and template rendering. |
-| NotificationCenter | `NOTIFICATION-CENTER-ROUTERS:READCONFIG` | Test routing conditions. |
+| Method | Required permission |
+|--------|---------------------|
+| `TestConnectorConfig` | `notification-center-connectors:UpdateConfig` |
+| `TestExistingConnector` | `notification-center-connectors:UpdateConfig` |
+| `TestPresetConfig` | `notification-center-connectors:UpdateConfig` AND `notification-center-presets:UpdateConfig` |
+| `TestExistingPreset` | `notification-center-connectors:UpdateConfig` AND `notification-center-presets:UpdateConfig` |
+| `TestDestination` | `notification-center-connectors:UpdateConfig` AND `notification-center-presets:UpdateConfig` |
+| `TestTemplateRender` | `notification-center-connectors:ReadConfig` OR `notification-center-connectors:UpdateConfig` OR `notification-center-presets:ReadConfig` OR `notification-center-presets:UpdateConfig` |
 
 ## Common error response codes
 
