@@ -1,0 +1,21 @@
+# Cases Notification service overview
+
+The Cases Notification service tracks notification-adjacent data for cases. Use it to retrieve the notification delivery records routed for one or more cases, including routing, target, and outcome information for each delivery attempt.
+
+Learn more in our [documentation](https://coralogix.com/docs/user-guides/cases/working-with-cases/#notification-evidence).
+
+## Authentication and permissions
+
+To use the Cases Notification service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). Cases do not ship with a permission preset; add the individual `case:Read` permission to the key.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+|  | `case:Read` | List notification delivery records for one or more cases. |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
