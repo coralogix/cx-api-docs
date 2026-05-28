@@ -1,0 +1,8 @@
+# Default: ecosystem team owns the build system and generated artifacts
+* @coralogix/team-eco-system
+
+# Human-authored docs content is co-owned by technical writers
+/service-overviews/ @coralogix/team-eco-system @coralogix/team-technical-writers
+/introduction-v3.mdx @coralogix/team-eco-system @coralogix/team-technical-writers
+/introduction-v4.mdx @coralogix/team-eco-system @coralogix/team-technical-writers
+/introduction-v5.mdx @coralogix/team-eco-system @coralogix/team-technical-writers
