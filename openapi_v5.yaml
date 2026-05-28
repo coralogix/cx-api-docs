@@ -9427,6 +9427,9 @@ paths:
       summary: Get Connector Schema
       tags:
         - Connector Schema service
+      x-coralogixPermissions:
+        - notification-center-connectors:ReadSummary
+        - notification-center-presets:ReadSummary
       description: No description available
   /notifications/notification-center/v1/connectors:
     get:
@@ -9619,6 +9622,8 @@ paths:
       summary: Test Connector Config
       tags:
         - Notifications testing service
+      x-coralogixPermissions:
+        - notification-center-connectors:UpdateConfig
       description: No description available
   /notifications/notification-center/v1/connectors/types/summaries:
     get:
@@ -9727,6 +9732,9 @@ paths:
       summary: Test Destination
       tags:
         - Notifications testing service
+      x-coralogixPermissions:
+        - notification-center-connectors:UpdateConfig
+        - notification-center-presets:UpdateConfig
       description: No description available
   /notifications/notification-center/v1/entity-types:
     get:
@@ -9792,6 +9800,8 @@ paths:
       summary: Test Existing Connector
       tags:
         - Notifications testing service
+      x-coralogixPermissions:
+        - notification-center-connectors:UpdateConfig
       description: No description available
   /notifications/notification-center/v1/presets:
     get:
@@ -9997,6 +10007,9 @@ paths:
       summary: Test Existing Preset
       tags:
         - Notifications testing service
+      x-coralogixPermissions:
+        - notification-center-connectors:UpdateConfig
+        - notification-center-presets:UpdateConfig
       description: No description available
   /notifications/notification-center/v1/presets/tests/config:
     post:
@@ -10032,6 +10045,9 @@ paths:
       summary: Test Preset Config
       tags:
         - Notifications testing service
+      x-coralogixPermissions:
+        - notification-center-connectors:UpdateConfig
+        - notification-center-presets:UpdateConfig
       description: No description available
   /notifications/notification-center/v1/presets/{id}:
     get:
@@ -10340,6 +10356,11 @@ paths:
       summary: Test Template Render
       tags:
         - Notifications testing service
+      x-coralogixPermissions:
+        - notification-center-connectors:ReadConfig
+        - notification-center-connectors:UpdateConfig
+        - notification-center-presets:ReadConfig
+        - notification-center-presets:UpdateConfig
       description: No description available
   /parsing-rules/limits/v1:
     post:
