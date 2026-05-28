@@ -6,11 +6,12 @@ Learn more in our [documentation](https://coralogix.com/docs/user-guides/notific
 
 ## Authentication and permissions
 
-To use the Connector Schema service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). Add the Notification Center permission below to the key.
+To use the Connector Schema service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). The key needs one of the following permissions.
 
-| Presets | Permission            | Description                                      |
-|---------|-----------------------|--------------------------------------------------|
-| NotificationCenter | `NOTIFICATION-CENTER-CONNECTORS:READCONFIG` | View connectors in the Notification Center and their field data. |
+| Permission | Description |
+|------------|-------------|
+| `notification-center-connectors:ReadSummary` | View connector schemas. |
+| `notification-center-presets:ReadSummary` | View preset schemas. |
 
 ## Common error response codes
 
