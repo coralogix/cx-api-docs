@@ -147,20 +147,6 @@
             ]
           },
           {
-            "group": "Data Usage Service",
-            "pages": [
-              "api-reference/v5/data-usage-service/overview",
-              "api-reference/v5/data-usage-service/get-daily-usage-evaluation-tokens",
-              "api-reference/v5/data-usage-service/get-daily-usage-processed-gbs",
-              "api-reference/v5/data-usage-service/get-daily-usage-units",
-              "api-reference/v5/data-usage-service/get-data-usage",
-              "api-reference/v5/data-usage-service/get-data-usage-metrics-export-status",
-              "api-reference/v5/data-usage-service/get-logs-count",
-              "api-reference/v5/data-usage-service/get-spans-count",
-              "api-reference/v5/data-usage-service/update-data-usage-metrics-export-status"
-            ]
-          },
-          {
             "group": "Enrichments Service",
             "pages": [
               "api-reference/v5/enrichments-service/overview",
@@ -651,20 +637,6 @@
             ]
           },
           {
-            "group": "Data Usage Service",
-            "pages": [
-              "api-reference/v4/data-usage-service/overview",
-              "api-reference/v4/data-usage-service/get-daily-usage-evaluation-tokens",
-              "api-reference/v4/data-usage-service/get-daily-usage-processed-gbs",
-              "api-reference/v4/data-usage-service/get-daily-usage-units",
-              "api-reference/v4/data-usage-service/get-data-usage",
-              "api-reference/v4/data-usage-service/get-data-usage-metrics-export-status",
-              "api-reference/v4/data-usage-service/get-logs-count",
-              "api-reference/v4/data-usage-service/get-spans-count",
-              "api-reference/v4/data-usage-service/update-data-usage-metrics-export-status"
-            ]
-          },
-          {
             "group": "Enrichments Service",
             "pages": [
               "api-reference/v4/enrichments-service/overview",
@@ -1150,20 +1122,6 @@
               "api-reference/v3/dashboard-service/remove-dashboard-from-favorites",
               "api-reference/v3/dashboard-service/replace-a-dashboard",
               "api-reference/v3/dashboard-service/replace-the-default-dashboard"
-            ]
-          },
-          {
-            "group": "Data Usage Service",
-            "pages": [
-              "api-reference/v3/data-usage-service/overview",
-              "api-reference/v3/data-usage-service/get-daily-usage-evaluation-tokens",
-              "api-reference/v3/data-usage-service/get-daily-usage-processed-gbs",
-              "api-reference/v3/data-usage-service/get-daily-usage-units",
-              "api-reference/v3/data-usage-service/get-data-usage",
-              "api-reference/v3/data-usage-service/get-data-usage-metrics-export-status",
-              "api-reference/v3/data-usage-service/get-logs-count",
-              "api-reference/v3/data-usage-service/get-spans-count",
-              "api-reference/v3/data-usage-service/update-data-usage-metrics-export-status"
             ]
           },
           {
