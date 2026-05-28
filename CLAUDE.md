@@ -39,11 +39,6 @@ For a service already in the spec (files exist under `api-reference/v5/`):
 
 For a brand-new service not yet in the spec: get the spec merged in openapi-facade first (CI auto-syncs it here), then follow the steps above.
 
-## Hidden services (in spec, not in nav)
-
-These v5 services have generated files but are excluded from the nav pending overview authoring:
-`api-keys-admin-service`, `cases-notification-service`, `cases-service`, `users-management-service`
-
 ## Running locally
 
 ```bash
