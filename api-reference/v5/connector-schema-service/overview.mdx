@@ -1,6 +1,6 @@
 # Connector Schema service overview
 
-The Connector Schema service returns the schema definition for a Notification Center connector of a given type (for example, Slack, generic HTTPS, or PagerDuty). The schema lists the fields needed to configure that connector, including each field's name, type, allowed values, and whether it is required. Call this service before creating a connector or preset so you know which fields to provide.
+The Connector Schema service returns the schema for a Notification Center connector of a given type (for example, Slack, generic HTTPS, or PagerDuty). The response contains both `connector_config_schema` — the fields needed to configure the connector itself — and one or more `message_config_schemas`, which define the preset (message) fields for that connector type. Each schema lists every field's name, type, allowed values, and whether it is required. Check `connector_config_schema` before creating a connector and `message_config_schemas` before creating a preset.
 
 Learn more in our [documentation](https://coralogix.com/docs/user-guides/notification-center/introduction/).
 
