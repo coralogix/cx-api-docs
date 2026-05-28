@@ -26,6 +26,8 @@ Mintlify-based API documentation built from OpenAPI specs.
 
 **Not touched by `make build`:** `introduction-v{3,4,5}.mdx`, `service-overviews/`. Those are maintained manually.
 
+> If you change the `build` target in `Makefile`, verify the new workflow end-to-end and update this section.
+
 A service in the OpenAPI spec is not enough — it must also be in `V5_SERVICES` in `build_navigation_file.py` to appear in the nav.
 
 ## Adding a service to docs (v5 only)
