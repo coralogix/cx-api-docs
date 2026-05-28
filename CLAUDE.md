@@ -51,16 +51,24 @@ There are also a handful of loose `.mdx` files at the `api-reference/v5/` root (
 
 ---
 
+## Version policy
+
+**v5 is the only active version.** All new APIs and services go into v5 only.
+
+**v3 and v4 are frozen for backward compatibility.** Do not add new service overviews, new entries to `V3_SERVICES`/`V4_SERVICES`, or new rows to `introduction-v3.mdx`/`introduction-v4.mdx`. The only valid changes to those versions are bug fixes to existing content.
+
+---
+
 ## Adding an existing API to docs
 
-An API is "existing" if its operations already appear in the OpenAPI spec (i.e., `make build` already generated files for it).
+An API is "existing" if its operations already appear in the OpenAPI spec (i.e., `make build` already generated files for it). All work targets **v5 only**.
 
-1. **Register the service in the nav** — add an entry to the appropriate `V{3,4,5}_SERVICES` dict in `build_navigation_file.py`:
+1. **Register the service in the v5 nav** — add an entry to `V5_SERVICES` in `build_navigation_file.py`:
    ```python
    'cases-service': 'Cases Service',
    ```
 2. **Write a service overview** — create `service-overviews/cases-service-overview.mdx`. Follow the pattern of existing overviews (title, auth/permissions table, error codes, protocol docs).
-3. **Add it to the intro page** — open `introduction-v5.mdx` (or whichever version applies) and add a row to the API Overview table.
+3. **Add it to the intro page** — open `introduction-v5.mdx` and add a row to the API Overview table.
 4. **Run `make build`** to copy the overview into place and regenerate `docs.json`.
 5. **Run `mintlify dev`** to verify it renders correctly.
 
@@ -68,11 +76,11 @@ An API is "existing" if its operations already appear in the OpenAPI spec (i.e.,
 
 ## Adding a brand-new API to docs
 
-A "new" API is one whose operations do not yet exist in the OpenAPI spec.
+A "new" API is one whose operations do not yet exist in the OpenAPI spec. All work targets **v5 only**.
 
 1. **Get the spec updated** — the OpenAPI specs are auto-synced from the openapi-facade repository (see the CI workflow). Either land the spec change there and wait for the sync, or temporarily add operations to the local yaml for preview purposes.
 2. **Run `make build`** — this generates the per-operation `.mdx` files.
-3. **Follow the "existing API" steps above** (register in `V{version}_SERVICES`, write overview, update intro page).
+3. **Follow the "existing API" steps above** (register in `V5_SERVICES`, write overview, update `introduction-v5.mdx`).
 
 ---
 
