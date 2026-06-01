@@ -68,6 +68,15 @@
             ]
           },
           {
+            "group": "API Keys Admin Service",
+            "pages": [
+              "api-reference/v5/api-keys-admin-service/overview",
+              "api-reference/v5/api-keys-admin-service/delete-api-keys",
+              "api-reference/v5/api-keys-admin-service/get-team-members-api-keys",
+              "api-reference/v5/api-keys-admin-service/update-api-keys-status"
+            ]
+          },
+          {
             "group": "API Keys Service",
             "pages": [
               "api-reference/v5/api-keys-service/overview",
@@ -77,15 +86,6 @@
               "api-reference/v5/api-keys-service/get-api-key",
               "api-reference/v5/api-keys-service/get-api-keys",
               "api-reference/v5/api-keys-service/update-api-key"
-            ]
-          },
-          {
-            "group": "API Keys Admin Service",
-            "pages": [
-              "api-reference/v5/api-keys-admin-service/overview",
-              "api-reference/v5/api-keys-admin-service/delete-api-keys",
-              "api-reference/v5/api-keys-admin-service/get-team-members-api-keys",
-              "api-reference/v5/api-keys-admin-service/update-api-keys-status"
             ]
           },
           {
@@ -103,7 +103,13 @@
           {
             "group": "Case Settings Service",
             "pages": [
-              "api-reference/v5/case-settings-service/overview"
+              "api-reference/v5/case-settings-service/overview",
+              "api-reference/v5/case-settings-service/create-a-case-settings-team-configuration",
+              "api-reference/v5/case-settings-service/delete-a-case-settings-team-configuration",
+              "api-reference/v5/case-settings-service/get-a-case-settings-team-configuration",
+              "api-reference/v5/case-settings-service/get-system-default-case-settings-team-configuration-settings",
+              "api-reference/v5/case-settings-service/get-the-active-case-settings-team-configuration",
+              "api-reference/v5/case-settings-service/update-a-case-settings-team-configuration"
             ]
           },
           {
@@ -116,7 +122,28 @@
           {
             "group": "Cases Service",
             "pages": [
-              "api-reference/v5/cases-service/overview"
+              "api-reference/v5/cases-service/overview",
+              "api-reference/v5/cases-service/acknowledge-a-case",
+              "api-reference/v5/cases-service/acknowledge-multiple-cases",
+              "api-reference/v5/cases-service/assign-a-case-to-a-user",
+              "api-reference/v5/cases-service/assign-multiple-cases-to-a-user",
+              "api-reference/v5/cases-service/close-a-case",
+              "api-reference/v5/cases-service/close-multiple-cases",
+              "api-reference/v5/cases-service/get-available-filter-values",
+              "api-reference/v5/cases-service/get-available-grouping-keys",
+              "api-reference/v5/cases-service/get-case-by-id",
+              "api-reference/v5/cases-service/get-case-deep-links",
+              "api-reference/v5/cases-service/list-cases-with-filters",
+              "api-reference/v5/cases-service/override-priority-for-multiple-cases",
+              "api-reference/v5/cases-service/remove-assignment-from-multiple-cases",
+              "api-reference/v5/cases-service/remove-case-assignment",
+              "api-reference/v5/cases-service/remove-priority-override",
+              "api-reference/v5/cases-service/remove-priority-override-from-multiple-cases",
+              "api-reference/v5/cases-service/resolve-a-case",
+              "api-reference/v5/cases-service/resolve-multiple-cases",
+              "api-reference/v5/cases-service/set-priority-override",
+              "api-reference/v5/cases-service/unacknowledge-a-case",
+              "api-reference/v5/cases-service/update-case-fields"
             ]
           },
           {
@@ -634,6 +661,15 @@
             ]
           },
           {
+            "group": "API Keys Admin Service",
+            "pages": [
+              "api-reference/v4/api-keys-admin-service/overview",
+              "api-reference/v4/api-keys-admin-service/delete-api-keys",
+              "api-reference/v4/api-keys-admin-service/get-team-members-api-keys",
+              "api-reference/v4/api-keys-admin-service/update-api-keys-status"
+            ]
+          },
+          {
             "group": "API Keys Service",
             "pages": [
               "api-reference/v4/api-keys-service/overview",
@@ -642,15 +678,6 @@
               "api-reference/v4/api-keys-service/get-\"send-data\"-api-keys",
               "api-reference/v4/api-keys-service/get-api-key",
               "api-reference/v4/api-keys-service/update-api-key"
-            ]
-          },
-          {
-            "group": "API Keys Admin Service",
-            "pages": [
-              "api-reference/v4/api-keys-admin-service/overview",
-              "api-reference/v4/api-keys-admin-service/delete-api-keys",
-              "api-reference/v4/api-keys-admin-service/get-team-members-api-keys",
-              "api-reference/v4/api-keys-admin-service/update-api-keys-status"
             ]
           },
           {
