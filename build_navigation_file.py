@@ -56,6 +56,7 @@ V3_SERVICES = {
 
 V4_SERVICES = {
     **V3_SERVICES,
+    'api-keys-admin-service': 'API Keys Admin Service',
     'events-service': 'Events Service',
     'team-groups-management-service': 'Team Groups Management Service',
 }
@@ -64,6 +65,11 @@ V5_SERVICES = {
     **V4_SERVICES,
     'connector-schema-service': 'Connector Schema Service',
     'notifications-testing-service': 'Notifications Testing Service',
+    'cases-service': 'Cases Service',
+    'case-events-service': 'Case Events Service',
+    'case-settings-service': 'Case Settings Service',
+    'cases-notification-service': 'Cases Notification Service',
+    'users-management-service': 'Users Management Service',
 }
 
 VERSION_CONFIG = {
