@@ -165,7 +165,7 @@
             "pages": [
               "api-reference/v5/enrichments-service/overview",
               "api-reference/v5/enrichments-service/add-enrichments",
-              "api-reference/v5/enrichments-service/atomic-overwrite-for-all-types-of-enrichments-the-request-is-the-desired-state-which-will-override-all-enrichments-warning:-this-operation-will-delete-all-existing-enrichments-and-replace-them-with-the-provided-ones",
+              "api-reference/v5/enrichments-service/atomic-overwrite-for-all-types-of-enrichments",
               "api-reference/v5/enrichments-service/atomic-overwrite-for-customenrichments-only",
               "api-reference/v5/enrichments-service/delete-enrichments",
               "api-reference/v5/enrichments-service/get-company-enrichment-settings",
@@ -313,12 +313,12 @@
           {
             "group": "Metrics Data Archive Service",
             "pages": [
-              "api-reference/v5/metrics-data-archive-service/configuretenant",
-              "api-reference/v5/metrics-data-archive-service/disablearchive",
-              "api-reference/v5/metrics-data-archive-service/enablearchive",
-              "api-reference/v5/metrics-data-archive-service/gettenantconfig",
-              "api-reference/v5/metrics-data-archive-service/update",
-              "api-reference/v5/metrics-data-archive-service/validatebucket"
+              "api-reference/v5/metrics-data-archive-service/configure-tenant",
+              "api-reference/v5/metrics-data-archive-service/disable-metrics-archive",
+              "api-reference/v5/metrics-data-archive-service/enable-metrics-archive",
+              "api-reference/v5/metrics-data-archive-service/get-metrics-storage-configuration",
+              "api-reference/v5/metrics-data-archive-service/update-metrics-storage-configuration",
+              "api-reference/v5/metrics-data-archive-service/validate-metrics-storage-bucket"
             ]
           },
           {
@@ -347,6 +347,7 @@
               "api-reference/v5/policies-service/bulk-test-log-policies",
               "api-reference/v5/policies-service/create-policy",
               "api-reference/v5/policies-service/delete-policy",
+              "api-reference/v5/policies-service/forecast-policy-usage",
               "api-reference/v5/policies-service/get-company-policies",
               "api-reference/v5/policies-service/get-policy-by-id",
               "api-reference/v5/policies-service/get-policy-priority-settings",
@@ -468,17 +469,6 @@
               "api-reference/v5/target-service/overview",
               "api-reference/v5/target-service/get-target",
               "api-reference/v5/target-service/set-target"
-            ]
-          },
-          {
-            "group": "Team Config Service",
-            "pages": [
-              "api-reference/v5/team-config-service/create-a-team-configuration",
-              "api-reference/v5/team-config-service/delete-a-team-configuration",
-              "api-reference/v5/team-config-service/get-a-team-configuration",
-              "api-reference/v5/team-config-service/get-system-default-team-configuration-settings",
-              "api-reference/v5/team-config-service/get-the-active-team-configuration",
-              "api-reference/v5/team-config-service/update-a-team-configuration"
             ]
           },
           {
