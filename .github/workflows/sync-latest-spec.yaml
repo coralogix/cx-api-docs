@@ -15,10 +15,17 @@ on:
         required: false
         type: string
         default: ""
+      release_date:
+        description: "Changelog release date (YYYY-MM-DD). Leave empty to use today (UTC)."
+        required: false
+        type: string
+        default: ""
 
 env:
   FACADE_REPO: coralogix/openapi-facade
   FACADE_SPEC_PATH: may26/openapi.yaml
+  FACADE_DEPS_PATH: may26/dependencies.json
+  CX_APIS_REPO: coralogix/cx-management-apis
   TARGET_SPEC_FILE: openapi_v5.yaml
 
 jobs:
@@ -91,6 +98,49 @@ jobs:
             exit 1
           fi
 
+      - name: Resolve cx-management-apis source commit
+        id: cxapis
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          # The facade build pins the exact cx-management-apis commit it was generated
+          # from in may26/dependencies.json. Fetch the changelog at that same commit so
+          # the docs changelog never runs ahead of the shipped spec.
+          gh api -H "Accept: application/vnd.github.raw" \
+            "repos/${FACADE_REPO}/contents/${FACADE_DEPS_PATH}?ref=${{ steps.facade.outputs.sha }}" \
+            > facade-dependencies.json
+          CX_SHA=$(python3 -c "import json,sys;print(json.load(open('facade-dependencies.json'))['cx-management-apis'])")
+          rm -f facade-dependencies.json
+          if [ -z "$CX_SHA" ]; then
+            echo "::error::Could not resolve cx-management-apis SHA from ${FACADE_DEPS_PATH}"
+            exit 1
+          fi
+          echo "Using cx-management-apis SHA: $CX_SHA"
+          echo "sha=$CX_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Build public changelog
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh api -H "Accept: application/vnd.github.raw" \
+            "repos/${CX_APIS_REPO}/contents/CHANGELOG.md?ref=${{ steps.cxapis.outputs.sha }}" \
+            > upstream-changelog.md
+          if [ ! -s upstream-changelog.md ]; then
+            echo "::error::Fetched upstream CHANGELOG.md is empty"
+            exit 1
+          fi
+          RELEASE_DATE="${{ github.event.inputs.release_date }}"
+          if [ -z "$RELEASE_DATE" ]; then
+            RELEASE_DATE="$(date -u +%F)"
+          fi
+          python3 build_changelog.py \
+            --upstream upstream-changelog.md \
+            --release-date "$RELEASE_DATE" \
+            --cx-sha "${{ steps.cxapis.outputs.sha }}" \
+            --data changelog.data.json \
+            --out changelog.mdx
+          rm -f upstream-changelog.md
+
       - name: Rebuild docs
         run: |
           make clean
@@ -100,7 +150,7 @@ jobs:
       - name: Skip if no changes
         id: diff
         run: |
-          if git diff --quiet -- openapi_v5.yaml api-reference/v5 docs.json; then
+          if git diff --quiet -- openapi_v5.yaml api-reference/v5 docs.json changelog.mdx changelog.data.json; then
             echo "No changes after sync; nothing to PR."
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
@@ -119,17 +169,21 @@ jobs:
             openapi_v5.yaml
             api-reference/v5/**
             docs.json
+            changelog.mdx
+            changelog.data.json
           commit-message: "${{ steps.facade.outputs.short_sha }}: Sync openapi_v5 from openapi-facade"
           title: "${{ steps.facade.outputs.short_sha }}: Sync openapi_v5 from openapi-facade"
           body: |
             Automated sync of `openapi_v5.yaml` from `coralogix/openapi-facade` `may26/openapi.yaml`.
 
             Source commit: [`${{ steps.facade.outputs.short_sha }}`](https://github.com/coralogix/openapi-facade/commit/${{ steps.facade.outputs.sha }})
+            cx-management-apis commit: [`${{ steps.cxapis.outputs.sha }}`](https://github.com/coralogix/cx-management-apis/commit/${{ steps.cxapis.outputs.sha }})
 
             Regenerated:
             - `openapi_v5.yaml`
             - `api-reference/**` (mintlify-scrape output)
             - `docs.json` (`build_navigation_file.py`)
+            - `changelog.mdx` / `changelog.data.json` (`build_changelog.py`, new upstream entries collapsed under today's release date)
           labels: |
             sync
             facade-sync

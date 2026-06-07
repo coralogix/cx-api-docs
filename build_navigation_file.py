@@ -154,7 +154,14 @@ def build_version_groups(api_ref_path: Path, version: str, config: dict) -> List
             ]
         }
     ]
-    
+
+    # Changelog is v5-only and CI-generated (build_changelog.py). See CLAUDE.md.
+    if version == 'v5':
+        intro_groups.append({
+            "group": "Changelog",
+            "pages": ["changelog"]
+        })
+
     return intro_groups + groups
 
 

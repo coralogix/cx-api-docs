@@ -19,6 +19,12 @@
             ]
           },
           {
+            "group": "Changelog",
+            "pages": [
+              "changelog"
+            ]
+          },
+          {
             "group": "Actions Service",
             "pages": [
               "api-reference/v5/actions-service/overview",
