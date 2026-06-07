@@ -52,16 +52,17 @@ The `sync-latest-spec.yaml` workflow:
 1. Reads the cx-management-apis commit the facade build was based on from
    `openapi-facade/may26/dependencies.json` (`cx-management-apis` key).
 2. Fetches `CHANGELOG.md` from cx-management-apis **at that exact commit**.
-3. Runs `build_changelog.py`, which collapses every upstream entry newer than the last published
-   one into a single `<Update>` section dated the release day (the workflow run date, or the
-   `release_date` dispatch input). Two syncs on the same day merge into one section.
+3. Runs `build_changelog.py`, which collapses every upstream entry not yet published into a single
+   `<Update>` section dated the release day (the workflow run date, or the `release_date` dispatch
+   input). Two syncs on the same day merge into one section.
 
-State lives in `changelog.data.json` (released history; the high-water mark is `max(upstream_dates)`).
-Entries are copied **verbatim**. The page is wired into the v5 nav only, via
-`build_navigation_file.py`.
+State lives in `changelog.data.json`: `published` holds a hash of every upstream bullet already
+accounted for (dedup is by bullet **content**, not date, so a bullet appended under an
+already-published date is still picked up), and `releases` is the rendered history. Entries are
+copied **verbatim**. The page is wired into the v5 nav only, via `build_navigation_file.py`.
 
-**One-time bootstrap** (already done at adoption): seed the high-water mark from current upstream
-without dumping history into a single release —
+**One-time bootstrap** (already done at adoption): seed `published` from current upstream without
+dumping history into a single release —
 `python3 build_changelog.py --upstream CHANGELOG.md --bootstrap --cx-sha <sha>`.
 The changelog stays empty until the next upstream change ships.
 
