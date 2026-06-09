@@ -39,12 +39,8 @@ BULLET = re.compile(r"^-\s+")
 
 FRONTMATTER = """---
 title: Changelog
-description: "Public API changes, grouped by Coralogix Developer Docs release date."
+description: "Public API changes, grouped by the date they were released to the APIs."
 ---
-
-<Note>
-  Changes are grouped by the date they were released to the APIs.
-</Note>
 
 """
 
