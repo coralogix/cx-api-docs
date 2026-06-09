@@ -7,7 +7,8 @@
           {
             "group": "Introduction",
             "pages": [
-              "introduction-v5"
+              "introduction-v5",
+              "changelog"
             ]
           },
           {
@@ -16,12 +17,6 @@
               "copy_a_dashboard",
               "create_an_alert_with_an_outgoing_webhook",
               "setup_kubernetes_complete_observability_integration"
-            ]
-          },
-          {
-            "group": "Changelog",
-            "pages": [
-              "changelog"
             ]
           },
           {
