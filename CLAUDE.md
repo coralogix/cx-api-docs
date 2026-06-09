@@ -61,10 +61,11 @@ accounted for (dedup is by bullet **content**, not date, so a bullet appended un
 already-published date is still picked up), and `releases` is the rendered history. Entries are
 copied **verbatim**. The page is wired into the v5 nav only, via `build_navigation_file.py`.
 
-**One-time bootstrap** (already done at adoption): seed `published` from current upstream without
-dumping history into a single release —
-`python3 build_changelog.py --upstream CHANGELOG.md --bootstrap --cx-sha <sha>`.
-The changelog stays empty until the next upstream change ships.
+**Initial state** (done at adoption): seeded by a normal run from empty state, so all existing
+upstream entries collapse into one release dated the adoption day —
+`python3 build_changelog.py --upstream CHANGELOG.md --release-date <today> --cx-sha <sha>`.
+(`--bootstrap` is the alternative: seed `published` without rendering anything, so the page starts
+empty and only fills from the next upstream change.)
 
 ## Running locally
 
