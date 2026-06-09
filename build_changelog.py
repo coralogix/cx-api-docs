@@ -117,10 +117,13 @@ def collect_new(
     """
     new_bullets: List[str] = []
     new_dates: List[str] = []
+    seen = set(published)  # also dedup repeats within this single upstream pass
     for dt, bullets in sections:
         contributed = False
         for b in bullets:
-            if bullet_hash(b) not in published:
+            h = bullet_hash(b)
+            if h not in seen:
+                seen.add(h)
                 new_bullets.append(b)
                 contributed = True
         if contributed:
