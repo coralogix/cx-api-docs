@@ -7,7 +7,8 @@
           {
             "group": "Introduction",
             "pages": [
-              "introduction-v5"
+              "introduction-v5",
+              "changelog"
             ]
           },
           {
