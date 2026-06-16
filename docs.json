@@ -1595,8 +1595,8 @@
     ]
   },
   "logo": {
-    "dark": "/logo/coralogix.svg",
-    "light": "/logo/coralogix.svg"
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
   },
   "name": "Coralogix Developer Docs",
   "favicon": "/favicon.svg",
