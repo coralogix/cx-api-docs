@@ -133,6 +133,7 @@
               "api-reference/v5/cases-service/get-available-filter-values",
               "api-reference/v5/cases-service/get-available-grouping-keys",
               "api-reference/v5/cases-service/get-case-by-id",
+              "api-reference/v5/cases-service/get-case-by-indicator",
               "api-reference/v5/cases-service/get-case-deep-links",
               "api-reference/v5/cases-service/list-cases-with-filters",
               "api-reference/v5/cases-service/override-priority-for-multiple-cases",
@@ -218,7 +219,8 @@
               "api-reference/v5/dashboard-service/get-dashboard-catalog",
               "api-reference/v5/dashboard-service/remove-dashboard-from-favorites",
               "api-reference/v5/dashboard-service/replace-a-dashboard",
-              "api-reference/v5/dashboard-service/replace-the-default-dashboard"
+              "api-reference/v5/dashboard-service/replace-the-default-dashboard",
+              "api-reference/v5/dashboard-service/validate-a-dashboard-and-return-issues"
             ]
           },
           {
@@ -298,15 +300,6 @@
               "api-reference/v5/extension-service/overview",
               "api-reference/v5/extension-service/get-all-extensions",
               "api-reference/v5/extension-service/get-extension-by-id"
-            ]
-          },
-          {
-            "group": "Extension Testing Service",
-            "pages": [
-              "api-reference/v5/extension-testing-service/overview",
-              "api-reference/v5/extension-testing-service/cleanup-testing-extension",
-              "api-reference/v5/extension-testing-service/initialize-testing-revision",
-              "api-reference/v5/extension-testing-service/test-extension-revision"
             ]
           },
           {
