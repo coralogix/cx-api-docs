@@ -3,15 +3,19 @@
 Generate the public changelog (changelog.mdx) from the upstream cx-management-apis
 CHANGELOG.md, unifying entries by *docs release date* instead of upstream date.
 
-Upstream records changes under `## YYYY-MM-DD` headers (reverse-chronological), with
-verbatim bullet entries. When a facade sync ships those changes to the public docs, every
-upstream entry newer than what we've already published collapses into a single section
-dated the release day.
+Upstream records released changes under section headers — either a bare `## YYYY-MM-DD`
+or a versioned `## vX.Y.Z - YYYY-MM-DD` (reverse-chronological), with verbatim bullet
+entries. In both forms the trailing `YYYY-MM-DD` is the section date. A `## Unreleased`
+staging section (and any other non-date/non-version `## ` header) is deliberately ignored
+so unreleased entries never reach the public docs. When a facade sync ships released
+changes to the public docs, every upstream entry newer than what we've already published
+collapses into a single section dated the release day.
 
 State lives in changelog.data.json:
   - "published": hashes of every upstream bullet already accounted for. This is the dedup
     key — tracking bullet *content* (not just dates) so a new bullet appended under an
-    already-published `## YYYY-MM-DD` is still picked up on the next sync.
+    already-published section is still picked up on the next sync, and re-heading existing
+    dated sections under a version header republishes nothing (identical bullet text).
   - "releases": the rendered history, newest-first.
 Bootstrap seeds "published" from the full current upstream so adoption doesn't dump history.
 
@@ -35,6 +39,12 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 DATE_HEADER = re.compile(r"^##\s+(\d{4}-\d{2}-\d{2})\s*$")
+# Versioned release header, e.g. "## v5.0.1 - 2026-06-30". The trailing date is the
+# section date used for grouping; the version itself is not rendered.
+VERSION_HEADER = re.compile(r"^##\s+v\d+\.\d+\.\d+\s+-\s+(\d{4}-\d{2}-\d{2})\s*$")
+# Any other H2 (e.g. "## Unreleased") opens a non-published section: its bullets are
+# deliberately skipped so unreleased entries never reach the public docs.
+OTHER_H2 = re.compile(r"^##\s+")
 BULLET = re.compile(r"^-\s+")
 
 FRONTMATTER = """---
@@ -71,11 +81,15 @@ def parse_upstream(text: str) -> List[Tuple[str, List[str]]]:
         cur_bullets = []
 
     for line in text.splitlines():
-        m = DATE_HEADER.match(line)
+        m = DATE_HEADER.match(line) or VERSION_HEADER.match(line)
         if m:
             flush_section()
             cur_date = m.group(1)
             cur_bullets = []
+            continue
+        if OTHER_H2.match(line):
+            # e.g. "## Unreleased" — close any open section; bullets here are skipped.
+            flush_section()
             continue
         if cur_date is None:
             continue  # skip the top-level "# Changelog" header and any preamble
