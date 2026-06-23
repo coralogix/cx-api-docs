@@ -1,0 +1,23 @@
+# AI Applications service overview
+
+The AI Applications service manages the catalog of AI applications that Coralogix automatically discovers from your spans. Use it to list the AI applications in your account (optionally filtered by evaluation type), retrieve a single application by its ID, and delete an application from the catalog. The service also manages your company-wide custom model pricing, letting you read, replace, or delete the per-model pricing Coralogix uses when it calculates the cost of AI application activity.
+
+Learn more in our [documentation](https://coralogix.com/docs/user-guides/ai/app_catalog/).
+
+## Authentication and permissions
+
+To use the AI Applications service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). The permissions below are part of the **AiObservability** role preset; assign that preset, or add the individual permissions you need.
+
+| Presets | Permission | Description |
+|---------|-----------|-------------|
+| AiObservability | `AI-APP-CATALOG:READ` | View the Application Catalog. |
+| AiObservability | `AI-APP-DISCOVERY:READ` | View AI App Discovery. |
+| AiObservability | `AI-APP-DISCOVERY:MANAGE` | Activate AI App Discovery and rescan to detect new AI apps. |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
