@@ -46,10 +46,14 @@ VERSION_HEADER = re.compile(r"^##\s+v\d+\.\d+\.\d+\s+-\s+(\d{4}-\d{2}-\d{2})\s*$
 # deliberately skipped so unreleased entries never reach the public docs.
 OTHER_H2 = re.compile(r"^##\s+")
 BULLET = re.compile(r"^-\s+")
+# A cx-management-apis release tag, e.g. "v5.0.1". When --cx-sha is a tag (the
+# normal flow), it labels the rendered release block alongside the docs date;
+# a bare commit SHA (manual sync) leaves the block date-only.
+RELEASE_TAG = re.compile(r"^v\d+\.\d+\.\d+$")
 
 FRONTMATTER = """---
 title: Changelog
-description: "Public API changes, grouped by the date they were released to the APIs."
+description: "Public API changes, grouped by release version and the date it shipped."
 ---
 
 """
@@ -149,12 +153,22 @@ def fmt_label(iso: str) -> str:
     return datetime.strptime(iso, "%Y-%m-%d").strftime("%B %-d, %Y")
 
 
+def release_label(rec: Dict) -> str:
+    """Heading for a release block: "vX.Y.Z — <date>" when versions are known,
+    otherwise just the docs release date (older blocks, or manual SHA syncs)."""
+    date = fmt_label(rec["release_date"])
+    versions = rec.get("versions") or []
+    if versions:
+        return f"{', '.join(versions)} — {date}"
+    return date
+
+
 def render(data: Dict) -> str:
     out = [FRONTMATTER]
     for rec in data["releases"]:
         if not rec.get("bullets"):
             continue
-        out.append(f'<Update label="{fmt_label(rec["release_date"])}">\n')
+        out.append(f'<Update label="{release_label(rec)}">\n')
         for b in rec["bullets"]:
             # Keep multi-line bullets readable under the markdown list item.
             lines = b.split("\n")
@@ -210,6 +224,10 @@ def main() -> int:
     data["published"] = sorted(published | {bullet_hash(b) for b in new_bullets})
     data["last_cx_sha"] = args.cx_sha
 
+    # When --cx-sha is a release tag, label the block with it; a bare commit SHA
+    # (manual sync) yields no version and the block stays date-only.
+    version = args.cx_sha if RELEASE_TAG.match(args.cx_sha or "") else None
+
     releases = data["releases"]
     if releases and releases[0].get("release_date") == args.release_date:
         rec = releases[0]
@@ -217,12 +235,17 @@ def main() -> int:
         rec["upstream_dates"] = sorted(
             set(rec.get("upstream_dates", [])) | set(new_dates), reverse=True
         )
+        if version and version not in rec.get("versions", []):
+            # Same-day syncs of multiple releases collapse into one block; list
+            # each version, newest first.
+            rec["versions"] = [version] + rec.get("versions", [])
         print(f"Merged {len(new_bullets)} entries into existing {args.release_date} release.")
     else:
         releases.insert(
             0,
             {
                 "release_date": args.release_date,
+                "versions": [version] if version else [],
                 "upstream_dates": new_dates,
                 "bullets": new_bullets,
             },
