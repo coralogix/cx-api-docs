@@ -2,6 +2,7 @@
   "published": [
     "009f09adc2580d24db67586d4f5f53d60a63a9e2",
     "042a9f2e312199d2b4a51a7459023630b60d1ccb",
+    "19309168766f9b79d8227052405d22e1e5592d99",
     "20d814944d0027247725d8e4b1e41ec0537e4835",
     "310dbf64db9d28911360d3d8fa0b803e624d0e8c",
     "31f3f5c78e3cfabb5b0803c03a2c61dfc0387912",
@@ -38,6 +39,7 @@
     "d020203e4fd5f1d4007b6ee8b33260bd9122af04",
     "e51c1c43b1a1854e90c33e8a4f142a7a0f5eaa6d",
     "e8ab82bd1f034237200d47c7d9f9778ed74069a2",
+    "eb93e37819f4154a5bad66a6d21aedc0925739c2",
     "ec4a71e0ec75fdbcf01835c455506a150d455b8a",
     "ed9d7da348f8206e36d887df159700571b7b8bfe",
     "ef5da5e0448a1e631212e205ee7581c0e78387fb",
@@ -46,6 +48,19 @@
     "fde094fc67f549a49961396c84a70256ca148e88"
   ],
   "releases": [
+    {
+      "release_date": "2026-06-23",
+      "versions": [
+        "v5.0.1"
+      ],
+      "upstream_dates": [
+        "2026-06-23"
+      ],
+      "bullets": [
+        "Added optional `timeBucketMs` string to the request body of `POST /dataplans/policies/v1/all/forecast-usage` (forecast TCO policy usage). When set, the forecast is bucketed into intervals of the given millisecond width. Non-breaking; omitting it preserves existing behavior.",
+        "Added optional `usageBuckets` array to the response of `POST /dataplans/policies/v1/all/forecast-usage` (forecast TCO policy usage). Each item is `{ \"bucketStartMs\": string, \"bytes\": string }`, where `bucketStartMs` is the bucket window start in epoch milliseconds and `bytes` is the matched bytes within that bucket. Populated only when `timeBucketMs` is set on the request; otherwise empty. Non-breaking; `estimatedBytes` is unchanged."
+      ]
+    },
     {
       "release_date": "2026-06-22",
       "upstream_dates": [
@@ -127,5 +142,5 @@
       ]
     }
   ],
-  "last_cx_sha": "f627170b327a0feb97a5f260acc5d6078e333079"
+  "last_cx_sha": "v5.0.1"
 }
