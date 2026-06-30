@@ -15,11 +15,15 @@
     "5c2ff33d89dc9d426cb53fb4dcf3c767005d68bd",
     "5d1e76219402bdb68c68bf91e8015f71f3f0c423",
     "6173a4c85d920f79d159aed20510b7bc6bf766a3",
+    "64656212d6d95712c1bbbca12b74103e670c011a",
     "66e355f313f3df7fd4859172cdb9e8ba46d1bea3",
     "68cb31b5bdb32d1970c12cf7acb7dac6ce5a2f40",
     "6ae6c95c0c9e40a1c998716af4c14183e17b8f9f",
+    "6fb4ee6ea8ea7a0d1499f60631b2f90526ff1782",
     "75a51432f3af4c9a0bf0a4b76ec4184a3e9bcb4a",
     "7791c226ceb90fb14be2d89cce9cf59cbc7344ef",
+    "77e0a3169f42e48e0f1945a97061f63058744ca8",
+    "7879fd08b6e95dd38759562b1e90bbd5dc15ce61",
     "83c9fb7a63113770989424bb7b6d50505b4d9e28",
     "83d5b0f8e62d6947cf76b38358312669aecb711c",
     "8cb1b270c9a9c2ecc1b9c850628b6425b3a8de37",
@@ -31,6 +35,7 @@
     "b932c88dc23ed49cc2c9e5b534ab774d821a9ff1",
     "bb41c56a4672f6b98f37dba22bcbe790f88968b1",
     "bd48c2b31a14d442cc7ca49e17c44cde5516f5d8",
+    "c3fcc37fd9e8ab8e4720a669a80592a92af7967d",
     "c4a82831060c300d1d8557c3bfbc1b1c5d546950",
     "c73aa26644402ae9a0607283d8bb1accf7fc5eee",
     "cbce36a1816a50f8b3051cffdabbed789de3c496",
@@ -42,12 +47,30 @@
     "eb93e37819f4154a5bad66a6d21aedc0925739c2",
     "ec4a71e0ec75fdbcf01835c455506a150d455b8a",
     "ed9d7da348f8206e36d887df159700571b7b8bfe",
+    "ee6f54017fc8f57cd2ab7b1819fd7b6a64722055",
     "ef5da5e0448a1e631212e205ee7581c0e78387fb",
     "efff1d7a1c328b500a8461ca7a6c0f441eabb609",
     "f6b861eea270a153586a786833c3d2e4275a83bb",
     "fde094fc67f549a49961396c84a70256ca148e88"
   ],
   "releases": [
+    {
+      "release_date": "2026-06-30",
+      "versions": [
+        "v5.0.2"
+      ],
+      "upstream_dates": [
+        "2026-06-30"
+      ],
+      "bullets": [
+        "Error responses (`400`, `401`, `403`, `404`, `409`, `500`) across the Management API now document their `application/json` body with an `Error` schema, where previously the body carried no schema. `Error` is `{ \"code\": integer, \"message\": string }` \u2014 `code` is the HTTP status code (100\u2013599) and `message` is a human-readable description. Response-only; non-breaking.",
+        "`PUT /aaa/custom-roles/v1` (create custom role) no longer documents a `201` response; a successful create returns `200` with `{ \"id\": integer }` \u2014 the new role's identifier.",
+        "`DELETE /aaa/custom-roles/v1/{role_id}` (delete custom role) `204` response no longer declares an `application/json` body, matching its no-content semantics.",
+        "Added explicit validation bounds to request fields and response arrays across the notification-center REST APIs (`/notifications/notification-center/v1/connectors`,\n`/notifications/notification-center/v1/presets`, `/notifications/notification-center/v1/routers`). Specifics:\n- The `id` path parameter on `GET /notifications/notification-center/v1/connectors/{id}`, `DELETE /notifications/notification-center/v1/connectors/{id}`, `GET\n/notifications/notification-center/v1/presets/{id}`, `DELETE /notifications/notification-center/v1/presets/custom/{id}`, `POST\n/notifications/notification-center/v1/presets/custom/{id}/default`, `POST /notifications/notification-center/v1/presets/{id}/default/apply`, `GET\n/notifications/notification-center/v1/routers/{id}`, and `DELETE /notifications/notification-center/v1/routers/{id}` now has `minLength: 1`, `maxLength: 128`, and pattern\n`^[a-zA-Z0-9][a-zA-Z0-9_-]*$`.\n- String request fields including `name`, `id`, `connectorId`, `presetId`, `payloadType`, `fieldName`, `template`, and `description` in the request bodies of `POST\n/notifications/notification-center/v1/connectors`, `PUT /notifications/notification-center/v1/connectors`, `POST /notifications/notification-center/v1/presets:createCustom`, `PUT\n/notifications/notification-center/v1/presets:replaceCustom`, `POST /notifications/notification-center/v1/routers`, `PUT /notifications/notification-center/v1/routers`, and related\n`:test`/`:testConfig` endpoints now have `minLength`, `maxLength`, and `pattern` in the spec.\n- Response arrays on `GET /notifications/notification-center/v1/connectors/all/list`, `GET /notifications/notification-center/v1/connectors/all/summaries`, `GET\n/notifications/notification-center/v1/presets`, `GET /notifications/notification-center/v1/routers`, and `GET /notifications/notification-center/v1/routers/all/summaries` now have `maxItems` bounds.",
+        "Added a Microsoft Teams actor variant to case event actors. The `microsoftTeams` actor carries `teamsUserId` (string), `displayName` (string), optional `userEmail` (string), and optional `coralogixUserId` (string, UUID). It appears in the `actor` field of events returned by `GET /cases/cases/v1/{case_id}/events`, in the `event` field of responses from `POST /cases/cases/v1/{case_id}/comments`, `GET /cases/events/v1/{event_id}`, and `PUT /cases/events/v1/{event_id}/comments`. Response-only; non-breaking.",
+        "Added a `microsoftTeams` resolver variant to `resolvedBy` in the `ResolutionDetails` object in case responses. The variant is an empty marker object indicating the case was resolved through a Microsoft Teams connector. It appears wherever a `case` object is returned: `GET /cases/cases/v1/{id}`, `PUT /cases/cases/v1/{id}`, `POST /cases/cases/v1` (list); `PUT /cases/acknowledged/v1/{id}`, `DELETE /cases/acknowledged/v1/{id}`, `POST /cases/acknowledged/v1` (bulk); `POST /cases/assigned/v1/{id}`, `DELETE /cases/assigned/v1/{id}`, `PUT /cases/assigned/v1` (bulk assign), `DELETE /cases/assigned/v1` (bulk unassign); `POST /cases/closed/v1/{id}`, `POST /cases/closed/v1` (bulk); `POST /cases/indicators/v1/get`; `PUT /cases/priority-override/v1/{id}`, `DELETE /cases/priority-override/v1/{id}`, `POST /cases/priority-override/v1` (bulk set), `DELETE /cases/priority-override/v1` (bulk clear); `PUT /cases/resolved/v1/{id}`, `POST /cases/resolved/v1` (bulk). Response-only; non-breaking."
+      ]
+    },
     {
       "release_date": "2026-06-23",
       "versions": [
@@ -142,5 +165,5 @@
       ]
     }
   ],
-  "last_cx_sha": "v5.0.1"
+  "last_cx_sha": "v5.0.2"
 }
