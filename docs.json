@@ -255,6 +255,7 @@
             "pages": [
               "api-reference/v5/entities-service/overview",
               "api-reference/v5/entities-service/list-entity-subtypes",
+              "api-reference/v5/entities-service/list-entity-type-attachment-types",
               "api-reference/v5/entities-service/list-entity-types"
             ]
           },
