@@ -1,11 +1,16 @@
 {
   "published": [
     "009f09adc2580d24db67586d4f5f53d60a63a9e2",
+    "00f8a67cacf2d11dd658fd011559c3d243f45acf",
     "042a9f2e312199d2b4a51a7459023630b60d1ccb",
     "19309168766f9b79d8227052405d22e1e5592d99",
+    "19373893467a53b57601564446c2be134be9a8f8",
+    "207037020bc2bca1e2f7ce16f58fab4f70bd585e",
     "20d814944d0027247725d8e4b1e41ec0537e4835",
+    "25be8f945fc9305654033b80482e31cc0d78e086",
     "310dbf64db9d28911360d3d8fa0b803e624d0e8c",
     "31f3f5c78e3cfabb5b0803c03a2c61dfc0387912",
+    "38b3e42c45ea463ce9785ac8863e072b739d3df9",
     "39b8612afa7c4b22702f14549e6fb4de457f3582",
     "3a2023f56cd9c6d04525c99d818b17ac60498800",
     "3a61345db12b0455e3432a0c4c5579edfccc06e9",
@@ -14,7 +19,9 @@
     "4eb353d05813d9e7d0835cf60f900ba4195dc7bb",
     "5c2ff33d89dc9d426cb53fb4dcf3c767005d68bd",
     "5d1e76219402bdb68c68bf91e8015f71f3f0c423",
+    "5ea3f6cd43752d972722a6d281017417a377a0be",
     "6173a4c85d920f79d159aed20510b7bc6bf766a3",
+    "62ddf1faf4c87aca981a061a021447623edd9596",
     "64656212d6d95712c1bbbca12b74103e670c011a",
     "66e355f313f3df7fd4859172cdb9e8ba46d1bea3",
     "68cb31b5bdb32d1970c12cf7acb7dac6ce5a2f40",
@@ -26,6 +33,7 @@
     "7879fd08b6e95dd38759562b1e90bbd5dc15ce61",
     "83c9fb7a63113770989424bb7b6d50505b4d9e28",
     "83d5b0f8e62d6947cf76b38358312669aecb711c",
+    "8b25b1096b00a5e5d5cb02e7cc00bca9145034e4",
     "8cb1b270c9a9c2ecc1b9c850628b6425b3a8de37",
     "a2ca5adb530ce2a5e6d82e9662b8823f2f4c637f",
     "a9c966471e32d733bd35ecc836d94afd291ff7b9",
@@ -35,6 +43,7 @@
     "b932c88dc23ed49cc2c9e5b534ab774d821a9ff1",
     "bb41c56a4672f6b98f37dba22bcbe790f88968b1",
     "bd48c2b31a14d442cc7ca49e17c44cde5516f5d8",
+    "c23e3740610964f35de91b5fcc349d3a8a6e668f",
     "c3fcc37fd9e8ab8e4720a669a80592a92af7967d",
     "c4a82831060c300d1d8557c3bfbc1b1c5d546950",
     "c73aa26644402ae9a0607283d8bb1accf7fc5eee",
@@ -42,6 +51,7 @@
     "ce35e654127d1cd020911f5f40213fc4af8f696c",
     "cfd7b94539a082d983fb036006822ba49cea03ab",
     "d020203e4fd5f1d4007b6ee8b33260bd9122af04",
+    "e4ad568b1831070d68a8daed7db5a0bf82e06cb7",
     "e51c1c43b1a1854e90c33e8a4f142a7a0f5eaa6d",
     "e8ab82bd1f034237200d47c7d9f9778ed74069a2",
     "eb93e37819f4154a5bad66a6d21aedc0925739c2",
@@ -54,6 +64,27 @@
     "fde094fc67f549a49961396c84a70256ca148e88"
   ],
   "releases": [
+    {
+      "release_date": "2026-07-10",
+      "versions": [
+        "v5.0.3"
+      ],
+      "upstream_dates": [
+        "2026-07-09"
+      ],
+      "bullets": [
+        "Added non-breaking OpenAPI validation metadata to existing views and folders REST payloads; no endpoints, JSON fields, or field requiredness changed. For view payloads in `POST /data-exploration/views/v1/views`, `PUT /data-exploration/views/v1/views/{id}`, `GET /data-exploration/views/v1/views`, and `GET /data-exploration/views/v1/views/{id}`, the spec now documents bounds for `id` integer (`1..2147483647`, where present), `name` string (`1..250`), `searchQuery.query` string (`1..65535`), `filters.filters` array (`1..1000`), `filters.filters[].name` string (`1..65535`), `timeSelection.quickSelection.caption` string (`1..100`), `timeSelection.quickSelection.seconds` integer (`0..4294967295`), and `timeSelection.customSelection.fromTime` / `timeSelection.customSelection.toTime` date-time strings (`1..35`). The shared `id` path parameter on `GET`, `PUT`, and `DELETE /data-exploration/views/v1/views/{id}` is also documented as integer `1..2147483647`; the `views` response array on `GET /data-exploration/views/v1/views` is documented as `0..100000` items. For folder payloads in `POST /data-exploration/views/v1/folders`, `PUT /data-exploration/views/v1/folders`, `GET /data-exploration/views/v1/folders`, and `GET /data-exploration/views/v1/folders/{id}`, the spec now documents `name` string bounds (`1..100`) and the `folders` response array bounds (`0..100000` items).",
+        "Added an optional `arcDisplay` object (with `valueArc` and `thresholdArc` booleans) and an optional `showMinMax` boolean to the gauge widget and the dynamic-widget gauge visualization inside the dashboard payload. The fields appear in the request body of `POST /dashboards/dashboards/v1` and `PUT /dashboards/dashboards/v1`, and in the dashboard read responses of `GET /dashboards/dashboards/v1/{dashboard_id}` and `GET /dashboards/dashboards/v1/slugs/lookup/{slug}`. The presence of `arcDisplay` indicates the gauge arcs are shown; omitting it hides them. Deprecated the `showInnerArc` and `showOuterArc` booleans on both gauges. Non-breaking; omitting the new fields preserves existing behavior.",
+        "Added optional `dpxlExpression` string to the span-rules object (`spanRules`) in the quota policy payload, mirroring the existing `dpxlExpression` on log rules. It appears in the request bodies of `POST /dataplans/policies/v1` (create), `PUT /dataplans/policies/v1` (update), `PUT /dataplans/span-policies/v1` (replace span policies), and `POST /dataplans/policies/v1/all/forecast-usage` (forecast usage); and in the response payloads of `GET /dataplans/policies/v1/{id}`, `GET /dataplans/policies/v1` (list), the `POST`/`PUT /dataplans/policies/v1` responses, `PUT /dataplans/span-policies/v1` (replace span policies), `PUT /dataplans/log-policies/v1` (replace log policies), and `POST /dataplans/policies/v1/all/test-policies` (test policies). Optional and non-breaking.",
+        "Breaking OpenAPI schema change for `/logs/data-setup/v2`: in the `POST` request body, the `s3` object is now documented as required alongside `isActive`, matching existing server-side validation. In the `GET` and `POST` 200 response bodies, `target.archiveSpec` is now documented as required. This is an OpenAPI contract clarification only; the REST wire behavior is unchanged.",
+        "Added optional `histogramBucketUnit` string enum to the dynamic heatmap widget's `heatmap` visualization object. It is accepted in dashboard request widgets for `POST /dashboards/check/v1`, `POST /dashboards/dashboards/v1`, and `PUT /dashboards/dashboards/v1`, and returned in dashboard response widgets from `GET /dashboards/dashboards/v1/{dashboard_id}` and `GET /dashboards/dashboards/v1/slugs/lookup/{slug}`. Values are `HEATMAP_HISTOGRAM_BUCKET_UNIT_UNSPECIFIED`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_NANOSECONDS`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_MICROSECONDS`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_MILLISECONDS`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_SECONDS`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_BYTES_IEC`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_KIBYTES`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_MIBYTES`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_GIBYTES`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_BYTES`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_KBYTES`, `HEATMAP_HISTOGRAM_BUCKET_UNIT_MBYTES`, and `HEATMAP_HISTOGRAM_BUCKET_UNIT_GBYTES`. Non-breaking; omitting it preserves existing behavior.",
+        "Added documented validation constraints across the dashboards REST API: `POST /dashboards/check/v1`; `POST` and `PUT` on `/dashboards/dashboards/v1`; `GET` and `DELETE` on `/dashboards/dashboards/v1/{dashboard_id}`; `GET /dashboards/dashboards/v1/catalog/list`; `GET /dashboards/dashboards/v1/slugs/lookup/{slug}`; `PUT /dashboards/dashboards/v1/{dashboard_id}/default`; `POST /dashboards/dashboards/v1/{dashboard_id}/folder`; `GET`, `POST`, and `PUT` on `/dashboards/folders/v1`; `GET` and `DELETE` on `/dashboards/folders/v1/{folder_id}`; and `PUT` and `DELETE` on `/dashboards/pinned/v1/{dashboard_id}`. String, array, and integer fields throughout the dashboard, folder, and widget request and response payloads now declare `minLength`/`maxLength`/`pattern`, `minItems`/`maxItems`, and `minimum`/`maximum` limits. Specifically:\n- Dashboard identifiers are 21-character strings: the `dashboard_id` path parameter on `PUT /dashboards/dashboards/v1/{dashboard_id}/default` and `POST /dashboards/dashboards/v1/{dashboard_id}/folder`, the `dashboardId` in the `POST /dashboards/dashboards/v1` response, each catalog item's `id` in the `GET /dashboards/dashboards/v1/catalog/list` response, and the dashboard body's `id` (string) all require exactly 21 characters.\n- Folder and annotation identifiers are UUID strings (36 characters, canonical UUID pattern): a folder's `id` and `parentId` and the `POST /dashboards/folders/v1` response's `folderId`, and each dashboard annotation's `id` together with its action `id` and `widgetId`.\n- Annotation, folder, and variable `name` and variable `displayName` strings are limited to 1\u2013100 characters.\n- Annotation-source `messageTemplate` strings are limited to 0\u20131000 characters, and their `labelFields`/`labels` arrays to at most 10 items.\n- A folder `path`'s `segments` array holds 1\u20132 items, each a 1\u2013100-character string.\n- The `accessPolicy` string in the `GET /dashboards/dashboards/v1/{dashboard_id}` and `GET /dashboards/dashboards/v1/slugs/lookup/{slug}` responses accepts an empty string (`minLength: 0`).\n- The line chart's `queryDefinitions` array declares `minItems: 1`. Widget, section, row, filter, and variable `id` fields are UUID strings (36 characters, canonical UUID pattern).\n- The `slug` path parameter on `GET /dashboards/dashboards/v1/slugs/lookup/{slug}` is limited to 1\u2013255 characters; the `request_id` query parameter on `DELETE /dashboards/dashboards/v1/{dashboard_id}`, `GET` and `DELETE` on `/dashboards/folders/v1/{folder_id}`, and `PUT` and `DELETE` on `/dashboards/pinned/v1/{dashboard_id}` is limited to 1\u2013128 characters.",
+        "The data-usage query API is now public: the following endpoints now appear in the public OpenAPI spec and customer-facing docs. `POST /dataplan/data-usage/v1/query` returns billable usage aggregated into daily or hourly buckets and supports filtering and grouping by labels. `GET /dataplan/data-usage/v1/capabilities` returns the supported labels, measurement kinds, units, and per-request limits. Both require the `data-usage:Read` permission. Additive; no request or response shapes changed.",
+        "Added documented validation constraints on the recording rules REST API (`POST`, `GET`, `PUT`, and `DELETE` on `/recording-rules/recording-rules/v1`). Request and response fields now declare string length and pattern limits, integer ranges, and array size bounds; nested `groups[].name`, `groups[].rules[].record`, and `groups[].rules[].expr` are required on create and update, and `id` is required on create responses and on items returned by list and get. The `id` path parameter on get, update, and delete is limited to 1\u2013128 characters. Non-breaking.",
+        "Added `GET /notifications/notification-center/v1/entity-types/{entity_type}/attachment-types` (List Entity Type Attachment Types). Returns all supported attachment types for the given entity type. The response body contains `supportedAttachmentTypes` (array, 0\u2013100 items), where each item is `{ \"name\": string, \"defaultEnabled\": boolean }` \u2014 `name` is the attachment type identifier (e.g. `\"alert_graph\"`) and `defaultEnabled` indicates whether the type is included by default when the policy is `AUTO`. Non-breaking; new endpoint.",
+        "Added the time-to-update KPI to Cases. The `KPIType` string enum now contains `KPI_TYPE_UNSPECIFIED`, `KPI_TYPE_TIME_TO_ACKNOWLEDGE`, `KPI_TYPE_TIME_TO_RESOLVE`, and `KPI_TYPE_TIME_TO_UPDATE`.\n- `caseLifecycle.kpi.thresholds[].type` in the request bodies for `POST /cases/cases/case-settings/v1/configs` and `PATCH /cases/cases/case-settings/v1/configs/{id}`.\n- `caseSettings.caseLifecycle.kpi.thresholds[].type` in the response bodies from `POST /cases/cases/case-settings/v1/configs`, `GET /cases/cases/case-settings/v1/configs/{id}`, `PATCH /cases/cases/case-settings/v1/configs/{id}`, and `GET /cases/cases/case-settings/v1/configs:getActive`; and `caseLifecycle.kpi.thresholds[].type` in the response body from `GET /cases/cases/case-settings/v1/configs:getSystemDefaults`.\n- `case.kpiBreaches.breachedKpis[].kpiType` in the response bodies from `GET /cases/cases/v1/{id}`, `PUT /cases/cases/v1/{id}`, `PUT /cases/acknowledged/v1/{id}`, `DELETE /cases/acknowledged/v1/{id}`, `POST /cases/assigned/v1/{id}`, `DELETE /cases/assigned/v1/{id}`, `POST /cases/closed/v1/{id}`, `POST /cases/indicators/v1/get`, `PUT /cases/priority-override/v1/{id}`, `DELETE /cases/priority-override/v1/{id}`, and `PUT /cases/resolved/v1/{id}`.\n- `cases[].kpiBreaches.breachedKpis[].kpiType` in the response bodies from `POST /cases/cases/v1`, `POST /cases/acknowledged/v1`, `PUT /cases/assigned/v1`, `DELETE /cases/assigned/v1`, `POST /cases/closed/v1`, `POST /cases/priority-override/v1`, `DELETE /cases/priority-override/v1`, and `POST /cases/resolved/v1`.\n- `event.eventData.kpiBreached.kpiType` in the response bodies from `POST /cases/cases/v1/{case_id}/comments`, `GET /cases/events/v1/{event_id}`, and `PUT /cases/events/v1/{event_id}/comments`; and `events[].eventData.kpiBreached.kpiType` in the response body from `GET /cases/cases/v1/{case_id}/events`.\n- The `KPIFilter` string enum used by optional `filters.breached[]` arrays in the request bodies for `POST /cases/cases/v1` and `POST /cases/filter-values/v1` now contains `KPI_FILTER_UNSPECIFIED`, `KPI_FILTER_TIME_TO_ACKNOWLEDGE_BREACHED`, `KPI_FILTER_TIME_TO_RESOLVE_BREACHED`, `KPI_FILTER_NOT_BREACHED`, and `KPI_FILTER_TIME_TO_UPDATE_BREACHED`. Non-breaking."
+      ]
+    },
     {
       "release_date": "2026-06-30",
       "versions": [
@@ -165,5 +196,5 @@
       ]
     }
   ],
-  "last_cx_sha": "v5.0.2"
+  "last_cx_sha": "v5.0.3"
 }
