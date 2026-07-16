@@ -70,6 +70,7 @@ V5_SERVICES = {
     'case-settings-service': 'Case Settings Service',
     'cases-notification-service': 'Cases Notification Service',
     'users-management-service': 'Users Management Service',
+    'fleet-manager-configuration-groups': 'Fleet Manager Configuration Groups',
 }
 
 VERSION_CONFIG = {
