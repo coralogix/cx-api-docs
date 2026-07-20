@@ -425,6 +425,7 @@
             "pages": [
               "api-reference/v5/policies-service/overview",
               "api-reference/v5/policies-service/atomic-overwrite-log-policies",
+              "api-reference/v5/policies-service/atomic-overwrite-rum-policies",
               "api-reference/v5/policies-service/atomic-overwrite-span-policies",
               "api-reference/v5/policies-service/bulk-test-log-policies",
               "api-reference/v5/policies-service/create-policy",
