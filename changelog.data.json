@@ -3,6 +3,8 @@
     "009f09adc2580d24db67586d4f5f53d60a63a9e2",
     "00f8a67cacf2d11dd658fd011559c3d243f45acf",
     "042a9f2e312199d2b4a51a7459023630b60d1ccb",
+    "0877100769c0a92e6892b2efd8f8574dc41c3051",
+    "12655f2c4fa683484f5dbb0e2a6f6b4711aa4d73",
     "19309168766f9b79d8227052405d22e1e5592d99",
     "19373893467a53b57601564446c2be134be9a8f8",
     "207037020bc2bca1e2f7ce16f58fab4f70bd585e",
@@ -17,7 +19,9 @@
     "3cbfa10a7d08bd3d02faf6a343110226b8ea1bbc",
     "4472e325417fefa648bca4ced615798993eee020",
     "4eb353d05813d9e7d0835cf60f900ba4195dc7bb",
+    "4faee1ea63ede1de2b1965cc9535e79e6d7454f1",
     "5c2ff33d89dc9d426cb53fb4dcf3c767005d68bd",
+    "5c3b4cdac99595ea2650c1ad4086969961a14c9b",
     "5d1e76219402bdb68c68bf91e8015f71f3f0c423",
     "5ea3f6cd43752d972722a6d281017417a377a0be",
     "6173a4c85d920f79d159aed20510b7bc6bf766a3",
@@ -35,6 +39,7 @@
     "83d5b0f8e62d6947cf76b38358312669aecb711c",
     "8b25b1096b00a5e5d5cb02e7cc00bca9145034e4",
     "8cb1b270c9a9c2ecc1b9c850628b6425b3a8de37",
+    "9e352b22c889e52db5a4085b41229684664108dd",
     "a2ca5adb530ce2a5e6d82e9662b8823f2f4c637f",
     "a9c966471e32d733bd35ecc836d94afd291ff7b9",
     "abafac0176b7ca0df08d7e6d788c36800cd11a21",
@@ -64,6 +69,22 @@
     "fde094fc67f549a49961396c84a70256ca148e88"
   ],
   "releases": [
+    {
+      "release_date": "2026-07-20",
+      "versions": [
+        "v5.0.4"
+      ],
+      "upstream_dates": [
+        "2026-07-20"
+      ],
+      "bullets": [
+        "Added documented validation constraints across the events-to-metrics REST API (`POST`, `GET`, and `PUT` on `/events2metrics/events2metrics/v2`; `GET` and `DELETE` on `/events2metrics/events2metrics/v2/{id}`; `POST /events2metrics/events2metrics/v2/all/execute`; `GET /events2metrics/labels/v2/cardinalities`; and `GET /events2metrics/limits/v2`). String fields now declare `minLength`, `maxLength`, and `pattern`; integer fields declare `minimum` and `maximum`; and array fields declare `minItems` and `maxItems`. This covers request and response fields including `name`, `description`, `dataSource`, `permutationsLimit`, `metricLabels` (items include `targetLabel`, `sourceField`), `metricFields` (items include `targetBaseMetricName`, `sourceField`, `aggregations`, `targetMetricName`), and the nested query fields: logs query (`lucene`, `alias`, `applicationnameFilters`, `subsystemnameFilters`, `severityFilters`) and spans query (`lucene`, `applicationnameFilters`, `subsystemnameFilters`, `actionFilters`, `serviceFilters`), plus `companyId`, `labelsLimit`, and the `id` identifiers. Non-breaking; constraints describe the values the service already accepts.",
+        "Added `PUT /dataplans/rum-policies/v1` to manage RUM TCO policies as an atomic overwrite: it deletes all existing RUM policies and creates the provided list in order, mirroring `PUT /dataplans/log-policies/v1` and `PUT /dataplans/span-policies/v1`. The request body holds a `policies` array (at most 10000 items); each item carries a required `policy` object (required `name`, `description`, and `priority`; optional `applicationRule`, `subsystemRule`, `archiveRetention`, `priorityOverride`, `targets`, and `disabled`) and a required `rumRules` object with the same shape as `logRules` (a `severities` array and an optional `dpxlExpression` string). The response holds a `createResponses` array; each item contains the created `policy`. Non-breaking; additive.",
+        "Added a `SOURCE_TYPE_RUM` value to the TCO policy source-type string enum, which now holds `SOURCE_TYPE_UNSPECIFIED`, `SOURCE_TYPE_LOGS`, `SOURCE_TYPE_SPANS`, and `SOURCE_TYPE_RUM` \u2014 accepted by the `source_type` query parameter on `GET /dataplans/policies/v1` (list) and the `sourceType` field in the `POST /dataplans/policies/v1/all/reorder` request body \u2014 and an optional `rumRules` object to the policy source-type choice (alongside `logRules` and `spanRules`) in the policy payload returned by `GET /dataplans/policies/v1` (list), `GET /dataplans/policies/v1/{id}`, the `POST`/`PUT /dataplans/policies/v1` responses, `PUT /dataplans/rum-policies/v1` (replace RUM policies), `PUT /dataplans/log-policies/v1` (replace log policies), `PUT /dataplans/span-policies/v1` (replace span policies), and `POST /dataplans/policies/v1/all/test-policies` (test policies). `rumRules` has the same shape as `logRules` \u2014 a `severities` array and an optional `dpxlExpression` string. Non-breaking; additive.",
+        "Added an optional `rumRules` object to the policy source-type choice (alongside `logRules` and `spanRules`) in the request bodies of `POST /dataplans/policies/v1` (create), `PUT /dataplans/policies/v1` (update), and `POST /dataplans/policies/v1/all/forecast-usage` (forecast usage), so RUM policies can also be created, updated, and forecast individually. Non-breaking; additive.",
+        "Documented existing validation bounds on the alerts and alert-event REST APIs (`minLength`/`maxLength`/`pattern` on strings, `minimum`/`maximum` on integers, `minItems`/`maxItems` on arrays). The constraints describe validation the service already enforces; values outside them were already rejected, so this is non-breaking. By field:\n- **Alert-definition properties** \u2014 request bodies of `POST /alerts/alerts/v3` and `PUT /alerts/alerts/v3`, and response bodies of `GET /alerts/alerts/v3` and `GET /alerts/alerts/v3/{id}`: `alertDefProperties.name` string 1\u2013512; `alertDefProperties.description` string 0\u20133000; `alertDefProperties.groupByKeys` array 0\u2013100 items, each string 1\u20131024; `alertDefProperties.dataSources` array 0\u20131 items, each with `dataSpace` string 1\u201350 and `dataSet` string 1\u2013300; `alertDefProperties.notificationGroupExcess` array \u2264100 items.\n- **Condition / type-definition fields** (same request and response bodies): `evaluationDelayMs` integer 0\u201310800000; metric `metricFilter.promql` and analytics `dataprimeQuery.query` string 1\u201365535; metric `forOverPct` and `minNonNullValuesPct` integer 0\u2013100; logs-ratio `numeratorAlias` / `denominatorAlias` string \u2264200; `noDataPolicy.autoRetireSeconds` integer \u226560.\n- **Notification group & schedule** (same bodies): incident-settings/webhook `retriggeringPeriod.minutes` integer 1\u201310080; schedule `activeOn.startTime` / `endTime` `hours` 0\u201323 and `minutes` 0\u201359; `dayOfWeek` array 1\u20137 items.\n- **Identifiers**: the `id` path parameter on `GET /alerts/alerts/v3/{id}` and `DELETE /alerts/alerts/v3/{id}` is a UUID string (`maxLength: 36`, canonical UUID pattern); the `alertVersionId` path parameter on `GET /alerts/alerts/v3/version-ids/{alert_version_id}` and the `AlertDef.alertVersionId` response field are 1\u201336 free-form strings; the response `AlertDef.id` is a UUID string 1\u201336; response `AlertDef.createdTime` / `updatedTime` / `lastTriggeredTime` strings \u226464.\n- **Bulk operations**: `POST /alerts/alerts/v3/all/delete` request `ids` array 1\u2013100 items, each a UUID string 1\u201336; `PUT /alerts/alerts/v3/all/replace` request `alertDefsToReplace[].id` a UUID string 1\u201336; bulk response id arrays (`notFoundIds`, `deletedIds`, `skippedIds`) \u22641000 UUID-string items.\n- **Pagination** (list endpoints): request `pageSize` integer 0\u20131000 and `pageToken` string 1\u20134096; response `alertDefs` array \u22641000 items.\n- **Filter option counts** \u2014 `GET /alerts/alerts/v3/all/counts` response: the per-bucket `count` integers (`typeCounts[].count`, `priorityCounts[].count`, `statusCounts[].count`, `enabledCounts[].count`, `entityLabelCounts[].count`) are 0\u20134294967295.\n- **Alert events**: `GET /v3/alert-event/{id}` `id` path parameter free-form string 1\u201336; `GET /v3/alert-event-stats` request `ids` array \u22641000 free-form strings 1\u201336; response `AlertEvent.alertId` a UUID string 1\u201336, and `permutationId` / `preGroupingEventId` / `incidentCorrelationKey` / `payloadType` strings \u2264256; event-stats `count` / `resolvedCount` / `triggeredCount` / `isMutedCount` integers 0\u20134294967295."
+      ]
+    },
     {
       "release_date": "2026-07-10",
       "versions": [
@@ -196,5 +217,5 @@
       ]
     }
   ],
-  "last_cx_sha": "v5.0.3"
+  "last_cx_sha": "v5.0.4"
 }
