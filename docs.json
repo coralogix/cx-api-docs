@@ -36,6 +36,7 @@
             "group": "Alert Definitions Service",
             "pages": [
               "api-reference/v5/alert-definitions-service/overview",
+              "api-reference/v5/alert-definitions-service/bulk-create-alert-definitions",
               "api-reference/v5/alert-definitions-service/bulk-delete-alert-definitions",
               "api-reference/v5/alert-definitions-service/bulk-replace-alert-definitions",
               "api-reference/v5/alert-definitions-service/create-an-alert",
