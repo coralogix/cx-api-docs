@@ -18,6 +18,32 @@ To use the Dashboard service API you need to [create a personal or team API key]
 |---------|-----------------------|--------------------------------------------------|
 | Dashboards | `team-dashboards:Read` | Grants access to read team-dashboards |
 |  | `team-dashboards:Update` | Required to create, update, or delete team-dashboards |
+|  | `team-dashboards:ReadAccessPolicy` | Required to read a dashboard's access policy |
+|  | `team-dashboards:UpdateAccessPolicy` | Required to set or remove a dashboard's access policy |
+
+## Dashboard access policy
+
+Dashboards support [policy-based access control](https://coralogix.com/docs/user-guides/aaa/access-control/policies/) (PBAC). The optional `access_policy` field on the dashboard CRUD endpoints reads and writes the policy as a JSON string:
+
+- **Create dashboard** and **Replace dashboard**: a non-empty `access_policy` string sets the policy, an empty string removes it, and omitting the field leaves the existing policy unchanged. Setting or removing a policy requires `team-dashboards:UpdateAccessPolicy`.
+- **Get dashboard** and **Get dashboard by slug**: the response returns the current policy in `access_policy`. The field is omitted if you lack `team-dashboards:ReadAccessPolicy`, and is an empty string if no policy is set.
+
+### Example dashboard access policy
+
+```
+{
+  "version": "2025-01-01",
+  "rules": [],
+  "default": {
+    "permissions": {
+      "team-dashboards:Read": "grant",
+      "team-dashboards:Update": "deny",
+      "team-dashboards:ReadAccessPolicy": "grant",
+      "team-dashboards:UpdateAccessPolicy": "deny"
+    }
+  }
+}
+```
 
 ## Common error response codes
 
