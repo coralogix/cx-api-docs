@@ -44,6 +44,7 @@
     "6cdbe651e334e9f89d10ca288d9554aab5497bfc",
     "6fb4ee6ea8ea7a0d1499f60631b2f90526ff1782",
     "75a51432f3af4c9a0bf0a4b76ec4184a3e9bcb4a",
+    "7651b1216ed5409cb71cb57590f177faf738b98f",
     "7791c226ceb90fb14be2d89cce9cf59cbc7344ef",
     "77e0a3169f42e48e0f1945a97061f63058744ca8",
     "78489db426d9243be32d8e91fa06233978c59b14",
@@ -96,6 +97,16 @@
     "fde094fc67f549a49961396c84a70256ca148e88"
   ],
   "releases": [
+    {
+      "release_date": "2026-08-17",
+      "versions": [],
+      "upstream_dates": [
+        "2026-08-17"
+      ],
+      "bullets": [
+        "The dashboard API now rejects a spans-query `fieldValue` variable source that has both `observationField` (an object) and `value` (an object) set simultaneously. Both fields live at `dashboard.variablesV2[].source.query.spansQuery.type.fieldValue` in the request bodies. Previously at least one of the two had to be set, and setting both was silently accepted (the extra field ignored); the API now returns a validation error when both are present, so exactly one of the two must be set. The deprecated `value` field (legacy span-field addressing) remains accepted when used alone; `observationField` remains accepted alone and is the preferred field. This is a breaking change for callers that were sending both fields together \u2014 they must drop `value` and send only `observationField`. Affected request bodies: `POST /dashboards/dashboards/v1`, `PUT /dashboards/dashboards/v1`, and `POST /dashboards/check/v1` (which carries the dashboard in the same `dashboard` field); clients can verify the object shapes of both fields from that path in the OpenAPI spec."
+      ]
+    },
     {
       "release_date": "2026-08-12",
       "versions": [
@@ -294,5 +305,5 @@
       ]
     }
   ],
-  "last_cx_sha": "v5.0.6"
+  "last_cx_sha": "93d3fe50c0358a832d7fdc390df7dbbf3315f0a5"
 }
