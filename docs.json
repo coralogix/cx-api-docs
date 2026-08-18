@@ -33,6 +33,37 @@
             ]
           },
           {
+            "group": "AI Applications Service",
+            "pages": [
+              "api-reference/v5/ai-applications-service/overview",
+              "api-reference/v5/ai-applications-service/delete-ai-application",
+              "api-reference/v5/ai-applications-service/delete-company-model-pricing",
+              "api-reference/v5/ai-applications-service/get-ai-application",
+              "api-reference/v5/ai-applications-service/get-company-model-pricing",
+              "api-reference/v5/ai-applications-service/list-ai-applications",
+              "api-reference/v5/ai-applications-service/set-company-model-pricing"
+            ]
+          },
+          {
+            "group": "AI Evaluations Service",
+            "pages": [
+              "api-reference/v5/ai-evaluations-service/overview",
+              "api-reference/v5/ai-evaluations-service/count-applications-per-evaluation-type",
+              "api-reference/v5/ai-evaluations-service/create-ai-evaluation",
+              "api-reference/v5/ai-evaluations-service/create-custom-evaluation",
+              "api-reference/v5/ai-evaluations-service/delete-ai-evaluation",
+              "api-reference/v5/ai-evaluations-service/delete-custom-evaluation",
+              "api-reference/v5/ai-evaluations-service/get-ai-evaluation",
+              "api-reference/v5/ai-evaluations-service/link-custom-evaluation-to-application",
+              "api-reference/v5/ai-evaluations-service/list-ai-evaluations",
+              "api-reference/v5/ai-evaluations-service/list-custom-evaluations",
+              "api-reference/v5/ai-evaluations-service/list-custom-evaluations-for-application",
+              "api-reference/v5/ai-evaluations-service/unlink-custom-evaluation-from-application",
+              "api-reference/v5/ai-evaluations-service/update-ai-evaluation",
+              "api-reference/v5/ai-evaluations-service/update-custom-evaluation"
+            ]
+          },
+          {
             "group": "Alert Definitions Service",
             "pages": [
               "api-reference/v5/alert-definitions-service/overview",

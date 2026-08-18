@@ -1,0 +1,50 @@
+# AI Evaluations service overview
+
+The AI Evaluations service manages AI evaluations and the custom evaluation catalog for your AI applications. Use it to define, list, update, and delete custom evaluations in the catalog, and to link or unlink those custom evaluations to specific AI applications. The service also manages the evaluations that run against an application: list them (optionally filtered by application, subsystem, or evaluation type), create, retrieve, update, and delete an evaluation, and count how many AI applications use each evaluation type.
+
+Learn more in our [documentation](https://coralogix.com/docs/user-guides/ai/evaluations/).
+
+## Authentication and permissions
+
+To use the AI Evaluations service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). The permissions below are part of the **AiObservability** role preset; assign that preset, or add the individual permissions you need.
+
+| Presets | Permission | Description |
+|---------|-----------|-------------|
+| AiObservability | `AI-APP-EVALUATORS:READ` | View the Application Eval Catalog. |
+| AiObservability | `AI-APP-EVALUATORS:MANAGE` | Add, edit, and delete evals for an application. |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | Response code 400 |
+| `401 Unauthorized` | Response code 401 |
+| `500 Internal Server Error` | Response code 500 |
+
+## Constants
+
+<details>
+  <summary>EvaluationType</summary>
+
+  | Value |
+|-------|
+| `ALLOWED_TOPICS` |
+| `COMPETITION` |
+| `HALLUCINATION_COMPLETENESS` |
+| `HALLUCINATION_CONTEXT_ADHERENCE` |
+| `HALLUCINATION_CONTEXT_RELEVANCE` |
+| `HALLUCINATION_CORRECTNESS` |
+| `HALLUCINATION_TASK_ADHERENCE` |
+| `PII` |
+| `PROMPT_INJECTION` |
+| `RESTRICTED_TOPICS` |
+| `SEXISM` |
+| `SQL_ALLOWED_TABLES` |
+| `SQL_HALLUCINATION` |
+| `SQL_LOAD` |
+| `SQL_READ_ONLY` |
+| `SQL_RESTRICTED_TABLES` |
+| `TOXICITY` |
+| `LANGUAGE_MISMATCH` |
+| `CUSTOM_EVALUATION` |
+</details>

@@ -63,6 +63,8 @@ V4_SERVICES = {
 
 V5_SERVICES = {
     **V4_SERVICES,
+    'ai-applications-service': 'AI Applications Service',
+    'ai-evaluations-service': 'AI Evaluations Service',
     'connector-schema-service': 'Connector Schema Service',
     'notifications-testing-service': 'Notifications Testing Service',
     'cases-service': 'Cases Service',
