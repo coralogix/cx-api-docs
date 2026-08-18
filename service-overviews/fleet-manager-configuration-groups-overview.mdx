@@ -1,0 +1,48 @@
+# Fleet Manager Configuration Groups overview
+
+The Fleet Manager Configuration Groups service manages remote configurations for OpenTelemetry agents in Fleet Management. A configuration group represents a configuration and its complete version history, and contains configuration families—versioned sets of one or more interdependent remote configurations (such as agents, gateways, and cluster collectors) that are deployed together. Use this API to create a configuration group, retrieve a group by ID (optionally returning only the latest family), update a group's fields and its latest family, and archive a group when it is no longer needed. Archiving is irreversible and requires all families in the group to be inactive.
+
+Learn more in our [documentation](https://coralogix.com/docs/user-guides/fleet-management/configuration-management/).
+
+## Methods
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/fleet-management/configuration-groups/v1` | Create a configuration group. |
+| `GET` | `/fleet-management/configuration-groups/v1/{id}` | Get a configuration group by ID. Set `latestFamilyOnly` to return only the latest family. |
+| `PUT` | `/fleet-management/configuration-groups/v1/{id}` | Update configuration group fields and optionally the latest family. |
+| `POST` | `/fleet-management/configuration-groups/v1/{id}/archive` | Archive a configuration group. |
+
+## Authentication and permissions
+
+To use the Fleet Manager Configuration Groups API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/) with the following permission. Admin roles (Legacy Admin, Organization Admin, or Data Admin) include it automatically.
+
+| Presets | Permission | Description |
+|---------|------------|--------------|
+| FleetManagement | `remote-configuration:Manage` | Manage remote configurations (create, edit, activate, deactivate, archive). |
+
+## Common error response codes
+
+| Status Code | Description                           |
+|-------------|---------------------------------------|
+| `400 Bad Request` | The request payload or parameters are invalid. |
+| `401 Unauthorized` | Missing or invalid API key. |
+| `404 Not Found` | Configuration group not found. |
+| `409 Conflict` | Configuration group already exists. |
+| `500 Internal Server Error` | Internal server error. |
+
+## Constants
+
+<details>
+  <summary>ChartName</summary>
+
+  | Value |
+|-------|
+| `CHART_NAME_UNSPECIFIED` |
+| `CHART_NAME_OTEL_INTEGRATION` |
+| `CHART_NAME_OPENTELEMETRY_COLLECTOR` |
+| `CHART_NAME_OTEL_LINUX_STANDALONE` |
+| `CHART_NAME_OTEL_WINDOWS_STANDALONE` |
+| `CHART_NAME_OTEL_MACOS_STANDALONE` |
+| `CHART_NAME_OTEL_ECS_EC2` |
+</details>
