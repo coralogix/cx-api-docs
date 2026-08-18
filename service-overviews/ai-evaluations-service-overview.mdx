@@ -1,0 +1,21 @@
+# AI Evaluations Service overview
+
+Manage AI evaluations and the custom evaluation catalog for AI applications.
+
+## Methods
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/ai/custom-evaluations/v3` | List custom evaluations |
+| `POST` | `/ai/custom-evaluations/v3` | Create custom evaluation |
+| `GET` | `/ai/custom-evaluations/v3/by-application/{application_id}` | List custom evaluations for application |
+| `DELETE` | `/ai/custom-evaluations/v3/{id}` | Delete custom evaluation |
+| `PATCH` | `/ai/custom-evaluations/v3/{id}` | Update custom evaluation |
+| `DELETE` | `/ai/custom-evaluations/v3/{id}/applications/{application_id}` | Unlink custom evaluation from application |
+| `POST` | `/ai/custom-evaluations/v3/{id}/applications/{application_id}` | Link custom evaluation to application |
+| `GET` | `/ai/evaluation-counts/v3/per-type` | Count applications per evaluation type |
+| `GET` | `/ai/evaluations/v3` | List AI evaluations |
+| `POST` | `/ai/evaluations/v3` | Create AI evaluation |
+| `DELETE` | `/ai/evaluations/v3/{id}` | Delete AI evaluation |
+| `GET` | `/ai/evaluations/v3/{id}` | Get AI evaluation |
+| `PATCH` | `/ai/evaluations/v3/{id}` | Update AI evaluation |

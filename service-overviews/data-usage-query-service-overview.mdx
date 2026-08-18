@@ -1,0 +1,18 @@
+# Data Usage Query service overview
+
+Query billable data usage through the public Coralogix API using daily or hourly bucketed aggregations over supported labels.
+
+## Methods
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/dataplan/data-usage/v1/capabilities` | Get data usage capabilities |
+| `POST` | `/dataplan/data-usage/v1/query` | Query data usage |
+
+## Authentication and permissions
+
+To use the Data Usage Query service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). The key needs one of the following permissions.
+
+| Permission |
+|------------|
+| `data-usage:Read` |
