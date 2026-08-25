@@ -9,6 +9,7 @@
     "0eafd39b6353b8146fb01cab6fc851eb5f4acff4",
     "122a2e9b8eff5d0ce4640322753e75733167bc4e",
     "12655f2c4fa683484f5dbb0e2a6f6b4711aa4d73",
+    "14897332072d9e61b9d4460521c8ad3011da3ad2",
     "19309168766f9b79d8227052405d22e1e5592d99",
     "19373893467a53b57601564446c2be134be9a8f8",
     "1a95ccb48f7fd4ed0b9c55d066be89bf2af8812c",
@@ -36,6 +37,7 @@
     "5ea3f6cd43752d972722a6d281017417a377a0be",
     "6173a4c85d920f79d159aed20510b7bc6bf766a3",
     "62ddf1faf4c87aca981a061a021447623edd9596",
+    "6314f70b82a2f2d941102299c84df444e272a3cf",
     "644fb82efa3a4338fab125caab2adeeae07e5043",
     "64656212d6d95712c1bbbca12b74103e670c011a",
     "66e355f313f3df7fd4859172cdb9e8ba46d1bea3",
@@ -44,6 +46,7 @@
     "6cdbe651e334e9f89d10ca288d9554aab5497bfc",
     "6fb4ee6ea8ea7a0d1499f60631b2f90526ff1782",
     "75a51432f3af4c9a0bf0a4b76ec4184a3e9bcb4a",
+    "7651b1216ed5409cb71cb57590f177faf738b98f",
     "7791c226ceb90fb14be2d89cce9cf59cbc7344ef",
     "77e0a3169f42e48e0f1945a97061f63058744ca8",
     "78489db426d9243be32d8e91fa06233978c59b14",
@@ -81,6 +84,7 @@
     "cfd7b94539a082d983fb036006822ba49cea03ab",
     "d020203e4fd5f1d4007b6ee8b33260bd9122af04",
     "d34c8c1835494aa50d7cdd422411f72572d4fbdd",
+    "d8676879ac1cee3659544a2e8d9c2bafbdec7225",
     "d8c1caef3bba049e413d1e84d8d7775561c62a66",
     "e4ad568b1831070d68a8daed7db5a0bf82e06cb7",
     "e51c1c43b1a1854e90c33e8a4f142a7a0f5eaa6d",
@@ -96,6 +100,21 @@
     "fde094fc67f549a49961396c84a70256ca148e88"
   ],
   "releases": [
+    {
+      "release_date": "2026-08-25",
+      "versions": [],
+      "upstream_dates": [
+        "2026-08-24",
+        "2026-08-20",
+        "2026-08-17"
+      ],
+      "bullets": [
+        "Added an `INCIDENT_IO` value to the notification-center `ConnectorType` string enum, which now holds `CONNECTOR_TYPE_UNSPECIFIED`, `SLACK`, `GENERIC_HTTPS`, `PAGERDUTY`, `IBM_EVENT_NOTIFICATIONS`, `SERVICE_NOW`, `EMAIL`, `PAGERDUTY_INCIDENTS`, `MICROSOFT_TEAMS`, `EVENTBRIDGE`, and `INCIDENT_IO`. Non-breaking; additive. The enum is reachable across the notification-center REST API as follows:\n- **Connectors**: the `type` field accepts it in the request and response bodies of `POST /notifications/notification-center/v1/connectors` (create) and `PUT /notifications/notification-center/v1/connectors` (replace); it also appears in the response body of `GET /notifications/notification-center/v1/connectors` (list), `GET /notifications/notification-center/v1/connectors/{id}` (get), and `GET /notifications/notification-center/v1/connectors/all/list` (batch-get). The `connector_type` query parameter on `GET /notifications/notification-center/v1/connectors` also accepts it. The request body's `type` field on `POST /notifications/notification-center/v1/connectors:testConfig` accepts it too.\n- **Connector summaries**: the `type` field appears in the response body of `GET /notifications/notification-center/v1/connectors/all/summaries` and `GET /notifications/notification-center/v1/connectors/list/summaries`; the `connector_type` query parameter on the latter also accepts it.\n- **Connector types**: the `type` field appears in the response body of `GET /notifications/notification-center/v1/connectors/types/summaries`, and both the `type` query parameter and the response body's `type` field on `GET /notifications/notification-center/v1/connector-schemas` accept/return it.\n- **Presets**: the `connectorType` field accepts it in the request body, and appears in the response body, of `POST /notifications/notification-center/v1/presets:createCustom` (create custom) and `PUT /notifications/notification-center/v1/presets:replaceCustom` (replace custom); it also appears in the response body of `GET /notifications/notification-center/v1/presets` (batch-get) and `GET /notifications/notification-center/v1/presets/{id}` (get). The `connector_type` query parameter, and the returned preset summary's `connectorType` field, on `GET /notifications/notification-center/v1/presets/summaries/system` (system default summary), `GET /notifications/notification-center/v1/presets:getDefaultSummary` (default summary), and `GET /notifications/notification-center/v1/presets:summariesList` (list summaries) also accept/return it.",
+        "Renamed the OpenAPI tag on `POST /dataplan/data-usage/v1/query` and `GET /dataplan/data-usage/v1/capabilities` from `Data Usage Query service` to `Data Usage Query Service`. Docs grouping only; no path, HTTP method, request, or response change. Non-breaking.",
+        "**Deprecated:** the v2 data usage endpoints are now marked deprecated and are no longer published in the API reference. They continue to be served exactly as before \u2014 no path, HTTP method, request body, response shape, field name, or field type changes, and existing integrations keep working \u2014 but they are no longer documented, and new integrations should not adopt them. The deprecated operations are `GET /dataplans/data-usage/v2`, `GET /dataplans/data-usage/v2/spans/count`, `GET /dataplans/data-usage/v2/logs/count`, `POST /dataplans/data-usage/v2/daily/units`, `POST /dataplans/data-usage/v2/daily/processed-gbs`, `POST /dataplans/data-usage/v2/daily/evaluation-tokens`, and both `GET` and `POST /dataplans/data-usage/v2/export-status`.\n- **Replacement for usage queries:** `POST /dataplan/data-usage/v1/query` (note the singular `dataplan` in the new path) returns billable data usage aggregated into daily or hourly buckets, with filtering and grouping by supported labels. Use `GET /dataplan/data-usage/v1/capabilities` to discover the labels, measurement kinds, units, and per-request limits it accepts before submitting a query. Between them these cover the six usage-reading operations above; the v1 query response is bucket-first and is not shaped like the v2 responses, so callers need to map fields rather than swap the path.\n- **No replacement yet for export status:** `GET` and `POST /dataplans/data-usage/v2/export-status` have no v1 equivalent. They remain available and keep working; callers relying on them should not migrate yet.\n- No removal date is set, and nothing is being switched off by this change.",
+        "The dashboard API now rejects a spans-query `fieldValue` variable source that has both `observationField` (an object) and `value` (an object) set simultaneously. Both fields live at `dashboard.variablesV2[].source.query.spansQuery.type.fieldValue` in the request bodies. Previously at least one of the two had to be set, and setting both was silently accepted (the extra field ignored); the API now returns a validation error when both are present, so exactly one of the two must be set. The deprecated `value` field (legacy span-field addressing) remains accepted when used alone; `observationField` remains accepted alone and is the preferred field. This is a breaking change for callers that were sending both fields together \u2014 they must drop `value` and send only `observationField`. Affected request bodies: `POST /dashboards/dashboards/v1`, `PUT /dashboards/dashboards/v1`, and `POST /dashboards/check/v1` (which carries the dashboard in the same `dashboard` field); clients can verify the object shapes of both fields from that path in the OpenAPI spec."
+      ]
+    },
     {
       "release_date": "2026-08-12",
       "versions": [
@@ -294,5 +313,5 @@
       ]
     }
   ],
-  "last_cx_sha": "v5.0.6"
+  "last_cx_sha": "f56e46dfd1af67f1d5f6edcb59f54917ee38921c"
 }
