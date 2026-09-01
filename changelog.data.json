@@ -9,6 +9,7 @@
     "0eafd39b6353b8146fb01cab6fc851eb5f4acff4",
     "122a2e9b8eff5d0ce4640322753e75733167bc4e",
     "12655f2c4fa683484f5dbb0e2a6f6b4711aa4d73",
+    "14897332072d9e61b9d4460521c8ad3011da3ad2",
     "19309168766f9b79d8227052405d22e1e5592d99",
     "19373893467a53b57601564446c2be134be9a8f8",
     "1a95ccb48f7fd4ed0b9c55d066be89bf2af8812c",
@@ -18,6 +19,7 @@
     "25be8f945fc9305654033b80482e31cc0d78e086",
     "310dbf64db9d28911360d3d8fa0b803e624d0e8c",
     "31f3f5c78e3cfabb5b0803c03a2c61dfc0387912",
+    "3832e842d4d727c69e015d377e5d72e99c327ba7",
     "38b3e42c45ea463ce9785ac8863e072b739d3df9",
     "39b8612afa7c4b22702f14549e6fb4de457f3582",
     "3a2023f56cd9c6d04525c99d818b17ac60498800",
@@ -36,6 +38,7 @@
     "5ea3f6cd43752d972722a6d281017417a377a0be",
     "6173a4c85d920f79d159aed20510b7bc6bf766a3",
     "62ddf1faf4c87aca981a061a021447623edd9596",
+    "6314f70b82a2f2d941102299c84df444e272a3cf",
     "644fb82efa3a4338fab125caab2adeeae07e5043",
     "64656212d6d95712c1bbbca12b74103e670c011a",
     "66e355f313f3df7fd4859172cdb9e8ba46d1bea3",
@@ -44,11 +47,13 @@
     "6cdbe651e334e9f89d10ca288d9554aab5497bfc",
     "6fb4ee6ea8ea7a0d1499f60631b2f90526ff1782",
     "75a51432f3af4c9a0bf0a4b76ec4184a3e9bcb4a",
+    "7651b1216ed5409cb71cb57590f177faf738b98f",
     "7791c226ceb90fb14be2d89cce9cf59cbc7344ef",
     "77e0a3169f42e48e0f1945a97061f63058744ca8",
     "78489db426d9243be32d8e91fa06233978c59b14",
     "7879fd08b6e95dd38759562b1e90bbd5dc15ce61",
     "7aa51a1235698ebfa56b3cfbc7f9e53f6314719a",
+    "7cedcfde808c26b0fb23e79c8edc750616887df3",
     "7de6aad9702b56ee755a9134d466b8438db2245f",
     "83c9fb7a63113770989424bb7b6d50505b4d9e28",
     "83d5b0f8e62d6947cf76b38358312669aecb711c",
@@ -59,6 +64,7 @@
     "93baa1481493f202a8f3ee9fab2cd65b04fa95df",
     "9e352b22c889e52db5a4085b41229684664108dd",
     "a2ca5adb530ce2a5e6d82e9662b8823f2f4c637f",
+    "a41c222e1374ca70fa1dd5dd9b2c63416c6d9ae0",
     "a9c966471e32d733bd35ecc836d94afd291ff7b9",
     "abafac0176b7ca0df08d7e6d788c36800cd11a21",
     "ac0302515b4e70a81f9effe5dee0e47d3c9b0f6b",
@@ -69,18 +75,22 @@
     "ba5741c103c7e0c7eb14032bb0d84b4a54558c58",
     "ba895c1d0c015eab88ef1b422dbf03f45cf62fba",
     "bb41c56a4672f6b98f37dba22bcbe790f88968b1",
+    "bc51dbc14c54cb1ad8d834849b5186db4699810b",
     "bd48c2b31a14d442cc7ca49e17c44cde5516f5d8",
     "c23e3740610964f35de91b5fcc349d3a8a6e668f",
     "c3e7673914d13c60dc3b3c3341095ad2de3ec1fe",
     "c3fcc37fd9e8ab8e4720a669a80592a92af7967d",
     "c4a82831060c300d1d8557c3bfbc1b1c5d546950",
     "c73aa26644402ae9a0607283d8bb1accf7fc5eee",
+    "c96d2d6e9d1f4835e8798adc17aceae7a466d85f",
     "cb1d35c8d83a9cb4b087a4ed8bf49485e2e967ff",
     "cbce36a1816a50f8b3051cffdabbed789de3c496",
+    "ce2b58dabf6f161ad60454b5e37d3cdcef3e9a8f",
     "ce35e654127d1cd020911f5f40213fc4af8f696c",
     "cfd7b94539a082d983fb036006822ba49cea03ab",
     "d020203e4fd5f1d4007b6ee8b33260bd9122af04",
     "d34c8c1835494aa50d7cdd422411f72572d4fbdd",
+    "d8676879ac1cee3659544a2e8d9c2bafbdec7225",
     "d8c1caef3bba049e413d1e84d8d7775561c62a66",
     "e4ad568b1831070d68a8daed7db5a0bf82e06cb7",
     "e51c1c43b1a1854e90c33e8a4f142a7a0f5eaa6d",
@@ -96,6 +106,29 @@
     "fde094fc67f549a49961396c84a70256ca148e88"
   ],
   "releases": [
+    {
+      "release_date": "2026-09-01",
+      "versions": [],
+      "upstream_dates": [
+        "2026-08-31",
+        "2026-08-25",
+        "2026-08-24",
+        "2026-08-20",
+        "2026-08-17"
+      ],
+      "bullets": [
+        "Corrected the request body schema for `POST` and `PUT /aaa/teams/v2/{team_id}/members`. The body is now a top-level array of user objects instead of one user object. OpenAPI does not mark the request body as required. When sent, the body must use the array form required by the runtime. This is a breaking schema correction for clients generated from the previous OpenAPI document.",
+        "The OpenAPI document now declares `openapi: 3.1.0` (was `3.0.0`), and schema-level `example` values are emitted as `examples` arrays (JSON Schema 2020-12). Non-breaking at the schema level, but consumers whose OpenAPI tooling only supports 3.0 must upgrade to 3.1-capable tooling to process the document.",
+        "New endpoint `GET /aaa/identity/v1/whoami` resolves the identity behind the credentials used to call the API. It takes no parameters \u2014 the identity is derived entirely from the `Authorization` header \u2014 and returns the required integer `teamId` and string `teamName` always, plus the optional string `teamUrl` when the team has a web-app URL slug configured and the optional string `username` when the caller authenticates as a user. Authenticating with an API key resolves a team but no user, so `username` is absent in that case. Documented responses are `401` for missing or invalid credentials, `404` when the authenticated team no longer exists, and `500`. Non-breaking; new surface.",
+        "Team groups can now be created and updated by **role name** as an alternative to `roleId`. On `POST /aaa/team-groups/v2` the request body accepts an optional string `roleName` (1-255 characters). On `PUT /aaa/team-groups/v2/{group_id}` the `roleUpdate.action` oneOf accepts a new `setRoleByName` branch, selected with `actionType: \"set_role_by_name\"` alongside the existing `set_role_id` and `clear`; the branch is an object with a single required string property `value` (1-255 characters), i.e. `{\"actionType\": \"set_role_by_name\", \"setRoleByName\": {\"value\": \"Platform Admin\"}}`. Names resolve against the team's own custom roles plus the global built-in roles, matching is case-insensitive, and the response reports the resolved role's id and canonical name. On create, `roleName` and `roleId` are mutually exclusive and setting both is rejected. An unmatched name returns `400`, and so does a name matching more than one role in the team, with the colliding role ids named in the message rather than one being silently picked. Non-breaking; additive, and `roleId` remains the canonical form and the only one used in responses.",
+        "`POST /aaa/teams/v2/{team_id}/members` now returns a per-user result instead of an empty body. The response gains `results`, an array of objects with one entry per requested user in request order. Each entry carries the required string `username`, echoing the request so callers can join on it rather than on position, and the enum `status`; where the outcome produced them it also carries the integer `userAccountId` and the string `userId`, plus the string `message` for outcomes a status alone cannot explain. Only `username` is required by the schema, so treat the others as optional. The `status` enum gains `CREATE_USER_STATUS_ALREADY_INVITED`, `CREATE_USER_STATUS_DOMAIN_NOT_ALLOWED`, and `CREATE_USER_STATUS_FAILED`, so its full set of accepted wire values is now `CREATE_USER_STATUS_UNSPECIFIED`, `CREATE_USER_STATUS_CREATED`, `CREATE_USER_STATUS_ALREADY_EXISTS`, `CREATE_USER_STATUS_INVITED`, `CREATE_USER_STATUS_ALREADY_INVITED`, `CREATE_USER_STATUS_DOMAIN_NOT_ALLOWED`, and `CREATE_USER_STATUS_FAILED`. Non-breaking; additive \u2014 the response schema previously declared no properties, so callers reading only the status code are unaffected. Note the operation is not atomic: the request is validated before anything is written, but a failure occurring after writing has begun leaves already-created entries in place and returns a non-OK status with no body.",
+        "`POST /dataplans/policies/v1`, `PUT /dataplans/log-policies/v1`, `PUT /dataplans/span-policies/v1`, and `PUT /dataplans/rum-policies/v1` now document a `429 Too Many Requests` response, returned when the request would exceed the team's maximum number of policies for that data type (logs, spans, or RUM). The response body is the standard error object (`code`: 429, `message`: string). To resolve it, request a limit increase or reduce the number of policies. This replaces the `400` previously returned for this case on `POST /dataplans/policies/v1` \u2014 **breaking** for callers that key on `400` to detect the limit; the overwrite endpoints previously did not report this condition.",
+        "Added an `INCIDENT_IO` value to the notification-center `ConnectorType` string enum, which now holds `CONNECTOR_TYPE_UNSPECIFIED`, `SLACK`, `GENERIC_HTTPS`, `PAGERDUTY`, `IBM_EVENT_NOTIFICATIONS`, `SERVICE_NOW`, `EMAIL`, `PAGERDUTY_INCIDENTS`, `MICROSOFT_TEAMS`, `EVENTBRIDGE`, and `INCIDENT_IO`. Non-breaking; additive. The enum is reachable across the notification-center REST API as follows:\n- **Connectors**: the `type` field accepts it in the request and response bodies of `POST /notifications/notification-center/v1/connectors` (create) and `PUT /notifications/notification-center/v1/connectors` (replace); it also appears in the response body of `GET /notifications/notification-center/v1/connectors` (list), `GET /notifications/notification-center/v1/connectors/{id}` (get), and `GET /notifications/notification-center/v1/connectors/all/list` (batch-get). The `connector_type` query parameter on `GET /notifications/notification-center/v1/connectors` also accepts it. The request body's `type` field on `POST /notifications/notification-center/v1/connectors:testConfig` accepts it too.\n- **Connector summaries**: the `type` field appears in the response body of `GET /notifications/notification-center/v1/connectors/all/summaries` and `GET /notifications/notification-center/v1/connectors/list/summaries`; the `connector_type` query parameter on the latter also accepts it.\n- **Connector types**: the `type` field appears in the response body of `GET /notifications/notification-center/v1/connectors/types/summaries`, and both the `type` query parameter and the response body's `type` field on `GET /notifications/notification-center/v1/connector-schemas` accept/return it.\n- **Presets**: the `connectorType` field accepts it in the request body, and appears in the response body, of `POST /notifications/notification-center/v1/presets:createCustom` (create custom) and `PUT /notifications/notification-center/v1/presets:replaceCustom` (replace custom); it also appears in the response body of `GET /notifications/notification-center/v1/presets` (batch-get) and `GET /notifications/notification-center/v1/presets/{id}` (get). The `connector_type` query parameter, and the returned preset summary's `connectorType` field, on `GET /notifications/notification-center/v1/presets/summaries/system` (system default summary), `GET /notifications/notification-center/v1/presets:getDefaultSummary` (default summary), and `GET /notifications/notification-center/v1/presets:summariesList` (list summaries) also accept/return it.",
+        "Renamed the OpenAPI tag on `POST /dataplan/data-usage/v1/query` and `GET /dataplan/data-usage/v1/capabilities` from `Data Usage Query service` to `Data Usage Query Service`. Docs grouping only; no path, HTTP method, request, or response change. Non-breaking.",
+        "**Deprecated:** the v2 data usage endpoints are now marked deprecated and are no longer published in the API reference. They continue to be served exactly as before \u2014 no path, HTTP method, request body, response shape, field name, or field type changes, and existing integrations keep working \u2014 but they are no longer documented, and new integrations should not adopt them. The deprecated operations are `GET /dataplans/data-usage/v2`, `GET /dataplans/data-usage/v2/spans/count`, `GET /dataplans/data-usage/v2/logs/count`, `POST /dataplans/data-usage/v2/daily/units`, `POST /dataplans/data-usage/v2/daily/processed-gbs`, `POST /dataplans/data-usage/v2/daily/evaluation-tokens`, and both `GET` and `POST /dataplans/data-usage/v2/export-status`.\n- **Replacement for usage queries:** `POST /dataplan/data-usage/v1/query` (note the singular `dataplan` in the new path) returns billable data usage aggregated into daily or hourly buckets, with filtering and grouping by supported labels. Use `GET /dataplan/data-usage/v1/capabilities` to discover the labels, measurement kinds, units, and per-request limits it accepts before submitting a query. Between them these cover the six usage-reading operations above; the v1 query response is bucket-first and is not shaped like the v2 responses, so callers need to map fields rather than swap the path.\n- **No replacement yet for export status:** `GET` and `POST /dataplans/data-usage/v2/export-status` have no v1 equivalent. They remain available and keep working; callers relying on them should not migrate yet.\n- No removal date is set, and nothing is being switched off by this change.",
+        "The dashboard API now rejects a spans-query `fieldValue` variable source that has both `observationField` (an object) and `value` (an object) set simultaneously. Both fields live at `dashboard.variablesV2[].source.query.spansQuery.type.fieldValue` in the request bodies. Previously at least one of the two had to be set, and setting both was silently accepted (the extra field ignored); the API now returns a validation error when both are present, so exactly one of the two must be set. The deprecated `value` field (legacy span-field addressing) remains accepted when used alone; `observationField` remains accepted alone and is the preferred field. This is a breaking change for callers that were sending both fields together \u2014 they must drop `value` and send only `observationField`. Affected request bodies: `POST /dashboards/dashboards/v1`, `PUT /dashboards/dashboards/v1`, and `POST /dashboards/check/v1` (which carries the dashboard in the same `dashboard` field); clients can verify the object shapes of both fields from that path in the OpenAPI spec."
+      ]
+    },
     {
       "release_date": "2026-08-12",
       "versions": [
@@ -294,5 +327,5 @@
       ]
     }
   ],
-  "last_cx_sha": "v5.0.6"
+  "last_cx_sha": "d0e69e696384c0c1cebe44c0a28b0cf349646acc"
 }
