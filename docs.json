@@ -291,6 +291,17 @@
             ]
           },
           {
+            "group": "Fleet Manager Configuration Groups",
+            "pages": [
+              "api-reference/v5/fleet-manager-configuration-groups/overview",
+              "api-reference/v5/fleet-manager-configuration-groups/archive-configuration-group",
+              "api-reference/v5/fleet-manager-configuration-groups/create-configuration-group",
+              "api-reference/v5/fleet-manager-configuration-groups/get-configuration-group",
+              "api-reference/v5/fleet-manager-configuration-groups/list-configuration-groups",
+              "api-reference/v5/fleet-manager-configuration-groups/update-configuration-group"
+            ]
+          },
+          {
             "group": "Folders for Views Service",
             "pages": [
               "api-reference/v5/folders-for-views-service/overview",

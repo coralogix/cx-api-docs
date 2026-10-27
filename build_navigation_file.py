@@ -58,6 +58,7 @@ V4_SERVICES = {
     **V3_SERVICES,
     'api-keys-admin-service': 'API Keys Admin Service',
     'events-service': 'Events Service',
+    'fleet-manager-configuration-groups': 'Fleet Manager Configuration Groups',
     'team-groups-management-service': 'Team Groups Management Service',
 }
 
