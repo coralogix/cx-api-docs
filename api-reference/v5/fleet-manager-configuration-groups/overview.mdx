@@ -6,8 +6,11 @@ Use this service to create groups with an initial family, list and read groups, 
 
 ## Authentication and permissions
 
-To use the Fleet Manager Configuration Groups service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). It's recommended to use permission presets, as they are automatically updated with all relevant permissions. The service is in preview; manage its permissions for your team through the permission presets in the Coralogix UI.
+To use the Fleet Manager Configuration Groups service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). It's recommended to use permission presets, as they are automatically updated with all relevant permissions. Alternatively, you can manually add the following individual permission.
 
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+| Fleet Manager | `remote-configuration:Manage` | Grants access to create, update, and archive configuration groups and their families |
 ## Common error response codes
 
 | Status Code | Description |
