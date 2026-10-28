@@ -54,7 +54,7 @@ Each entry in `raw.remoteConfigurations` pairs Collector YAML with an agent sele
 - **`agentSelector`** — exact key-value matches against advertised agent attributes, combined with AND. Set custom attributes under `agent_description.non_identifying_attributes` of the Collector's `opamp` extension, or under `agent.description.non_identifying_attributes` in the Supervisor configuration. An empty selector matches all agents; a configuration saved with an omitted or empty selector is returned without `agentSelector` and keeps matching all agents.
 - **`name`** — identifies the configuration within the family.
 
-`raw.collectorVersion` states the Collector semantic version targeted by the family (no leading `v` prefix). It has no impact on agent selector matching. `raw.metadata` stores environment setup values with the family.
+`raw.collectorVersion` states the Collector semantic version targeted by the family (no leading `v` prefix). It has no impact on agent selector matching.
 
 A small `rawConfiguration` example:
 
@@ -86,7 +86,7 @@ Changing `family.raw` content creates a new family version only when the content
 
 The update operation applies only the fields listed in its required `update_mask`:
 
-- `family.raw` replaces the whole family content; a path inside it (for example `family.raw.metadata`) changes only that field and keeps the others.
+- `family.raw` replaces the whole family content; a path inside it changes only that field and keeps the others.
 - A listed field that is omitted from the body is cleared (for example `description`, `tags`) or reset to its default (`priorityOrder` to `0`, `family.active` to `false`). `name` cannot be cleared, and `family.raw.remoteConfigurations` cannot be empty.
 - Sending `family.raw` for a family that was not defined from remote configurations returns `400`.
 
