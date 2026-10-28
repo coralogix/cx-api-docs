@@ -56,13 +56,6 @@ A **family** is a versioned collection of Collector configurations and agent sel
 - **`description`** — optional, human-readable.
 - **`basedOnConfigurationFamilyId`** — optional id of the family this one is based on.
 
-A family's content is exactly one of:
-
-- **`raw`** — remote configurations defined directly, or
-- **`preset`** — a Coralogix configuration template from which the service generates the remote configurations.
-
-The content type of a family cannot be switched later.
-
 ### Raw families
 
 Each entry in `raw.remoteConfigurations` pairs Collector YAML with an agent selector (1–128 entries):
@@ -93,23 +86,19 @@ service:
 
 A matching selector example: `{"cx.agent.type": "docker", "host.name": "collector-host-01"}`.
 
-### Preset families
-
-Instead of raw YAML, a family can be defined from a configuration template: `preset.chartName` (the template type, such as `CHART_NAME_OTEL_INTEGRATION` for Kubernetes or `CHART_NAME_OTEL_LINUX_STANDALONE` for hosts), `preset.chartVersion`, optional `preset.integrationVersion` (omit it to use the default for the template type and version), `preset.metadata` (environment setup values such as `ClusterName` or `ApplicationName`), and `preset.observabilityFeatures` (a JSON object string). Coralogix generates the remote configurations from these settings.
-
 ## Activation and delivery
 
 Create a group with `family.active` set to `true` to make the initial configuration available to matching agents immediately; when omitted, the family is inactive. To activate the latest family of an existing group, send `{"family": {"active": true}}` with `update_mask=family.active` on the update operation.
 
-Changing `family.raw` or `family.preset` content creates a new family version only when the content changes.
+Changing `family.raw` content creates a new family version only when the content changes.
 
 ## Updates and field masks
 
 The update operation applies only the fields listed in its required `update_mask`:
 
-- `family.raw` and `family.preset` replace the whole family content; a path inside them (for example `family.raw.metadata` or `family.preset.chartVersion`) changes only that field and keeps the others.
+- `family.raw` replaces the whole family content; a path inside it (for example `family.raw.metadata`) changes only that field and keeps the others.
 - A listed field that is omitted from the body is cleared (for example `description`, `tags`) or reset to its default (`priorityOrder` to `0`, `family.active` to `false`). `name` cannot be cleared, and `family.raw.remoteConfigurations` cannot be empty.
-- Only the arm matching the current family's content type is accepted; raw and preset families cannot be switched.
+- Sending `family.raw` for a family that was not defined from remote configurations returns `400`.
 
 ## Archive semantics
 
