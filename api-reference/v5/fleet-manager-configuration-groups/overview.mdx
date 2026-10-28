@@ -98,9 +98,9 @@ Archiving a group stops it from matching agents. Afterward:
 - `GET .../{id}?include_archived=true` returns the archived group with its latest configuration family, including an archived family.
 - The list operation excludes archived groups unless `include_archived=true`.
 
-## IaC surfaces
+## Manage configuration groups with infrastructure as code
 
-The same resource is available through infrastructure as code:
+The same resource is available through:
 
 - **Terraform**: [Fleet Management — configuration groups](https://coralogix.com/docs/developer-portal/infrastructure-as-code/terraform-provider/fleet-management/configuration-groups/) (provider resource `coralogix_configuration_group`)
 - **Coralogix Kubernetes operator**: [Fleet Management — configuration groups](https://coralogix.com/docs/developer-portal/infrastructure-as-code/coralogix-operator/fleet-management/configuration-groups/) (`ConfigurationGroup` custom resource)
