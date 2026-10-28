@@ -74,7 +74,7 @@ service:
       exporters: [otlp]
 ```
 
-A matching selector example: `{"cx.agent.type": "docker", "host.name": "collector-host-01"}`.
+A matching selector example: `{"attributes": {"cx.agent.type": "docker", "host.name": "collector-host-01"}}`.
 
 ## Activation and delivery
 
