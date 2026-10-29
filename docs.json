@@ -225,20 +225,6 @@
             ]
           },
           {
-            "group": "Data Usage Service",
-            "pages": [
-              "api-reference/v5/data-usage-service/overview",
-              "api-reference/v5/data-usage-service/get-daily-usage-evaluation-tokens",
-              "api-reference/v5/data-usage-service/get-daily-usage-processed-gbs",
-              "api-reference/v5/data-usage-service/get-daily-usage-units",
-              "api-reference/v5/data-usage-service/get-data-usage",
-              "api-reference/v5/data-usage-service/get-data-usage-metrics-export-status",
-              "api-reference/v5/data-usage-service/get-logs-count",
-              "api-reference/v5/data-usage-service/get-spans-count",
-              "api-reference/v5/data-usage-service/update-data-usage-metrics-export-status"
-            ]
-          },
-          {
             "group": "Enrichments Service",
             "pages": [
               "api-reference/v5/enrichments-service/overview",
@@ -302,6 +288,17 @@
               "api-reference/v5/extension-service/overview",
               "api-reference/v5/extension-service/get-all-extensions",
               "api-reference/v5/extension-service/get-extension-by-id"
+            ]
+          },
+          {
+            "group": "Fleet Manager Configuration Groups",
+            "pages": [
+              "api-reference/v5/fleet-manager-configuration-groups/overview",
+              "api-reference/v5/fleet-manager-configuration-groups/archive-configuration-group",
+              "api-reference/v5/fleet-manager-configuration-groups/create-configuration-group",
+              "api-reference/v5/fleet-manager-configuration-groups/get-configuration-group",
+              "api-reference/v5/fleet-manager-configuration-groups/list-configuration-groups",
+              "api-reference/v5/fleet-manager-configuration-groups/update-configuration-group"
             ]
           },
           {
@@ -541,6 +538,7 @@
               "api-reference/v5/slos-service/create-slo",
               "api-reference/v5/slos-service/delete-slo",
               "api-reference/v5/slos-service/get-slo",
+              "api-reference/v5/slos-service/get-slo-status",
               "api-reference/v5/slos-service/get-slo-zero-state",
               "api-reference/v5/slos-service/list-slos",
               "api-reference/v5/slos-service/replace-slo",

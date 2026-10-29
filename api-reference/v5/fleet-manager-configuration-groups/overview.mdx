@@ -1,0 +1,106 @@
+# Fleet Manager configuration groups overview
+
+The Fleet Manager Configuration Groups service manages OpenTelemetry Collector configurations delivered to connected agents. A **configuration group** holds versioned **families**. Each family contains Collector YAML and **agent selectors** that match agent attributes. Activate a family to make its configurations available to matching agents.
+
+Use this service to create groups with an initial family, list and read groups, update group settings or family content, and archive groups that are no longer needed.
+
+## Authentication and permissions
+
+To use the Fleet Manager Configuration Groups service API you need to [create a personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/). It's recommended to use permission presets, as they are automatically updated with all relevant permissions. Alternatively, you can manually add the following individual permission.
+
+| Presets | Permission            | Description                                      |
+|---------|-----------------------|--------------------------------------------------|
+| Fleet Manager | `remote-configuration:Manage` | Grants access to create, update, and archive configuration groups and their families |
+## Common error response codes
+
+| Status Code | Description |
+|-------------|-------------|
+| `400 Bad Request` | Malformed request, invalid field mask, unknown update path, or empty remote configurations |
+| `401 Unauthorized` | Missing or invalid API key |
+| `404 Not Found` | Configuration group not found, or archived (see [Archive semantics](#archive-semantics)) |
+| `409 Conflict` | A configuration group with the same name already exists |
+| `500 Internal Server Error` | Internal server error |
+
+## Core concepts
+
+### Configuration groups
+
+A group is the unit you manage. It has:
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `string` | UUID v7, assigned by the service. |
+| `name` | `string` | Display name shown in Fleet Management, unique among the team's configuration groups. |
+| `description` | `string` | Optional description of the group's purpose. |
+| `tags` | `string[]` | Tags for organizing the group. Tags do not select agents. |
+| `priorityOrder` | `integer` | Selection priority when multiple configurations match an agent. On ties, higher values win. Defaults to `0`. |
+| `archived` | `boolean` | Whether the group is archived. |
+
+### Configuration families
+
+A **family** is a versioned collection of Collector configurations and agent selectors. Family IDs identify versions; the group ID stays the same across updates. Each family has:
+
+- **`version`** — increasing version within the group, returned as a string. The initial version is `"1"`; changing the configuration content creates a new version.
+- **`active`** — whether this family is eligible for delivery to matching agents. This is not confirmation that an agent has applied it; check Fleet Management for agent application status.
+- **`lastActivatedAt`** — when the family was last activated.
+- **`description`** — optional, human-readable.
+- **`basedOnConfigurationFamilyId`** — optional id of the family this one is based on.
+
+### Raw families
+
+Each entry in `raw.remoteConfigurations` pairs Collector YAML with an agent selector (1–128 entries):
+
+- **`rawConfiguration`** — the Collector configuration YAML, encoded as a JSON string with newline escapes (`\n`) between YAML lines. Environment references such as `${env:CORALOGIX_PRIVATE_KEY}` are resolved on the Collector host. Do not define the Supervisor-managed `opamp` extension.
+- **`agentSelector`** — exact key-value matches against advertised agent attributes, combined with AND. Set custom attributes under `agent_description.non_identifying_attributes` of the Collector's `opamp` extension, or under `agent.description.non_identifying_attributes` in the Supervisor configuration. An empty selector matches all agents; a configuration saved with an omitted or empty selector is returned without `agentSelector` and keeps matching all agents.
+- **`name`** — identifies the configuration within the family.
+
+`raw.collectorVersion` states the Collector semantic version targeted by the family (no leading `v` prefix). It has no impact on agent selector matching.
+
+A small `rawConfiguration` example:
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+exporters:
+  otlp:
+    endpoint: otelcol:4317
+service:
+  pipelines:
+    logs:
+      receivers: [otlp]
+      exporters: [otlp]
+```
+
+A matching selector example: `{"attributes": {"cx.agent.type": "docker", "host.name": "collector-host-01"}}`.
+
+## Activation and delivery
+
+Create a group with `family.active` set to `true` to make the initial configuration available to matching agents immediately; when omitted, the family is inactive. To activate the latest family of an existing group, send `{"family": {"active": true}}` with `update_mask=family.active` on the update operation.
+
+Changing `family.raw` content creates a new family version only when the content changes.
+
+## Updates and field masks
+
+The update operation applies only the fields listed in its required `update_mask`:
+
+- `family.raw` replaces the whole family content; a path inside it changes only that field and keeps the others.
+- A listed field that is omitted from the body is cleared (for example `description`, `tags`) or reset to its default (`priorityOrder` to `0`, `family.active` to `false`). `name` cannot be cleared, and `family.raw.remoteConfigurations` cannot be empty.
+- Sending `family.raw` for a family that was not defined from remote configurations returns `400`.
+
+## Archive semantics
+
+Archiving a group stops it from matching agents. Afterward:
+
+- `GET`, `PATCH`, and a repeated archive on an archived group return `404`.
+- `GET .../{id}?include_archived=true` returns the archived group with its latest configuration family, including an archived family.
+- The list operation excludes archived groups unless `include_archived=true`.
+
+## Manage configuration groups with infrastructure as code
+
+The same resource is available through:
+
+- **Terraform**: [Fleet Management — configuration groups](https://coralogix.com/docs/developer-portal/infrastructure-as-code/terraform-provider/fleet-management/configuration-groups/) (provider resource `coralogix_configuration_group`)
+- **Coralogix Kubernetes operator**: [Fleet Management — configuration groups](https://coralogix.com/docs/developer-portal/infrastructure-as-code/coralogix-operator/fleet-management/configuration-groups/) (`ConfigurationGroup` custom resource)
