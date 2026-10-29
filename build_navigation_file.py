@@ -63,6 +63,7 @@ V4_SERVICES = {
 
 V5_SERVICES = {
     **V4_SERVICES,
+    'fleet-manager-configuration-groups': 'Fleet Manager Configuration Groups',
     'connector-schema-service': 'Connector Schema Service',
     'notifications-testing-service': 'Notifications Testing Service',
     'cases-service': 'Cases Service',
