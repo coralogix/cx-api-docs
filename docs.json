@@ -291,6 +291,17 @@
             ]
           },
           {
+            "group": "Fleet Manager Configuration Overlays",
+            "pages": [
+              "api-reference/v5/fleet-manager-configuration-overlays/overview",
+              "api-reference/v5/fleet-manager-configuration-overlays/archive-configuration-overlay",
+              "api-reference/v5/fleet-manager-configuration-overlays/create-configuration-overlay",
+              "api-reference/v5/fleet-manager-configuration-overlays/get-configuration-overlay",
+              "api-reference/v5/fleet-manager-configuration-overlays/list-configuration-overlays",
+              "api-reference/v5/fleet-manager-configuration-overlays/update-configuration-overlay"
+            ]
+          },
+          {
             "group": "Folders for Views Service",
             "pages": [
               "api-reference/v5/folders-for-views-service/overview",

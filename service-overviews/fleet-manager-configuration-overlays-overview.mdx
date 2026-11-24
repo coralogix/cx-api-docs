@@ -1,0 +1,59 @@
+# Fleet Manager configuration overlays overview
+
+The Fleet Manager Configuration Overlays API manages OpenTelemetry Collector configuration fragments that are merged into selected remote configurations from active configuration groups. An overlay can target several remote configurations, and its priority controls how it combines with other active overlays.
+
+Use this service to create, list, retrieve, update, and archive overlays. Activate an overlay to apply it continuously or during scheduled windows. The API is in preview.
+
+## Authentication and permissions
+
+To use the Fleet Manager Configuration Overlays API, create a [personal or team API key](https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/) with the `remote-configuration:Manage` permission. The Fleet Manager permission preset includes this permission.
+
+## Common error response codes
+
+| Status Code | Description |
+|-------------|-------------|
+| `400 Bad Request` | Invalid request, update mask, target, or schedule. |
+| `401 Unauthorized` | Missing or invalid API key. |
+| `404 Not Found` | Overlay not found or archived. |
+| `409 Conflict` | An overlay with the same name already exists. |
+| `500 Internal Server Error` | Internal server error. |
+
+## Endpoints
+
+| Method | Path | Summary |
+|--------|------|---------|
+| `POST` | `/fleet-management/configuration-overlays/v1` | Create configuration overlay |
+| `GET` | `/fleet-management/configuration-overlays/v1` | List configuration overlays |
+| `GET` | `/fleet-management/configuration-overlays/v1/{id}` | Get configuration overlay |
+| `PATCH` | `/fleet-management/configuration-overlays/v1/{id}` | Update configuration overlay |
+| `POST` | `/fleet-management/configuration-overlays/v1/{id}/archive` | Archive configuration overlay |
+
+## Core concepts
+
+### Overlays and versions
+
+An overlay has a stable `id` and a current `version` and `versionId`. Changes to its configuration or targets create a new version. Schedule changes update the current version without creating a new one. The `active` field indicates that the overlay is eligible to apply; it does not confirm that an agent has applied the resulting configuration.
+
+### Targets and `remoteConfigurationId`
+
+Each target identifies a remote configuration in a configuration group. When creating or replacing targets, set `remoteConfigurationId` to the ID at `families[].remoteConfigurations[].id` in the configuration group response. This is the remote configuration ID, not the configuration group ID. The remote configuration's family must be active. See [Get configuration group](https://coralogix.com/docs/api-reference/v5/fleet-manager-configuration-groups/get-configuration-group/) to find it.
+
+After saving, the overlay response records the target snapshot, including the source configuration family and remote configuration IDs and the generated overlay family and remote configuration IDs.
+
+### Merge precedence
+
+When several active overlays target the same remote configuration, the service merges them in ascending `priorityOrder`. Higher values win when overlays change the same key. If priorities tie, the newer overlay wins. `priorityOrder` defaults to `0`.
+
+## Activation and schedules
+
+New overlays are inactive by default. Set `active` to `true` to activate an overlay; activation requires at least one target. With no schedules, an active overlay applies continuously. With schedules, it applies only during the scheduled windows. Schedule windows on the same overlay cannot overlap, and an active overlay cannot have an empty target list.
+
+The create and update responses report whether an overlay is eligible to apply. Check Fleet Management for the per-agent status that confirms whether agents applied the merged configuration.
+
+## Updates and field masks
+
+An update applies only the fields listed in `update_mask`. A listed field omitted from the request body is cleared or reset to its default. Changing `custom.configuration` or `custom.targets` creates a new overlay version; the schedules carry over to that version. Updating only schedules does not create a version. The API rejects a version-creating update while one of the overlay's scheduled windows is applying.
+
+## Archive semantics
+
+Archiving an overlay archives the overlay and all its versions. Deactivate an active overlay before archiving it. An archived overlay cannot be updated; list and get operations exclude archived overlays unless `include_archived=true`.
